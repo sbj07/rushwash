@@ -7,7 +7,7 @@
 
 <header>
     <nav>
-      <a href=""><i class="fa-brands fa-waze"></i></a>
+      <a href="/rushwash/home"><i class="fa-brands fa-waze"></i></a>
         <a href="플젝명/user/home">RUSH&WASH</a>
         <a href="">세탁신청</a>
         <a href="">구독</a>
@@ -18,7 +18,7 @@
         <a href="">고객센터</a>
         <a href="">회원가입</a>
         <a href="">로그인</a>
-        <a href=""><i class="fa-regular fa-user"></i></i></a>
+        <a href=""><i class="fa-regular fa-user"></i></a>
     </nav>
 </header>
 
