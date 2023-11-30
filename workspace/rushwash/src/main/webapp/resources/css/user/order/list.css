@@ -1,0 +1,100 @@
+:root {
+    /* color */
+    --color-black : #0F0F0F;
+    --color-navy : #163172;
+    --color-blue : #1E56A0;
+    --color-lightblue : #d6e4f0;
+    --color-beige : #F6F6F6;
+}
+
+
+
+body {
+    text-align: center; /* 콘텐츠 가운데 정렬 */
+    margin: 0; /* body의 margin 초기화 */
+    padding: 0; /* body의 padding 초기화 */
+}
+
+
+#btn {
+    --position: absolute; /* 절대 위치 설정 */
+    left: 10px; /* 왼쪽에 붙이기 */
+    top: 10px; /* 상단에 붙이기 */
+/*    margin-bottom: 20px;*/
+}
+
+.btn1, .btn2:hover{
+    border: 2px solid #163172;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+
+/* button {
+    margin-right: 10px;
+} */
+
+#t1, #t2 {
+  
+    /* border-collapse: collapse; */
+    width: 80%;
+    margin: 0 auto; /* 테이블 가운데 정렬 */
+    margin-top: 20px;
+   
+}
+
+#t1 th, #t1 td, #t2 th, #t2 td {
+    padding: 8px;
+    text-align: left;
+}
+
+#t1 th, #t2 th {
+    
+    background-color: #163172;
+    color: white;
+}
+
+.btn1,.btn2{
+    margin: 0 auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+} 
+
+main{
+    /* display: grid;
+    grid-template-rows: 1fr 5fr 3fr; */
+    /* grid-template-columns: 1fr 9fr 1fr; */
+    /* justify-content: center;
+    align-items: center; */
+   
+
+}
+
+#t2{
+    display: none;
+}
+
+
+#wrap {
+ 
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    
+    
+    background-color: var(--color-beige);
+    width: 100%;
+    height:1000px;
+   
+}
+
+main{
+	   padding-top: 150px;
+	   padding-bottom: 150px;
+	   
+}
+#btn, #ttn1, #ttn3 {
+    width: 100%; 
+}
+
+
+
