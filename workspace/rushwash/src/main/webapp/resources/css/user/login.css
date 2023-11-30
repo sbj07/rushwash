@@ -1,0 +1,80 @@
+ .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 100px - 100px); /* .event 클래스와 footer의 높이를 제외한 높이 */
+        margin: 0 auto;
+        text-align: center;
+        color: #163172 ;
+    }
+
+    #login-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 450px;
+        margin: 20px 0
+    }
+
+    #login-form h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 300px; /* 아래쪽 마진을 늘림 */
+        margin-top: -100px;
+    }
+
+    #login-form input[type="email"],
+    #login-form input[type="password"] {
+        padding: 13px;
+        border: 1px solid lightgray;
+        border-radius: 2px;
+        font-weight: bold;
+        font-size: 16px;
+        height: 25px;
+        margin-bottom: 10px;
+
+    }
+
+    .remember-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    #login-form input[type="submit"] {
+        padding: 10px;
+        background-color: #F6F6F6;
+        color: #163172;
+        border: 2px solid #163172;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .extra-links {
+        display: flex;
+        justify-content: space-around;
+        width: 300px;
+    }
+
+    .extra-links a {
+        color: #163172;
+        text-decoration: none;
+        font-size: 12px;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+    input[type="submit"]:hover {
+        background-color: #163172 !important;
+        color: white !important;
+    }
+    
+    input[type="submit"]:active {
+        background-color: #163172 !important;
+        color: white !important;
+    }
+    

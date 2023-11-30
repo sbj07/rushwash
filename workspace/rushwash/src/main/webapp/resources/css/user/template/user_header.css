@@ -1,0 +1,116 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+	content: none;
+}
+table {
+    border-collapse: collapse;
+	border-spacing: 0;
+}
+/* CSS 리셋 */
+
+:root {
+    /* color */
+    --color-black : #0F0F0F;
+    --color-navy : #163172;
+    --color-blue : #1E56A0;
+    --color-lightblue : #d6e4f0;
+    --color-beige : #F6F6F6;
+}
+
+header{
+    width: 100%;
+    background-color: var(--color-beige);
+    position: fixed;
+    top: 0;
+}
+
+body{
+    background-color: var(--color-beige);
+    /* display: flex; */
+    align-items: center;
+    justify-items: center;
+}
+
+nav{
+   width: 100%; 
+   height: 50px;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
+   background-color: var(--color-beige);
+}
+
+
+nav a{
+    text-decoration: none;
+    color: var(--color-black);
+    
+}
+
+.event{
+    height: 150px;
+    border: 2px solid white;
+    background-color: white; 
+    margin-top: 60px;
+}
+
+nav i.fa-brands.fa-waze {
+    color: #163172;
+    font-size: 45px; /* Adjust the size as needed */
+}
+nav i.fa-regular.fa-user{
+    color: #163172;
+    font-size : 25px;
+}
+
+nav a:hover {
+    color: #163172; /* 네이비 색상으로 변경 */
+    font-weight: bold;
+    font-size: 18px; /* 원하는 크기로 조절 */
+}
+.event {
+    height: 150px;
+    border: 2px solid white;
+    /* background-color: white; */
+    margin-top: 60px;
+    text-align: center;
+  }
+.event img {
+    width: fit-content;
+    height: fit-content;
+    
+}
