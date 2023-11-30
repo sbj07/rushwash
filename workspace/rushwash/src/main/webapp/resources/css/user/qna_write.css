@@ -1,0 +1,64 @@
+:root {
+    /* color */
+    --color-black : #0F0F0F;
+    --color-navy : #163172;
+    --color-blue : #1E56A0;
+    --color-lightblue : #d6e4f0;
+    --color-beige : #F6F6F6;
+}
+
+main{
+    height: 1000px;
+    padding-top: 50px;
+}
+input{
+	border: none;
+    outline: none;
+    height: 60px;
+    width: 500px;
+}
+textarea{
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    font-size: 15px;
+    resize: none;
+}
+table{
+    width: 1000px;
+    background-color: white;
+}
+table tr{
+    height: 70px;
+    border-bottom: 1px solid var(--color-navy);
+    border-top: 1px solid var(--color-navy);
+}
+td.submit-cell {
+            text-align: center;
+            padding: 10px; 
+    	vertical-align: middle; 
+  }
+.second{
+    height: 500px;
+}
+.submit{
+    background-color: black;
+    color: white;
+    height: 40px;
+    width: 90px;
+}
+.title{
+    text-align: center;
+    padding-left: 40px;
+}
+.font{
+    font-size: 50px;
+    font-weight: bold;
+    color: var(--color-navy);
+    padding-bottom: 50px;
+}
+
+#wrap{
+    padding-left: 280px;
+    padding-top: 20px;
+}
