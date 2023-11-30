@@ -1,0 +1,41 @@
+:root {
+    /* color */
+    --color-black : #0F0F0F;
+    --color-navy : #163172;
+    --color-blue : #1E56A0;
+    --color-lightblue : #d6e4f0;
+    --color-beige : #F6F6F6;
+}
+
+
+main{
+	width: 100%;
+	height: 800px;
+    display: grid;
+    padding-top: 150px;
+    grid-template-rows: 1fr 4fr 2fr;
+/*    justify-content: space-around;*/
+    
+}
+
+table{
+    background-color: white;
+    align-items: center center;
+    width: 90%;
+    padding-right: 20%;
+    
+}
+table th, table td {
+    
+    place-items: center center;
+    font-size: 24px;
+    align-items: center center;
+    text-align: center;
+    
+}
+
+table th{
+    
+    background-color: 163172;
+    color: white;
+}
