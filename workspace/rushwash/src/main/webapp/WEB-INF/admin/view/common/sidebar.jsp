@@ -93,18 +93,15 @@
 		aria-expanded="true" aria-controls="collapseBoards"> <i
 			class="fas fa-fw fa-table"></i> <span>게시글 관리</span>
 	</a>
-		<div id="collapseBoards" class="collapse"
+		<div id="collapseBoards" class="collapse
 			aria-labelledby="headingPages" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">게시판 조회:</h6>
-				<a class="collapse-item" href="login.html">전체 공지사항 조회</a> <a
-					class="collapse-item" href="register.html">전체 FAQ 조회</a> <a
-					class="collapse-item" href="register.html">QNA 관리</a>
+				<a class="collapse-item" href="/rushwash/admin/board/notice">전체 공지사항 조회</a> <a
+					class="collapse-item" href="/rushwash/admin/board/faq">전체 FAQ 조회</a> <a
+					class="collapse-item" href="/rushwash/admin/board/qna">QNA 관리</a>
 				<div class="collapse-divider"></div>
-				<h6 class="collapse-header">게시판 작성:</h6>
-				<a class="collapse-item" href="404.html">공지사항 작성</a> <a
-					class="collapse-item" href="404.html">FAQ 작성</a> <a
-					class="collapse-item" href="404.html">QNA 답글 작성</a>
+				
 			</div>
 		</div></li>
 
