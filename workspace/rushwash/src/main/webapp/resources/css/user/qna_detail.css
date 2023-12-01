@@ -9,7 +9,7 @@
 }
 main{
     height: 1000px;
-    padding-top: 50px;
+    padding-top: 10%;
 }
 #content{
     height: 400px;
@@ -42,7 +42,7 @@ table td{
     margin-top: 20px;
 }
 .font{
-    font-size: 50px;
+    font-size: 35px;
     font-weight: bold;
     color: var(--color-navy);
     padding-bottom: 50px;

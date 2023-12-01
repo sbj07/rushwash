@@ -39,7 +39,7 @@
 
     <script>
         function go(){
-            window.location.href = '/rushwash/board/qna';
+            window.location.href = '/rushwash/board/center';
         }
     </script>
 </body>

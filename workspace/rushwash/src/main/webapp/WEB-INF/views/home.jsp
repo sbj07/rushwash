@@ -11,10 +11,12 @@
 <body>
 	<main>
         <div id="wrap">
-            <div class="font">
+            <div class="font" id="font">
                 세탁소도 세탁기도 
                 <br>
                 필요없어요.
+                <br>
+                <img src="/rushwash/resources/img/user/img04.png" alt="이미지" class="img04">
             </div>
             <div class="first">
                 <div>
