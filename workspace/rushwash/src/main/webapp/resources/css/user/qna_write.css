@@ -9,7 +9,7 @@
 
 main{
     height: 1000px;
-    padding-top: 50px;
+    padding-top: 10%;
 }
 input{
 	border: none;
@@ -42,6 +42,7 @@ td.submit-cell {
     height: 500px;
 }
 .submit{
+	border-radius: 50px;
     background-color: black;
     color: white;
     height: 40px;
@@ -52,7 +53,7 @@ td.submit-cell {
     padding-left: 40px;
 }
 .font{
-    font-size: 50px;
+    font-size: 35px;
     font-weight: bold;
     color: var(--color-navy);
     padding-bottom: 50px;

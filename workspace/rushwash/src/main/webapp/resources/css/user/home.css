@@ -1,4 +1,9 @@
-
+.img04{
+	width: 1200px;
+    height: 400px;
+    border-radius: 30px;
+    padding-top: 20px;
+}
 .img{
     width: 540px;
     height: 360px;
@@ -9,7 +14,6 @@
     font-weight: bold;
     text-align: left;
     padding-left: 9%;
-    padding-top: 20px;
 }
 .first{
     display: flex;
@@ -44,5 +48,8 @@
 }
 #wrap{
     height: 2000px;
-    padding-top: 50px;
+    padding-top: 10%;
+    display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	padding-bottom: 10%;
 }
