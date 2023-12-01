@@ -1,0 +1,48 @@
+table{
+	width: 100%;
+	background-color: white;
+	color: black;
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+main > table > tbody > tr:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+main> table > tbody > tr{
+	height: 60px;
+}
+
+table > tr{
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr 1fr;
+	width: 100%
+	
+	}
+	
+.content{
+	width: 100%;
+
+	}
+	
+#titleHead{
+	background-color: rgb(185, 185, 185);
+	
+	}
+	
+
+#title{
+	width: 40%;	
+}
+ 
+textarea{
+	resize: none;
+	border: none;
+}
+.page-area{
+	display: flex;
+	justify-content:  right;
+}
