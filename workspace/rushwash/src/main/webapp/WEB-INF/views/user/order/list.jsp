@@ -11,7 +11,7 @@
 
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
 
-    <main>
+    <main id="wrap">
     
         
             <div id="btn">
@@ -21,7 +21,7 @@
 
 
             <div id="ttn1">
-                <table id="t1"  display="block">
+                <table id="t1">
                     <thead>
                         <tr>
                             <th>주문번호</th>
@@ -70,7 +70,7 @@
                     </tbody>
                 </table>
 
-                <table id="t2" display="block">
+                <table id="t2">
                     <thead>
                         <tr>
                             <th>주문번호</th>
@@ -128,17 +128,21 @@
 </body>
 
 <script>
-    function showTable(tableId) {
-        document.getElementById('t1').style.display = 'block';
+	function showTable(tableId) {
+        document.getElementById('t1').style.display = 'table';
         document.getElementById('t2').style.display = 'none';
 
         if (tableId === 't1') {
-            document.getElementById('t1').style.display = 'block';
+            document.getElementById('t1').style.display = 'table';
+            document.getElementById('t2').style.display = 'none';
         } else if (tableId === 't2') {
             document.getElementById('t1').style.display = 'none';
-            document.getElementById('t2').style.display = 'block';
+            document.getElementById('t2').style.display = 'table';
         }
-    }
+	}
+	
 </script>
+
+
 
 </html>
