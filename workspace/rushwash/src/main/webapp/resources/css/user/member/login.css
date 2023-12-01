@@ -4,7 +4,7 @@
         align-items: center;
         justify-content: center;
         height: calc(100vh - 100px - 100px); /* .event 클래스와 footer의 높이를 제외한 높이 */
-        margin: 0 auto;
+        margin: 5% 20%;
         text-align: center;
         color: #163172 ;
     }
@@ -16,11 +16,9 @@
         margin: 20px 0
     }
 
-    #login-form h1 {
-        font-size: 24px;
+    .login-container h1 {
+        font-size: 30px;
         font-weight: bold;
-        margin-bottom: 300px; /* 아래쪽 마진을 늘림 */
-        margin-top: -100px;
     }
 
     #login-form input[type="email"],

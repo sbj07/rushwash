@@ -1,0 +1,143 @@
+.test {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 500px; /* Set the desired height value */
+    background-color: #F6F6F6; /* Add a background color if needed */
+}
+
+
+#sidebar {
+	margin-top: 10%;
+    width: 23%;
+    height: 480px;
+    background-color: transparent;
+    color: darkblue;
+    padding-top: 20px;
+    text-align: center;
+    transition: font-size 0.2s;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+    flex: 1;
+
+}
+#sidebar .menu-item,
+#sidebar .menu-item:visited {
+    color: #163172; /* 링크의 기본 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+#sidebar .menu-item:hover {
+    font-size: 24px;
+    color: #163172; /* 호버 상태에서의 텍스트 색상 */
+}
+
+#sidebar .menu-item:active,
+#sidebar .menu-item:focus {
+    color: #163172;
+    font-weight: bold; 
+   
+}
+#sidebar .menu-item {
+    margin-bottom: 40px;
+    margin-top: 40px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px; /* Set the initial font size */
+    transition: font-size 0.2s; /* Add transition for smooth effect */
+    display: block; /* 변경: 세로로 배치 */
+    text-decoration: none; /* 변경: 밑줄 제거 */
+}
+
+#sidebar .menu-item:hover {
+    font-size: 24px; /* Set the font size on hover */
+}
+
+
+.event {
+    /* existing styles */
+    margin-top: 60px; /* Adjust as needed */
+}
+#content {	
+	margin-top: 10%;
+    height: 480px;
+    padding: 4px;
+    width: 70%;
+    flex: 2.4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* 변경된 스타일: 사이드바 제목 */
+#payment-heading {
+    justify-content: flex-end; /* 변경: text-align에서 justify-content로 수정 */
+    margin-bottom: 10px; /* 필요한 만큼 여백 조정 */
+}
+
+
+.menu-item {
+    margin-bottom: 40px;
+    margin-top: 40px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+.content-section {
+    width: 110%;
+    margin-bottom: 0px;
+    height: 480px;
+    flex-direction: column;
+    margin-right: 50px;
+}
+#title-box {
+    height: 80px;
+}
+
+#title{
+    border-bottom: 3px solid #163172;
+    font-size: 30px;
+    margin-left: 20px;
+    color: #163172;
+    font-weight: bold;
+    width: 64%
+}
+
+
+#user-info {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-left: 92px; 
+
+}
+
+#user p {
+    margin-bottom: 4px;
+    margin-top: 9px;
+    font-size: 15px;
+    color: #163172;
+    font-weight: bold;
+}
+
+#user input[type="email"],
+#user input[type="password"],
+#user input[type="tel"],
+#user input[type="text"] {
+    padding: 10px;
+    background-color: #F6F6F6;
+    color: #163172;
+    border: 2px solid lightgray;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 66%;
+}
+
+#user {
+    width: 80%;
+}
