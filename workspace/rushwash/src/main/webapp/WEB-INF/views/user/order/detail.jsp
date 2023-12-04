@@ -14,7 +14,9 @@
 <main id="wrap">
 
     <div id="div1">
-        <h1>주문내역 상세조회</h1>
+       주문내역 상세조회
+       <br>
+       <br>
     </div>
 
     <div id="div2">
@@ -54,7 +56,7 @@
         </table>
     </div>
 
-    <div id="div3">
+    <div id="div2">
 
     </div>
 </main>
