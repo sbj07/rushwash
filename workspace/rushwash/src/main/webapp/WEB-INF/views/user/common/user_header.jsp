@@ -11,11 +11,11 @@
         <a href="플젝명/user/home">RUSH&WASH</a>
         <a href="">세탁신청</a>
         <a href="">구독</a>
-        <a href="">가격표</a>
-        <a href="">서비스지역</a>
-        <a href="">공지사항</a>
-        <a href="">주문내역</a>	
-        <a href="">고객센터</a>
+        <a href="/rushwash/board/price">가격표</a>
+        <a href="/rushwash/board/map">서비스지역</a>
+        <a href="/rushwash/board/notice">공지사항</a>
+        <a href="/rushwash/order/list">주문내역</a>	
+        <a href="/rushwash/board/center">고객센터</a>
         <a href="/rushwash/member/join">회원가입</a>
         <a href="/rushwash/member/login">로그인</a>
         <a href="/rushwash/member/mypage"><i class="fa-regular fa-user"></i></a>
