@@ -1,0 +1,86 @@
+main{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: fit-content;
+    margin-top: 80px;
+    margin-left: 10%;
+    margin-bottom: 80px;
+}
+
+.form-box {
+    margin-top: 3%;
+    border-top: 2px solid var(--color-navy);
+    border-bottom: 2px solid var(--color-navy);
+}
+
+.page-name {
+    font-weight: 700;
+    font-size: 40px;
+    text-align: left;
+    color: var(--color-navy);
+}
+
+.form-header{
+    background-color: #D6E4F0;
+    padding: 2% 1% 2% 5%;
+
+    font-size: 35px;
+    font-weight: 600;
+    color: var(--color-navy);
+    text-align: left;
+}
+
+.form-body {
+    padding: 2% 1% 2% 5%;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
+.form-content1 span {
+    color: var(--color-navy);
+}
+
+.form-content2 {
+    margin: 10% auto;
+
+    padding: 3% 3% 3% 3%;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    
+    background-color: #D9D9D9;
+    border-radius: 20px;
+}
+
+.grey-box span {
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.grey-box ol{
+    margin-top: 30px;
+}
+
+.form-footer {
+    background-color: #D6E4F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-footer {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: var(--color-navy);
+    border-radius: 15px;
+    padding: 1.5% 2.5%;
+    border: 0;
+
+    font-size: 35px;
+    font-weight: 700;
+    width: fit-content;
+    color: white;
+
+}

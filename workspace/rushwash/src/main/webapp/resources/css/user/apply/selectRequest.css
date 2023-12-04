@@ -1,0 +1,183 @@
+
+#wrap {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr ;
+    /* grid-template-rows: 400px 200px 200px 200px; */
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    background-color: var(--color-beige);
+}
+
+.item1 {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.item2 {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+.item3 {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    /* margin-top: 80px; */
+}
+
+.item4 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+}
+.item5 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+}
+
+/* -------------------------------------------------------------- */
+/* 1번 박스 */
+.click-box {
+    margin-left: 100px;
+    border: 3px solid #163172;
+    border-radius: 45px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#blue-box {
+    border-radius: 39px;
+    padding: 25px 25px 25px 40px;
+    height: auto;
+    background-color: #163172;
+
+}
+
+#head-title {
+    font: 40px bold;
+    color: white;
+}
+
+#blue-box > pre {
+    padding-top: 35px;
+    padding-bottom: 15px;
+    color: #9F9F9F;
+    font: 20px bold;
+}
+
+.descript {
+    padding: 80px 25px 40px 40px;
+    color: black;
+    font: 20px bolder;
+}
+
+
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* 2번박스 */
+
+
+.click-box2 {
+    margin-left: -150px;
+    border: 3px solid #163172;
+    border-radius: 45px;
+    height: fit-content;
+}
+
+#blue-box2 {
+    border-radius: 39px;
+    padding: 25px 25px 25px 40px;
+    width: 320px;
+    height: auto;
+    background-color: #163172;
+
+}
+
+#head-title2 {
+    font: 40px bold;
+    color: white;
+}
+
+#blue-box2 > pre {
+    padding-top: 6px;
+
+    color: #9F9F9F;
+    font: 20px bold;
+}
+
+.descript2 {
+    padding: 10px 25px 10px 40px;
+    color: black;
+    font: 20px bolder;
+}
+
+/* --------------------------------------------------------- */
+/* 3번박스 */
+
+.click-box3 {
+    margin-left: -150px;
+    margin-bottom: 40px;
+    border: 3px solid #163172;
+    border-radius: 45px;
+    height: fit-content;
+}
+
+/* ------------------------------------------------------------------------------- */
+/* 4번박스 */
+
+.plan-box{
+    margin-left: -200px;
+    margin-top: 40px;
+
+}
+#plan-text {
+    font: 50px bold;
+    color: black;
+}
+
+.plan-box > pre {
+    /* margin-left: -300px; */
+    margin-top: 50px;
+    color: #807f7f;
+    font: 30px bolder;
+}
+
+/* ------------------------------------------------------------------------------- */
+/* 5번박스 */
+.plan-req {
+    text-align: center;
+    width: fit-content;
+}
+
+#plan-descript {
+    width: fit-content;
+    font: 40px bold;
+    color: black;
+}
+
+#plan-btn{
+    margin: 20px auto;
+    width: fit-content;
+    padding: 15px 40px 15px 40px;
+
+
+    background-color: #163172;
+    border-radius: 35px;
+    font: 40px bold;
+    color: white;
+}
