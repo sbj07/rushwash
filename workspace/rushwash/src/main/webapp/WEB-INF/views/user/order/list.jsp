@@ -115,7 +115,7 @@
             </div>
             
 
-        <div id="ttn3">
+        <div id="ttn2">
 
         </div>
 
@@ -128,9 +128,15 @@
 </body>
 
 <script>
+	window.onload = function() {
+		document.getElementById('t1').style.display = 'table';
+    	document.getElementById('t2').style.display = 'none';
+
+	};
+	
 	function showTable(tableId) {
-        document.getElementById('t1').style.display = 'table';
-        document.getElementById('t2').style.display = 'none';
+//         document.getElementById('t1').style.display = 'table';
+//         document.getElementById('t2').style.display = 'none';
 
         if (tableId === 't1') {
             document.getElementById('t1').style.display = 'table';

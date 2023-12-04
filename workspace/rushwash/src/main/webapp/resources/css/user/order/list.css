@@ -1,87 +1,104 @@
 :root {
-    /* color */
-    --color-black : #0F0F0F;
-    --color-navy : #163172;
-    --color-blue : #1E56A0;
-    --color-lightblue : #d6e4f0;
-    --color-beige : #F6F6F6;
+	/* color */
+	--color-black: #0F0F0F;
+	--color-navy: #163172;
+	--color-blue: #1E56A0;
+	--color-lightblue: #d6e4f0;
+	--color-beige: #F6F6F6;
 }
 
 
 body {
-    text-align: center; /* 콘텐츠 가운데 정렬 */
-    margin: 0; /* body의 margin 초기화 */
-    padding: 0; /* body의 padding 초기화 */
+	text-align: center;
+	/* 콘텐츠 가운데 정렬 */
+	margin: 0;
+	/* body의 margin 초기화 */
+	padding: 0;
+	/* body의 padding 초기화 */
 }
 
 
 
 /*#wrap {*/
- 
+
 /*    display: grid;*/
 /*    grid-template-columns: repeat(1, 3fr);*/
-    
-    
+
+
 /*    background-color: var(--color-beige);*/
 /*    width: 100%;*/
 /*    height:1000px;*/
-   
+
 /*}*/
 
 
-main{
-	   padding-top: 150px;
-	   padding-bottom: 150px;
-	   
+main {
+	padding-top: 150px;
+	padding-bottom: 150px;
+
 }
 
 
- #ttn1, #ttn3 {
-    width: 100%; 
+#ttn1,
+#ttn2 {
+	width: 100%;
 }
 
-#btn{
+#btn {
 	text-align: center;
 	width: 473px;
 	position: relative;
 	position: absolute;
 
-	
+
 }
 
-.btn1,.btn2{
-    margin: 0 auto;
-    bottom: 0;
-/*	height: 30px;*/
-} 
+.btn1,
+.btn2 {
+	margin: 0 auto;
+	bottom: 0;
+	/*	height: 30px;*/
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
 
-.btn1, .btn2:hover{
-    border: 2px solid #163172;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+.btn1,
+.btn2:hover {
+	border: 2px solid #163172;
+	background-color: black;
+	color: white;
+	cursor: pointer;
 }
 
 
-#t1, #t2 {
-  
-    /* border-collapse: collapse; */
-    width: 80%;
-    margin: 0 auto; /* 테이블 가운데 정렬 */
-    margin-top: 20px;
-   
+#t1,
+#t2 {
+
+	/* border-collapse: collapse; */
+	width: 80%;
+	margin: 0 auto;
+	/* 테이블 가운데 정렬 */
+	margin-top: 20px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
-#t1 th, #t1 td, #t2 th, #t2 td {
-    padding: 8px;
-/*    text-align: left;*/
-    text-align: center;
+#t1 th,
+#t1 td,
+#t2 th,
+#t2 td {
+	padding: 8px;
+	/*    text-align: left;*/
+	text-align: center;
 }
 
-#t1 th, #t2 th {
-    
-    background-color: #163172;
-    color: white;
-    height: 50px;
-   
+#t1 th,
+#t2 th {
+
+	background-color: #163172;
+	color: white;
+	height: 50px;
+	/*   border-top-left-radius: 10px;*/
+	/*	border-top-right-radius: 10px;*/
+
 }
