@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user"
-                                            id="ID" placeholder="ID">
+                                            id="Id" placeholder="ID">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -45,14 +45,14 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="Name"
-                                            placeholder="Name">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="Password2" placeholder="Repeat Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="RepeatPassword" placeholder="Repeat Password">
+                                        <input type="text" class="form-control form-control-user" id="Name"
+                                            placeholder="Name">
                                     </div>
                                 </div>
                                 <a href="login.html" class="btn btn-primary btn-user btn-block">

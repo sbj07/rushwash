@@ -79,7 +79,13 @@
 											<td><%=vo.getAddress() %></td>
 											<td><%=vo.getEmail() %></td>
 											<td><%=vo.getTel() %></td>
-											<td><%=vo.getPlanDate() %></td>
+											<td>
+												<%if(vo.getPlanDate() != null) { %>
+													<%=vo.getPlanDate() %>
+												<%}else{ %>
+													-
+												<%} %>
+											</td>
 											<td><%=vo.getSubGrade() %></td>
 											<td><%=vo.getPoint() %></td>
 											<td>

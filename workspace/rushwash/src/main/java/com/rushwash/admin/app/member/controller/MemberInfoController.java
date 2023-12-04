@@ -33,10 +33,6 @@ public class MemberInfoController extends HttpServlet {
 			req.setAttribute("memberVoList", memberVoList);
 			req.getRequestDispatcher("/WEB-INF/admin/view/member/memberInfo.jsp").forward(req, resp);
 			
-			for(MemberVo vo : memberVoList) {
-				System.out.println(vo);
-			}
-			
 		} catch (Exception e) {
 			System.out.println("[ERROR-U001 유저 정보 전체조회 실패]");
 			e.printStackTrace();

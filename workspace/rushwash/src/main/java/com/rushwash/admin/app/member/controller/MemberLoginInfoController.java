@@ -32,10 +32,6 @@ public class MemberLoginInfoController extends HttpServlet {
 			req.setAttribute("memberVoList", memberVoList);
 			req.getRequestDispatcher("/WEB-INF/admin/view/member/memberLoginInfo.jsp").forward(req, resp);
 
-			for(MemberVo vo : memberVoList) {
-				System.out.println(vo);
-			}
-			
 		} catch (Exception e) {
 			System.out.println("[ERROR-U002 유저 로그인정보 전체조회 실패]");
 			e.printStackTrace();

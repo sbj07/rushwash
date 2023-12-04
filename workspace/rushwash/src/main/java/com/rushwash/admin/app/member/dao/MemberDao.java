@@ -14,7 +14,7 @@ public class MemberDao {
 	//유저 정보 조회 (일반, 로그인 동일 로직)
 	public List<MemberVo> infoView(Connection conn) throws Exception {
 		//sql
-		String sql = "select M.* ,pi.plan_date,pg.sub_grade from member M JOIN PLAN_INFO PI ON PI.MEMBER_NO = M.NO JOIN PLAN_GRADE PG ON PG.NO = PI.GRADE_NO";
+		String sql = "select M.* ,pi.plan_date,pg.sub_grade from member M LEFT JOIN PLAN_INFO PI ON PI.MEMBER_NO = M.NO LEFT JOIN PLAN_GRADE PG ON PG.NO = PI.GRADE_NO";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -31,11 +31,10 @@ public class MemberDao {
 			String subGrade = rs.getString("SUB_GRADE");
 			String point = rs.getString("POINT");
 			String delYn = rs.getString("DEL_YN");
-			String id = rs.getString("MEMBER_ID");
-			String pwd = rs.getString("MEMBER_PWD");
+			String id = rs.getString("ID");
+			String pwd = rs.getString("PWD");
 			String enrollDate = rs.getString("ENROLL_DATE");
 			String modifyDate = rs.getString("MODIFY_DATE");
-			String modifyMemo = rs.getString("MODIFY_MEMO");
 			
 			MemberVo vo = new MemberVo();
 			
@@ -52,7 +51,6 @@ public class MemberDao {
 			vo.setPwd(pwd);
 			vo.setEnrollDate(enrollDate);
 			vo.setModifyDate(modifyDate);
-			vo.setModifyMemo(modifyMemo);
 			
 			memberList.add(vo);
 		}

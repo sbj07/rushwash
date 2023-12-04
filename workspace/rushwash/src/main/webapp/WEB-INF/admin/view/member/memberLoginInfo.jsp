@@ -53,7 +53,6 @@
 											<th>PWD</th>
 											<th>가입일자</th>
 											<th>정보변경일자</th>
-											<th>변경사항비고</th>
 											<th>사용여부</th>
 										</tr>
 									</thead>
@@ -65,7 +64,6 @@
 											<th>PWD</th>
 											<th>가입일자</th>
 											<th>정보변경일자</th>
-											<th>변경사항비고</th>
 											<th>사용여부</th>
 										</tr>
 									</tfoot>
@@ -77,8 +75,14 @@
 											<td><%=vo.getId() %></td>
 											<td><%=vo.getPwd() %></td>
 											<td><%=vo.getEnrollDate() %></td>
-											<td><%=vo.getModifyDate() %></td>
-											<td><%=vo.getModifyMemo() %></td>
+											<td>
+											<%if(vo.getModifyDate() != null) { %>
+													<%=vo.getModifyDate() %>
+												<%}else{ %>
+													-
+												<%} %>
+											</td>
+											
 											<td>
 											<select class="custom-select" name="status">
 													<option value="N">N</option>
