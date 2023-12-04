@@ -50,9 +50,9 @@ td:last-child {
 }
 
 #wrap table tr:first-child td:first-child {
-    border-top-left-radius: 50px;
+    border-top-left-radius: 20px;
 }
 
 #wrap table tr:first-child td:last-child {
-    border-top-right-radius: 50px;
+    border-top-right-radius: 20px;
 }

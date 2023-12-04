@@ -1,3 +1,4 @@
+<%@page import="com.rushwash.app.board.notice.vo.UserNoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,25 +23,16 @@
           <td colspan="2"></td>
         </tr>
           <tr>
-            <td>[공지]상품 정보 안내</td>
-            <td>2023.11.11</td>
+            <td>제목</td>
+            <td>작성일시</td>
           </tr>
-          <tr>
-            <td>[공지]상품 정보 안내</td>
-            <td>2023.11.11</td>
-          </tr>
-          <tr>
-            <td>[공지]상품 정보 안내</td>
-            <td>2023.11.11</td>
-          </tr>
-          <tr>
-            <td>[공지]상품 정보 안내</td>
-            <td>2023.11.11</td>
-          </tr>
-          <tr>
-            <td>[공지]상품 정보 안내</td>
-            <td>2023.11.11</td>
-          </tr>
+          
+          <%for(UserNoticeVo vo : boardVoList){ %>
+	          <tr>
+	            <td><%= vo.getNo()%><%= vo.getTitle() %></td>
+	            <td><%= vo.getEnrollDate() %></td>
+	          </tr>
+          <%}%>
           
        </table>
     </div>
