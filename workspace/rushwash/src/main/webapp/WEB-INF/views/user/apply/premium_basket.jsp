@@ -15,9 +15,9 @@
     <main>
         <div id="wrap">
             <div class="price-box">
-                <button data-target="top-table" class="btn-top tag-btn btn-selected">상의</button>
-                <button data-target="bottom-table" class="btn-bottom tag-btn">하의</button>
-                <button data-target="outer-table" class="btn-outer tag-btn">아우터</button>
+                <button data-target="top-table" class="btn-top tag-btn btn-selected" id="top-category" value="1">상의</button>
+                <button data-target="bottom-table" class="btn-bottom tag-btn" id="bottom-category" value="2">하의</button>
+                <button data-target="outer-table" class="btn-outer tag-btn" id="outer-category"value="3">아우터</button>
 
                 <table class="price-table">
 
@@ -95,6 +95,19 @@
 </html>
 
 <script>
+    // 버튼 클릭 시 실행되는 함수
+    function handleButtonClick(event) {
+        // 모든 버튼에서 btn-selected 클래스 제거
+        document.querySelectorAll('.tag-btn').forEach(btn => {
+            btn.classList.remove('btn-selected');
+        });
+        // 클릭된 버튼에 btn-selected 클래스 추가
+        event.currentTarget.classList.add('btn-selected');
+    }
+    // 각 버튼에 클릭 이벤트 리스너 추가
+    document.getElementById('top-category').addEventListener('click', handleButtonClick);
+    document.getElementById('bottom-category').addEventListener('click', handleButtonClick);
+    document.getElementById('outer-category').addEventListener('click', handleButtonClick);
 
     // 수량증감 함수
     document.addEventListener('DOMContentLoaded', function () {
@@ -126,5 +139,7 @@
             this.value = sanitizedValue;
         });
     });
+
+   
 
 </script>

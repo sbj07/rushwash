@@ -19,8 +19,8 @@ public class ApplyPremiumController extends HttpServlet {
 		try {
 			//data
 			// 유저의 구독플랜 정보 갖고오기
-			
-			//service
+//			String categoryCode = req.getParameter("category");
+//			//service
 //			ItemService itemService = new ItemService();
 //			List<ItemVo> itemList = itemService.selectItemList();
 			//view
