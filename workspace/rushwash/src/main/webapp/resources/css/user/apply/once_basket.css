@@ -1,0 +1,154 @@
+#wrap {
+    margin-top: 300px;
+    margin-bottom: 150px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.price-box .tag-btn {
+    background-color: white;
+    border: 2px solid var(--color-navy);
+    border-bottom: 0px;
+    font: 25px bold;
+    color: black;
+    border-radius: 20px 20px 0 0;
+    padding: 10px 20px 0 20px;
+}
+
+.price-box .btn-selected {
+    background-color: var(--color-navy);
+    border: 2px solid var(--color-navy);
+    border-bottom: 0px;
+    color: white;
+    
+}
+
+.price-table{
+    border-top: 2px solid var(--color-navy);
+    border-bottom: 2px solid var(--color-navy);
+}
+
+thead{
+    background-color: #D6E4F0;
+    width: fit-content;
+    align-items: center;
+}
+
+.price-box th{
+    font: 30px bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#product {
+    padding-right: 250px;
+    padding-left: 20px;
+}
+
+
+#normal-price {
+    padding-right: 100px;
+}
+
+#plan-price {
+    padding-right: 80px;
+}
+
+table.price-table >tbody > tr {
+    margin: 10px 0px 10px 20px;
+}
+
+.price-box .price-table tbody tr td {
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid black;
+    font: 20px bold;
+}
+
+.price-box .price-table tbody td:first-child {
+    padding-left: 20px;
+}
+
+
+/* 수량  */
+.quantity{
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* 업, 다운 버튼 */
+#up-btn , #down-btn {
+    background-color: var(--color-navy);
+    border: 0px;
+    width: 25px;
+    color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: center;
+    
+}
+
+/* 수량입력 input태그 */
+.quantity-input {
+    width: 30px;
+    text-align: center;
+
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+/* 테이블 하단 게산 */
+tfoot {
+    background-color: #D6E4F0;
+}
+
+.price-box tfoot tr:first-child td {
+    width: fit-content;
+    align-items: center;
+    font: 25px bold;
+    padding: 20px 0 20px 0;
+    border: 0px;
+}
+
+.price-box tfoot tr:not(:first-child) td {
+    width: fit-content;
+    align-items: center;
+    font: 25px bold;
+    padding-bottom: 10px;
+    /* padding-left: 20px; */
+    border: 0px;
+}
+
+.price-box tfoot tr td:first-child {
+    padding-left: 20px;
+}
+
+.price-box tfoot tr td:nth-child(3) {
+    text-align:right;
+    padding-right: 30px;
+}
+
+/* 결제버튼 */
+.td-payment {
+    vertical-align: middle;
+}
+
+
+#btn-payment {
+    background-color: #0031AC;
+    margin-right: 20px;
+    
+    width: 10vw;
+    height: 8vh;
+    
+    font: 30px bold;
+    color: white;
+    text-align: center;
+
+    border: 0;
+    border-radius: 5px;
+}
