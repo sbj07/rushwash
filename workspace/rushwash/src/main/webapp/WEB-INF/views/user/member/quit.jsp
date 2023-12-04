@@ -25,7 +25,7 @@
                 </div>     
                 <div id="user-info">
                     <form id="user-info-form">
-                        <p>이메일주소</p>
+                        <p>아이디</p>
                         <input type="text" id="memberId" name="memberId" >                                            
                         <p>패스워드</p>
                         <input type="password" id="password" name="password" >   

@@ -27,7 +27,7 @@
                     <form id="sub-form">
                         <p>이름</p>
                         <input type="text" id="memberName" name="memberName">                                            
-                        <p>이메일</p>
+                        <p>아이디</p>
                         <input type="text" id="email" name="email">   
                         <p>구독 여부</p>
                         <input type="text" id="sub" name="sub">

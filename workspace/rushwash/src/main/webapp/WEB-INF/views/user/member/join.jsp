@@ -60,14 +60,22 @@
                         </span>
                         <span class="error_next_box"></span>
                     </div>
-    
-                    <!-- EMAIL -->
-                    <div>
-                        <h3 class="join_title"><label for="email">주소(배송지)</label></h3>
+    				
+    				<div>
+                        <h3 class="join_title"><label for="email">이메일</label></h3>
                         <span class="box int_email">
-                            <input type="text" id="email" class="int" maxlength="100" placeholder="주소입력">
+                            <input type="text" id="email" class="int" maxlength="100" placeholder="이메일입력">
                         </span>
                         <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>    
+                    </div>
+    
+                    <!-- ADDRESS -->
+                    <div>
+                        <h3 class="join_title"><label for="addr">주소(배송지)</label></h3>
+                        <span class="box int_email">
+                            <input type="text" id="addr" class="int" maxlength="100" placeholder="주소입력">
+                        </span>
+                        <span class="error_next_box"></span>
                     </div>
     
                     <!-- MOBILE -->
@@ -97,27 +105,16 @@
 <script>
 	
 const id = document.querySelector('#id');
-
 const pw1 = document.querySelector('#pswd1');
 const pwMsg = document.querySelector('#alertTxt');
 const pwImg1 = document.querySelector('#pswd1_img1');
-
 const pw2 = document.querySelector('#pswd2');
 const pwImg2 = document.querySelector('#pswd2_img1');
 const pwMsgArea = document.querySelector('.int_pass');
-
 const userName = document.querySelector('#name');
-
-const yy = document.querySelector('#yy');
-const mm = document.querySelector('#mm');
-const dd = document.querySelector('#dd');
-
-const gender = document.querySelector('#gender');
-
+const addr = document.querySelector('#addr');
 const email = document.querySelector('#email');
-
 const mobile = document.querySelector('#mobile');
-
 const error = document.querySelectorAll('.error_next_box');
 
 
@@ -128,7 +125,8 @@ const error = document.querySelectorAll('.error_next_box');
 id.addEventListener("focusout", checkId);
 pw1.addEventListener("focusout", checkPw);
 pw2.addEventListener("focusout", comparePw);
-
+userName.addEventListener("focusout", checkName);
+addr.addEventListener("focusout", checkAddr);
 email.addEventListener("focusout", isEmailCorrect);
 mobile.addEventListener("focusout", checkPhoneNum);
 
@@ -205,34 +203,40 @@ function checkName() {
     }
 }
 
+function checkAddr() {
+    if(userName.value === "") {
+        error[4].innerHTML = "필수 정보입니다.";
+        error[4].style.display = "block";
+    } else {
+        error[4].style.display = "none";
+    }
+}
 
 function isEmailCorrect() {
     const emailPattern = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/;
 
     if(email.value === ""){ 
-        error[6].style.display = "none"; 
+    	error[5].innerHTML = "필수 정보입니다.";
+        error[5].style.display = "none"; 
     } else if(!emailPattern.test(email.value)) {
-        error[6].style.display = "block";
+        error[5].style.display = "block";
     } else {
-        error[6].style.display = "none"; 
+        error[5].style.display = "none"; 
     }
 
 }
 
 function checkPhoneNum() {
-    const isPhoneNum = /([01]{2})([01679]{1})([0-9]{3,4})([0-9]{4})/;
-
+    const isPhoneNum = /([01]{2})-([01679]{1})([0-9]{3,4})-([0-9]{4})/;
     if(mobile.value === "") {
-        error[7].innerHTML = "필수 정보입니다.";
-        error[7].style.display = "block";
+        error[6].innerHTML = "필수 정보입니다.";
+        error[6].style.display = "block";
     } else if(!isPhoneNum.test(mobile.value)) {
-        error[7].innerHTML = "형식에 맞지 않는 번호입니다.";
-        error[7].style.display = "block";
+        error[6].innerHTML = "형식에 맞지 않는 번호입니다.";
+        error[6].style.display = "block";
     } else {
-        error[7].style.display = "none";
+        error[6].style.display = "none";
     }
-
-    
 }
 	
 </script>
