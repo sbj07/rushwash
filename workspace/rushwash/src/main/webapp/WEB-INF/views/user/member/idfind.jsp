@@ -20,7 +20,7 @@
         </div>
     </div>
     	<div id="button-container">
-        	<button type="button" onclick="">이메일 아이디 찾기</button>
+        	<button type="button" onclick="">아이디 찾기</button>
     	</div>
 
 </body>

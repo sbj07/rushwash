@@ -25,7 +25,7 @@
                 </div>     
                 <div id="user-info">
                     <form id="user">
-                        <p>이메일 (아이디)</p>
+                        <p>아이디</p>
                         <input type="text" id="userid" name="userid">
                         <p>비밀번호</p>
                         <input type="password" id="password" name="password">                                      
@@ -33,6 +33,8 @@
                         <input type="text" id="address" name="address">   
                         <p>전화번호</p>
                         <input type="tel" id="phone" name="phone">
+                        <p>보유 포인트</p>
+                        <input type="text" id="point" name="point">
                     </form>
                 </div>
             </div>
