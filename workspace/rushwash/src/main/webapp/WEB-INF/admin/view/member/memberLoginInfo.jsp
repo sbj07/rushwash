@@ -1,5 +1,9 @@
+<%@page import="com.rushwash.admin.app.member.vo.MemberVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%List<MemberVo> memberVoList = (List<MemberVo>) request.getAttribute("memberVoList");%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -27,9 +31,9 @@
 					<!-- Page Heading(페이지 제목) -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">전체 유저 조회</h1>
+						<h1 class="h3 mb-0 text-gray-800">유저 로그인정보 조회</h1>
 					</div>
-					<p class="mb-4">모든 유저의 기본정보를 확인합니다. 강제탈퇴 처리 또한 이 페이지에서 가능합니다.</p>
+					<p class="mb-4">모든 유저의 로그인정보를 확인합니다.</p>
 
 					<!-- End of Main Content -->
 
@@ -44,77 +48,45 @@
 									<thead>
 										<tr>
 											<th>유저번호</th>
-											<th>유저명</th>
-											<th>유저주소</th>
-											<th>이메일</th>
-											<th>전화번호</th>
-											<th>구독일자</th>
-											<th>회원등급</th>
-											<th>포인트</th>
-											<th>탈퇴여부</th>
+											<th>성함</th>
+											<th>ID</th>
+											<th>PWD</th>
+											<th>가입일자</th>
+											<th>정보변경일자</th>
+											<th>변경사항비고</th>
+											<th>사용여부</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
 											<th>유저번호</th>
-											<th>유저명</th>
-											<th>유저주소</th>
-											<th>이메일</th>
-											<th>전화번호</th>
-											<th>구독일자</th>
-											<th>회원등급</th>
-											<th>포인트</th>
-											<th>탈퇴여부</th>
+											<th>성함</th>
+											<th>ID</th>
+											<th>PWD</th>
+											<th>가입일자</th>
+											<th>정보변경일자</th>
+											<th>변경사항비고</th>
+											<th>사용여부</th>
 										</tr>
 									</tfoot>
 									<tbody>
+										<%for (MemberVo vo : memberVoList) {%>
 										<tr>
-											<td>1</td>
-											<td>김첨지</td>
-											<td>서울특별시 종로구</td>
-											<td>cunsnd@naver.com</td>
-											<td>010-5144-8874</td>
-											<td>2023/11/20</td>
-											<td>스탠다드</td>
-											<td>1500</td>
-											<td><select class="custom-select" name="status">
+											<td><%=vo.getNo() %></td>
+											<td><%=vo.getName() %></td>
+											<td><%=vo.getId() %></td>
+											<td><%=vo.getPwd() %></td>
+											<td><%=vo.getEnrollDate() %></td>
+											<td><%=vo.getModifyDate() %></td>
+											<td><%=vo.getModifyMemo() %></td>
+											<td>
+											<select class="custom-select" name="status">
 													<option value="N">N</option>
 													<option value="Y">Y</option>
-											</select></td>
+											</select>
+											</td>
 										</tr>
-										<tr>
-											<td>2</td>
-											<td>심원용</td>
-											<td>서울특별시 종로구</td>
-											<td>cunsnd@naver.com</td>
-											<td>010-5144-8874</td>
-											<td>2023/11/20</td>
-											<td>스탠다드</td>
-											<td>600</td>
-											<td>Y</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>이병건</td>
-											<td>서울특별시 종로구</td>
-											<td>cunsnd@naver.com</td>
-											<td>010-5144-8874</td>
-											<td>2023/10/20</td>
-											<td>스탠다드</td>
-											<td>1100</td>
-											<td>N</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td>이왕건</td>
-											<td>서울특별시 종로구</td>
-											<td>cunsnd@naver.com</td>
-											<td>010-5144-8874</td>
-											<td>2023/11/20</td>
-											<td>스탠다드</td>
-											<td>15300</td>
-											<td>N</td>
-										</tr>
+									<%} %>
 									</tbody>
 								</table>
 							</div>
@@ -125,8 +97,8 @@
 
 				</div>
 			</div>
+			<!-- End of Content Wrapper -->
 		</div>
-		<!-- End of Content Wrapper -->
 	</div>
 	<!-- End of Page Wrapper -->
 
@@ -161,5 +133,4 @@
       }
     });
 </script>
-
 </html>

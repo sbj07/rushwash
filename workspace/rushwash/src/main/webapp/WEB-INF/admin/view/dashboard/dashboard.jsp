@@ -198,9 +198,7 @@
 
 </body>
 <script src="/rushwash/resources/admin/vendor/chart.js/Chart.min.js"></script>
-<script src="/rushwash/resources/admin/js/demo/chart-area-demo.js"></script>
-<script src="/rushwash/resources/admin/js/demo/chart-pie-laundry.js"></script>
-<script src="/rushwash/resources/admin/js/demo/chart-pie-plan.js"></script>
-<script src="/rushwash/resources/admin/js/demo/chart-bar-demo.js"></script>
+<%@include file="/WEB-INF/admin/view/dashboard/laundryChart.jsp"%>
+<%@include file="/WEB-INF/admin/view/dashboard/planChart.jsp"%>
 
 </html>

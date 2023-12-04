@@ -1,4 +1,4 @@
-package com.rushwash.admin.app.user;
+package com.rushwash.admin.app.dashboard.controller;
 
 import java.io.IOException;
 
@@ -8,11 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/user/view")
-public class UserInfoController extends HttpServlet{
-
+@WebServlet("/admin/dashboard")
+public class AdminDashboardController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/admin/view/user/userInfo.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/admin/view/dashboard/dashboard.jsp").forward(req, resp);
 	}
 }
