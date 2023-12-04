@@ -52,14 +52,14 @@
 									<tr>
 										<td><%= vo.getNo() %></td>
 										<td><%= vo.getTitle() %></td>
-										<td><%= vo.getAdminNo() %></td>
+										<td><%= vo.getManagerNo() %></td>
 										<td><%= vo.getEnrollDate() %></td>
 									</tr>
 								<% } %>
 							</tbody>
 							
 						</table>
-						<button onclick="location.href='/rushwash/board/noticeWrite'">작성하기</button>
+						<button onclick="location.href='/rushwash/admin/board/noticeWrite'">작성하기</button>
 						
 						
 						<div class="page-area">

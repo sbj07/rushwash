@@ -3,6 +3,7 @@ package com.rushwash.admin.app.board.notice.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class NoticeDao {
 	   public List<NoticeVo> selectNoticeList(Connection conn, PageVo pvo) throws Exception{
 	      
 	      //SQL
-	      String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE, N.CONTENT, N.ADMIN_NO, N.ENROLL_DATE FROM NOTICE N WHERE N.DEL_YN = 'N' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+	      String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE, N.CONTENT, N.MANAGER_NO, N.ENROLL_DATE FROM NOTICE N WHERE N.DEL_YN = 'N' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setInt(1, pvo.getStartRow());
 	      pstmt.setInt(2, pvo.getLastRow());
@@ -27,7 +28,7 @@ public class NoticeDao {
 	      while(rs.next()) {
 	         
 	         String no = rs.getString("NO");
-	         String adminNo = rs.getString("ADMIN_NO");
+	         String managerNo = rs.getString("MANAGER_NO");
 	         String title = rs.getString("TITLE");
 	         String content = rs.getString("CONTENT");
 	         String enrollDate = rs.getString("ENROLL_DATE");
@@ -36,7 +37,7 @@ public class NoticeDao {
 	         
 	         NoticeVo vo = new NoticeVo();
 	         vo.setNo(no);
-	         vo.setAdminNo(adminNo);
+	         vo.setManagerNo(managerNo);
 	         vo.setTitle(title);
 	         vo.setContent(content);
 	         vo.setEnrollDate(enrollDate);
@@ -80,7 +81,7 @@ public class NoticeDao {
 	   public NoticeVo selectNoticeByNo(Connection conn, String no) throws Exception{
 	      
 	      //SQL
-	      String sql = "SELECT NO, TITLE, CONTENT, ADMIN_NO, ENROLL_DATE FROM NOTICE WHERE NO = ?";
+	      String sql = "SELECT NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE FROM NOTICE WHERE NO = ?";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, no);
 	      ResultSet rs = pstmt.executeQuery();
@@ -89,14 +90,14 @@ public class NoticeDao {
 	      NoticeVo vo = null;
 	      if(rs.next()) {
 	    	 no = rs.getString("NO");
-			 String adminNo = rs.getString("ADMIN_NO");
+			 String managerNo = rs.getString("MANAGER_NO");
 			 String title = rs.getString("TITLE");
 			 String content = rs.getString("CONTENT");
 			 String enrollDate = rs.getString("ENROLL_DATE");
 	         
 	         vo = new NoticeVo();
 	         vo.setNo(no);
-	         vo.setAdminNo(adminNo);
+	         vo.setManagerNo(managerNo);
 	         vo.setTitle(title);
 	         vo.setContent(content);
 	         vo.setEnrollDate(enrollDate);
@@ -107,6 +108,38 @@ public class NoticeDao {
 	      JDBCTemplate.close(pstmt);
 	      return vo;
 	   }
+	   
+	 //게시글 삭제
+	   public int delete(Connection conn, String no) throws Exception {
+	      
+	      //SQL
+	      String sql = "UPDATE NOTICE SET DEL_YN = 'Y' WHERE NO = ?";
+	      PreparedStatement pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, no);
+	      int result = pstmt.executeUpdate();
+	      
+	      //close
+	      JDBCTemplate.close(pstmt);
+	      
+	      return result;
+	   }//delete
+
+	public int write(Connection conn, NoticeVo vo) throws Exception {
+		//SQL
+	      String sql = "INSERT INTO BOARD (NO, TITLE, CONTENT, MANAGER_NO) VALUES ( SEQ_BOARD_NO.NEXTVAL, ?, ?, ?)";
+	      PreparedStatement pstmt = conn.prepareStatement(sql);
+	      pstmt.setString(1, vo.getNo());
+	      pstmt.setString(2, vo.getTitle());
+	      pstmt.setString(3, vo.getContent());
+	      pstmt.setString(4, vo.getManagerNo());
+	      int result = pstmt.executeUpdate();
+	      
+	      //close
+	      JDBCTemplate.close(pstmt);
+	      return result;
+	      
+	}  
+}
+	
 
 	   
-}

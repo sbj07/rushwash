@@ -71,4 +71,48 @@ public class NoticeService {
 		return vo;
 	}
 	
+	//게시글 삭제
+		public int delete(String no) throws Exception {
+			//conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			//dao
+			NoticeDao dao = new NoticeDao();
+			int result = dao.delete(conn , no);
+			
+			//tx
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+			//close
+			JDBCTemplate.close(conn);
+
+			return result;
+		}//delete
+
+		public int write(NoticeVo vo) throws Exception {
+			
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// dao
+			NoticeDao dao = new NoticeDao();
+			int result = dao.write(conn, vo);
+			
+			// tx
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+			// close
+			JDBCTemplate.close(conn);
+			
+			return result;
+		}
+	
 }
