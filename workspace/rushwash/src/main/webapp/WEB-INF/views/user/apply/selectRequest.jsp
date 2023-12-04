@@ -8,14 +8,13 @@
     <title>wash</title>
     <link rel="stylesheet" href="/rushwash/resources/css/user/apply/selectRequest.css">
 </head>
-
 <body>
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
         <main>
             <div id="wrap">
                 <div class="item1">
                     <div class="click-box">
-                            <div id="blue-box">
+                            <div id="blue-box" onclick="redirectPremium()">
                                 <div id="head-title">프리미엄 세탁</div>
                                 <pre>구독플랜 가입자를 위한<br>프리미엄 세탁</pre>
                             </div>
@@ -24,7 +23,7 @@
                 </div>
                 <div class="item2">
                     <div class="click-box2">
-                        <div id="blue-box2">
+                        <div id="blue-box2" onclick="redirectOnce()">
                             <div id="head-title2">한번 이용</div>
                             <pre>필요시만 이용하는 일회성 세탁</pre>
                         </div>
@@ -34,7 +33,7 @@
                 </div>
                 <div class="item3">
                     <div class="click-box3">
-                        <div id="blue-box2">
+                        <div id="blue-box2" onclick="redirectOldclothes()">
                             <div id="head-title2">헌옷 수거</div>
                             <pre>헌옷을 대신 버려주는 헌옷수거 서비스</pre>
                         </div>
@@ -52,13 +51,28 @@
                 <div class="item5">
                     <div class="plan-req">
                         <div id="plan-descript">자세한 할인율과 플랜을 알고싶다면?<br>구독을 하고싶으다면?</div>
-                        <div id="plan-btn" onclick="">구독신청하러가기</div>
+                        <div id="plan-btn" onclick="redirectPlanSelect()">구독신청하러가기</div>
                     </div>
                 </div>
             </div>
         </main>
-
-        
     <%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %>
 </body>
 </html>
+<script>
+    function redirectPremium() {
+        location.href='/rushwash/apply/request/premium';
+    }
+
+    function redirectOnce() {
+        location.href='/rushwash/apply/request/once';
+    }
+
+    function redirectOldclothes(){
+        location.href='/rushwash/apply/request/old-clothes-info';
+    }
+
+    function redirectPlanSelect() {
+        location.href='/rushwash/plan/select';
+    }
+</script>
