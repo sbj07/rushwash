@@ -65,6 +65,7 @@ h3 {
 
 .box.int_id {
     padding-right: 110px;
+    position: relative;
 }
 
 .box.int_pass {
@@ -75,7 +76,17 @@ h3 {
     padding-right: 40px;
 }
 
-
+.step-url {
+	position: absolute;
+    right: 10px;
+    top: 9.6%;
+    transform: translateY(-100%);
+    background-color: #163172; 
+    color: white; 
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
 
 .pswdImg {
     width: 18px;
