@@ -2,7 +2,7 @@ package com.rushwash.admin.app.board.notice.vo;
 
 public class NoticeVo {
 	private String no;
-	private String adminNo;
+	private String managerNo;
 	private String title;
 	private String content;
 	private String delYn;
@@ -14,11 +14,11 @@ public class NoticeVo {
 	public void setNo(String no) {
 		this.no = no;
 	}
-	public String getAdminNo() {
-		return adminNo;
+	public String getManagerNo() {
+		return managerNo;
 	}
-	public void setAdminNo(String admin_no) {
-		this.adminNo = admin_no;
+	public void setManagerNo(String admin_no) {
+		this.managerNo = admin_no;
 	}
 	public String getTitle() {
 		return title;
@@ -46,7 +46,7 @@ public class NoticeVo {
 	}
 	public NoticeVo(String no, String admin_no, String title, String content, String delYn, String enrollDate) {
 		this.no = no;
-		this.adminNo = admin_no;
+		this.managerNo = admin_no;
 		this.title = title;
 		this.content = content;
 		this.delYn = delYn;
@@ -57,7 +57,7 @@ public class NoticeVo {
 	}
 	@Override
 	public String toString() {
-		return "NoticeVo [no=" + no + ", admin_no=" + adminNo + ", title=" + title + ", content=" + content
+		return "NoticeVo [no=" + no + ", admin_no=" + managerNo + ", title=" + title + ", content=" + content
 				+ ", delYn=" + delYn + ", enrollDate=" + enrollDate + "]";
 	}
 	

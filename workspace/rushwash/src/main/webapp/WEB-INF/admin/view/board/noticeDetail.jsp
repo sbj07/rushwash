@@ -40,7 +40,7 @@
 									<tbody>
 										<tr>
 											<td>제목 : <%= vo.getTitle() %></td>
-											<td>작성자 : <%= vo.getAdminNo() %></td>
+											<td>작성자 : <%= vo.getManagerNo() %></td>
 											<td>작성일자 : <%= vo.getEnrollDate() %></td>
 										</tr>
 										
@@ -52,8 +52,8 @@
 					
 								
 									<div class="btn-area">
-										<button onclick="location.href='/app99/board/edit?no=<%= vo.getNo() %>'">수정</button>
-										<button onclick="location.href='/app99/board/delete?no=<%= vo.getNo() %>'">삭제</button>
+										<button onclick="location.href='/rushwash/admin/board/notice/edit?no=<%= vo.getNo() %>'">수정</button>
+										<button onclick="location.href='/rushwash/admin/board/noticeDelete?no=<%= vo.getNo() %>'">삭제</button>
 									</div>
 							</main>
                             
@@ -83,7 +83,6 @@
         
         
         </html>
-        <script>
         
         
         </script>
