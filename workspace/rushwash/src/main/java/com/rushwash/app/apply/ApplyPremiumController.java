@@ -21,11 +21,14 @@ public class ApplyPremiumController extends HttpServlet {
 			// 유저의 구독플랜 정보 갖고오기
 //			String categoryCode = req.getParameter("category");
 //			//service
-//			ItemService itemService = new ItemService();
-//			List<ItemVo> itemList = itemService.selectItemList();
+			ItemService itemService = new ItemService();
+			List<ItemVo> itemList = itemService.selectItemList();
+			for(ItemVo vo : itemList) {
+				System.out.println("서비스호출");
+				System.out.println(vo);
+			}
 			//view
 			req.getRequestDispatcher("/WEB-INF/views/user/apply/premium_basket.jsp").forward(req, resp);
-			
 		} catch (Exception e) {
 			System.out.println("[ERROR-A001] 품목리스트 조회 에러");
 			e.printStackTrace();
