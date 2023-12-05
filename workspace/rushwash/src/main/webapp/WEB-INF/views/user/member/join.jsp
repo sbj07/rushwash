@@ -28,6 +28,7 @@
                         <span class="box int_id">
                             <input type="text" id="id" class="int" maxlength="20">
                         </span>
+                        <button type="button" class="step-url" onclick="">중복확인</button>
                         <span class="error_next_box"></span>
                     </div>
     
@@ -126,8 +127,8 @@ id.addEventListener("focusout", checkId);
 pw1.addEventListener("focusout", checkPw);
 pw2.addEventListener("focusout", comparePw);
 userName.addEventListener("focusout", checkName);
-addr.addEventListener("focusout", checkAddr);
 email.addEventListener("focusout", isEmailCorrect);
+addr.addEventListener("focusout", checkAddr);
 mobile.addEventListener("focusout", checkPhoneNum);
 
 
@@ -146,7 +147,7 @@ function checkId() {
         error[0].innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
         error[0].style.display = "block";
     } else {
-        error[0].innerHTML = "멋진 아이디네요!";
+        error[0].innerHTML = "사용가능한 아이디 입니다.";
         error[0].style.color = "#08A600";
         error[0].style.display = "block";
     }
@@ -203,27 +204,28 @@ function checkName() {
     }
 }
 
-function checkAddr() {
-    if(userName.value === "") {
-        error[4].innerHTML = "필수 정보입니다.";
-        error[4].style.display = "block";
-    } else {
-        error[4].style.display = "none";
-    }
-}
 
 function isEmailCorrect() {
     const emailPattern = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/;
 
     if(email.value === ""){ 
-    	error[5].innerHTML = "필수 정보입니다.";
-        error[5].style.display = "none"; 
+    	error[4].innerHTML = "필수 정보입니다.";
+        error[4].style.display = "none"; 
     } else if(!emailPattern.test(email.value)) {
-        error[5].style.display = "block";
+        error[4].style.display = "block";
     } else {
-        error[5].style.display = "none"; 
+        error[4].style.display = "none"; 
     }
 
+}
+
+function checkAddr() {
+    if(addr.value === "") {
+        error[5].innerHTML = "필수 정보입니다.";
+        error[5].style.display = "block";
+    } else {
+        error[5].style.display = "none";
+    }
 }
 
 function checkPhoneNum() {
