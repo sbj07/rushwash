@@ -33,9 +33,9 @@
                         <!-- Begin Page Content -->
                         <div class="container-fluid">
         
+						<form action="/rushwash/admin/board/noticeWrite" method="post">
                             <main>
 								<h1>게시글 작성</h1>
-								<form action="/rushwash/admin/board/noticeWrite" method="post">
 								<table border="1">
 									<tbody>
 										<tr>

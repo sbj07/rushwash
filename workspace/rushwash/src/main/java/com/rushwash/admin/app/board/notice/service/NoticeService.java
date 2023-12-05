@@ -92,7 +92,9 @@ public class NoticeService {
 
 			return result;
 		}//delete
-
+		
+		
+		//게시글 작성
 		public int write(NoticeVo vo) throws Exception {
 			
 			// conn

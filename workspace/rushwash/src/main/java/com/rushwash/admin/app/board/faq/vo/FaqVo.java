@@ -1,6 +1,6 @@
-package com.rushwash.admin.app.board.notice.vo;
+package com.rushwash.admin.app.board.faq.vo;
 
-public class NoticeVo {
+public class FaqVo {
 	private String no;
 	private String managerId;
 	private String title;
@@ -8,17 +8,6 @@ public class NoticeVo {
 	private String delYn;
 	private String enrollDate;
 	
-	
-	public NoticeVo(String no, String managerId, String title, String content, String delYn, String enrollDate) {
-		this.no = no;
-		this.managerId = managerId;
-		this.title = title;
-		this.content = content;
-		this.delYn = delYn;
-		this.enrollDate = enrollDate;
-	}
-	public NoticeVo() {
-	}
 	public String getNo() {
 		return no;
 	}
@@ -55,13 +44,22 @@ public class NoticeVo {
 	public void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
+	public FaqVo(String no, String managerId, String title, String content, String delYn, String enrollDate) {
+		this.no = no;
+		this.managerId = managerId;
+		this.title = title;
+		this.content = content;
+		this.delYn = delYn;
+		this.enrollDate = enrollDate;
+	}
+	public FaqVo() {
+	}
 	@Override
 	public String toString() {
-		return "NoticeVo [no=" + no + ", managerId=" + managerId + ", title=" + title + ", content=" + content
-				+ ", delYn=" + delYn + ", enrollDate=" + enrollDate + "]";
+		return "FaqVo [no=" + no + ", managerId=" + managerId + ", title=" + title + ", content=" + content + ", delYn="
+				+ delYn + ", enrollDate=" + enrollDate + "]";
 	}
 	
 	
-	
-	
+
 }

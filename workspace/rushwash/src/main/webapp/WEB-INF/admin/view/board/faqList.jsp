@@ -1,13 +1,12 @@
-
 <%@page import="com.rushwash.admin.app.page.vo.PageVo"%>
-<%@page import="com.rushwash.admin.app.board.notice.vo.NoticeVo"%>
+<%@page import="com.rushwash.admin.app.board.faq.vo.FaqVo"%>
 <%@page import="java.util.List"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 	<% 
-		List<NoticeVo> NoticeVoList = (List<NoticeVo>) request.getAttribute("NoticeVoList");
+		List<FaqVo> FaqVoList = (List<FaqVo>) request.getAttribute("FaqVoList");
 		PageVo pvo = (PageVo)request.getAttribute("pvo"); 
 	%>
     
@@ -36,7 +35,7 @@
 				<div class="container-fluid">
 
 					
-					<main><h1>공지사항</h1>
+					<main><h1>FAQ</h1>
 					
 						<table border="1">
 							<thead>
@@ -48,7 +47,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<% for(NoticeVo vo : NoticeVoList){ %>
+								<% for(FaqVo vo : FaqVoList){ %>
 									<tr>
 										<td><%= vo.getNo() %></td>
 										<td><%= vo.getTitle() %></td>
@@ -59,13 +58,13 @@
 							</tbody>
 							
 						</table>
-						<button onclick="location.href='/rushwash/admin/board/noticeWrite'">작성하기</button>
+						<button onclick="location.href='/rushwash/admin/board/faqWrite'">작성하기</button>
 						
 						
 						<div class="page-area">
 			
 							<% if(pvo.getStartPage() != 1){ %>
-								<a href="/rushwash/admin/board/notice?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+								<a href="/rushwash/admin/board/Faq?pno=<%= pvo.getStartPage()-1 %>">이전</a>
 							<% } %>
 							
 							<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
@@ -73,13 +72,13 @@
 								<% if( i == pvo.getCurrentPage() ){ %>
 									<span><%= i %></span>
 								<% }else{ %>
-									<a href="/rushwash/admin/board/notice?pno=<%= i %>"><%= i %></a>
+									<a href="/rushwash/admin/board/Faq?pno=<%= i %>"><%= i %></a>
 								<% } %>
 								
 							<% } %>
 							
 							<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
-								<a href="/rushwash/admin/board/notice?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+								<a href="/rushwash/admin/board/faq?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
 							<% } %>
 						
 						</div>
@@ -118,6 +117,6 @@
 	function handleClick(event){
 		const tr = event.currentTarget;
 		const no = tr.children[0].innerText;
-		location.href = '/rushwash/admin/board/notice/detail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
+		location.href = '/rushwash/admin/board/faq/detail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
 	}
 </script>
