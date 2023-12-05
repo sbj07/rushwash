@@ -31,6 +31,10 @@ public class ManagerService {
 		//dao
 		int result = dao.regist(conn,vo);
 		
+		if(!vo.getPwd().equals(vo.getPwd2())) {
+			throw new Exception("비밀번호 재확인 불일치");
+		}
+		
 		//tx
 		if(result==1) {
 			JDBCTemplate.commit(conn);
