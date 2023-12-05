@@ -30,34 +30,33 @@
 					</div>
 					<p class="mb-4">새로운 관리자 계정을 생성하여 공유하십시오. 모든 기능은 로그인 후 이용해야합니다.</p>
 					
-					<form class="user">
+					<form class="user" method="post">
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user"
-                                            id="Id" placeholder="ID">
+                                            name="Id" placeholder="ID">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="Password" placeholder="Password">
+                                            name="Password" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="Password2" placeholder="Repeat Password">
+                                            name="Password2" placeholder="Repeat Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="Name"
+                                        <input type="text" class="form-control form-control-user" name="Name"
                                             placeholder="Name">
                                     </div>
                                 </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    계정 등록
-                                </a>
+                                
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="계정 등록">
                             </form>
 					
 					

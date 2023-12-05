@@ -46,8 +46,11 @@ public class ManagerDao {
 
 	public int regist(Connection conn, ManagerVo vo) throws Exception {
 		//sql
-		String sql = "";
+		String sql = "insert into manager (no , manager_id , manager_pwd , name) VALUES (seq_manager_no.nextval,?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getId());
+		pstmt.setString(2, vo.getPwd());
+		pstmt.setString(3, vo.getName());
 		int result = pstmt.executeUpdate();
 		
 		//close

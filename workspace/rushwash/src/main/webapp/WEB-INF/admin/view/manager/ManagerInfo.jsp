@@ -1,5 +1,8 @@
+<%@page import="com.rushwash.admin.app.manager.vo.ManagerVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%List<ManagerVo> voList = (List<ManagerVo>) request.getAttribute("voList"); %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -52,7 +55,7 @@
 									</thead>
 									<tfoot>
 										<tr>
-											<th>NO.</th>
+											<th>NO</th>
 											<th>NAME</th>
 											<th>ID</th>
 											<th>PWD</th>
@@ -60,47 +63,20 @@
 										</tr>
 									</tfoot>
 									<tbody>
+										<%for (ManagerVo vo : voList) {%>
 										<tr>
-											<td>1</td>
-											<td>김관리</td>
-											<td>adminkim123</td>
-											<td>qqww1122@</td>
+											<td><%=vo.getNo() %></td>
+											<td><%=vo.getName() %></td>
+											<td><%=vo.getId() %></td>
+											<td><%=vo.getPwd() %></td>
 											<td>
-											<form action="" method="post">
 											<select class="custom-select" name="status">
-													<option value="N" selected>사용</option>
-													<option value="Y">미사용</option>
+													<option value="N">N</option>
+													<option value="Y">Y</option>
 											</select>
-											<input type="submit" class="btn btn-primary">
-											</form>
 											</td>
 										</tr>
-										<tr>
-											<td>2</td>
-											<td>이차장</td>
-											<td>leegjo22</td>
-											<td>q21ff2@</td>
-											<td><form action="" method="post">
-											<select class="custom-select" name="status">
-													<option value="N">사용</option>
-													<option value="Y">미사용</option>
-											</select>
-											<input type="submit" class="btn btn-primary">
-											</form></td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>박부장</td>
-											<td>parkboo67</td>
-											<td>qqff2!@</td>
-											<td><form action="" method="post">
-											<select class="custom-select" name="status">
-													<option value="N">사용</option>
-													<option value="Y">미사용</option>
-											</select>
-											<input type="submit" class="btn btn-primary">
-											</form></td>
-										</tr>
+									<%} %>
 									</tbody>
 								</table>
 							</div>
