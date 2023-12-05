@@ -1,19 +1,19 @@
 package com.rushwash.app.board.notice.vo;
 
 public class UserNoticeVo {
-	private String no;
 	@Override
 	public String toString() {
 		return "UserNoticeVo [no=" + no + ", adminNo=" + adminNo + ", title=" + title + ", content=" + content
-				+ ", enrollDate=" + enrollDate + "]";
+				+ ", enrollDate=" + enrollDate + ", delYn=" + delYn + "]";
 	}
-	public UserNoticeVo(String no, String adminNo, String title, String content, String enrollDate) {
+	public UserNoticeVo(String no, String adminNo, String title, String content, String enrollDate, String delYn) {
 		super();
 		this.no = no;
 		this.adminNo = adminNo;
 		this.title = title;
 		this.content = content;
 		this.enrollDate = enrollDate;
+		this.delYn = delYn;
 	}
 	public UserNoticeVo() {
 		super();
@@ -49,10 +49,19 @@ public class UserNoticeVo {
 	public void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
+	public String getDelYn() {
+		return delYn;
+	}
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
+	}
+	private String no;
 	private String adminNo;
 	private String title;
 	private String content;
 	private String enrollDate;
+	private String delYn;
+	
 	
 	
 }

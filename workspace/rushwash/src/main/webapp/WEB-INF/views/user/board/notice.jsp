@@ -27,12 +27,12 @@
             <td>작성일시</td>
           </tr>
           
-          <%for(UserNoticeVo vo : boardVoList){ %>
+          <%-- <%for(UserNoticeVo vo : boardVoList){ %>
 	          <tr>
 	            <td><%= vo.getNo()%><%= vo.getTitle() %></td>
 	            <td><%= vo.getEnrollDate() %></td>
 	          </tr>
-          <%}%>
+          <%}%> --%>
           
        </table>
     </div>

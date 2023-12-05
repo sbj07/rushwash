@@ -16,7 +16,7 @@ public class UserNoticeDao {
 	public List<UserNoticeVo> selectBoardList(Connection conn, PageVo pvo) throws Exception {
 	
 		//sql
-		String sql = "";
+		String sql = "SELECT NO, TITLE, CONTENT, ENROLL_DATE, DEL_YN FROM ( SELECT TITLE, CONTENT, ENROLL_DATE, DEL_YN FROM NOTICE WHERE DEL_YN = 'N' ORDER BY ENROLL_DATE DESC ) WHERE ROWNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getStartRow());
 		pstmt.setInt(2, pvo.getLastRow());
@@ -27,15 +27,17 @@ public class UserNoticeDao {
 		while(rs.next()) {
 			
 			String no = rs.getString("NO");
-			String title = rs.getString("Title");
+			String title = rs.getString("TITLE");
 			String content = rs.getString("CONTENT");
 			String enrollDate = rs.getString("ENROLL_DATE");
+			String delYn = rs.getString("DEL_YN");
 			
 			UserNoticeVo vo = new UserNoticeVo();
 			vo.setNo(no);
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setEnrollDate(enrollDate);
+			vo.setDelYn(delYn);
 			
 			boardVoList.add(vo);
 		}
