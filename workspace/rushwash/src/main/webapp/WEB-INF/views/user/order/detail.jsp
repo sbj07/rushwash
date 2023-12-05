@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/rushwash/resources/css/user/order/detail.css">
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
        <br>
        <br>
     </div>
-
+	<div id="div4">총 가격 : <%%></div>
     <div id="div2">
         <table>
             <thead>
@@ -57,7 +58,7 @@
     </div>
 
     <div id="div2">
-
+		<button type="botton" >주문취소</button>
     </div>
 </main>
 
