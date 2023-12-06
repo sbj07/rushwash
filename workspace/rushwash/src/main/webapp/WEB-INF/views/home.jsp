@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    String x = (String) session.getAttribute("alertMsg");
+    session.removeAttribute("alertMsg");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,3 +70,9 @@
 </body>
 <%@ include file='/WEB-INF/views/user/common/user_footer.jsp' %>
 </html>
+
+<script>
+	<% if(x != null){ %>
+		alert('<%= x %>');
+	<% } %>
+</script>
