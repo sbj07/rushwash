@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    
-  
+<%
+    String x = (String) request.getAttribute("errorMsg");
+%> 
   
 <!DOCTYPE html>
 <html>
@@ -28,7 +30,7 @@
                         </h3>
                         <span class="box int_id">
                             <input type="text" id="id" class="int" maxlength="20" name="memberId">
-                            <button type="button" class="step-url">중복확인</button> 
+                            <button type="button" class="step-url" onclick="checkIdDup();">중복확인</button> 
                         </span>
                         <span class="error_next_box"></span>
                     </div>
@@ -101,6 +103,9 @@
 
 <script>
 
+<% if(x != null){ %>
+	alert('<%= x %>');
+<% } %>
 
 const id = document.querySelector('#id');
 const pw1 = document.querySelector('#pswd1');
@@ -144,7 +149,7 @@ function checkId() {
         error[0].innerHTML = "사용가능한 아이디 입니다.";
         error[0].style.color = "#08A600";
         error[0].style.display = "block";
-    }
+    }  
 }
 
 function checkPw() {
@@ -236,6 +241,24 @@ function checkPhoneNum() {
     }
 }
 
+function checkIdDup(){
+	
+	const memberIdValue = document.querySelector("main input[name=memberId]").value;
+	
+	fetch("/rushwash/member/check/id?memberId=" + memberIdValue)
+	.then( (resp) => { return resp.json() } )
+	.then( (data) => { 
+		const result = data.msg;
+		const isOk = result === "ok";
+		if(isOk){	
+			alert("사용가능");
+			window.idOk = true;
+		}else{
+			alert("사용불가");
+			window.idOk = false;
+		}
+	} );
+}
 
 	
 </script>

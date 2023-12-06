@@ -96,7 +96,7 @@ h3 {
     top: 50%;
     right: 16px;
     margin-top: -10px;
-    cursor: pointer;
+    cursor: default;
 }
 
 select {

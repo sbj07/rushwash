@@ -100,4 +100,19 @@ public class MemberService {
 		return loginMember;
 	}
 
+	public boolean checkId(String memberId) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		boolean result = dao.checkId(conn, memberId);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }
