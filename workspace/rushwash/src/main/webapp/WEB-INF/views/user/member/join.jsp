@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
+  
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +12,7 @@
 </head>
 <body>
 	<main>
-	<form action="" method="post">
+	<form action="/rushwash/member/join" method="post">
             <div id="header">
                 <a href="/rushwash/home"><img src="/rushwash/resources/img/user/member/logo.png" id="logo"></a>
                 <h1>회원가입</h1>
@@ -19,80 +22,73 @@
     
                 <!-- content-->
                 <div id="content">
-    
-                    <!-- ID -->
                     <div>
                         <h3 class="join_title">
-                            <label for="id">아이디(이메일)</label>
+                            <label for="id">아이디</label>
                         </h3>
                         <span class="box int_id">
-                            <input type="text" id="id" class="int" maxlength="20">
+                            <input type="text" id="id" class="int" maxlength="20" name="memberId">
+                            <button type="button" class="step-url">중복확인</button> 
                         </span>
-                        <button type="button" class="step-url" onclick="">중복확인</button>
                         <span class="error_next_box"></span>
                     </div>
     
-                    <!-- PW1 -->
                     <div>
                         <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
                         <span class="box int_pass">
-                            <input type="password" id="pswd1" class="int" maxlength="20">
+                            <input type="password" id="pswd1" class="int" maxlength="20" name="memberPwd">
                             <span id="alertTxt">사용불가</span>
                             <img src="/rushwash/resources/img/user/member/pass.png" id="pswd1_img1" class="pswdImg">
                         </span>
                         <span class="error_next_box"></span>
                     </div>
     
-                    <!-- PW2 -->
                     <div>
                         <h3 class="join_title"><label for="pswd2">비밀번호 확인</label></h3>
                         <span class="box int_pass_check">
-                            <input type="password" id="pswd2" class="int" maxlength="20">
+                            <input type="password" id="pswd2" class="int" maxlength="20" name="memberPwd2">
                             <img src="/rushwash/resources/img/user/member/disable.png" id="pswd2_img1" class="pswdImg">
                         </span>
                         <span class="error_next_box"></span>
                     </div>
     
-                    <!-- NAME -->
                     <div>
                         <h3 class="join_title"><label for="name">이름</label></h3>
                         <span class="box int_name">
-                            <input type="text" id="name" class="int" maxlength="20">
+                            <input type="text" id="name" class="int" maxlength="20" name="memberName">
                         </span>
                         <span class="error_next_box"></span>
                     </div>
-    				
-    				<div>
+                    
+                    <div>
                         <h3 class="join_title"><label for="email">이메일</label></h3>
                         <span class="box int_email">
-                            <input type="text" id="email" class="int" maxlength="100" placeholder="이메일입력">
+                            <input type="text" id="email" class="int" maxlength="100" name="memberEmail" placeholder="이메일 입력">
                         </span>
-                        <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>    
+                        <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>   
+
                     </div>
     
-                    <!-- ADDRESS -->
                     <div>
                         <h3 class="join_title"><label for="addr">주소(배송지)</label></h3>
-                        <span class="box int_email">
-                            <input type="text" id="addr" class="int" maxlength="100" placeholder="주소입력">
+                        <span class="box int_addr">
+                            <input type="text" id="addr" class="int" maxlength="100" name="memberAddress" placeholder="주소 입력">
                         </span>
-                        <span class="error_next_box"></span>
+                        <span class="error_next_box">올바른 주소를 입력하세요</span> 
                     </div>
     
-                    <!-- MOBILE -->
                     <div>
                         <h3 class="join_title"><label for="phoneNo">휴대전화</label></h3>
                         <span class="box int_mobile">
-                            <input type="tel" id="mobile" class="int" maxlength="16" placeholder="전화번호 입력">
+                            <input type="tel" id="mobile" class="int" maxlength="16" name="memberTel" placeholder="전화번호 입력">
                         </span>
                         <span class="error_next_box"></span>    
                     </div>
     
-                    <!-- JOIN BTN-->
                     <div class="btn_area">
-                        <button type="button" id="btnJoin" onclick="">
+                        <button type="submit" id="btnJoin">
                             <span>가입하기</span>
-                        </button>
+                        </button>             
                     </div>
                 </div> 
                 <!-- content-->
@@ -104,7 +100,8 @@
 </html>
 
 <script>
-	
+
+
 const id = document.querySelector('#id');
 const pw1 = document.querySelector('#pswd1');
 const pwMsg = document.querySelector('#alertTxt');
@@ -119,19 +116,15 @@ const mobile = document.querySelector('#mobile');
 const error = document.querySelectorAll('.error_next_box');
 
 
-
 /*이벤트 핸들러 연결*/
-
 
 id.addEventListener("focusout", checkId);
 pw1.addEventListener("focusout", checkPw);
 pw2.addEventListener("focusout", comparePw);
 userName.addEventListener("focusout", checkName);
-email.addEventListener("focusout", isEmailCorrect);
 addr.addEventListener("focusout", checkAddr);
+email.addEventListener("focusout", isEmailCorrect);
 mobile.addEventListener("focusout", checkPhoneNum);
-
-
 
 
 
@@ -145,6 +138,7 @@ function checkId() {
         error[0].style.display = "block";
     } else if(!idPattern.test(id.value)) {
         error[0].innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+        error[0].style.color = "red";
         error[0].style.display = "block";
     } else {
         error[0].innerHTML = "사용가능한 아이디 입니다.";
@@ -204,14 +198,14 @@ function checkName() {
     }
 }
 
-
 function isEmailCorrect() {
     const emailPattern = /[a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,}/;
 
     if(email.value === ""){ 
     	error[4].innerHTML = "필수 정보입니다.";
-        error[4].style.display = "none"; 
+        error[4].style.display = "block"; // 이메일이 빈 문자열일 때 에러 메시지를 표시하도록 수정
     } else if(!emailPattern.test(email.value)) {
+        error[4].innerHTML = "이메일 주소를 다시 확인해주세요."; // 이메일 형식이 맞지 않을 때 에러 메시지를 표시
         error[4].style.display = "block";
     } else {
         error[4].style.display = "none"; 
@@ -228,8 +222,9 @@ function checkAddr() {
     }
 }
 
+
 function checkPhoneNum() {
-    const isPhoneNum = /([01]{2})-([01679]{1})([0-9]{3,4})-([0-9]{4})/;
+    const isPhoneNum = /([01]{2})([01679]{1})-([0-9]{3,4})-([0-9]{4})/;
     if(mobile.value === "") {
         error[6].innerHTML = "필수 정보입니다.";
         error[6].style.display = "block";
@@ -240,5 +235,7 @@ function checkPhoneNum() {
         error[6].style.display = "none";
     }
 }
+
+
 	
 </script>

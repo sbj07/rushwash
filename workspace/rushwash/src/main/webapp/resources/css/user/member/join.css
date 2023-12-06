@@ -80,7 +80,7 @@ h3 {
 	position: absolute;
     right: 10px;
     top: 9.6%;
-    transform: translateY(-100%);
+    transform: translateY(20%);
     background-color: #163172; 
     color: white; 
     border-radius: 10px;
