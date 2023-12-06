@@ -1,9 +1,9 @@
-<%@page import="com.rushwash.admin.app.board.notice.vo.NoticeVo"%>
+<%@page import="com.rushwash.admin.app.board.faq.vo.FaqVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-   	<%
-    	NoticeVo vo = (NoticeVo)request.getAttribute("vo");
+    <%
+    	FaqVo vo = (FaqVo)request.getAttribute("vo");
     	String currPage = (String)request.getAttribute("currPage");
     	if(currPage == null){
     		currPage = "1";
@@ -14,7 +14,7 @@
 <html>
     <head>
         <%@ include file="/WEB-INF/admin/view/common/header.jsp"%>
-		<link rel="stylesheet" href="/rushwash/resources/admin/css/detail.css">
+		<link rel="stylesheet" href="/rushwash/resources/admin/css/write.css">
         </head>
         
         <!-- PAGE TOP -->
@@ -33,31 +33,28 @@
                         <!-- Begin Page Content -->
                         <div class="container-fluid">
         
+							<form action="/rushwash/admin/board/faqWrite" method="post">
                             <main>
-								<h1>게시글 상세조회</h1>
-								
-								<table border="1">
-									<tbody>
-										<tr>
-											<td>제목 : <%= vo.getTitle() %></td>
-											<td>작성자 : <%= vo.getManagerId() %></td>
-											<td>작성일자 : <%= vo.getEnrollDate() %></td>
-										</tr>
-										
-										<tr id="content">
-											<td colspan="3"><%= vo.getContent() %></td>
-										</tr>
-									</tbody>
-								</table>
-					
-								
-									<div class="btn-area">
-										<button onclick="location.href='/rushwash/admin/board/notice/edit?no=<%= vo.getNo() %>'">수정</button>
-										<button onclick="location.href='/rushwash/admin/board/noticeDelete?no=<%= vo.getNo() %>'">삭제</button>
-									</div>
-							</main>
-                            
-                            <a href="/rushwash/admin/board/notice?pno=<%= currPage %>">목록으로</a>
+								<h1>FAQ 작성</h1>
+									<table border="1">
+										<tbody>
+											<tr>
+												<td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
+												<td>작성자 : </td>
+												<td>작성일자 : </td>
+											</tr>
+											
+											<tr id="content">
+												<td colspan=3><textarea name="content" placeholder="내용을 입력하세요"></textarea>
+	
+												
+											</tr>
+										</tbody>
+									</table>
+								</main>
+                            	<input type="submit" value="작성하기">
+                            </form>
+                            <a href="/rushwash/admin/board/faq?pno=<%= currPage %>">목록으로</a>
                             
                             
                             
@@ -83,6 +80,7 @@
         
         
         </html>
+        <script>
         
         
-      
+        </script>
