@@ -21,18 +21,35 @@ public class ManagerLoginController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("adminInputID");
-		String pwd = req.getParameter("adminInputPWD");
-		ManagerVo vo = new ManagerVo();
-		vo.setId(id);
-		vo.setPwd(pwd);
-		
-		System.out.println(vo);
-		
-		//세션에 로그인 정보 담기
-		HttpSession session = req.getSession();
-		session.setAttribute("loginData", vo);
-	
+		try {
+			//DATA
+			String id = req.getParameter("adminInputID");
+			String pwd = req.getParameter("adminInputPWD");
+			ManagerVo vo = new ManagerVo();
+			vo.setId(id);
+			vo.setPwd(pwd);
+			
+			//서비스
+			ManagerService ms = new ManagerService();
+			ManagerVo loginManager = ms.login(vo);
+			
+			System.out.println(vo);
+			System.out.println(loginManager);
+			if(loginManager==null) {
+				throw new Exception("ERROR 매니저 로그인 실패");
+			}
+			
+			//세션에 로그인 정보 담기
+			HttpSession session = req.getSession();
+			session.setAttribute("loginManager", loginManager);
+			session.setAttribute("alertMsg", "관리자 로그인에 성공하였습니다.");
+			//성공 후 대시보드로 리다이렉트
+			resp.sendRedirect("/rushwash/admin/dashboard");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			req.setAttribute("errMsg", "매니저 로그인 실패");
+			req.getRequestDispatcher("/WEB-INF/admin/view/manager/login.jsp").forward(req, resp);
+		}
 	}
-
-}
+}//class end

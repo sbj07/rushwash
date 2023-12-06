@@ -1,5 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String alertMsg = (String) session.getAttribute("alertMsg");
+	session.removeAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -200,5 +205,11 @@
 <script src="/rushwash/resources/admin/vendor/chart.js/Chart.min.js"></script>
 <%@include file="/WEB-INF/admin/view/dashboard/laundryChart.jsp"%>
 <%@include file="/WEB-INF/admin/view/dashboard/planChart.jsp"%>
+
+<script>
+	<%if(alertMsg!=null) {%>
+		alert("<%=alertMsg%>");
+	<%}%>
+</script>
 
 </html>

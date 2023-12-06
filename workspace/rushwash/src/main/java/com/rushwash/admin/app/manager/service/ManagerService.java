@@ -48,4 +48,17 @@ public class ManagerService {
 		return result;
 	}
 
+	public ManagerVo login(ManagerVo vo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		ManagerVo dbVo = dao.login(conn, vo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return dbVo;
+	}
+
 }
