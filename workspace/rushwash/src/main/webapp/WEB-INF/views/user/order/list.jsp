@@ -59,13 +59,15 @@
                     </thead>
                     
                     <tbody>
+	                    
 	                    <c:forEach items="voList" var="vo">
 	                        <tr>
 	                            <td>1</td>
 	                            <td>9</td>
 	                            <td>22022.02.23</td>
-	                            <td>배송완료</td>
+	                            <td>배송완료</td> 
 	                        </tr>
+	                   
 	                    </c:forEach>
                     </tbody>
                 </table>

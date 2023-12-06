@@ -20,11 +20,11 @@
        <br>
        <br>
     </div>
-	<div id="div4">총 가격 : <%%></div>
+	<div id="div4">총 가격 : </div>
     <div id="div2">
-        <table>
+        <table id="tt00">
             <thead>
-                <tr>
+                <tr id="th1">
                     <th>상품</th>
                     <th>가격</th>
                     <th>수량</th>
@@ -42,6 +42,21 @@
                     <td>세탁중</td>
                 </tr>
             	</c:forEach>
+            	<tr id="th2">
+                    <td>수령인</td>
+                    <td>핸드폰번호</td>
+                    <td>주소</td>
+                    <td colspan="2">요청사항</td>
+                </tr>
+                <c:forEach items="voList" var="vo">
+                	<tr>
+	                    <td>수령asdfasdfasd인</td>
+	                    <td>핸드fasdfasdfas폰번호</td>
+	                    <td>주dfasdfasdfasdf소</td>
+	                    <td colspan="2">asdfasdfsdf</td>
+               	 </tr>
+                
+                </c:forEach>
             </tbody>
         </table>
     </div>
