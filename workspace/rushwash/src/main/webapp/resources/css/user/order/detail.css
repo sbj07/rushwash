@@ -1,5 +1,4 @@
 :root {
-    /* 색상 변수 */
     --색상-검정: #0F0F0F;
     --색상-네이비: #163172;
     --색상-블루: #1E56A0;
@@ -20,7 +19,7 @@ body {
 }
 
 #div1 {
-    /* div1의 스타일을 필요에 맞게 조절 */
+	text-align: center;
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 20px;
@@ -28,39 +27,37 @@ body {
 }
 
 #div4 {
-    /* div4의 스타일을 필요에 맞게 조절 */
     font-weight: bold;
     margin-bottom: 20px;
     text-align: right;
 }
 
 #div2 {
-    /* div2의 스타일을 필요에 맞게 조절 */
     margin-bottom: 25px;
     text-align: center;
 }
 
 table {
     width: 100%;
-    height: 50px;
     font-size: 20px;
-    border-collapse: collapse;
 
 }
 
 th, td {
+	height: 50px;
     padding: 8px;
     text-align: left;
     letter-spacing: 1px;
     border-bottom: 1px solid lightgray;
 }
-th{
+#tt00 th{
 	background-color: #163172;
 	color: white;
+	height: 50px;
+	
 }
 
 button {
-    /* 버튼의 스타일을 필요에 맞게 조절 */
     padding: 10px;
     background-color: #163172;;
     color: white;
@@ -73,5 +70,24 @@ button {
 div{
 	text-align: center;
 }
+#tt00 th,
+#tt00 td{
+	text-align: center;
+	vertical-align: middle
 
-/* 다른 main 내부의 요소들에 필요한 스타일을 추가 */
+}
+thead{
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+#th2 {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+table th:first-child {
+    border-top-left-radius: 20px;
+}
+
+table th:last-child {
+    border-top-right-radius: 20px;
+}
