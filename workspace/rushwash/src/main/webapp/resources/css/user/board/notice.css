@@ -6,10 +6,13 @@
     --color-lightblue : #d6e4f0;
     --color-beige : #F6F6F6;
 }
-
+body{
+	align-items: center;
+}
 main{
     height: 1500px;
     padding-top: 50px;
+    align-items: center;
 }
 
 table{
@@ -26,33 +29,45 @@ table td {
     font-size: 20px;
     vertical-align: middle;
 }
-table tr:first-child{
-    background-color: var(--color-navy);
+table tbody{
+	background-color: white;
 }
-table tr{
-    background-color: white;
-    
+table thead{
+	background-color: var(--color-navy);
+}
+table tbody tr:hover{
+	background-color: lightgray;
 }
 td:last-child {
     text-align: right;
     color: rgb(128, 126, 126);
     padding-right: 20px;
   }
+.title{
+	color: white;
+}
 .font{
     font-size: 50px;
     font-weight: bold;
     color: var(--color-navy);
     padding-bottom: 50px;
 }
+.page-area{
+	text-align: center;
+	padding-right: 15%;
+	margin-top: 5%;
+	font-size: 20px;
+}
+
 #wrap{
     padding-left: 250px;
     padding-top: 80px;
 }
 
-#wrap table tr:first-child td:first-child {
+#wrap table thead tr:first-child td:first-child {
     border-top-left-radius: 20px;
 }
 
-#wrap table tr:first-child td:last-child {
+#wrap table thead tr:first-child td:last-child {
     border-top-right-radius: 20px;
 }
