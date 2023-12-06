@@ -51,7 +51,7 @@ public class MemberLoginController extends HttpServlet {
 			System.out.println("[ERROR-M002] 로그인 중 예외 발생");
 			e.printStackTrace();
 			req.setAttribute("errorMsg", "로그인 실패");
-			req.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/user/member/login.jsp").forward(req, resp);
 		}
 	}
 }
