@@ -1,70 +1,77 @@
 :root {
-    /* color */
-    --color-black : #0F0F0F;
-    --color-navy : #163172;
-    --color-blue : #1E56A0;
-    --color-lightblue : #d6e4f0;
-    --color-beige : #F6F6F6;
+    /* 색상 변수 */
+    --색상-검정: #0F0F0F;
+    --색상-네이비: #163172;
+    --색상-블루: #1E56A0;
+    --색상-라이트블루: #d6e4f0;
+    --색상-베이지: #F6F6F6;
 }
 
-
-#wrap{
-	background-color: #F6F6F6;
-	padding-top: 150px;
-	padding-bottom: 150px;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	   
+body {
+    margin: 0;
 }
 
-    
+#wrap {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding-top: 20px;
+}
 
+#div1 {
+    /* div1의 스타일을 필요에 맞게 조절 */
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color:  #163172;;
+}
 
-table{
-    background-color: white;
-/*    align-items: center center;*/
-	width: 80%;
-/*    max-width: 800px;*/
+#div4 {
+    /* div4의 스타일을 필요에 맞게 조절 */
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+#div2 {
+    /* div2의 스타일을 필요에 맞게 조절 */
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
     border-collapse: collapse;
-    border-radius: 10px 10px 0 0;
-    margin: auto;
-    text-align: center;
-/*    padding-right: 20%;*/
-    
-}
-table th, table td {
-    
-/*    place-items: center center;*/
-    font-size: 24px;
-/*    align-items: center center;*/
-    text-align: center;
-    padding: 15px;
-    
+
 }
 
-table th{
-    
-    background-color: #163172;
+th, td {
+    padding: 8px;
+    text-align: left;
+    letter-spacing: 1px;
+    border-bottom: 1px solid lightgray;
+}
+th{
+	background-color: #163172;
+	color: white;
+}
+
+button {
+    /* 버튼의 스타일을 필요에 맞게 조절 */
+    padding: 10px;
+    background-color: #163172;;
     color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
 }
-
-#div1{
-	text-align: center;
-	font-size: 60px;
-	font-weight: bold;
-	color:  #163172;
-}
-
-#div2{
-	width: 80%;
-/*	max-width: 800px;*/
-	overflow: hidden;
-}
-
-
-#div4{
+div{
 	text-align: center;
 }
+
+/* 다른 main 내부의 요소들에 필요한 스타일을 추가 */
