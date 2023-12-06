@@ -1,5 +1,10 @@
+<%@page import="com.rushwash.admin.app.laundry.vo.LaundryVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -44,9 +49,9 @@
 									cellspacing="0">
 									<thead>
 										<tr>
+											<th>세탁물번호</th>
 											<th>주문번호</th>
 											<th>유저번호</th>
-											<th>세탁물번호</th>
 											<th>품목명</th>
 											<th>수량</th>
 											<th>세탁시작일</th>
@@ -57,9 +62,9 @@
 									</thead>
 									<tfoot>
 										<tr>
+											<th>세탁물번호</th>
 											<th>주문번호</th>
 											<th>유저번호</th>
-											<th>세탁물번호</th>
 											<th>품목명</th>
 											<th>수량</th>
 											<th>세탁시작일</th>
@@ -69,84 +74,34 @@
 										</tr>
 									</tfoot>
 									<tbody>
+										<%
+										for (LaundryVo vo : voList) {
+										%>
 										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>1</td>
-											<td>셔츠</td>
-											<td>2</td>
-											<td>2023/11/20</td>
-											<td>2023/11/21</td>
+											<td><%=vo.getNo()%></td>
+											<td><%=vo.getOrderNo()%></td>
+											<td><%=vo.getMemberNo()%></td>
+											<td><%=vo.getItem()%></td>
+											<td><%=vo.getEa()%></td>
+											<td><%=vo.getWashStartDate()%></td>
+											<td><%=vo.getWashEndDate()%></td>
 											<td>
-											<form action="" method="post">
-												<select class="custom-select" name="status">
+												<form id="statusForm_<%=vo.getNo()%>">
+<%-- 												<%if(vo.getStatus() == ) %> --%>
+													<select class="custom-select" name="status">
 														<option value="1">대기</option>
-														<option value="2">세탁중</option>
-														<option value="3" selected>세탁완료</option>
-												</select>
-												<input type="submit" class="btn btn-primary">											
-											</form>
-											</td>
-											<td>N</td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>2</td>
-											<td>2</td>
-											<td>양말</td>
-											<td>4</td>
-											<td>2023/11/20</td>
-											<td>2023/11/21</td>
-											<td><form action="" method="post">
-												<select class="custom-select" name="status">
-														<option value="1">대기</option>
-														<option value="2">세탁중</option>
-														<option value="3" selected>세탁완료</option>
-												</select>
-												<input type="submit" class="btn btn-primary">											
-											</form></td>
-											<td>N</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>1</td>
-											<td>3</td>
-											<td>슬랙스</td>
-											<td>3</td>
-											<td>2023/11/25</td>
-											<td>-</td>
-											<td>
-											<form action="" method="post">
-												<select class="custom-select" name="status">
-														<option value="1">대기</option>
-														<option value="2"selected>세탁중</option>
+														<option value="2" selected>세탁중</option>
 														<option value="3">세탁완료</option>
-												</select>
-												<input type="submit" class="btn btn-primary">											
-											</form>
+													</select> 
+													<input type="button" class="btn btn-primary" value="제출"
+														onclick="submitForm(<%=vo.getNo()%>)">
+												</form>
 											</td>
-											<td>N</td>
+											<td><%=vo.getDelYn()%></td>
 										</tr>
-										<tr>
-											<td>3</td>
-											<td>3</td>
-											<td>4</td>
-											<td>이불</td>
-											<td>1</td>
-											<td>2023/11/27</td>
-											<td>-</td>
-											<td>
-											<form action="" method="post">
-												<select class="custom-select" name="status">
-														<option value="1">대기</option>
-														<option value="2">세탁중</option>
-														<option value="3">세탁완료</option>
-												</select>
-												<input type="submit" class="btn btn-primary">
-											</form>
-											</td>
-											<td>Y</td>
-										</tr>
+										<%
+										}
+										%>
 									</tbody>
 								</table>
 							</div>
@@ -171,7 +126,7 @@
 </body>
 <script type="text/javascript">
      // Use querySelectorAll to select all elements with the class "custom-select"
-    var statusSelects = document.querySelectorAll(".custom-select");
+    var statusSelects = document.querySelectorAll('.custom-select option');
 
  // Add event listener to each selected element
     statusSelects.forEach(function(statusSelect) {
@@ -190,9 +145,45 @@
           statusSelect.style.backgroundColor = "lightgreen";
           break;
         default:
-          statusSelect.style.backgroundColor = ""; // Reset to default
+          statusSelect.style.backgroundColor = "";
       }
     });
+ 
+ 	//AJAX
+ 	function submitForm(no) {
+ 		  // JS오브젝트 생성
+ 		  let formData = {
+ 				no: no,
+                status: document.querySelector('#statusForm_' + no + ' select[name="status"]').value
+            };
+ 		  // 데이터를 JSON 방식으로
+ 		  let jsonString = JSON.stringify(formData);
+
+ 		  // URL 전달 패치 (옵션 : 포스트, json, body지정)
+ 		  fetch('http://127.0.0.1:8888/rushwash/admin/laundry/control', {
+ 		    method: 'POST',
+ 		    headers: {'Content-Type': 'application/json'},
+ 		    body: jsonString
+ 		  })
+ 		  .then(resp => {
+ 		    if (!resp.ok) {
+ 		      throw new Error('Network response was not ok');
+ 		    }
+ 		    return resp.json();
+ 		  })
+ 		  .then(data => {
+ 		    // Handle the response data if needed
+ 		    console.log(data);
+ 		  })
+ 		  .catch(error => {
+ 		    // Handle errors
+ 		    console.error('There was a problem with the fetch operation:', error);
+ 		  });
+ 				
+ 	}//confirm end
+ 	
+	
+ 	
 </script>
 
 </html>
