@@ -24,73 +24,56 @@
                 <button data-target="bottom-table" class="btn-bottom tag-btn" id="bottom-category" value="2">하의</button>
                 <button data-target="outer-table" class="btn-outer tag-btn" id="outer-category"value="3">아우터</button>
 
-                <table class="price-table">
+                <form action="/rushwash/payment/laundry-form" method="post">
+                    <table class="price-table">
 
-                    <!-- 상단 -->
-                    <thead>
-                        <th id="product">품목</th>
-                        <th id="normal-price">일반가격</th>
-                        <th id="plan-price">플랜 할인 가격</th>
-                        <th id="ea">수량</th>
-                    </thead>
+                        <!-- 상단 -->
+                        <thead>
+                            <th id="product">품목</th>
+                            <th id="normal-price">일반가격</th>
+                            <th id="plan-price">플랜 할인 가격</th>
+                            <th id="ea">수량</th>
+                        </thead>
 
-                    <!-- 바디 -->
-                    <tbody id="resultTable">
-                        <tr>
-                            <td>
-                                와이셔츠
-                            </td>
-                            <td>
-                                2100원
-                            </td>
-                            <td>1995</td>
-                            <td>
-                                <div class="quantity">
-                                    <button class="quantity-up" id="up-btn">+</button>
-                                    <input type="text" class="quantity-input" value="0" min="0" max="99">
-                                    <button class="quantity-down" id="down-btn">-</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                와이셔츠
-                            </td>
-                            <td>
-                                2100원
-                            </td>
-                            <td>1995</td>
-                            <td>
-                                <div class="quantity">
-                                    <input type="text" class="quantity-input" value="0" min="0" max="99">
-                                    <button class="quantity-up" id="up-btn">+</button>
-                                    <button class="quantity-down" id="down-btn">-</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+                        <!-- 바디 -->
+                        <tbody id="resultTable">
+                            <tr>
+                                <td>
+                                    와이셔츠
+                                </td>
+                                <td>
+                                    2100원
+                                </td>
+                                <td>1995</td>
+                                <td>
+                                    <div class="quantity">
+                                        <input type="text" class="quantity-input" value="0" min="0" max="99" name="itemEa">
+                                        <button type="button" class="quantity-up" id="up-btn">+</button>
+                                        <button type="button" class="quantity-down" id="down-btn">-</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
 
+                        <!-- 하단 -->
+                        <tfoot>
+                            <tr id="tfoot-top">
+                                <td>수량합계</td>
+                                <td>총가격</td>
+                                <td>19000원</td>
+                                <td rowspan="2" class="td-payment">
+                                    <button type="submit" id="btn-payment">바로결제</button>
+                                </td>
+                            </tr>
+                            <tr id="tfoot-bottom">
+                                <td>15개</td>
+                                <td>플랜 할인 가격</td>
+                                <td>15000원</td>
+                            </tr>
+                        </tfoot>
 
-                    <!-- 하단 -->
-                    <tfoot>
-                        <tr id="tfoot-top">
-                            <td>수량합계</td>
-                            <td>총가격</td>
-                            <td>19000원</td>
-                            <td rowspan="2" class="td-payment">
-                                <button id="btn-payment">바로결제</button>
-                            </td>
-                        </tr>
-                        <tr id="tfoot-bottom">
-                            <td>15개</td>
-                            <td>플랜 할인 가격</td>
-                            <td>15000원</td>
-                        </tr>
-                    </tfoot>
-
-                </table>
-                <table id="bottom-table"></table>
-                <table id="outer-table"></table>
+                    </table>
+                </form>
             </div>
         </div>
     </main>
@@ -117,6 +100,11 @@
     document.getElementById('top-category').addEventListener('click', handleButtonClick);
     document.getElementById('bottom-category').addEventListener('click', handleButtonClick);
     document.getElementById('outer-category').addEventListener('click', handleButtonClick);
+
+    function quantityUpDown(event) {
+        
+    }
+
 
     // 수량증감 함수
     document.addEventListener('DOMContentLoaded', function () {
@@ -149,6 +137,7 @@
         });
     });
 
+    // 테이블 데이터 가져오는 
     function getItemTable() {
         const selectedBtn = document.querySelector(".btn-selected");
         const targetValue = selectedBtn.value;
@@ -175,14 +164,18 @@
         const normalPriceTag = document.createElement("td");
         const premiumPriceTag = document.createElement("td");
         const eaTdTag = document.createElement("td");
-        const eaBtnTag = document.createElement("button");
+
+        const eaDivTag = document.createElement("div");
+        eaDivTag.classList.add('quantity');
+
+        eaDivTag.insertAdjacentHTML("afterbegin", '<input type="text" class="quantity-input" value="0" min="0" max="99" name="itemEa"> <button type="button" class="quantity-up" id="up-btn">+</button> <button type="button" class="quantity-down" id="down-btn">-</button>');
 
         nameTag.innerText = itemName;
         normalPriceTag.innerText = itemPrice;
         premiumPriceTag.innerText = itemPrice;
-        eaBtnTag.innerHTML = "버튼";
+        // eaBtnTag.innerHTML = "버튼";
         
-        eaTdTag.appendChild(eaBtnTag);
+        eaTdTag.appendChild(eaDivTag);
         trTag.appendChild(nameTag);
         trTag.appendChild(normalPriceTag);
         trTag.appendChild(premiumPriceTag);
@@ -190,11 +183,11 @@
 
         resultTable.appendChild(trTag);
 
-        console.log("addColum끝");
     }
 
     function removeTable(){
         const resultTable = document.querySelector("#resultTable");
         resultTable.innerHTML = "";
+
     }
 </script>
