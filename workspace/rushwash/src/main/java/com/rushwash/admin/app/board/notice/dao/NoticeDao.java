@@ -126,7 +126,7 @@ public class NoticeDao {
 
 	public int write(Connection conn, NoticeVo vo) throws Exception {
 		//SQL
-	      String sql = "INSERT INTO NOTICE (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) VALUES ( SEQ_NOTICE_NO.NEXTVAL, ?, ?, 1, SYSDATE)";
+	      String sql = "INSERT INTO NOTICE (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) VALUES ( SEQ_NOTICE_NO.NEXTVAL, ?, ?, 2, SYSDATE)";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 //	      pstmt.setString(1, vo.getNo());
 	      pstmt.setString(1, vo.getTitle());

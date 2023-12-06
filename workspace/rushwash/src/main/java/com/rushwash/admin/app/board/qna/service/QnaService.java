@@ -91,37 +91,37 @@ public class QnaService {
 		}//delete
 		
 		//댓글 삭제
-				public int cmmtDelete(String no) throws Exception {
-					//conn
-					Connection conn = JDBCTemplate.getConnection();
-					
-					//dao
-					QnaDao dao = new QnaDao();
-					int result = dao.commtDelete(conn, no);
-					
-					//tx
-					if(result == 1) {
-						JDBCTemplate.commit(conn);
-					}else {
-						JDBCTemplate.rollback(conn);
-					}
-					
-					//close
-					JDBCTemplate.close(conn);
+		public int commtDelete(String no) throws Exception {
+			//conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			//dao
+			QnaDao dao = new QnaDao();
+			int result = dao.commtDelete(conn, no);
+			
+			//tx
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+			//close
+			JDBCTemplate.close(conn);
 
-					return result;
-				}//delete
+			return result;
+		}//delete
 			
 			
 		//게시글 작성
-		public int write(QnaVo vo) throws Exception {
+		public int write(QnaVo vo, String no) throws Exception {
 			
 			// conn
 			Connection conn = JDBCTemplate.getConnection();
 			
 			// dao
 			QnaDao dao = new QnaDao();
-			int result = dao.write(conn, vo);
+			int result = dao.write(conn, vo, no);
 			
 			// tx
 			if(result == 1) {

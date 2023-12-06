@@ -136,15 +136,13 @@ public class QnaDao {
 	   }//delete
 	   
 	   //댓글 작성
-		public int write(Connection conn, QnaVo vo) throws Exception {
+		public int write(Connection conn, QnaVo vo, String no) throws Exception {
 			//SQL
-		      String sql = "UPDATE QNA SET COMMT = ? WHERE NO = ?";
+		      String sql = "UPDATE QNA SET  COMMT = ? WHERE NO = ?";
 		      PreparedStatement pstmt = conn.prepareStatement(sql);
 		      pstmt.setString(1, vo.getCommt());
-		      pstmt.setString(2, vo.getNo());
+		      pstmt.setString(2, no);
 		      int result = pstmt.executeUpdate();
-		      System.out.println(result);
-		      System.out.println(vo.getCommt());
 		      //close
 		      JDBCTemplate.close(pstmt);
 		      return result;

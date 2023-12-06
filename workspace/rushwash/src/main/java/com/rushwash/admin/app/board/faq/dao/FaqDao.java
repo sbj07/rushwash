@@ -124,7 +124,7 @@ public class FaqDao {
 
 	public int write(Connection conn, FaqVo vo) throws Exception {
 		//SQL
-	      String sql = "INSERT INTO FAQ (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) VALUES ( SEQ_FAQ_NO.NEXTVAL, ?, ?, 1, SYSDATE)";
+	      String sql = "INSERT INTO FAQ (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) VALUES ( SEQ_FAQ_NO.NEXTVAL, ?, ?, 2, SYSDATE)";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 //	      pstmt.setString(1, vo.getNo());
 	      pstmt.setString(1, vo.getTitle());
