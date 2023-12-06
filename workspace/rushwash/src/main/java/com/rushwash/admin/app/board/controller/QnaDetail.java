@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rushwash.admin.app.board.faq.service.FaqService;
-import com.rushwash.admin.app.board.faq.vo.FaqVo;
+import com.rushwash.admin.app.board.qna.service.QnaService;
+import com.rushwash.admin.app.board.qna.vo.QnaVo;
 
 
-@WebServlet("/admin/board/faq/detail")
-public class FaqDetailController extends HttpServlet{
-	
+@WebServlet("/admin/board/qna/detail")
+public class QnaDetail extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -23,13 +22,17 @@ public class FaqDetailController extends HttpServlet{
 			String no = req.getParameter("no");
 			
 			// service
-			FaqService bs = new FaqService();
-			FaqVo vo = bs.selectFaqByNo(no);
+			QnaService bs = new QnaService();
+			QnaVo vo = bs.selectQnaByNo(no);
 			
 			// result == view
 			req.setAttribute("vo", vo);
 			req.setAttribute("currPage", req.getParameter("currPage"));
-			req.getRequestDispatcher("/WEB-INF/admin/view/board/faqDetail.jsp").forward(req, resp);
+			if(vo.getCommt() == null) {
+				req.getRequestDispatcher("/WEB-INF/admin/view/board/qnaDetailCommtNull.jsp").forward(req, resp);				
+			}else {
+				req.getRequestDispatcher("/WEB-INF/admin/view/board/qnaDetail.jsp").forward(req, resp);
+			}
 			
 		}catch(Exception e) {
 			System.out.println("[ERROR-B003] 게시글 상세조회 중 에러 발생 ...");
@@ -39,4 +42,3 @@ public class FaqDetailController extends HttpServlet{
 
 	}//doGet
 }
-

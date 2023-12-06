@@ -44,7 +44,7 @@ public class FaqService {
 		
 		
 		//공지사항 상세조회
-		public FaqVo selectNoticeByNo(String no) throws Exception {
+		public FaqVo selectFaqByNo(String no) throws Exception {
 			
 			// conn
 			Connection conn = JDBCTemplate.getConnection();
