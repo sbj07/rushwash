@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/rushwash/resources/css/user/center.css">
+<link rel="stylesheet" href="/rushwash/resources/css/user/board/center.css">
 </head>
 <body>
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
