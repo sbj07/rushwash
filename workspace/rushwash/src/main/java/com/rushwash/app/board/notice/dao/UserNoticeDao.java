@@ -16,7 +16,7 @@ public class UserNoticeDao {
 	public List<UserNoticeVo> selectBoardList(Connection conn, PageVo pvo) throws Exception {
 	
 		//sql
-		String sql = "SELECT NO, TITLE, CONTENT, ENROLL_DATE, DEL_YN FROM ( SELECT TITLE, CONTENT, ENROLL_DATE, DEL_YN FROM NOTICE WHERE DEL_YN = 'N' ORDER BY ENROLL_DATE DESC ) WHERE ROWNUM BETWEEN ? AND ?";
+		String sql = "SELECT NO, TITLE, CONTENT, ENROLL_DATE, DEL_YN FROM ( SELECT NO, TITLE, CONTENT, ENROLL_DATE, DEL_YN FROM NOTICE WHERE DEL_YN = 'N' ORDER BY ENROLL_DATE DESC ) WHERE ROWNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getStartRow());
 		pstmt.setInt(2, pvo.getLastRow());
@@ -50,7 +50,7 @@ public class UserNoticeDao {
 	}
 
 	public int selectBoardCount(Connection conn) throws Exception {
-		String sql = "";
+		String sql = "SELECT COUNT(*) AS cnt FROM NOTICE WHERE DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		
 		ResultSet rs = pstmt.executeQuery();
