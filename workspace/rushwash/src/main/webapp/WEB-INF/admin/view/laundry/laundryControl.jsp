@@ -87,11 +87,10 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
 											<td><%=vo.getWashEndDate()%></td>
 											<td>
 												<form id="statusForm_<%=vo.getNo()%>">
-<%-- 												<%if(vo.getStatus() == ) %> --%>
 													<select class="custom-select" name="status">
-														<option value="1">대기</option>
-														<option value="2" selected>세탁중</option>
-														<option value="3">세탁완료</option>
+														<option class="options" value="1" <%=vo.getStatusNo().equals("1") ? "selected" : "" %>>대기</option>
+														<option class="options" value="2" <%=vo.getStatusNo().equals("2") ? "selected" : "" %>>세탁중</option>
+														<option class="options" value="3" <%=vo.getStatusNo().equals("3") ? "selected" : "" %>>세탁완료</option>
 													</select> 
 													<input type="button" class="btn btn-primary" value="제출"
 														onclick="submitForm(<%=vo.getNo()%>)">
@@ -126,28 +125,32 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
 </body>
 <script type="text/javascript">
      // Use querySelectorAll to select all elements with the class "custom-select"
-    var statusSelects = document.querySelectorAll('.custom-select option');
+    var statusSelects = document.querySelectorAll('.custom-select:not(.custom-select > *)');
+     console.log(statusSelects);
 
- // Add event listener to each selected element
-    statusSelects.forEach(function(statusSelect) {
-      // Get the initial selected value
-      var selectedValue = statusSelect.value;
+     function backColor(){
+    	// Add event listener to each selected element
+    	    statusSelects.forEach(function(statusSelect) {
+    	      // Get the initial selected value
+    	      var selectedValue = statusSelect.value;
 
-      // Set the background color based on the initial selected value
-      switch (selectedValue) {
-        case "1":
-          statusSelect.style.backgroundColor = "#f8f9fc";
-          break;
-        case "2":
-          statusSelect.style.backgroundColor = "lightblue";
-          break;
-        case "3":
-          statusSelect.style.backgroundColor = "lightgreen";
-          break;
-        default:
-          statusSelect.style.backgroundColor = "";
-      }
-    });
+    	      // Set the background color based on the initial selected value
+    	      switch (selectedValue) {
+    	        case "1":
+    	          statusSelect.style.backgroundColor = "#f8f9fc";
+    	          break;
+    	        case "2":
+    	          statusSelect.style.backgroundColor = "lightblue";
+    	          break;
+    	        case "3":
+    	          statusSelect.style.backgroundColor = "lightgreen";
+    	          break;
+    	        default:
+    	          statusSelect.style.backgroundColor = "";
+    	      }
+    	    })
+     }
+	 backColor();
  
  	//AJAX
  	function submitForm(no) {
@@ -172,14 +175,13 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
  		    return resp.json();
  		  })
  		  .then(data => {
- 		    // Handle the response data if needed
- 		    console.log(data);
  		  })
  		  .catch(error => {
  		    // Handle errors
  		    console.error('There was a problem with the fetch operation:', error);
  		  });
  				
+ 		 backColor();
  	}//confirm end
  	
 	
