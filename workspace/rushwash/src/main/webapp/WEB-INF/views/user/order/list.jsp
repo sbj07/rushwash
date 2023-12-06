@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/rushwash/resources/css/user/order/list.css">
@@ -20,7 +21,7 @@
             </div>
 
 
-            <div id="ttn1">
+            <div id="order">
                 <table id="t1">
                     <thead>
                         <tr>
@@ -32,46 +33,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>22022.02.23</td>
-                            <td>수거전</td>
-                            <td><button type="button">상세조회</button></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>12</td>
-                            <td>22022.02.23</td>
-                            <td>수거전</td>
-                            <td><button type="button">상세조회</button></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>12</td>
-                            <td>22022.02.23</td>
-                            <td>수거전</td>
-                            <td><button type="button">상세조회</button></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>8</td>
-                            <td>22022.02.23</td>
-                            <td>수거전</td>
-                            <td><button type="button">상세조회</button></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>22022.02.23</td>
-                            <td>수거완료</td>
-                            <td><button type="button">상세조회</button></td>
-                        </tr>
+                    
+	                    <c:forEach items="voLsit" var="vo">
+	                        <tr>
+	                            <td>1</td>
+	                            <td>2</td>
+	                            <td>22022.02.23</td>
+	                            <td>수거전</td>
+	                            <td><a id="aa" href="/rushwash/order/detail">상세조회</a></td>
+	                        </tr>
+	                    </c:forEach>
+                    
                     </tbody>
                 </table>
 
                 <table id="t2">
                     <thead>
+                    
                         <tr>
                             <th>주문번호</th>
                             <th>총 수량</th>
@@ -79,37 +57,16 @@
                             <th>주문상태</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>9</td>
-                            <td>22022.02.23</td>
-                            <td>배송완료</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>6</td>
-                            <td>22022.02.23</td>
-                            <td>배송완료</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>22022.02.23</td>
-                            <td>배송완료</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>10</td>
-                            <td>22022.02.23</td>
-                            <td>배송완료</td>
-                        </tr>  
-                        <tr>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>22022.02.23</td>
-                            <td>배송완료</td>
-                        </tr>
+	                    <c:forEach items="voList" var="vo">
+	                        <tr>
+	                            <td>1</td>
+	                            <td>9</td>
+	                            <td>22022.02.23</td>
+	                            <td>배송완료</td>
+	                        </tr>
+	                    </c:forEach>
                     </tbody>
                 </table>
             </div>

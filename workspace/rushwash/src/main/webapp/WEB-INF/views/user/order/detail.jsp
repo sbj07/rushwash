@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/rushwash/resources/css/user/order/detail.css">
@@ -32,6 +33,7 @@
                 </tr>
             </thead>
             <tbody>
+            	<c:forEach items="voList" var="vo">
                 <tr>
                     <td>스터트</td>
                     <td>5,000 원</td>
@@ -39,20 +41,7 @@
                     <td>2021.02.15</td>
                     <td>세탁중</td>
                 </tr>
-                <tr>
-                    <td>청바지</td>
-                    <td>5,000  원</td>
-                    <td>1</td>
-                    <td>2021.02.15</td>
-                    <td>세탁중</td>
-                </tr>
-                <tr>
-                    <td>와이셔츠</td>
-                    <td>5,000 원</td>
-                    <td>2</td>
-                    <td>2021.02.15</td>
-                    <td>세탁중</td>
-                </tr>
+            	</c:forEach>
             </tbody>
         </table>
     </div>
