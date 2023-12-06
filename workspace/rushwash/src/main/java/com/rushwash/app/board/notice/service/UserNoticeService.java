@@ -38,7 +38,7 @@ public class UserNoticeService {
 		
 		return cnt;
 		
-		//close
+		
 	}
 
 

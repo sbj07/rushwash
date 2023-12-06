@@ -1,6 +1,13 @@
+<%@page import="com.rushwash.admin.app.page.vo.PageVo"%>
+<%@page import="java.util.List"%>
 <%@page import="com.rushwash.app.board.notice.vo.UserNoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	List<UserNoticeVo> boardVoList = (List<UserNoticeVo>) request.getAttribute("boardVoList");
+    	PageVo pvo = (PageVo)request.getAttribute("pvo");
+    	
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,20 +26,19 @@
         공지사항
       </div>
       <table>
-        <tr>
-          <td colspan="2"></td>
-        </tr>
-          <tr>
-            <td>제목</td>
-            <td>작성일시</td>
-          </tr>
-          
-          <%-- <%for(UserNoticeVo vo : boardVoList){ %>
+      
+      		<tr>
+      			<td>제목</td>
+      			<td>작성일자</td>
+      		</tr>
+      
+          <%for(UserNoticeVo vo : boardVoList){ %>
 	          <tr>
 	            <td><%= vo.getNo()%><%= vo.getTitle() %></td>
 	            <td><%= vo.getEnrollDate() %></td>
 	          </tr>
-          <%}%> --%>
+          <%}%> 
+          
           
        </table>
     </div>
