@@ -30,6 +30,7 @@ public class LaundryDao {
 			String washEndDate = rs.getString("WASH_END_DATE");
 			String status = rs.getString("STATUS");
 			String delYn = rs.getString("DEL_YN");
+			String statusNo = rs.getString("LAUNDRY_STATUS");
 			
 			LaundryVo vo = new LaundryVo();
 			
@@ -41,6 +42,7 @@ public class LaundryDao {
 			vo.setWashStartDate(washStartDate);
 			vo.setWashEndDate(washEndDate);
 			vo.setStatus(status);
+			vo.setStatusNo(statusNo);
 			vo.setDelYn(delYn);
 			
 			voList.add(vo);

@@ -1,14 +1,11 @@
 package com.rushwash.admin.app.laundry.vo;
 
 public class LaundryVo {
-	
+
 	public LaundryVo() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	public LaundryVo(String orderNo, String memberNo, String no, String item, String ea, String washStartDate,
-			String washEndDate, String status, String delYn) {
-		super();
+			String washEndDate, String statusNo, String status, String delYn) {
 		this.orderNo = orderNo;
 		this.memberNo = memberNo;
 		this.no = no;
@@ -16,6 +13,7 @@ public class LaundryVo {
 		this.ea = ea;
 		this.washStartDate = washStartDate;
 		this.washEndDate = washEndDate;
+		this.statusNo = statusNo;
 		this.status = status;
 		this.delYn = delYn;
 	}
@@ -27,6 +25,7 @@ public class LaundryVo {
 	private String ea;
 	private String washStartDate;
 	private String washEndDate;
+	private String statusNo;
 	private String status;
 	private String delYn;
 	
@@ -84,11 +83,18 @@ public class LaundryVo {
 	public void setDelYn(String delYn) {
 		this.delYn = delYn;
 	}
+	
+	public String getStatusNo() {
+		return statusNo;
+	}
+	public void setStatusNo(String statusNo) {
+		this.statusNo = statusNo;
+	}
 	@Override
 	public String toString() {
 		return "LaundryVo [orderNo=" + orderNo + ", memberNo=" + memberNo + ", no=" + no + ", item=" + item + ", ea="
-				+ ea + ", washStartDate=" + washStartDate + ", washEndDate=" + washEndDate + ", status=" + status
-				+ ", delYn=" + delYn + "]";
+				+ ea + ", washStartDate=" + washStartDate + ", washEndDate=" + washEndDate + ", statusNo=" + statusNo
+				+ ", status=" + status + ", delYn=" + delYn + "]";
 	}
 	
 	

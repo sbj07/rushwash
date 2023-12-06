@@ -86,7 +86,13 @@
 													-
 												<%} %>
 											</td>
-											<td><%=vo.getSubGrade() %></td>
+											<td>
+												<%if(vo.getSubGrade() !=null ){ %>
+													<%=vo.getSubGrade() %>
+												<%} else{%>
+													비구독												
+												<%}%>
+											</td>
 											<td><%=vo.getPoint() %></td>
 											<td>
 											<select class="custom-select" name="status">

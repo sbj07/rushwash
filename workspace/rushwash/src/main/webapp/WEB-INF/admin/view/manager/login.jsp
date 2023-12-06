@@ -48,9 +48,6 @@
                                         
                                     </form>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">비밀번호를 잊어버렸나요?</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
