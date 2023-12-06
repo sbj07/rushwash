@@ -1,8 +1,5 @@
-<%@page import="com.rushwash.admin.app.manager.vo.ManagerVo"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%List<ManagerVo> voList = (List<ManagerVo>) request.getAttribute("voList"); %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -30,15 +27,15 @@
 					<!-- Page Heading(페이지 제목) -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">전체 매니저 조회</h1>
+						<h1 class="h3 mb-0 text-gray-800">헌옷 관리</h1>
 					</div>
-					<p class="mb-4">모든 관리자 계정의 정보를 확인합니다. 미사용 처리 또한 이 페이지에서 가능합니다.</p>
+					<p class="mb-4">헌옷 무게당 포인트를 지급하여야 합니다.</p>
 
 					<!-- End of Main Content -->
 
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">전체 유저</h6>
+							<h6 class="m-0 font-weight-bold text-primary">전체 헌옷</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -46,37 +43,42 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>NO.</th>
-											<th>NAME</th>
-											<th>ID</th>
-											<th>PWD</th>
-											<th>미사용</th>
+											<th>번호</th>
+											<th>유저번호</th>
+											<th>처리상태</th>
+											<th>수거요청일자</th>
+											<th>수거일자</th>
+											<th>무게(g)</th>
+											<th>취소상태</th>
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>NO</th>
-											<th>NAME</th>
-											<th>ID</th>
-											<th>PWD</th>
-											<th>미사용</th>
+											<th>번호</th>
+											<th>유저번호</th>
+											<th>처리상태</th>
+											<th>수거요청일자</th>
+											<th>수거일자</th>
+											<th>무게(g)</th>
+											<th>취소상태</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<%for (ManagerVo vo : voList) {%>
 										<tr>
-											<td><%=vo.getNo() %></td>
-											<td><%=vo.getName() %></td>
-											<td><%=vo.getId() %></td>
-											<td><%=vo.getPwd() %></td>
+											<td>1</td>
+											<td>1</td>
 											<td>
 											<select class="custom-select" name="status">
-													<option value="N">N</option>
-													<option value="Y">Y</option>
+													<option value="1">수거요청</option>
+													<option value="2">수거완료</option>
+													<option value="3">지급완료</option>
 											</select>
 											</td>
+											<td>2023.12.4</td>
+											<td>2023.12.5</td>
+											<td>1200</td>
+											<td>N</td>
 										</tr>
-									<%} %>
 									</tbody>
 								</table>
 							</div>
@@ -84,7 +86,6 @@
 					</div>
 
 					<%@ include file="/WEB-INF/admin/view/common/footer.jsp"%>
-
 				</div>
 			</div>
 		</div>
@@ -100,7 +101,6 @@
 	<%@ include file="/WEB-INF/admin/view/common/logoutModal.jsp"%>
 
 </body>
-
 <script type="text/javascript">
      // Use querySelectorAll to select all elements with the class "custom-select"
     var statusSelects = document.querySelectorAll(".custom-select");
@@ -112,11 +112,14 @@
 
       // Set the background color based on the initial selected value
       switch (selectedValue) {
-        case "Y":
-          statusSelect.style.backgroundColor = "lightcoral";
+        case "1":
+          statusSelect.style.backgroundColor = "#f8f9fc";
           break;
-        case "N":
+        case "2":
           statusSelect.style.backgroundColor = "lightblue";
+          break;
+        case "3":
+          statusSelect.style.backgroundColor = "lightgreen";
           break;
         default:
           statusSelect.style.backgroundColor = ""; // Reset to default

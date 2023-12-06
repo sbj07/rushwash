@@ -83,7 +83,7 @@
 				<a class="collapse-item" href="/rushwash/admin/laundry/control">상세 세탁물 관리</a> 
 				<div class="collapse-divider"></div>
 				<h6 class="collapse-header">그외 서비스:</h6>
-				<a class="collapse-item" href="clothes.html">헌옷 관리</a>
+				<a class="collapse-item" href="/rushwash/admin/clothes">헌옷 관리</a>
 			</div>
 		</div></li>
 
