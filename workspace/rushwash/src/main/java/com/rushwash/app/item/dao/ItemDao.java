@@ -12,9 +12,10 @@ import com.rushwash.app.item.vo.ItemVo;
 
 public class ItemDao {
 	
-	public List<ItemVo> selectItemList(Connection conn) throws Exception {
-		String sql = "SELECT * FROM ITEM WHERE DEL_YN = 'N'";
+	public List<ItemVo> selectItemList(Connection conn, String categoryNo) throws Exception {
+		String sql = "SELECT * FROM ITEM WHERE DEL_YN = 'N' AND CATEGORY_CODE = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, categoryNo);
 		ResultSet rs = pstmt.executeQuery();
 		
 		
