@@ -33,9 +33,8 @@
 			role="button" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false"> <span
 				class="mr-2 d-none d-lg-inline text-gray-600 small">
-				<%=loginManager.getName() %>
-				</span> <img class="img-profile rounded-circle"
-				src="resources/admin/img/undraw_profile.svg">
+				매니저 이름
+				</span> 
 		</a> 
 		<!-- Dropdown - User Information -->
 			<div

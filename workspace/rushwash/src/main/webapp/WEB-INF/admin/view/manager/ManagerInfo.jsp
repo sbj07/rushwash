@@ -2,7 +2,11 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%List<ManagerVo> voList = (List<ManagerVo>) request.getAttribute("voList"); %>
+<%
+List<ManagerVo> voList = (List<ManagerVo>) request.getAttribute("voList"); 
+String alertMsg = (String) session.getAttribute("alertMsg");
+session.removeAttribute("alertMsg");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -122,6 +126,11 @@
           statusSelect.style.backgroundColor = ""; // Reset to default
       }
     });
+ 
+    <%if(alertMsg!=null){%>
+	alert("<%=alertMsg%>");
+	<%}%>
+ 
 </script>
 
 </html>

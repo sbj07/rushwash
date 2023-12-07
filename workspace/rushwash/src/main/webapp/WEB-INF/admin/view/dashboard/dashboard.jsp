@@ -1,10 +1,14 @@
 
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String alertMsg = (String) session.getAttribute("alertMsg");
-	session.removeAttribute("alertMsg");
+String alertMsg = (String) session.getAttribute("alertMsg");
+session.removeAttribute("alertMsg");
+
+
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -138,12 +142,14 @@
 									</div>
 									<!-- 라벨값 표시 -->
 									<div class="mt-4 text-center small">
-										<span class="mr-2"> <i
-											class="fas fa-circle text-primary"></i> 카테고리1
-										</span> <span class="mr-2"> <i
-											class="fas fa-circle text-success"></i> 카테고리2
-										</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i>
-											카테고리3
+										<span class="mr-2"> <i class="fas fa-circle text-primary"></i> 
+										상의
+										</span> 
+										<span class="mr-2"> <i class="fas fa-circle text-success"></i> 
+										하의
+										</span> 
+										<span class="mr-2"> <i class="fas fa-circle text-info"></i>
+										아우터
 										</span>
 									</div>
 									<hr>
@@ -165,14 +171,17 @@
 									</div>
 									<!-- 라벨값 표시 -->
 									<div class="mt-4 text-center small">
-										<span class="mr-2"> <i
-											class="fas fa-circle text-primary"></i> 비구독
-										</span> <span class="mr-2"> <i
-											class="fas fa-circle text-success"></i> 브론즈
-										</span> <span class="mr-2"> <i class="fas fa-circle text-info"></i>
-											실버
-										</span><span class="mr-2"> <i class="fas fa-circle text-info"></i>
-											골드
+										<span class="mr-2"> 
+										<i class="fas fa-circle text-primary"></i> 비구독
+										</span> 
+										<span class="mr-2"> 
+										<i class="fas fa-circle text-success"></i> 브론즈
+										</span> 
+										<span class="mr-2"> 
+										<i class="fas fa-circle text-info"></i>실버
+										</span>
+										<span class="mr-2"> 
+										<i class="fas fa-circle text-warning"></i>골드
 										</span>
 									</div>
 									<hr>
@@ -207,9 +216,11 @@
 <%@include file="/WEB-INF/admin/view/dashboard/planChart.jsp"%>
 
 <script>
-	<%if(alertMsg!=null) {%>
-		alert("<%=alertMsg%>");
-	<%}%>
+	<%if (alertMsg != null) {%>
+		alert("<%=alertMsg%>
+	");
+<%}%>
+	
 </script>
 
 </html>
