@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%String errMsg = (String) request.getAttribute("errMsg"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,5 +80,11 @@
 	<%@ include file="/WEB-INF/admin/view/common/logoutModal.jsp"%>
 
 </body>
+<script>
+<%if(errMsg!=null){%>
+	alert("<%=errMsg%>");
+<%}%>
+
+</script>
 
 </html>

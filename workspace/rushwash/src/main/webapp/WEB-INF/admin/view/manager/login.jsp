@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    String errMsg = (String) request.getAttribute("errMsg");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +29,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">ADMIN LOGIN</h1>
                                     </div>
-                                    <form class="user" method="POST">
+                                    
+                                    <form action="" class="user" method="POST">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-login"
-                                                id="adminInputID" placeholder="Enter ID">
+                                                name="adminInputID" placeholder="Enter ID">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-login"
-                                                id="adminInputPWD" placeholder="Enter Password">
+                                                name="adminInputPWD" placeholder="Enter Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -43,23 +47,26 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary btn-user btn-block"
-                                                id="loginBtn" value="LOGIN">
+                                                name="loginBtn" value="LOGIN">
                                         </div>
-                                        
                                     </form>
                                     <hr>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </body>
+
+<script>
+	<% if(errMsg != null){ %>
+		console.log("<%= errMsg %>");
+		alert('<%= errMsg %>');
+	<% } %>
+</script>
 
 </html>

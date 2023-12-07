@@ -1,3 +1,5 @@
+<%@page import="java.util.Map"%>
+<%Map<String, String> planInfoCount = (Map<String, String>) request.getAttribute("planInfoCount"); %>
 <script>
 	//Set new default font family and font color to mimic Bootstrap's default styling
 			Chart.defaults.global.defaultFontFamily = 'Nunito',
@@ -9,11 +11,16 @@
 	var myPieChart = new Chart(ctx, {
 		type : 'doughnut',
 		data : {
-			labels : [ "Direct", "Referral", "Social" ],
+			labels : [ "Non-subscription", "Gold", "Silver", "Bronze"],
 			datasets : [ {
-				data : [ 55, 30, 15 ],
-				backgroundColor : [ '#4e73df', '#1cc88a', '#36b9cc' ],
-				hoverBackgroundColor : [ '#2e59d9', '#17a673', '#2c9faf' ],
+				data : [ 
+					  <%=planInfoCount.get("1")%>
+					, <%=planInfoCount.get("2")%>
+					, <%=planInfoCount.get("3")%>
+					, <%=planInfoCount.get("4")%>
+					],
+				backgroundColor : [ '#4e73df','#f6c23e','#36b9cc','#1cc88a'],
+				hoverBackgroundColor : [ '#2e59d9','#fd7e14' , '#2c9faf','#17a673' ],
 				hoverBorderColor : "rgba(234, 236, 244, 1)",
 			} ],
 		},

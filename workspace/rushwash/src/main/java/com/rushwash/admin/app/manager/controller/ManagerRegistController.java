@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.rushwash.admin.app.manager.service.ManagerService;
 import com.rushwash.admin.app.manager.vo.ManagerVo;
@@ -43,11 +44,15 @@ public class ManagerRegistController extends HttpServlet {
 				throw new Exception("[ERROR-M002]매니저 등록 실패");
 			}
 			
-			req.getRequestDispatcher("/WEB-INF/admin/view/manager/ManagerInfo.jsp").forward(req, resp);
+			HttpSession session = req.getSession();
+			session.setAttribute("alertMsg", "관리자 등록에 성공하였습니다.");
+			//성공 후 대시보드로 리다이렉트
+			resp.sendRedirect("/rushwash/admin/manager/view");
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			e.printStackTrace();
+			req.setAttribute("errMsg", "매니저 등록 실패 \\n"+e.getMessage());
+			req.getRequestDispatcher("/WEB-INF/admin/view/manager/regist.jsp").forward(req, resp);
 		}
 
 	}
