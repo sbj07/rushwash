@@ -124,21 +124,36 @@ public class NoticeDao {
 	      return result;
 	   }//delete
 
-	public int write(Connection conn, NoticeVo vo) throws Exception {
+	   //게시글 작성
+	   public int write(Connection conn, NoticeVo vo) throws Exception {
 		//SQL
 	      String sql = "INSERT INTO NOTICE (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) VALUES ( SEQ_NOTICE_NO.NEXTVAL, ?, ?, 2, SYSDATE)";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
-//	      pstmt.setString(1, vo.getNo());
 	      pstmt.setString(1, vo.getTitle());
 	      pstmt.setString(2, vo.getContent());
-//	      pstmt.setString(4, vo.getManagerNo());
 	      int result = pstmt.executeUpdate();
 	      
 	      //close
 	      JDBCTemplate.close(pstmt);
 	      return result;
 	      
-	}  
+	}
+
+	// 게시글 수정
+	   public int updateNoticeByNo(Connection conn, NoticeVo vo, String no) throws Exception {
+		   // SQL
+		   String sql = "UPDATE NOTICE SET TITLE = ? , CONTENT = ? WHERE NO = ?";
+		   PreparedStatement pstmt = conn.prepareStatement(sql);
+		   pstmt.setString(1, vo.getTitle());
+		   pstmt.setString(2, vo.getContent());
+		   pstmt.setString(3, vo.getNo());
+		   int result = pstmt.executeUpdate();
+		   
+		   // close
+		   JDBCTemplate.close(pstmt);
+		   
+		   return result; 
+	   	}
 }
 	
 

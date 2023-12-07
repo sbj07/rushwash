@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rushwash.admin.app.board.faq.vo.FaqVo;
+import com.rushwash.admin.app.board.notice.vo.NoticeVo;
 import com.rushwash.admin.app.db.util.JDBCTemplate;
 import com.rushwash.admin.app.page.vo.PageVo;
 
@@ -122,7 +123,7 @@ public class FaqDao {
 	      return result;
 	   }//delete
 
-	public int write(Connection conn, FaqVo vo) throws Exception {
+	   public int write(Connection conn, FaqVo vo) throws Exception {
 		//SQL
 	      String sql = "INSERT INTO FAQ (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) VALUES ( SEQ_FAQ_NO.NEXTVAL, ?, ?, 2, SYSDATE)";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -136,5 +137,21 @@ public class FaqDao {
 	      JDBCTemplate.close(pstmt);
 	      return result;
 	      
-	}  
+	   }  
+	
+	   // 게시글 수정
+	   public int updateFaqByNo(Connection conn, FaqVo vo, String no) throws Exception {
+		   // SQL
+		   String sql = "UPDATE FAQ SET TITLE = ? , CONTENT = ? WHERE NO = ?";
+		   PreparedStatement pstmt = conn.prepareStatement(sql);
+		   pstmt.setString(1, vo.getTitle());
+		   pstmt.setString(2, vo.getContent());
+		   pstmt.setString(3, vo.getNo());
+		   int result = pstmt.executeUpdate();
+		   
+		   // close
+		   JDBCTemplate.close(pstmt);
+		   
+		   return result; 
+	   	}
 }

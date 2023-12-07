@@ -1,7 +1,9 @@
 package com.rushwash.admin.app.board.notice.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.rushwash.admin.app.board.notice.dao.NoticeDao;
 import com.rushwash.admin.app.board.notice.vo.NoticeVo;
@@ -115,6 +117,50 @@ public class NoticeService {
 			JDBCTemplate.close(conn);
 			
 			return result;
+		}
+		
+		// 게시글 수정 (화면)
+		public Map<String, Object> edit(String no) throws Exception {
+			
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// dao
+			NoticeDao dao = new NoticeDao();
+			NoticeVo vo = dao.selectNoticeByNo(conn , no);
+			
+			Map<String, Object> m = new HashMap<String, Object>();
+			m.put("vo", vo);
+			
+			// close
+			JDBCTemplate.close(conn);
+			
+			return m;
+		}
+		
+		
+		//게시글 수정
+		public int edit(NoticeVo vo, String no) throws Exception {
+			
+			//conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			//dao
+			NoticeDao dao = new NoticeDao();
+			int result = dao.updateNoticeByNo(conn , vo, no);
+			
+			//tx
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+			//close
+			JDBCTemplate.close(conn);
+			
+			return result;
+			
 		}
 	
 }

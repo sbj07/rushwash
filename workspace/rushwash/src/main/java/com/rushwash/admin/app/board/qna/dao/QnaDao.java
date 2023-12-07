@@ -84,8 +84,8 @@ public class QnaDao {
 	         
 	   }
 
-	 //게시글 번호로 게시글 1개 조회
-	 public QnaVo selectQnaByNo(Connection conn, String no) throws Exception{
+	   //게시글 번호로 게시글 1개 조회
+	   public QnaVo selectQnaByNo(Connection conn, String no) throws Exception{
 	      
 	      //SQL
 	      String sql = "SELECT N.NO, N.TITLE, N.CONTENT, M.MANAGER_ID, N.ENROLL_DATE, ME.ID, N.COMMT FROM QNA N JOIN MANAGER M ON N.MANAGER_NO = M.NO JOIN MEMBER ME ON N.MEMBER_NO = ME.NO WHERE N.NO = ?";
@@ -120,8 +120,8 @@ public class QnaDao {
 	      return vo;
 	   }
 	   
-	 //게시글 삭제
-	   public int delete(Connection conn, String no) throws Exception {
+	   	//게시글 삭제
+	   	public int delete(Connection conn, String no) throws Exception {
 	      
 	      //SQL
 	      String sql = "UPDATE QNA SET DEL_YN = 'Y' WHERE NO = ?";
