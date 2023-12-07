@@ -1,4 +1,4 @@
-
+<%@page import="java.util.Map"%>
 <%@page import="com.rushwash.admin.app.page.vo.PageVo"%>
 <%@page import="com.rushwash.admin.app.board.qna.vo.QnaVo"%>
 <%@page import="java.util.List"%>
@@ -7,8 +7,11 @@
     pageEncoding="UTF-8"%>
     
 	<% 
+		String searchType = (String)request.getAttribute("searchType");
+	    String searchValue = (String)request.getAttribute("searchValue");
 		List<QnaVo> QnaVoList = (List<QnaVo>) request.getAttribute("QnaVoList");
 		PageVo pvo = (PageVo)request.getAttribute("pvo"); 
+		Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
 	%>
     
 <!DOCTYPE html>
@@ -36,7 +39,19 @@
 				<div class="container-fluid">
 
 					
-					<main><h1>QnA</h1>
+					<main>
+						<h1>QnA</h1>
+						<div class="search-area">
+							<form action="/rushwash/admin/board/qna/search" method="get">
+								<select name="searchType">
+									<option value="title">제목</option>
+									<option value="content">내용</option>
+								</select>
+								<input type="text" name="searchValue" placeholder="검색할 내용을 입력하세요">
+								<input type="submit" value="검색하기">
+							</form>
+						</div>
+					
 					
 						<table border="1">
 							<thead>
@@ -67,7 +82,10 @@
 						</table>
 						
 						
-						<div class="page-area">
+						
+						
+						<% if(searchType==null&&searchValue==null) { %>
+							<div class="page-area">
 			
 							<% if(pvo.getStartPage() != 1){ %>
 								<a href="/rushwash/admin/board/qna?pno=<%= pvo.getStartPage()-1 %>">이전</a>
@@ -82,12 +100,32 @@
 								<% } %>
 								
 							<% } %>
-							
-							<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
-								<a href="/rushwash/admin/board/qna?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+						    <% }else{ %>
+								<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
+									<a href="/rushwash/admin/board/Qna?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+									<div class="page-area">
+								    <% if (pvo.getStartPage() != 1) { %>
+								        <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= pvo.getStartPage()-1 %>">이전</a>
+								    <% } %>
+								
+								    <% for (int i = pvo.getStartPage(); i <= pvo.getEndPage(); i++) { %>
+								        <% if (i == pvo.getCurrentPage()) { %>
+								            <span><%= i %></span>
+								        <% } else { %>
+								            <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= i %>"><%= i %></a>
+								        <% } %>
+								    <% } %>
+								
+								    <% if (pvo.getEndPage() != pvo.getMaxPage()) { %>
+								        <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= pvo.getEndPage()+1 %>">다음</a>
+								    <% } %>
 							<% } %>
 						
+								</div>
+						 
+						 <% } %>
 						</div>
+
 						</main>
 					
 					
@@ -125,4 +163,34 @@
 		const no = tr.children[0].innerText;
 		location.href = '/rushwash/admin/board/qna/detail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
 	}
+	<% if(searchMap != null){ %>
+	function setSearchArea(){
+		
+		// 옵션태그 셋팅
+		const optionTagArr = document.querySelectorAll(".search-area form option");
+		const searchType = "<%= searchMap.get("searchType") %>";
+		for(let i = 0; i < optionTagArr.length; ++i){
+			if( optionTagArr[i].value === searchType ){
+				optionTagArr[i].selected = true;
+				break;
+			}
+		}
+	
+	// 인풋태그 셋팅
+	const searchValueTag = document.querySelector(".search-area form input[name=searchValue]");
+	searchValueTag.value = "<%= searchMap.get("searchValue") %>";
+	
+	}
+	setSearchArea();
+	
+	function setPageArea(){
+		const aTagArr = document.querySelectorAll(".page-area a");
+		for(let i = 0 ; i < aTagArr.length; ++i){
+			aTagArr[i].href = aTagArr[i].href.replace("QnaList" , "search"); 
+			aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
+			aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
+		}
+	}
+	setPageArea();
+	<% } %>
 </script>

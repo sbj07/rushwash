@@ -1,19 +1,20 @@
-<%@page import="com.rushwash.admin.app.board.qna.vo.QnaVo"%>
+<%@page import="com.rushwash.admin.app.board.notice.vo.NoticeVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <% 
-    	QnaVo vo = (QnaVo)request.getAttribute("vo");
-	    String currPage = (String)request.getAttribute("currPage");
-		if(currPage == null){
-			currPage = "1";
-		}
+    <%
+    	NoticeVo vo = (NoticeVo)request.getAttribute("vo");
+    	String currPage = (String)request.getAttribute("currPage");
+    	if(currPage == null){
+    		currPage = "1";
+    	}
     %>
+    
 <!DOCTYPE html>
 <html>
     <head>
         <%@ include file="/WEB-INF/admin/view/common/header.jsp"%>
-		<link rel="stylesheet" href="/rushwash/resources/admin/css/write.css">	
+		<link rel="stylesheet" href="/rushwash/resources/admin/css/write.css">
         </head>
         
         <!-- PAGE TOP -->
@@ -31,45 +32,30 @@
         
                         <!-- Begin Page Content -->
                         <div class="container-fluid">
+        
+						<form action="/rushwash/admin/board/notice/edit" method="post">
                             <main>
-								<h1>QnA 상세조회</h1>
-								
+								<h1>공지사항 수정</h1>
 								<table border="1">
 									<tbody>
 										<tr>
-											<td>제목 : <%= vo.getTitle() %></td>
-											<td>작성자 : <%= vo.getMemberId() %></td>
-											<td>작성일자 : <%= vo.getEnrollDate() %></td>
+											<td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
+											<td>작성자 : </td>
+											<td>작성일자 : </td>
 										</tr>
 										
 										<tr id="content">
-											<td colspan="3"><%= vo.getContent() %></td>
-										</tr>
-									</tbody>
-								</table>
-								
-<!-- 								<textarea name="content" placeholder="내용을 입력하세요"></textarea> -->
-								<table border="1">
-									<tbody>
-										<tr>
-											<td>답변 작성자 : <%= vo.getManagerId() %></td>
-										</tr>
-										<tr id="content">
+											<td colspan=3><textarea name="content" placeholder="내용을 입력하세요"></textarea>
+
 											
-											<td><%= vo.getCommt() %></td>
 										</tr>
 									</tbody>
 								</table>
-								<br>
-<!-- 								<button onclick="location.href='/rushwash/admin/board/qnaCmmtWrite'">댓글 입력</button> -->
-								<button onclick="location.href='/rushwash/admin/board/qnaCommtDelete?no=<%= vo.getNo() %>'">댓글 삭제</button>
-								
-									<div class="btn-area">
-										<button onclick="location.href='/rushwash/admin/board/qnaDelete?no=<%= vo.getNo() %>'">게시글 삭제</button>
-									</div>
 							</main>
-                            
-                            <a href="/rushwash/admin/board/qna?pno=<%= currPage %>">목록으로</a>
+							<input type="hidden" name="no" value="<%= vo.getNo() %>">
+                            <input type="submit" value="작성하기">
+                            </form>
+                            <a href="/rushwash/admin/board/notice?pno=<%= currPage %>">목록으로</a>
                             
                             
                             
@@ -95,3 +81,7 @@
         
         
         </html>
+        <script>
+        
+        
+        </script>

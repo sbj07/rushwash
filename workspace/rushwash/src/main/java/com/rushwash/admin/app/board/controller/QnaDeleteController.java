@@ -8,22 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.rushwash.admin.app.board.notice.service.NoticeService;
+import com.rushwash.admin.app.board.faq.service.FaqService;
+import com.rushwash.admin.app.board.qna.service.QnaService;
 
-
-@WebServlet("/admin/board/noticeDelete")
-public class NoticeDeleteController extends HttpServlet{
+@WebServlet("/admin/board/qnaDelete")
+public class QnaDeleteController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			
 			// data
 			String no = req.getParameter("no");
 			
 			
 			// service
-			NoticeService bs = new NoticeService();
+			QnaService bs = new QnaService();
 			int result = bs.delete(no);
 			
 			// result == view
@@ -32,7 +31,7 @@ public class NoticeDeleteController extends HttpServlet{
 			}
 			// 게시글 삭제 성공 => 게시글 목록으로 이동
 			req.getSession().setAttribute("alertMsg", "게시글 삭제 성공!");
-			resp.sendRedirect("/rushwash/admin/board/notice");
+			resp.sendRedirect("/rushwash/admin/board/qna");
 			
 		}catch(Exception e) {
 			System.out.println("[ERROR-B004] 게시글 삭제 중 에러 발생 ...");
@@ -40,5 +39,4 @@ public class NoticeDeleteController extends HttpServlet{
 			req.setAttribute("errorMsg", "게시글 삭제 중 에러 발생 ...");
 		}
 	}//doGet
-
 }

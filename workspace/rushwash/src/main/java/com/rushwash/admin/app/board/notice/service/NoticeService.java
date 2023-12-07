@@ -1,7 +1,9 @@
 package com.rushwash.admin.app.board.notice.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.rushwash.admin.app.board.notice.dao.NoticeDao;
 import com.rushwash.admin.app.board.notice.vo.NoticeVo;
@@ -115,6 +117,81 @@ public class NoticeService {
 			JDBCTemplate.close(conn);
 			
 			return result;
+		}
+		
+		// 게시글 수정 (화면)
+		public Map<String, Object> edit(String no) throws Exception {
+			
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// dao
+			NoticeDao dao = new NoticeDao();
+			NoticeVo vo = dao.selectNoticeByNo(conn , no);
+			
+			Map<String, Object> m = new HashMap<String, Object>();
+			m.put("vo", vo);
+			
+			// close
+			JDBCTemplate.close(conn);
+			
+			return m;
+		}
+		
+		
+		//게시글 수정
+		public int edit(NoticeVo vo, String no) throws Exception {
+			
+			//conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			//dao
+			NoticeDao dao = new NoticeDao();
+			int result = dao.updateNoticeByNo(conn , vo, no);
+			
+			//tx
+			if(result == 1) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+			//close
+			JDBCTemplate.close(conn);
+			
+			return result;
+			
+		}
+
+		// 게시글 검색
+		public List<NoticeVo> search(Map<String, String> m , PageVo pvo) throws Exception {
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// DAO
+			NoticeDao dao = new NoticeDao();
+			List<NoticeVo> NoticeVoList = dao.search(conn , m, pvo);
+			
+			//close
+			JDBCTemplate.close(conn);
+			
+			return NoticeVoList;
+		}
+	
+		// 게시글 갯수 조회 (검색값에 따라)
+		public int selectSearchNoticeCount(Map<String, String> m) throws Exception {
+			
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// DAO
+			NoticeDao dao = new NoticeDao();
+			int cnt = dao.getNoticeCountBySearch(conn , m);
+			
+			// close
+			JDBCTemplate.close(conn);
+			
+			return cnt;
 		}
 	
 }

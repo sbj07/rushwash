@@ -38,7 +38,6 @@ public class QnaController extends HttpServlet{
 					
 					// result (==view)
 					req.setAttribute("QnaVoList", QnaVoList);
-					System.out.println(QnaVoList);
 					req.setAttribute("pvo" , pvo);
 					req.getRequestDispatcher("/WEB-INF/admin/view/board/qnaList.jsp").forward(req, resp);
 				}catch(Exception e) {

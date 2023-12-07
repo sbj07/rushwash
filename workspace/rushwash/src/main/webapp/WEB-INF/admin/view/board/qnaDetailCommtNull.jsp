@@ -31,6 +31,8 @@
         
                         <!-- Begin Page Content -->
                         <div class="container-fluid">
+                        
+                        <form action="/rushwash/admin/board/qnaWriteCommt" method="post">
                             <main>
 								<h1>QnA 상세조회</h1>
 								
@@ -48,26 +50,19 @@
 									</tbody>
 								</table>
 								
-<!-- 								<textarea name="content" placeholder="내용을 입력하세요"></textarea> -->
-								<table border="1">
-									<tbody>
-										<tr>
-											<td>답변 작성자 : <%= vo.getManagerId() %></td>
-										</tr>
-										<tr id="content">
-											
-											<td><%= vo.getCommt() %></td>
-										</tr>
-									</tbody>
-								</table>
+								<textarea name="commt" placeholder="내용을 입력하세요"></textarea>
+								
 								<br>
-<!-- 								<button onclick="location.href='/rushwash/admin/board/qnaCmmtWrite'">댓글 입력</button> -->
-								<button onclick="location.href='/rushwash/admin/board/qnaCommtDelete?no=<%= vo.getNo() %>'">댓글 삭제</button>
+								
+								<input type="hidden" name="no" value="<%= vo.getNo() %>">
+								<input type="submit" value="댓글 입력">
 								
 									<div class="btn-area">
+									
 										<button onclick="location.href='/rushwash/admin/board/qnaDelete?no=<%= vo.getNo() %>'">게시글 삭제</button>
 									</div>
 							</main>
+						</form>
                             
                             <a href="/rushwash/admin/board/qna?pno=<%= currPage %>">목록으로</a>
                             
