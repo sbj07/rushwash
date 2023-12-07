@@ -2,7 +2,7 @@ package com.rushwash.app.order.vo;
 
 public class OrderVo {
 	
-	private String memberNo;		//주문번호(유저번호)
+	private String no;				//주문번호(요펑관리번호)
 	private String item;			//상품(품목)
 	private String price;			//결제내역
 	private String ea;				//수량(세탁물)
@@ -23,12 +23,12 @@ public class OrderVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public OrderVo(String memberNo, String item, String price, String ea, String name, String address, String tel,
+
+	public OrderVo(String no, String item, String price, String ea, String name, String address, String tel,
 			String request, String expDate, String status, String laundryStatus, String paymentDate,
 			String diliveryDate, String collectDate, String receiveDate, String delYn) {
 		super();
-		this.memberNo = memberNo;
+		this.no = no;
 		this.item = item;
 		this.price = price;
 		this.ea = ea;
@@ -45,113 +45,143 @@ public class OrderVo {
 		this.receiveDate = receiveDate;
 		this.delYn = delYn;
 	}
-	
-	public String getMemberNo() {
-		return memberNo;
+
+	public String getNo() {
+		return no;
 	}
-	public void setMemberNo(String memberNo) {
-		this.memberNo = memberNo;
+
+	public void setNo(String no) {
+		this.no = no;
 	}
+
 	public String getItem() {
 		return item;
 	}
+
 	public void setItem(String item) {
 		this.item = item;
 	}
+
 	public String getPrice() {
 		return price;
 	}
+
 	public void setPrice(String price) {
 		this.price = price;
 	}
+
 	public String getEa() {
 		return ea;
 	}
+
 	public void setEa(String ea) {
 		this.ea = ea;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public String getTel() {
 		return tel;
 	}
+
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+
 	public String getRequest() {
 		return request;
 	}
+
 	public void setRequest(String request) {
 		this.request = request;
 	}
+
 	public String getExpDate() {
 		return expDate;
 	}
+
 	public void setExpDate(String expDate) {
 		this.expDate = expDate;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public String getLaundryStatus() {
 		return laundryStatus;
 	}
+
 	public void setLaundryStatus(String laundryStatus) {
 		this.laundryStatus = laundryStatus;
 	}
+
 	public String getPaymentDate() {
 		return paymentDate;
 	}
+
 	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
 	}
+
 	public String getDiliveryDate() {
 		return diliveryDate;
 	}
+
 	public void setDiliveryDate(String diliveryDate) {
 		this.diliveryDate = diliveryDate;
 	}
+
 	public String getCollectDate() {
 		return collectDate;
 	}
+
 	public void setCollectDate(String collectDate) {
 		this.collectDate = collectDate;
 	}
+
 	public String getReceiveDate() {
 		return receiveDate;
 	}
+
 	public void setReceiveDate(String receiveDate) {
 		this.receiveDate = receiveDate;
 	}
+
 	public String getDelYn() {
 		return delYn;
 	}
+
 	public void setDelYn(String delYn) {
 		this.delYn = delYn;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "OrderVo [memberNo=" + memberNo + ", item=" + item + ", price=" + price + ", ea=" + ea + ", name=" + name
+		return "OrderVo [no=" + no + ", item=" + item + ", price=" + price + ", ea=" + ea + ", name=" + name
 				+ ", address=" + address + ", tel=" + tel + ", request=" + request + ", expDate=" + expDate
 				+ ", status=" + status + ", laundryStatus=" + laundryStatus + ", paymentDate=" + paymentDate
 				+ ", diliveryDate=" + diliveryDate + ", collectDate=" + collectDate + ", receiveDate=" + receiveDate
 				+ ", delYn=" + delYn + "]";
 	}
-	
 	
 	
 	
