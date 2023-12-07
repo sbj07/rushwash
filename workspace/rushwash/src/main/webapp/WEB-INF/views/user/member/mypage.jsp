@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
+    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,17 +28,31 @@
                     <h2 id="title">내 정보</h2> 
                 </div>     
                 <div id="user-info">
-                    <form id="user">
-                        <p>아이디</p>
-                        <input type="text" id="userid" name="userid">
-                        <p>비밀번호</p>
-                        <input type="password" id="password" name="password">                                      
-                        <p>주소 (배송지)</p>
-                        <input type="text" id="address" name="address">   
-                        <p>전화번호</p>
-                        <input type="tel" id="phone" name="phone">
-                        <p>보유 포인트</p>
-                        <input type="text" id="point" name="point">
+                    <form id="user">        
+                    <% if(loginMember != null){  %>
+                    	<p>아이디</p>
+						<input type="text" name="memberId" value="<%= loginMember.getMemberId() %>" readonly>
+						<p>이메일</p>
+						<input type="text" id="email" name="email" value="<%= loginMember.getMemberEmail() %>" readonly>
+						<p>주소 (배송지)</p>
+						<input type="text" id="address" name="address" value="<%= loginMember.getMemberAddress() %>" readonly>
+						<p>전화번호</p>
+						<input type="tel" id="phone" name="phone" value="<%= loginMember.getMemberTel() %>" readonly>
+						<p>보유 포인트</p>
+						<input type="text" id="point" name="point" value="<%= loginMember.getPoint() %>" readonly>
+                    <% } else { %>
+                    	<p>아이디</p>
+						<input type="text" name="memberId" value="" readonly>
+						<p>이메일</p>
+						<input type="text" id="email" name="email" value="" readonly>
+						<p>주소 (배송지)</p>
+						<input type="text" id="address" name="address" value="" readonly>
+						<p>전화번호</p>
+						<input type="tel" id="phone" name="phone" value="" readonly>
+						<p>보유 포인트</p>
+						<input type="text" id="point" name="point" value="" readonly>
+                   	 <% } %>
+                                 
                     </form>
                 </div>
             </div>

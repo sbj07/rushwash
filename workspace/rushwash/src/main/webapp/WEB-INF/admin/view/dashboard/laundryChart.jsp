@@ -1,3 +1,6 @@
+<%@page import="java.util.Map"%>
+<% Map<String, String> itemCategoryCount = (Map<String, String>) request.getAttribute("itemCategoryCount"); %>
+
 <script>
 //Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -8,9 +11,13 @@ var ctx = document.getElementById("myPieChart_Laundry");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: ["tops", "pants", "outers"],
     datasets: [{
-      data: [55, 30, 15],
+      data: [
+    	  <%=itemCategoryCount.get("1")%>
+    	  , <%=itemCategoryCount.get("2")%>
+    	  , <%=itemCategoryCount.get("3")%>
+    	  ],
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

@@ -25,17 +25,31 @@
                 </div>     
                 <div id="edit-info">
                     <form id="edit">
-                        <p>아이디</p>
-                        <input type="text" id="userid" name="userid" >
+                   <% if(loginMember != null){  %>
+                    	<p>아이디</p>
+                        <input type="text" id="userid" name="memberId" value="<%= loginMember.getMemberId() %>" readonly>
                         <button type="button" class="btn7" onclick="location.href='/rushwash/member/idchange'">변경</button>
                         <p>비밀번호</p>
-                        <input type="password" id="password" name="password" >   
+                        <input type="password" id="password" name="memberPwd" value ="<%= loginMember.getMemberPwd() %>" readonly>   
                         <button type="button" class="btn7" onclick="location.href='/rushwash/member/pwdchange'">변경</button>                              
                         <p>주소</p>
-                        <input type="text" id="address" name="address" >   
+                        <input type="text" id="address" name="memberAddress" value="<%= loginMember.getMemberAddress() %>" readonly>   
                         <button type="button" class="btn7" onclick="location.href='/rushwash/member/addrchange'">변경</button>
                         <p>전화번호</p>
-                        <input type="tel" id="phone" name="phone">+                    
+                        <input type="tel" id="phone" name="memberTel" value="<%= loginMember.getMemberTel() %>" readonly>  
+                   <% } else { %>
+                   			<p>아이디</p>
+	                        <input type="text" id="userid" name="memberId" value="" readonly>
+	                        <button type="button" class="btn7" onclick="location.href='/rushwash/member/idchange'">변경</button>
+	                        <p>비밀번호</p>
+	                        <input type="password" id="password" name="memberPwd" value ="" readonly>   
+	                        <button type="button" class="btn7" onclick="location.href='/rushwash/member/pwdchange'">변경</button>                              
+	                        <p>주소</p>
+	                        <input type="text" id="address" name="memberAddress" value="" readonly>   
+	                        <button type="button" class="btn7" onclick="location.href='/rushwash/member/addrchange'">변경</button>
+	                        <p>전화번호</p>
+	                        <input type="tel" id="phone" name="memberTel" value="" readonly> 
+	                  	<% } %>                        
                     </form>
                 </div>
             </div>

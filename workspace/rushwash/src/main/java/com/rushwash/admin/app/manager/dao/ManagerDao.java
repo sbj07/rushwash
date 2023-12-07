@@ -3,6 +3,7 @@ package com.rushwash.admin.app.manager.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +58,36 @@ public class ManagerDao {
 		JDBCTemplate.close(pstmt);
 		
 		return result;
+	}
+
+	public ManagerVo login(Connection conn, ManagerVo vo) throws Exception {
+		//sql
+		String sql = "select * from manager where manager_id=? and manager_pwd=? and del_yn='N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getId());
+		pstmt.setString(2, vo.getPwd());
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		ManagerVo loginManager = null;
+		if(rs.next()) {
+			String id = rs.getString("MANAGER_ID");
+			String pwd = rs.getString("MANAGER_PWD");
+			String name = rs.getString("NAME");
+			String delYn = rs.getString("DEL_YN");
+			
+			loginManager = new ManagerVo();
+			loginManager.setId(id);
+			loginManager.setPwd(pwd);
+			loginManager.setName(name);
+			loginManager.setDelYn(delYn);
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+
+		return loginManager;
 	}
 
 }
