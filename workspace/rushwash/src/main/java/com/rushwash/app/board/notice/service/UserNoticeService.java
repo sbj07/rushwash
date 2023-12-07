@@ -69,9 +69,19 @@ public class UserNoticeService {
 	
 	
 	//게시글 검색
-	public List<UserNoticeVo> search(Map<String, String> m, PageVo pvo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UserNoticeVo> search(Map<String, String> m, PageVo pvo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		UserNoticeDao dao = new UserNoticeDao();
+		List<UserNoticeVo> boardVoList = dao.search(conn, m, pvo);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return boardVoList;
 	}
 	
 	

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/rushwash/resources/css/user/qna_write.css">
+<link rel="stylesheet" href="/rushwash/resources/css/user/board/qna_write.css">
 </head>
 <body>
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
@@ -15,7 +15,7 @@
             <div class="font">
                 문의작성하기
             </div>
-          <form action="">
+          <form action="/rushwash/board/qnawrite" method="post">
             <table>
                 <tr>
                     <td class="title">제목</td>
