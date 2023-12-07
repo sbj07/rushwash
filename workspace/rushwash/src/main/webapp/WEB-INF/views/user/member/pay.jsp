@@ -23,7 +23,7 @@
                 <div id="title-box">
                     <h2 id="title">결제 수단</h2> 
                     <div id="card-box">
-                        <button id="change-card" onclick="">카드 변경</button> 
+                        <button type="button" id="change-card" onclick="location.href='/rushwash/payment/card-regist'">카드 등록</button> 
                     </div>
                 </div>     
                 <div id="pay-info">

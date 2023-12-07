@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	MemberVo vo = (MemberVo) request.getAttribute("vo");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,21 +29,33 @@
                     <h2 id="title">구독 등급</h2> 
                 </div>     
                 <div id="sub-info">
-                    <form id="sub-form">
+                    <form id="sub-form">      
+                    <% if(loginMember != null){ %>         
                         <p>이름</p>
-                        <input type="text" id="memberName" name="memberName">                                            
+                        <input type="text" id="memberName" name="memberName" value="<%= loginMember.getMemberName() %>" readonly>                                            
                         <p>아이디</p>
-                        <input type="text" id="email" name="email">   
+                        <input type="text" id="memberId" name="memberId" value="<%= loginMember.getMemberId() %>" readonly>   
                         <p>구독 여부</p>
-                        <input type="text" id="sub" name="sub">
+                        <input type="text" id="sub" name="sub" value="<%= loginMember.getSubGrade() %>" readonly> 
+                    <% } else { %> 
+                    	<p>이름</p>
+                        <input type="text" id="memberName" name="memberName" readonly>                                            
+                        <p>아이디</p>
+                        <input type="text" id="memberId" name="memberId" readonly>   
+                        <p>구독 여부</p>
+                        <input type="text" id="sub" name="sub" readonly>  
+                    <% } %>           
                     </form>
-                    <div id="subtext">
-                        <p>자세한 할인율과 플랜을 알고싶다면?</p>
-                        <p>구독을 하고싶다면?</p>
-                    </div>
-                    <div id="btn01">
-                        <button class="btn1" onclick="">구독 신청하러 가기</button>
-                    </div>
+                    	<div id="subtext">
+                        	<p>자세한 할인율과 플랜을 알고싶다면?</p>
+                        	<p>구독을 하고싶다면?</p>
+                   		</div>
+                    	<div id="btn01">
+                        	<button class="btn1" onclick="">구독 신청하러 가기</button>
+                    	</div>
+                  
+                    
+                    
                 </div>
             </div>
         </div>

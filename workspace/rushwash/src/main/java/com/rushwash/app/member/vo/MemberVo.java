@@ -14,14 +14,17 @@ public class MemberVo {
 	private String delYn;
 	private String modifyDate;
 	private String point;
+	private String subGrade;
+	private String cardCompany;
+	private String cardNo;
 	
 	public MemberVo() {
-
+		
 	}
 
 	public MemberVo(String no, String memberId, String memberPwd, String memberPwd2, String memberEmail,
 			String memberAddress, String memberName, String memberTel, String enrollDate, String delYn,
-			String modifyDate, String point) {
+			String modifyDate, String point, String subGrade, String cardCompany, String cardNo) {
 		super();
 		this.no = no;
 		this.memberId = memberId;
@@ -35,6 +38,9 @@ public class MemberVo {
 		this.delYn = delYn;
 		this.modifyDate = modifyDate;
 		this.point = point;
+		this.subGrade = subGrade;
+		this.cardCompany = cardCompany;
+		this.cardNo = cardNo;
 	}
 
 	public String getNo() {
@@ -133,11 +139,37 @@ public class MemberVo {
 		this.point = point;
 	}
 
+	public String getSubGrade() {
+		return subGrade;
+	}
+
+	public void setSubGrade(String subGrade) {
+		this.subGrade = subGrade;
+	}
+
+	public String getCardCompany() {
+		return cardCompany;
+	}
+
+	public void setCardCompany(String cardCompany) {
+		this.cardCompany = cardCompany;
+	}
+
+	public String getCardNo() {
+		return cardNo;
+	}
+
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVo [no=" + no + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberPwd2="
 				+ memberPwd2 + ", memberEmail=" + memberEmail + ", memberAddress=" + memberAddress + ", memberName="
 				+ memberName + ", memberTel=" + memberTel + ", enrollDate=" + enrollDate + ", delYn=" + delYn
-				+ ", modifyDate=" + modifyDate + ", point=" + point + "]";
+				+ ", modifyDate=" + modifyDate + ", point=" + point + ", subGrade=" + subGrade + ", cardCompany="
+				+ cardCompany + ", cardNo=" + cardNo + "]";
 	}
+	
 }

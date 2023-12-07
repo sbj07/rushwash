@@ -124,15 +124,14 @@
     font-weight: bold;
 }
 
-#user input[type="email"],
 #user input[type="password"],
 #user input[type="tel"],
 #user input[type="text"] {
     padding: 10px;
     background-color: #F6F6F6;
-    color: #163172;
+    color: gray;
     border: 2px solid lightgray;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     width: 66%;
