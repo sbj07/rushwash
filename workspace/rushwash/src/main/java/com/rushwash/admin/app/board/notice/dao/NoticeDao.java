@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.rushwash.admin.app.board.notice.vo.NoticeVo;
 import com.rushwash.admin.app.db.util.JDBCTemplate;
@@ -77,7 +78,7 @@ public class NoticeDao {
 	         
 	   }
 
-	 //게시글 번호로 게시글 1개 조회
+	 //게시글 번호로 게시글 상세 조회
 	   public NoticeVo selectNoticeByNo(Connection conn, String no) throws Exception{
 	      
 	      //SQL
@@ -139,7 +140,7 @@ public class NoticeDao {
 	      
 	}
 
-	// 게시글 수정
+	   // 게시글 수정
 	   public int updateNoticeByNo(Connection conn, NoticeVo vo, String no) throws Exception {
 		   // SQL
 		   String sql = "UPDATE NOTICE SET TITLE = ? , CONTENT = ? WHERE NO = ?";
@@ -154,6 +155,69 @@ public class NoticeDao {
 		   
 		   return result; 
 	   	}
+	   
+	   //게시글 검색
+		public List<NoticeVo> search(Connection conn, Map<String, String> m , PageVo pvo) throws Exception {
+			
+			String searchType = m.get("searchType");
+			
+			// SQL
+			String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE , N.CONTENT , M.MANAGER_ID , N.ENROLL_DATE FROM NOTICE N JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' AND " + searchType + " LIKE '%' || ? || '%' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.get("searchValue"));
+			pstmt.setInt(2, pvo.getStartRow());
+			pstmt.setInt(3, pvo.getLastRow());
+			ResultSet rs = pstmt.executeQuery();
+			
+			// rs
+		      List<NoticeVo> NoticeVoList = new ArrayList<NoticeVo>();
+		      while(rs.next()) {
+		         String no = rs.getString("NO");
+		         String managerId = rs.getString("MANAGER_ID");
+		         String title = rs.getString("TITLE");
+		         String content = rs.getString("CONTENT");
+		         String enrollDate = rs.getString("ENROLL_DATE");
+		         
+		         
+		         
+		         NoticeVo vo = new NoticeVo();
+		         vo.setNo(no);
+		         vo.setManagerId(managerId);
+		         vo.setTitle(title);
+		         vo.setContent(content);
+		         vo.setEnrollDate(enrollDate);
+		         
+		         NoticeVoList.add(vo);
+		      }
+		
+			// close
+		    JDBCTemplate.close(rs);
+		    JDBCTemplate.close(pstmt);
+		      
+		    return NoticeVoList;
+		}
+
+		// 게시글 갯수 조회 (검색값에 따라)
+		public int getNoticeCountBySearch(Connection conn, Map<String, String> m) throws Exception {
+			
+			// SQL
+			String sql = "SELECT COUNT(*) FROM NOTICE WHERE DEL_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.get("searchValue"));
+			ResultSet rs = pstmt.executeQuery();
+			
+			// rs
+			int cnt = 0;
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+			// close
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+			
+			return cnt;
+		}
 }
 	
 

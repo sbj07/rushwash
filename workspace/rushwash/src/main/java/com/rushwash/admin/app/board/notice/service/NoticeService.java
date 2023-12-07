@@ -162,5 +162,36 @@ public class NoticeService {
 			return result;
 			
 		}
+
+		// 게시글 검색
+		public List<NoticeVo> search(Map<String, String> m , PageVo pvo) throws Exception {
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// DAO
+			NoticeDao dao = new NoticeDao();
+			List<NoticeVo> NoticeVoList = dao.search(conn , m, pvo);
+			
+			//close
+			JDBCTemplate.close(conn);
+			
+			return NoticeVoList;
+		}
+	
+		// 게시글 갯수 조회 (검색값에 따라)
+		public int selectSearchNoticeCount(Map<String, String> m) throws Exception {
+			
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// DAO
+			NoticeDao dao = new NoticeDao();
+			int cnt = dao.getNoticeCountBySearch(conn , m);
+			
+			// close
+			JDBCTemplate.close(conn);
+			
+			return cnt;
+		}
 	
 }

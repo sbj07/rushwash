@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.rushwash.admin.app.board.faq.vo.FaqVo;
 import com.rushwash.admin.app.board.notice.vo.NoticeVo;
@@ -154,4 +155,66 @@ public class FaqDao {
 		   
 		   return result; 
 	   	}
+	   //게시글 검색
+ 		public List<FaqVo> search(Connection conn, Map<String, String> m , PageVo pvo) throws Exception {
+ 			
+ 			String searchType = m.get("searchType");
+ 			
+ 			// SQL
+ 			String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE , N.CONTENT , M.MANAGER_ID , N.ENROLL_DATE FROM FAQ N JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' AND " + searchType + " LIKE '%' || ? || '%' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+ 			PreparedStatement pstmt = conn.prepareStatement(sql);
+ 			pstmt.setString(1, m.get("searchValue"));
+ 			pstmt.setInt(2, pvo.getStartRow());
+ 			pstmt.setInt(3, pvo.getLastRow());
+ 			ResultSet rs = pstmt.executeQuery();
+ 			
+ 			// rs
+		      List<FaqVo> FaqVoList = new ArrayList<FaqVo>();
+		      while(rs.next()) {
+		         String no = rs.getString("NO");
+		         String managerId = rs.getString("MANAGER_ID");
+		         String title = rs.getString("TITLE");
+		         String content = rs.getString("CONTENT");
+		         String enrollDate = rs.getString("ENROLL_DATE");
+		         
+		         
+		         
+		         FaqVo vo = new FaqVo();
+		         vo.setNo(no);
+		         vo.setManagerId(managerId);
+		         vo.setTitle(title);
+		         vo.setContent(content);
+		         vo.setEnrollDate(enrollDate);
+		         
+		         FaqVoList.add(vo);
+		      }
+	
+ 			// close
+ 		    JDBCTemplate.close(rs);
+ 		    JDBCTemplate.close(pstmt);
+ 		      
+ 		    return FaqVoList;
+ 		}
+
+	 		// 게시글 갯수 조회 (검색값에 따라)
+	 		public int getFaqCountBySearch(Connection conn, Map<String, String> m) throws Exception {
+	 			
+	 			// SQL
+	 			String sql = "SELECT COUNT(*) FROM FAQ WHERE DEL_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
+	 			PreparedStatement pstmt = conn.prepareStatement(sql);
+	 			pstmt.setString(1, m.get("searchValue"));
+	 			ResultSet rs = pstmt.executeQuery();
+	 			
+	 			// rs
+	 			int cnt = 0;
+	 			if(rs.next()) {
+	 				cnt = rs.getInt(1);
+	 			}
+	 			
+	 			// close
+	 			JDBCTemplate.close(rs);
+	 			JDBCTemplate.close(pstmt);
+	 			
+	 			return cnt;
+	 		}
 }

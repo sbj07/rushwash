@@ -2,7 +2,10 @@ package com.rushwash.admin.app.board.qna.service;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
+import com.rushwash.admin.app.board.notice.dao.NoticeDao;
+import com.rushwash.admin.app.board.notice.vo.NoticeVo;
 import com.rushwash.admin.app.board.qna.dao.QnaDao;
 import com.rushwash.admin.app.board.qna.vo.QnaVo;
 import com.rushwash.admin.app.db.util.JDBCTemplate;
@@ -134,5 +137,36 @@ public class QnaService {
 			JDBCTemplate.close(conn);
 			
 			return result;
+		}
+		
+		// 게시글 검색
+		public List<QnaVo> search(Map<String, String> m , PageVo pvo) throws Exception {
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// DAO
+			QnaDao dao = new QnaDao();
+			List<QnaVo> QnaVoList = dao.search(conn , m, pvo);
+			
+			//close
+			JDBCTemplate.close(conn);
+			
+			return QnaVoList;
+		}
+	
+		// 게시글 갯수 조회 (검색값에 따라)
+		public int selectSearchQnaCount(Map<String, String> m) throws Exception {
+			
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+			
+			// DAO
+			QnaDao dao = new QnaDao();
+			int cnt = dao.getQnaCountBySearch(conn , m);
+			
+			// close
+			JDBCTemplate.close(conn);
+			
+			return cnt;
 		}
 }

@@ -161,4 +161,35 @@ public class FaqService {
 				return result;
 				
 			}
+			
+			// 게시글 검색
+			public List<FaqVo> search(Map<String, String> m , PageVo pvo) throws Exception {
+				// conn
+				Connection conn = JDBCTemplate.getConnection();
+				
+				// DAO
+				FaqDao dao = new FaqDao();
+				List<FaqVo> FaqVoList = dao.search(conn , m, pvo);
+				
+				//close
+				JDBCTemplate.close(conn);
+				
+				return FaqVoList;
+			}
+		
+			// 게시글 갯수 조회 (검색값에 따라)
+			public int selectSearchFaqCount(Map<String, String> m) throws Exception {
+				
+				// conn
+				Connection conn = JDBCTemplate.getConnection();
+				
+				// DAO
+				FaqDao dao = new FaqDao();
+				int cnt = dao.getFaqCountBySearch(conn , m);
+				
+				// close
+				JDBCTemplate.close(conn);
+				
+				return cnt;
+			}
 }

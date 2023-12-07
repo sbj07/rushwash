@@ -14,7 +14,7 @@ import com.rushwash.admin.app.board.qna.vo.QnaVo;
 import com.rushwash.admin.app.manager.vo.ManagerVo;
 
 @WebServlet("/admin/board/qnaWriteCommt")
-public class qnaWriteCommt extends HttpServlet{
+public class QnaWriteCommt extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

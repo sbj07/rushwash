@@ -1,4 +1,4 @@
-
+<%@page import="java.util.Map"%>
 <%@page import="com.rushwash.admin.app.page.vo.PageVo"%>
 <%@page import="com.rushwash.admin.app.board.notice.vo.NoticeVo"%>
 <%@page import="java.util.List"%>
@@ -9,6 +9,7 @@
 	<% 
 		List<NoticeVo> NoticeVoList = (List<NoticeVo>) request.getAttribute("NoticeVoList");
 		PageVo pvo = (PageVo)request.getAttribute("pvo"); 
+		Map<String, String> searchMap = (Map<String, String>)request.getAttribute("searchMap");
 	%>
     
 <!DOCTYPE html>
@@ -36,8 +37,20 @@
 				<div class="container-fluid">
 
 					
-					<main><h1>공지사항</h1>
-					
+					<main>
+						<h1>공지사항</h1>
+						<div class="search-area">
+							<form action="/rushwash/admin/board/notice/search" method="get">
+								<select name="searchType">
+									<option value="title">제목</option>
+									<option value="content">내용</option>
+								</select>
+								<input type="text" name="searchValue" placeholder="검색할 내용을 입력하세요">
+								<input type="submit" value="검색하기">
+							</form>
+						</div>
+						
+						
 						<table border="1">
 							<thead>
 								<tr id="titleHead">
@@ -120,4 +133,35 @@
 		const no = tr.children[0].innerText;
 		location.href = '/rushwash/admin/board/notice/detail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
 	}
+	<% if(searchMap != null){ %>
+		function setSearchArea(){
+			
+			// 옵션태그 셋팅
+			const optionTagArr = document.querySelectorAll(".search-area form option");
+			const searchType = "<%= searchMap.get("searchType") %>";
+			for(let i = 0; i < optionTagArr.length; ++i){
+				if( optionTagArr[i].value === searchType ){
+					optionTagArr[i].selected = true;
+					break;
+				}
+			}
+		
+		// 인풋태그 셋팅
+		const searchValueTag = document.querySelector(".search-area form input[name=searchValue]");
+		searchValueTag.value = "<%= searchMap.get("searchValue") %>";
+		
+	}
+	setSearchArea();
+	
+	function setPageArea(){
+		const aTagArr = document.querySelectorAll(".page-area a");
+		for(let i = 0 ; i < aTagArr.length; ++i){
+			aTagArr[i].href = aTagArr[i].href.replace("NoticeList" , "search"); 
+			aTagArr[i].href += "&searchType=<%= searchMap.get("searchType") %>";
+			aTagArr[i].href += "&searchValue=<%= searchMap.get("searchValue") %>";
+		}
+	}
+	setPageArea();
+<% } %>
+	
 </script>

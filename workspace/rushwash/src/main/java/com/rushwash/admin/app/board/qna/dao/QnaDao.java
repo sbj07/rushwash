@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.rushwash.admin.app.board.notice.vo.NoticeVo;
 import com.rushwash.admin.app.board.qna.vo.QnaVo;
 import com.rushwash.admin.app.db.util.JDBCTemplate;
 import com.rushwash.admin.app.page.vo.PageVo;
@@ -162,4 +164,79 @@ public class QnaDao {
 		      
 		      return result;
 		   }//cmmtDelete
+		
+		//게시글 검색
+		public List<QnaVo> search(Connection conn, Map<String, String> m , PageVo pvo) throws Exception {
+			
+			String searchType = m.get("searchType");
+			
+			// SQL
+			String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE , N.CONTENT , N.COMMT, M.MANAGER_ID , N.ENROLL_DATE , N.DEL_YN, N.SECRET_YN, ME.ID FROM QNA N JOIN MANAGER M ON N.MANAGER_NO = M.NO JOIN MEMBER ME ON N.MEMBER_NO = ME.NO WHERE N.DEL_YN = 'N' AND  " + searchType + "  LIKE '%' || ?|| '%' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.get("searchValue"));
+			pstmt.setInt(2, pvo.getStartRow());
+			pstmt.setInt(3, pvo.getLastRow());
+			ResultSet rs = pstmt.executeQuery();
+			
+			
+			//rs
+		      List<QnaVo> QnaVoList = new ArrayList<QnaVo>();
+		      while(rs.next()) {
+		         
+		         String no = rs.getString("NO");
+		         String memberId = rs.getString("ID");
+		         String managerId = rs.getString("MANAGER_ID");
+		         String title = rs.getString("TITLE");
+		         String content = rs.getString("CONTENT");
+		         String delYn = rs.getString("DEL_YN");
+		         String enrollDate = rs.getString("ENROLL_DATE");
+		         String secretYn = rs.getString("SECRET_YN");
+		         
+		         
+		         
+		         QnaVo vo = new QnaVo();
+		         vo.setNo(no);
+		         vo.setMemberId(memberId);
+		         vo.setManagerId(managerId);
+		         vo.setTitle(title);
+		         vo.setContent(content);
+		         vo.setDelYn(delYn);
+		         vo.setEnrollDate(enrollDate);
+		         vo.setSecretYn(secretYn);
+		         
+		         QnaVoList.add(vo);
+		         System.out.println("검색결과 : "+vo);
+		      }
+		      
+		
+			// close
+		    JDBCTemplate.close(rs);
+		    JDBCTemplate.close(pstmt);
+		      
+		    return QnaVoList;
+		}
+
+		// 게시글 갯수 조회 (검색값에 따라)
+		public int getQnaCountBySearch(Connection conn, Map<String, String> m) throws Exception {
+			
+			// SQL
+			String sql = "SELECT COUNT(*) FROM QNA WHERE DEL_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.get("searchValue"));
+			System.out.println(m);
+			ResultSet rs = pstmt.executeQuery();
+			
+			// rs
+			int cnt = 0;
+			if(rs.next()) {
+				cnt = rs.getInt(1);
+			}
+			
+			// close
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+			
+			return cnt;
+		}
+		
 	}
