@@ -82,22 +82,48 @@
 						</table>
 						
 						
-						<div class="page-area">
-						    <% if (pvo.getStartPage() != 1) { %>
-						        <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= pvo.getStartPage()-1 %>">이전</a>
-						    <% } %>
 						
-						    <% for (int i = pvo.getStartPage(); i <= pvo.getEndPage(); i++) { %>
-						        <% if (i == pvo.getCurrentPage()) { %>
-						            <span><%= i %></span>
-						        <% } else { %>
-						            <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= i %>"><%= i %></a>
-						        <% } %>
-						    <% } %>
 						
-						    <% if (pvo.getEndPage() != pvo.getMaxPage()) { %>
-						        <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= pvo.getEndPage()+1 %>">다음</a>
-						    <% } %>
+						<% if(searchType==null&&searchValue==null) { %>
+							<div class="page-area">
+			
+							<% if(pvo.getStartPage() != 1){ %>
+								<a href="/rushwash/admin/board/qna?pno=<%= pvo.getStartPage()-1 %>">이전</a>
+							<% } %>
+							
+							<% for(int i = pvo.getStartPage() ; i <= pvo.getEndPage(); i++){ %>
+								
+								<% if( i == pvo.getCurrentPage() ){ %>
+									<span><%= i %></span>
+								<% }else{ %>
+									<a href="/rushwash/admin/board/qna?pno=<%= i %>"><%= i %></a>
+								<% } %>
+								
+							<% } %>
+						    <% }else{ %>
+								<% if( pvo.getEndPage() != pvo.getMaxPage() ){ %>
+									<a href="/rushwash/admin/board/Qna?pno=<%= pvo.getEndPage()+1 %>">다음</a>	
+									<div class="page-area">
+								    <% if (pvo.getStartPage() != 1) { %>
+								        <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= pvo.getStartPage()-1 %>">이전</a>
+								    <% } %>
+								
+								    <% for (int i = pvo.getStartPage(); i <= pvo.getEndPage(); i++) { %>
+								        <% if (i == pvo.getCurrentPage()) { %>
+								            <span><%= i %></span>
+								        <% } else { %>
+								            <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= i %>"><%= i %></a>
+								        <% } %>
+								    <% } %>
+								
+								    <% if (pvo.getEndPage() != pvo.getMaxPage()) { %>
+								        <a href="/rushwash/admin/board/qna/search?searchType=<%= searchType %>&searchValue=<%= searchValue %>&pno=<%= pvo.getEndPage()+1 %>">다음</a>
+								    <% } %>
+							<% } %>
+						
+								</div>
+						 
+						 <% } %>
 						</div>
 
 						</main>
