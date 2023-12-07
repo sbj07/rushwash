@@ -1,6 +1,7 @@
 package com.rushwash.app.member.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.rushwash.admin.app.db.util.JDBCTemplate;
 import com.rushwash.app.member.dao.MemberDao;
@@ -8,6 +9,7 @@ import com.rushwash.app.member.vo.MemberVo;
 
 public class MemberService {
 
+	//회원가입
 	public int join(MemberVo vo) throws Exception {
 	
 		//conn
@@ -85,6 +87,7 @@ public class MemberService {
 	
 	}
 
+	//로그인
 	public MemberVo login(MemberVo vo) throws Exception {
 		
 		//conn
@@ -100,6 +103,7 @@ public class MemberService {
 		return loginMember;
 	}
 
+	//중복체크
 	public boolean checkId(String memberId) throws Exception {
 		
 		//conn
@@ -113,6 +117,54 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+	}
+	
+	//내정보 화면
+	public MemberVo myInfo(String no) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		MemberVo vo = dao.myInfo(conn, no);
+		
+		//close
+		JDBCTemplate.close(conn);
+
+		return vo;
+	}
+
+	//개인정보수정 화면
+	public MemberVo editInfo(String no) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		MemberVo vo = dao.editInfo(conn, no);
+		
+		//close
+		JDBCTemplate.close(conn);
+
+		return vo;
+	}
+
+	//구독정보 화면
+	public MemberVo sub(String no) throws Exception {
+	
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		MemberVo vo = dao.sub(conn, no);
+		
+		//close
+		JDBCTemplate.close(conn);
+
+		return vo;
 	}
 
 }

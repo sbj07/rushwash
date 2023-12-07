@@ -35,6 +35,7 @@
 </body>
 <%@ include file='/WEB-INF/views/user/common/user_footer.jsp' %>
 </html>
+
 <script>
 	<% if(x != null){ %>
 		alert('<%= x %>');
@@ -114,7 +115,4 @@
         }
     }
  
- 
-    
-    
 </script>

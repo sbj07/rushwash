@@ -146,7 +146,6 @@ function checkId() {
         error[0].style.color = "red";
         error[0].style.display = "block";
     } else {
-        error[0].innerHTML = "사용가능한 아이디 입니다.";
         error[0].style.color = "#08A600";
         error[0].style.display = "block";
     }  
@@ -251,10 +250,11 @@ function checkIdDup(){
 		const result = data.msg;
 		const isOk = result === "ok";
 		if(isOk){	
-			alert("사용가능");
+			error[0].innerHTML = "사용가능한 아이디 입니다.";
 			window.idOk = true;
 		}else{
-			alert("사용불가");
+			error[0].innerHTML = "이미 사용중인 아이디 입니다.";
+			error[0].style.color = "#ff0000";
 			window.idOk = false;
 		}
 	} );
