@@ -10,11 +10,11 @@ import com.rushwash.app.item.vo.ItemVo;
 public class ItemService {
 	
 	//품목리스트 조회
-	public List<ItemVo> selectItemList(String categoryNo) throws Exception {
+	public List<ItemVo> selectItemList() throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		ItemDao dao = new ItemDao();
-		List<ItemVo> itemList = dao.selectItemList(conn, categoryNo);
+		List<ItemVo> itemList = dao.selectItemList(conn);
 		
 		JDBCTemplate.close(conn);
 		
