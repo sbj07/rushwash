@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 	<main>
 	    <div id="wrap">
 	      <div class="font">
-	        문의내역
+	        QNA
 	      </div>
 	      <table class="table-wrapper">
 	        <tr>
@@ -49,9 +49,11 @@ pageEncoding="UTF-8"%>
 	          
 	       </table>
 	       <div class="btn">
-	        <button class="btn1" onclick="go();">작성하기</button>
+	        <button class="btn1" onclick="location.href='/rushwash/board/qnawrite'">작성하기</button>
 	    </div>
 	    </div>
+	    
+	    
 	     <div id="wrap">
 	      <div class="font">
 	        FAQ
@@ -99,10 +101,6 @@ pageEncoding="UTF-8"%>
     </div>
     <%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %>
 
-    <script>
-        function go(){
-            window.location.href = '/rushwash/board/qnawrite';
-        }
-    </script>
+
 </body>
 </html>

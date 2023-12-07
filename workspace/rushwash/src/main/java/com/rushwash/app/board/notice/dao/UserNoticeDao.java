@@ -101,10 +101,72 @@ public class UserNoticeDao {
 		return vo;
 	}
 
-	public int getNoticeCountBySearch(Connection conn, Map<String, String> m) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	//게시글 검색
+	public List<UserNoticeVo> search(Connection conn, Map<String, String> m, PageVo pvo) throws Exception {
+		
+		String searchType = m.get("searchType");
+		
+		//sql
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT B.NO, B.TITLE, B.CONTENT, B.ENROLL_DATE, B.DEL_YN FROM NOTICE B WHERE B.DEL_YN = 'N' AND " + searchType  + " LIKE '%' || ? || '%' ORDER BY B.NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.get("searchValue"));
+		pstmt.setInt(2, pvo.getStartRow());
+		pstmt.setInt(3, pvo.getLastRow());
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		List<UserNoticeVo> boardVoList = new ArrayList<UserNoticeVo>();
+		while(rs.next()) {
+			String no = rs.getString("NO");
+			String title = rs.getString("TITLE");
+			String content = rs.getString("CONTENT");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String delYn = rs.getString("DEL_YN");
+			
+			UserNoticeVo vo = new UserNoticeVo();
+			vo.setNo(no);
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setEnrollDate(enrollDate);
+			vo.setDelYn(delYn);
+			
+			boardVoList.add(vo);
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return boardVoList;
 	}
+	
+	
+	//게시글 갯수 조회
+	public int getNoticeCountBySearch(Connection conn, Map<String, String> m) throws Exception {
+		
+		//sql
+		String sql = "SELECT COUNT(*) FROM NOTICE WHERE DEL_YN ='N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m.get("searchValue"));
+		System.out.println(m);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		int cnt = 0;
+		if(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return cnt;
+	}
+
+	
+
+
 
 	
 
