@@ -1,5 +1,15 @@
+<%@page import="com.rushwash.admin.app.oldClothes.vo.OldClothesVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%
+		List<OldClothesVo> voList = (List<OldClothesVo>) request.getAttribute("voList");
+	
+	
+	%>
+	
+	
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -45,10 +55,10 @@
 										<tr>
 											<th>번호</th>
 											<th>유저번호</th>
-											<th>처리상태</th>
 											<th>수거요청일자</th>
 											<th>수거일자</th>
 											<th>무게(g)</th>
+											<th>처리상태</th>
 											<th>취소상태</th>
 										</tr>
 									</thead>
@@ -56,29 +66,48 @@
 										<tr>
 											<th>번호</th>
 											<th>유저번호</th>
-											<th>처리상태</th>
 											<th>수거요청일자</th>
 											<th>수거일자</th>
 											<th>무게(g)</th>
+											<th>처리상태</th>
 											<th>취소상태</th>
 										</tr>
 									</tfoot>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<td>1</td>
+										<%
+									    for (OldClothesVo vo : voList) {
+									        String statusNo = vo.getStatusNo();
+									        // vo.getStatusNo가 1 또는 2인 경우에만 해당 행을 표시
+									        if ("1".equals(statusNo) || "2".equals(statusNo)) {
+										%>
+											<td><%=vo.getNo()%></td>
+											<td><%=vo.getMemberNo()%></td>
+											<td><%=vo.getRequestDate()%></td>
 											<td>
-											<select class="custom-select" name="status">
-													<option value="1">수거요청</option>
-													<option value="2">수거완료</option>
-													<option value="3">지급완료</option>
-											</select>
+										    <% if (vo.getCollectDate() != null) { %>
+										        <%= vo.getCollectDate() %>
+										    <% } %>
 											</td>
-											<td>2023.12.4</td>
-											<td>2023.12.5</td>
-											<td>1200</td>
-											<td>N</td>
+											<td><%=vo.getWeight()%></td>
+											<td>
+												<form id="statusForm_<%=vo.getNo()%>">
+													<select class="custom-select" name="status">
+														<option class="options" value="1" <%=vo.getStatusNo().equals("1") ? "selected" : "" %>>수거요청</option>
+														<option class="options" value="2" <%=vo.getStatusNo().equals("2") ? "selected" : "" %>>수거완료</option>
+														<option class="options" value="3" <%=vo.getStatusNo().equals("3") ? "selected" : "" %>>지급완료</option>
+													</select> 
+													<input type="button" class="btn btn-primary" value="제출"
+														onclick="submitForm(<%=vo.getNo()%>)">
+												</form>
+											</td>
+											<td><%=vo.getDelYn()%></td>
 										</tr>
+										<%
+										}
+										%>
+									<%
+									}
+									%>
 									</tbody>
 								</table>
 							</div>
@@ -103,28 +132,68 @@
 </body>
 <script type="text/javascript">
      // Use querySelectorAll to select all elements with the class "custom-select"
-    var statusSelects = document.querySelectorAll(".custom-select");
+    var statusSelects = document.querySelectorAll('.custom-select:not(.custom-select > *)');
+     console.log(statusSelects);
 
- // Add event listener to each selected element
-    statusSelects.forEach(function(statusSelect) {
-      // Get the initial selected value
-      var selectedValue = statusSelect.value;
+     function backColor(){
+    	// Add event listener to each selected element
+    	    statusSelects.forEach(function(statusSelect) {
+    	      // Get the initial selected value
+    	      var selectedValue = statusSelect.value;
 
-      // Set the background color based on the initial selected value
-      switch (selectedValue) {
-        case "1":
-          statusSelect.style.backgroundColor = "#f8f9fc";
-          break;
-        case "2":
-          statusSelect.style.backgroundColor = "lightblue";
-          break;
-        case "3":
-          statusSelect.style.backgroundColor = "lightgreen";
-          break;
-        default:
-          statusSelect.style.backgroundColor = ""; // Reset to default
-      }
-    });
+    	      // Set the background color based on the initial selected value
+    	      switch (selectedValue) {
+    	        case "1":
+    	          statusSelect.style.backgroundColor = "#f8f9fc";
+    	          break;
+    	        case "2":
+    	          statusSelect.style.backgroundColor = "lightblue";
+    	          break;
+    	        case "3":
+    	          statusSelect.style.backgroundColor = "lightgreen";
+    	          break;
+    	        default:
+    	          statusSelect.style.backgroundColor = "";
+    	      }
+    	    })
+     }
+	 backColor();
+ 
+ 	//AJAX
+ 	function submitForm(no) {
+ 		  // JS오브젝트 생성
+ 		  let formData = {
+ 				no: no,
+                status: document.querySelector('#statusForm_' + no + ' select[name="status"]').value
+            };
+ 		  // 데이터를 JSON 방식으로
+ 		  let jsonString = JSON.stringify(formData);
+
+ 		  // URL 전달 패치 (옵션 : 포스트, json, body지정)
+ 		  fetch('http://127.0.0.1:8080/rushwash/admin/clothes', {
+ 		    method: 'POST',
+ 		    headers: {'Content-Type': 'application/json'},
+ 		    body: jsonString
+ 		  })
+ 		  .then(resp => {
+ 		    if (!resp.ok) {
+ 		      throw new Error('Network response was not ok');
+ 		    }
+ 		    return resp.json();
+ 		  })
+ 		  .then(data => {
+ 		  })
+ 		  .catch(error => {
+ 		    // Handle errors
+ 		    console.error('There was a problem with the fetch operation:', error);
+ 		  });
+ 				
+ 		 backColor();
+ 	}//confirm end
+ 	
+	
+ 	
 </script>
+
 
 </html>
