@@ -125,7 +125,7 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
 </body>
 <script type="text/javascript">
      // Use querySelectorAll to select all elements with the class "custom-select"
-    var statusSelects = document.querySelectorAll('.custom-select:not(.custom-select > *)');
+    var statusSelects = document.querySelectorAll('.custom-select');
      console.log(statusSelects);
 
      function backColor(){

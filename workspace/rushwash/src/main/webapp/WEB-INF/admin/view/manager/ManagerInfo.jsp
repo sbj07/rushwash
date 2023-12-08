@@ -74,10 +74,14 @@ session.removeAttribute("alertMsg");
 											<td><%=vo.getId() %></td>
 											<td><%=vo.getPwd() %></td>
 											<td>
-											<select class="custom-select" name="status">
-													<option value="N">N</option>
-													<option value="Y">Y</option>
-											</select>
+											<form id="statusForm_<%=vo.getNo()%>">
+													<select class="custom-select" name="status">
+															<option class="options" value="N" <%=vo.getDelYn().equals("N") ? "selected" : "" %>>N</option>
+															<option class="options" value="Y" <%=vo.getDelYn().equals("Y") ? "selected" : "" %>>Y</option>
+													</select>
+													<input type="button" class="btn btn-primary" value="제출"
+																onclick="submitForm(<%=vo.getNo()%>)">
+												</form>
 											</td>
 										</tr>
 									<%} %>
@@ -106,26 +110,63 @@ session.removeAttribute("alertMsg");
 </body>
 
 <script type="text/javascript">
-     // Use querySelectorAll to select all elements with the class "custom-select"
-    var statusSelects = document.querySelectorAll(".custom-select");
+//Use querySelectorAll to select all elements with the class "custom-select"
+var statusSelects = document.querySelectorAll(".custom-select");
 
- // Add event listener to each selected element
-    statusSelects.forEach(function(statusSelect) {
-      // Get the initial selected value
-      var selectedValue = statusSelect.value;
+function backColor(){
+  // Add event listener to each selected element
+  statusSelects.forEach(function(statusSelect) {
+  // Get the initial selected value
+  var selectedValue = statusSelect.value;
 
-      // Set the background color based on the initial selected value
-      switch (selectedValue) {
-        case "Y":
-          statusSelect.style.backgroundColor = "lightcoral";
-          break;
-        case "N":
-          statusSelect.style.backgroundColor = "lightblue";
-          break;
-        default:
-          statusSelect.style.backgroundColor = ""; // Reset to default
-      }
-    });
+  // Set the background color based on the initial selected value
+  switch (selectedValue) {
+    case "Y":
+      statusSelect.style.backgroundColor = "lightcoral";
+      break;
+    case "N":
+      statusSelect.style.backgroundColor = "lightblue";
+      break;
+    default:
+      statusSelect.style.backgroundColor = ""; // Reset to default
+  }
+})
+}
+backColor();
+
+//AJAX
+	function submitForm(no) {
+		  // JS오브젝트 생성
+		  let formData = {
+				no: no,
+            status: document.querySelector('#statusForm_' + no + ' select[name="status"]').value
+        };
+		  // 데이터를 JSON 방식으로
+		  let jsonString = JSON.stringify(formData);
+		  console.log(jsonString);
+		  
+		  // URL 전달 패치 (옵션 : 포스트, json, body지정)
+		  fetch('http://127.0.0.1:8888/rushwash/admin/manager/view', {
+		    method: 'POST',
+		    headers: {'Content-Type': 'application/json'},
+		    body: jsonString
+		  })
+		  .then(resp => {
+		    if (!resp.ok) {
+		      throw new Error('Network response was not ok');
+		    }
+		    return resp.json();
+		  })
+		  .then(data => {
+			 console.log('Response:', data);
+		  })
+		  .catch(error => {
+		    // Handle errors
+		    console.error('There was a problem with the fetch operation:', error);
+		  });
+				
+		 backColor();
+	}//confirm end
  
     <%if(alertMsg!=null){%>
 	alert("<%=alertMsg%>");

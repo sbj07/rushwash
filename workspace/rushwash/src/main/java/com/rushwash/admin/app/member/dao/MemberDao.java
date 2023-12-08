@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rushwash.admin.app.db.util.JDBCTemplate;
+import com.rushwash.admin.app.laundry.vo.LaundryVo;
+import com.rushwash.admin.app.laundry.vo.OrderVo;
 import com.rushwash.admin.app.member.vo.MemberVo;
 
 public class MemberDao {
@@ -60,6 +62,21 @@ public class MemberDao {
 		JDBCTemplate.close(pstmt);
 		
 		return memberList;
+	}
+
+	//로그인정보 상태값 갱신
+	public int submitStatus(Connection conn, MemberVo vo) throws Exception {
+		//sql
+		String sql = "update member set del_yn=? WHERE no=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getDelYn());
+		pstmt.setString(2, vo.getNo());
+		int result = pstmt.executeUpdate();
+		
+		//close
+		JDBCTemplate.close(pstmt);
+		
+		return result;
 	}
 
 }

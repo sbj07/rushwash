@@ -71,6 +71,8 @@ public class LaundryDao {
 		
 		return result;
 	}
+	
+	//상세세탁물 중 같은 주문번호끼리 모두 세탁완료(3)이 되면 오더를 배송중(4)로 변경
 
 	//세탁주문 리스트 불러오기
 	public List<OrderVo> getOrderList(Connection conn) throws Exception {

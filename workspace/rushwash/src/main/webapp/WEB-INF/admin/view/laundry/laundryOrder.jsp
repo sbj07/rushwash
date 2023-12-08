@@ -100,12 +100,12 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 											<td>
 												<form id="statusForm_<%=vo.getOrderNo()%>">
 													<select class="custom-select" name="status">
-														<option class="options" value="1" <%=vo.getStatus().equals("1") ? "selected" : "" %>>수거요청</option>
+														<option class="options" value="1" <%=vo.getStatus().equals("1") ? "selected" : "" %> disabled>수거요청</option>
 														<option class="options" value="2" <%=vo.getStatus().equals("2") ? "selected" : "" %>>수거완료</option>
 														<option class="options" value="3" <%=vo.getStatus().equals("3") ? "selected" : "" %>>세탁중</option>
 														<option class="options" value="4" <%=vo.getStatus().equals("4") ? "selected" : "" %>>배송중</option>
 														<option class="options" value="5" <%=vo.getStatus().equals("5") ? "selected" : "" %>>배송완료</option>
-														<option class="options" value="6" <%=vo.getStatus().equals("6") ? "selected" : "" %>>수령완료</option>
+														<option class="options" value="6" <%=vo.getStatus().equals("6") ? "selected" : "" %> disabled>수령완료</option>
 													</select> 
 													<input type="button" class="btn btn-primary" value="제출" onclick="submitForm(<%=vo.getOrderNo()%>)">
 												</form>
@@ -139,7 +139,7 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 </body>
 <script type="text/javascript">
      // Use querySelectorAll to select all elements with the class "custom-select"
-    var statusSelects = document.querySelectorAll('.custom-select:not(.custom-select > *)');
+    var statusSelects = document.querySelectorAll('.custom-select');
      console.log(statusSelects);
 
      function backColor(){
@@ -165,7 +165,7 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 			    default:
 			        statusSelect.style.backgroundColor = "";
 			}
-     	}
+     	})
      } //backColor End
 	 backColor();
  

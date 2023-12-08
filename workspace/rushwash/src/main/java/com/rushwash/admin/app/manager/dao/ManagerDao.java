@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.rushwash.admin.app.db.util.JDBCTemplate;
 import com.rushwash.admin.app.manager.vo.ManagerVo;
+import com.rushwash.admin.app.member.vo.MemberVo;
 
 public class ManagerDao {
 
@@ -110,5 +111,20 @@ public class ManagerDao {
 		
 		return isOk;
 	}
+
+	//로그인정보 상태값 갱신
+		public int submitStatus(Connection conn, ManagerVo vo) throws Exception {
+			//sql
+			String sql = "update manager set del_yn=? WHERE no=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getDelYn());
+			pstmt.setString(2, vo.getNo());
+			int result = pstmt.executeUpdate();
+			
+			//close
+			JDBCTemplate.close(pstmt);
+			
+			return result;
+		}
 
 }
