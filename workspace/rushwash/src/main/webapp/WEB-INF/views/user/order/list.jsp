@@ -34,12 +34,12 @@
                     </thead>
                     <tbody>
                     
-	                    <c:forEach items="voLsit" var="vo">
+	                    <c:forEach items="${ orderVoList }" var="vo">
 	                        <tr>
-	                            <td>1</td>
-	                            <td>2</td>
-	                            <td>22022.02.23</td>
-	                            <td>수거전</td>
+	                            <td>${vo.no}</td>
+	                            <td>${vo.ea}</td>
+	                            <td>${vo.paymentDate}</td>
+	                            <td>${vo.laundryStatus}</td>
 	                            <td><a id="aa" href="/rushwash/order/detail">상세조회</a></td>
 	                        </tr>
 	                    </c:forEach>
@@ -60,12 +60,12 @@
                     
                     <tbody>
 	                    
-	                    <c:forEach items="voList" var="vo">
+	                    <c:forEach items="${orderVoList}" var="vo">
 	                        <tr>
-	                            <td>1</td>
-	                            <td>9</td>
-	                            <td>22022.02.23</td>
-	                            <td>배송완료</td> 
+	                            <td>${vo.no }</td>
+	                            <td>${vo.ea }</td>
+	                            <td>${vo.receiveDate }</td>
+	                            <td>${vo.orderStatus }</td> 
 	                        </tr>
 	                   
 	                    </c:forEach>
