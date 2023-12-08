@@ -1,5 +1,13 @@
+<%@page import="com.rushwash.admin.app.page.vo.PageVo"%>
+<%@page import="com.rushwash.app.board.qna.vo.QnaVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+
+<%
+	List<QnaVo> boardVoList = (List<QnaVo>) request.getAttribute("boardVoList");
+	PageVo pvo = (PageVo)request.getAttribute("pvo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,37 +24,23 @@ pageEncoding="UTF-8"%>
 	        QNA
 	      </div>
 	      <table class="table-wrapper">
-	        <tr>
-	          <td>번호</td>
-	          <td>제목</td>
-	          <td>작성일</td>
-	        </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          
+		      <thead>
+		      	 <tr>
+		          <td>번호</td>
+		          <td>제목</td>
+		          <td>작성일</td>
+		        </tr>
+		      </thead>
+		      <tbody>
+		      <% for(QnaVo vo : boardVoList){ %>
+		      	<tr>
+		            <td><%= vo.getNo() %></td>
+		            <td><%= vo.getTitle() %></td>
+		            <td><%= vo.getEnrollDate() %></td>
+		          </tr>
+		      <%}%>
+		      	
+		      </tbody>	          
 	       </table>
 	       <div class="btn">
 	        <button class="btn1" onclick="location.href='/rushwash/board/qnawrite'">작성하기</button>
@@ -69,27 +63,6 @@ pageEncoding="UTF-8"%>
 	            <td>이게뭔가요</td>
 	            <td>2023.11.11</td>
 	          </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          <tr>
-	            <td>1</td>
-	            <td>이게뭔가요</td>
-	            <td>2023.11.11</td>
-	          </tr>
-	          
 	       </table>
 	    </div>
         
