@@ -39,7 +39,7 @@ public class MemberLoginController extends HttpServlet {
 			
 			//결과
 			if(loginMember == null) {
-				throw new Exception("로그인 실패");
+				throw new Exception("로그인 실패. 다시 시도 하세요.");
 			}
 			
 			HttpSession session = req.getSession();

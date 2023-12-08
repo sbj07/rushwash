@@ -62,7 +62,7 @@ public class MemberJoinController extends HttpServlet {
 			System.out.println("[ERROR-M001] 회원가입 중 에러 발생");
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			req.setAttribute("errorMsg" , "회원가입 실패");
+			req.setAttribute("errorMsg" , "회원가입 실패. 다시 시도 하세요");
 			req.getRequestDispatcher("/WEB-INF/views/user/member/join.jsp").forward(req, resp);
 		}
 		
