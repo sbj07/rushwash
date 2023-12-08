@@ -1,7 +1,6 @@
 package com.rushwash.admin.app.dashboard.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -32,11 +31,11 @@ public class AdminDashboardController extends HttpServlet{
 			Map<String, String> planInfoCount     = dashboardVo.getPlanInfoCount();
 			Map<String, String> orderStatusCount  = dashboardVo.getOrderStatusCount();
 
-			System.out.println(itemCategoryCount.get("1"));
-			System.out.println(itemCategoryCount.get("2"));
-			System.out.println(itemCategoryCount.get("3"));
-			System.out.println(planInfoCount);
-			System.out.println(orderStatusCount);
+			System.out.println(orderStatusCount.get("1"));
+			System.out.println(orderStatusCount.get("2"));
+			System.out.println(orderStatusCount.get("3"));
+			System.out.println(orderStatusCount.get("4"));
+			System.out.println(orderStatusCount.get("5"));
 			
 			req.setAttribute("itemCategoryCount", itemCategoryCount);
 			req.setAttribute("planInfoCount", planInfoCount);

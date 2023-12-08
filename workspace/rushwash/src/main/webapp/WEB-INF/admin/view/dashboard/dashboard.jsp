@@ -1,12 +1,10 @@
-
-
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 String alertMsg = (String) session.getAttribute("alertMsg");
 session.removeAttribute("alertMsg");
-
-
+Map<String, String> orderStatusCount = (Map<String, String>) request.getAttribute("orderStatusCount"); 
 %>
 
 <!DOCTYPE html>
@@ -53,7 +51,9 @@ session.removeAttribute("alertMsg");
 											<div
 												class="font-weight-bold text-primary text-uppercase mb-1">
 												수거중 주문건</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">25</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												<%=orderStatusCount.get("1") %>
+											</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -72,7 +72,9 @@ session.removeAttribute("alertMsg");
 											<div
 												class=" font-weight-bold text-success text-uppercase mb-1">
 												세탁대기 주문건</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">25</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												<%=orderStatusCount.get("2") %>
+											</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -92,7 +94,9 @@ session.removeAttribute("alertMsg");
 												주문건</div>
 											<div class="row no-gutters align-items-center">
 												<div class="col-auto">
-													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">11</div>
+													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+														<%=orderStatusCount.get("3")%>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -113,7 +117,9 @@ session.removeAttribute("alertMsg");
 											<div
 												class="font-weight-bold text-warning text-uppercase mb-1">
 												고객미수령 (배송중)</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												<%=Integer.parseInt(orderStatusCount.get("4"))  + Integer.parseInt(orderStatusCount.get("5")) %>
+											</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-comments fa-2x text-gray-300"></i>

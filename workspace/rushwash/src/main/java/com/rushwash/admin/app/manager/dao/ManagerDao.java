@@ -90,4 +90,25 @@ public class ManagerDao {
 		return loginManager;
 	}
 
+	//아이디 중복체크
+	public boolean checkId(Connection conn, String id) throws Exception {
+		//sql
+		String sql = "select * from manager where manager_id=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		boolean isOk = true;
+		if(rs.next()) {
+			isOk  = false;
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return isOk;
+	}
+
 }

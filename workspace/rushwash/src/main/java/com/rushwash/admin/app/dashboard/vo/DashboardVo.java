@@ -7,6 +7,7 @@ public class DashboardVo {
 	private Map<String, String> planInfoCount;
 	private Map<String, String> itemCategoryCount;
 	private Map<String, String> orderStatusCount;
+	
 	public Map<String, String> getPlanInfoCount() {
 		return planInfoCount;
 	}
