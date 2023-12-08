@@ -21,15 +21,21 @@
                     <table class="form-table" id="addr-info">
                         <tr>
                             <td>수령인</td>
-                            <td><input type="text" id="user-name"></td>
+                            <!-- <td><input type="text" id="user-name"></td> -->
+                            <td><span>${ loginMember.memberName }</span></td>
                         </tr>
                         <tr>
                             <td>연락처</td>
-                            <td><input type="text" id="user-phone"></td>
+                            <td>
+                                <span>${ loginMember.memberTel }</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>주소지</td>
-                            <td><input type="text" id="user-addr"></td>
+                            <td>
+                                <span>${ loginMember.memberAddress }</span>
+                            </td>
+
                         </tr>
                     </table>
                 </div>
@@ -43,7 +49,7 @@
                         </tr>
                         <tr>
                             <td>포인트 할인</td>
-                            <td>보유포인트 : </td>
+                            <td>보유포인트 : ${ loginMember.point }</td>
                             <td><input type="text" id="user-point"></td>
                         </tr>
                         <tr>

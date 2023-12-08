@@ -35,7 +35,6 @@ public class ApplyPremiumController extends HttpServlet {
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 			String memberNo = loginMember.getNo();
-			
 			String isShow = req.getParameter("showtable");			
 			
 			//service
@@ -55,6 +54,7 @@ public class ApplyPremiumController extends HttpServlet {
 				String jsonStr = gson.toJson(vo);
 				jsonList.add(jsonStr);
 			}
+			
 			// 할인율json 리스트에추가
 			jsonList.add(discountRate);
 						
@@ -75,7 +75,6 @@ public class ApplyPremiumController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("post요청 날라옴");
 		Enumeration<String> parameterNames = req.getParameterNames();
 		
 		List<ItemVo> itemList = new ArrayList<ItemVo>();
@@ -94,7 +93,8 @@ public class ApplyPremiumController extends HttpServlet {
 	        }
 	    }
 	    
-	    
-	    System.out.println(itemList);
+	    req.setAttribute("selectedItemList", itemList);
+	    resp.sendRedirect("/rushwash/payment/laundry-form");
+//	    req.getRequestDispatcher("/WEB-INF/views/user/payment/laundry_form.jsp").forward(req, resp);
 	}
 }
