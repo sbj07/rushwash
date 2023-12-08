@@ -6,25 +6,6 @@
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-	<!-- Topbar 검색(search for...) 여기 class 값들의 대부분은 css를 위해 있습니다. 상단바 검색 필없으면 지우기?-->
-	<form
-		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-		<div class="input-group">
-
-			<!-- 검색바 -->
-			<input type="text" class="form-control bg-light border-0 small"
-				placeholder="Search for..." aria-label="Search"
-				aria-describedby="basic-addon2">
-
-			<!-- 검색버튼 -->
-			<div class="input-group-append">
-				<button class="btn btn-primary" type="button">
-					<i class="fas fa-search fa-sm"></i>
-				</button>
-			</div>
-		</div>
-	</form>
-
 	<!-- Topbar Navbar -->
 	<ul class="navbar-nav ml-auto">
 		<!-- Nav Item - User Information -->

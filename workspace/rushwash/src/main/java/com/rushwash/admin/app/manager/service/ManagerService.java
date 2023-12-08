@@ -78,4 +78,17 @@ public class ManagerService {
 		return dbVo;
 	}
 
+	public boolean checkId(String id) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		boolean isOk = dao.checkId(conn, id);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return isOk;
+	}
+
 }
