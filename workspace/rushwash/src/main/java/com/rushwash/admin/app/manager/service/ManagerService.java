@@ -30,15 +30,15 @@ public class ManagerService {
 		
 		//business login
 		String id = vo.getId();
-		boolean idOk = id.matches("^[a-zA-Z][a-zA-Z0-9]{5,19}$");
+		boolean idOk = id.matches("^[a-zA-Z0-9_-]{5,20}$");
 
 		if(!idOk) {
-		    throw new Exception("ID는 영문자로 시작하는 영문자 또는 숫자 6~20자로 설정 필요.");
+		    throw new Exception("ID는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
 		}
 
 		// 비밀번호 8~15자리, 특수문자 포함
 		String pwd = vo.getPwd();
-		boolean pwdOk = pwd.matches("^[\\x21-\\x7E]{8,16}$");
+		boolean pwdOk = pwd.matches("^[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}$");
 
 		if(!pwdOk) {
 		    throw new Exception("비밀번호는 특수문자를 포함한 8~16자리로 설정 필요.");

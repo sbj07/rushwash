@@ -14,7 +14,11 @@
 			role="button" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false"> <span
 				class="mr-2 d-none d-lg-inline text-gray-600 small">
-				매니저 이름
+				<%if(loginManager==null) {%>
+					매니저
+				<%}else{ %>
+					<%=loginManager.getName() %>
+				<%} %>
 				</span> 
 		</a> 
 		<!-- Dropdown - User Information -->

@@ -92,6 +92,9 @@
 
 </body>
 <script>
+<%if (errMsg != null) {%>
+alert("<%=errMsg%>");
+<%}%>
 
 /* 쿼리셀렉터 */
 const idInput   = document.querySelector('#id');
