@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	MemberVo vo = (MemberVo) request.getAttribute("vo");
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,18 +29,18 @@
                 </div>     
                 <div id="edit-info">
                     <form id="edit">
-                   <% if(loginMember != null){  %>
+                   <% if(vo != null){  %>
                     	<p>아이디</p>
-                        <input type="text" id="userid" name="memberId" value="<%= loginMember.getMemberId() %>" readonly>
+                        <input type="text" id="userid" name="memberId" value="<%= vo.getMemberId() %>" readonly>
                         <button type="button" class="btn7" onclick="location.href='/rushwash/member/idchange'">변경</button>
                         <p>비밀번호</p>
-                        <input type="password" id="password" name="memberPwd" value ="<%= loginMember.getMemberPwd() %>" readonly>   
+                        <input type="password" id="password" name="memberPwd" value ="<%= vo.getMemberPwd() %>" readonly>   
                         <button type="button" class="btn7" onclick="location.href='/rushwash/member/pwdchange'">변경</button>                              
                         <p>주소</p>
-                        <input type="text" id="address" name="memberAddress" value="<%= loginMember.getMemberAddress() %>" readonly>   
+                        <input type="text" id="address" name="memberAddress" value="<%= vo.getMemberAddress() %>" readonly>   
                         <button type="button" class="btn7" onclick="location.href='/rushwash/member/addrchange'">변경</button>
                         <p>전화번호</p>
-                        <input type="tel" id="phone" name="memberTel" value="<%= loginMember.getMemberTel() %>" readonly>  
+                        <input type="tel" id="phone" name="memberTel" value="<%= vo.getMemberTel() %>" readonly>  
                    <% } else { %>
                    			<p>아이디</p>
 	                        <input type="text" id="userid" name="memberId" value="" readonly>

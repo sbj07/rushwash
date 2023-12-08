@@ -18,25 +18,20 @@ public class MemberMyPageController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 try {
-			 
-			 //data
-			 String no = req.getParameter("no");
-			 
-			 //service
-			 MemberService ms = new MemberService();
-			 MemberVo vo = ms.myInfo(no);
-			 	
-			 //result
-			 req.setAttribute("vo", vo);
-	         req.getRequestDispatcher("/WEB-INF/views/user/member/mypage.jsp").forward(req, resp);
+		try {
+            HttpSession session = req.getSession();
 
-	    }catch(Exception e) {
-	        System.out.println("[ERROR-M003] 사용자 정보 조회 중 에러 발생 ...");
-	        e.printStackTrace();
-	        req.setAttribute("errorMsg", "사용자 정보 조회 실패...");
-	        req.getRequestDispatcher("/WEB-INF/views/user/member/mypage.jsp").forward(req, resp);
-	    }
+            MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+            
+            req.setAttribute("vo", loginMember);
+            req.getRequestDispatcher("/WEB-INF/views/user/member/mypage.jsp").forward(req, resp);
+
+        } catch(Exception e) {
+            System.out.println("[ERROR-M003] 사용자 정보 조회 중 에러 발생 ...");
+            e.printStackTrace();
+            req.setAttribute("errorMsg", "사용자 정보 조회 실패...");
+            req.getRequestDispatcher("/WEB-INF/views/user/member/mypage.jsp").forward(req, resp);
+        }
 	}
 }
 	

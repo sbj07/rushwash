@@ -30,31 +30,50 @@
                 </div>     
                 <div id="sub-info">
                     <form id="sub-form">      
-                    <% if(loginMember != null){ %>         
-                        <p>이름</p>
-                        <input type="text" id="memberName" name="memberName" value="<%= loginMember.getMemberName() %>" readonly>                                            
-                        <p>아이디</p>
-                        <input type="text" id="memberId" name="memberId" value="<%= loginMember.getMemberId() %>" readonly>   
-                        <p>구독 여부</p>
-                        <input type="text" id="sub" name="sub" value="<%= loginMember.getSubGrade() %>" readonly> 
-                    <% } else { %> 
-                    	<p>이름</p>
-                        <input type="text" id="memberName" name="memberName" readonly>                                            
-                        <p>아이디</p>
-                        <input type="text" id="memberId" name="memberId" readonly>   
-                        <p>구독 여부</p>
-                        <input type="text" id="sub" name="sub" readonly>  
-                    <% } %>           
-                    </form>
-                    	<div id="subtext">
-                        	<p>자세한 할인율과 플랜을 알고싶다면?</p>
-                        	<p>구독을 하고싶다면?</p>
-                   		</div>
-                    	<div id="btn01">
-                        	<button class="btn1" onclick="">구독 신청하러 가기</button>
-                    	</div>
-                  
-                    
+                    <% if(vo != null){ %>         
+					    <p>이름</p>
+					    <input type="text" id="memberName" name="memberName" value="<%= vo.getMemberName() %>" readonly>                                            
+					    <p>아이디</p>
+					    <input type="text" id="memberId" name="memberId" value="<%= vo.getMemberId() %>" readonly>   
+					    <p>구독 여부</p>
+					    <input type="text" id="sub" name="sub" value="<%= vo.getSubGrade() %>" readonly> 
+					<% } else { %> 
+					    <p>이름</p>
+					    <input type="text" id="memberName" name="memberName" readonly>                                            
+					    <p>아이디</p>
+					    <input type="text" id="memberId" name="memberId" readonly>   
+					    <p>구독 여부</p>
+					    <input type="text" id="sub" name="sub" readonly>  
+					<% } %>           
+					</form>
+					<% if(vo == null) { %>
+					    <div id="subtext">
+					        <p>자세한 할인율과 플랜을 알고싶다면?</p>
+					        <p>구독을 하고싶다면?</p>
+					    </div>
+					    <div id="btn01">
+					        <button class="btn1" onclick="">구독 신청하러 가기</button>
+					    </div>
+					<% } %>
+					<% if(vo != null && "비구독".equals(vo.getSubGrade())){ %>
+					    <div id="subtext">
+					        <p>자세한 할인율과 플랜을 알고싶다면?</p>
+					        <p>구독을 하고싶다면?</p>
+					    </div>
+					    <div id="btn01">
+					        <button class="btn1" onclick="">구독 신청하러 가기</button>
+					    </div>
+					<% } else if(vo != null && vo.getSubGrade() == null){ %>
+					    <div id="subtext">
+					        <p>자세한 할인율과 플랜을 알고싶다면?</p>
+					        <p>구독을 하고싶다면?</p>
+					    </div>
+					    <div id="btn01">
+					        <button class="btn1" onclick="">구독 신청하러 가기</button>
+					    </div>
+					<% } else { %>	
+					<% } %>
+
                     
                 </div>
             </div>

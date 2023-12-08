@@ -118,53 +118,6 @@ public class MemberService {
 		
 		return result;
 	}
-	
-	//내정보 화면
-	public MemberVo myInfo(String no) throws Exception {
 
-		//conn
-		Connection conn = JDBCTemplate.getConnection();
-		
-		//dao
-		MemberDao dao = new MemberDao();
-		MemberVo vo = dao.myInfo(conn, no);
-		
-		//close
-		JDBCTemplate.close(conn);
-
-		return vo;
-	}
-
-	//개인정보수정 화면
-	public MemberVo editInfo(String no) throws Exception {
-
-		//conn
-		Connection conn = JDBCTemplate.getConnection();
-		
-		//dao
-		MemberDao dao = new MemberDao();
-		MemberVo vo = dao.editInfo(conn, no);
-		
-		//close
-		JDBCTemplate.close(conn);
-
-		return vo;
-	}
-
-	//구독정보 화면
-	public MemberVo sub(String no) throws Exception {
-	
-		//conn
-		Connection conn = JDBCTemplate.getConnection();
-		
-		//dao
-		MemberDao dao = new MemberDao();
-		MemberVo vo = dao.sub(conn, no);
-		
-		//close
-		JDBCTemplate.close(conn);
-
-		return vo;
-	}
 
 }

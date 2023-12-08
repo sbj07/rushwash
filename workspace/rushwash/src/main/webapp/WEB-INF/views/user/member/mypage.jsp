@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%
+	MemberVo vo = (MemberVo) request.getAttribute("vo");
+%>
 
     
 
@@ -29,17 +32,17 @@
                 </div>     
                 <div id="user-info">
                     <form id="user">        
-                    <% if(loginMember != null){  %>
+                    <% if(vo != null){  %>
                     	<p>아이디</p>
-						<input type="text" name="memberId" value="<%= loginMember.getMemberId() %>" readonly>
+						<input type="text" name="memberId" value="<%= vo.getMemberId() %>" readonly>
 						<p>이메일</p>
-						<input type="text" id="email" name="email" value="<%= loginMember.getMemberEmail() %>" readonly>
+						<input type="text" id="email" name="email" value="<%= vo.getMemberEmail() %>" readonly>
 						<p>주소 (배송지)</p>
-						<input type="text" id="address" name="address" value="<%= loginMember.getMemberAddress() %>" readonly>
+						<input type="text" id="address" name="address" value="<%= vo.getMemberAddress() %>" readonly>
 						<p>전화번호</p>
-						<input type="tel" id="phone" name="phone" value="<%= loginMember.getMemberTel() %>" readonly>
+						<input type="tel" id="phone" name="phone" value="<%= vo.getMemberTel() %>" readonly>
 						<p>보유 포인트</p>
-						<input type="text" id="point" name="point" value="<%= loginMember.getPoint() %>" readonly>
+						<input type="text" id="point" name="point" value="<%= vo.getPoint() %>" readonly>
                     <% } else { %>
                     	<p>아이디</p>
 						<input type="text" name="memberId" value="" readonly>
