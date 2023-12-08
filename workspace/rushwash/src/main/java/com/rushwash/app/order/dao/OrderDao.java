@@ -13,10 +13,11 @@ import com.rushwash.app.order.vo.OrderVo;
 
 public class OrderDao {
 
-	public List<OrderVo> getorderList(Connection conn) throws Exception {
+	public List<OrderVo> getorderList(Connection conn, String memberNo) throws Exception {
 		
-		String sql = "SELECT O.NO ,O.PRICE ,O.PAYMENT_DATE ,O.RECEIVE_DATE ,O.DEL_YN ,M.NAME AS MEMBER_NAME ,M.ADDRESS ,M.TEL ,I.NAME AS ITEM ,L.EA ,S.STATUS AS LAUNDRY_STATUS ,T.STATUS AS ORDER_STATUS FROM LAUNDRY L JOIN LAUNDRY_ORDER O ON O.NO = L.ORDER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN MEMBER M ON O.MEMBER_NO = M.NO JOIN LAUNDRY_STATUS S ON L.LAUNDRY_STATUS = S.NO JOIN ITEM I ON L.ITEM_NO = I.NO";
+		String sql = "SELECT O.NO ,O.PRICE ,O.PAYMENT_DATE ,O.RECEIVE_DATE ,O.DEL_YN ,M.NAME AS MEMBER_NAME ,M.ADDRESS ,M.TEL ,I.NAME AS ITEM ,L.EA ,S.STATUS AS LAUNDRY_STATUS ,T.STATUS AS ORDER_STATUS FROM LAUNDRY L JOIN LAUNDRY_ORDER O ON O.NO = L.ORDER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN MEMBER M ON O.MEMBER_NO = M.NO JOIN LAUNDRY_STATUS S ON L.LAUNDRY_STATUS = S.NO JOIN ITEM I ON L.ITEM_NO = I.NO WHERE M.NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, memberNo);
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<OrderVo> orderVoList = new ArrayList<OrderVo>();

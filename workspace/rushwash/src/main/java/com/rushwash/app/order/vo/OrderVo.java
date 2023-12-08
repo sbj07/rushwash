@@ -6,12 +6,12 @@ public class OrderVo {
 	private String item;			//상품(품목)
 	private String price;			//결제내역
 	private String ea;				//수량(세탁물)
-	private String memberName;			//수령인
+	private String memberName;		//수령인
 	private String address;			//주소
 	private String tel;				//핸드폰번호
 	private String request;			//요청사항
 	private String expDate ;		//예상 세탁 완료일
-	private String orderStatus;			//주문상태(신청상태 5)
+	private String orderStatus;		//주문상태(신청상태 5)
 	private String laundryStatus;	//진행상태(세탁상태 3)
 	private String paymentDate;		//주문일
 	private String diliveryDate;	//발송일

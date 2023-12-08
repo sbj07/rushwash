@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.rushwash.app.member.vo.MemberVo;
 import com.rushwash.app.order.service.OrderService;
 import com.rushwash.app.order.vo.OrderVo;
 
@@ -17,16 +19,31 @@ public class OrderListController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			resp.setContentType("text/html;charset=UTF-8");
+
 			
+			HttpSession session =req.getSession();
+			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+			String memberNo = loginMember.getNo();
+			
+			
+			if (loginMember != null) {
+			     memberNo = loginMember.getNo();
+			} else {
+			   throw new Exception("회원 정보 없음");
+			}
 			OrderService os = new OrderService();
-			List<OrderVo> orderVoList = os.getorderList();
-			
+			List<OrderVo> orderVoList = os.getorderList(memberNo);
 			req.setAttribute("orderVoList", orderVoList);
 			req.getRequestDispatcher("/WEB-INF/views/user/order/list.jsp").forward(req, resp);
+			
 		}catch(Exception e) {
-			System.out.println("[ERROR-O001] 주문내역 조회 중 에러 발생....");
+			System.out.println("[ERROR-O001] 주문내역 조회 중 에러 발생...");
 			e.printStackTrace();
-			req.setAttribute("errorMag","갤러리 목록 조회 실패");
+			req.setAttribute("errorMag","주문내역 에러");
+			req.setAttribute("alerMsg","접근권한없음 로그인 후 이용");
+            resp.getWriter().print("<script>alert('로그인이 필요합니다.'); location.href='/rushwash/home';</script>");
+			
 		}
 	}
 
