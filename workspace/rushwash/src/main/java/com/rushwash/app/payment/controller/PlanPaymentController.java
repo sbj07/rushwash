@@ -1,4 +1,4 @@
-package com.rushwash.app.payment;
+package com.rushwash.app.payment.controller;
 
 import java.io.IOException;
 
