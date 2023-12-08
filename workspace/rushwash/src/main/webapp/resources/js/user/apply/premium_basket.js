@@ -1,94 +1,91 @@
-let topCount = 0;
-let bottomCount = 0;
-let outerCount = 0;
-
-// getItemTable();
-
-// 버튼 클릭 시 실행되는 함수
-function handleButtonClick(event) {
-    offTable();
-    // 모든 버튼에서 btn-selected 클래스 제거
-    document.querySelectorAll('.tag-btn').forEach(btn => {
-        btn.classList.remove('btn-selected');
-    });
-    // 클릭된 버튼에 btn-selected 클래스 추가
-    event.currentTarget.classList.add('btn-selected');
-    
-    getItemTable();
-}
 
 // top버튼
-function topButtonClick(event) {
-    let targetNum = event.target.value;
-    console.log(targetNum);
-    
+function topButtonClick(event) {    
     // 모든 버튼에서 btn-selected 클래스 제거
     document.querySelectorAll('.tag-btn').forEach(btn => {
         btn.classList.remove('btn-selected');
     });
     // 클릭된 버튼에 btn-selected 클래스 추가
     event.currentTarget.classList.add('btn-selected');
-    
-    if(topCount == 0){
-        getItemTable(targetNum);
-        topCount += 1;
-    } else{
-        onTable(1);
-        offTable(2);
-        offTable(3);
-    }
+
+    onTable(1);
+    offTable(2);
+    offTable(3);
+}
+
+// bottom버튼
+function bottomButtonClick(event) {    
+    // 모든 버튼에서 btn-selected 클래스 제거
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.classList.remove('btn-selected');
+    });
+    // 클릭된 버튼에 btn-selected 클래스 추가
+    event.currentTarget.classList.add('btn-selected');
+
+    offTable(1);
+    onTable(2);
+    offTable(3);
+}
+
+// outer버튼
+function outerButtonClick(event) {    
+    // 모든 버튼에서 btn-selected 클래스 제거
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+        btn.classList.remove('btn-selected');
+    });
+    // 클릭된 버튼에 btn-selected 클래스 추가
+    event.currentTarget.classList.add('btn-selected');
+
+    offTable(1);
+    offTable(2);
+    onTable(3);
 }
 
 // 각 버튼에 클릭 이벤트 리스너 추가
-document.getElementById('top-category').addEventListener('click', handleButtonClick);
-document.getElementById('bottom-category').addEventListener('click', handleButtonClick);
-document.getElementById('outer-category').addEventListener('click', handleButtonClick);
+document.getElementById('top-category').addEventListener('click', topButtonClick);
+document.getElementById('bottom-category').addEventListener('click', bottomButtonClick);
+document.getElementById('outer-category').addEventListener('click', outerButtonClick);
 
-// 테이블 데이터 가져오는 
-function getItemTable() {
-    const selectedBtn = document.querySelector(".btn-selected");
-    const targetValue = selectedBtn.value;
-    fetch("/rushwash/apply/request/premium?category="+targetValue)
-    .then(response => response.json())
-    .then(data => {
-        let parsedData = data.map(item => JSON.parse(item));
-        parsedData.forEach(function(i){
-            addColumn(i , targetValue);
-        });
-    })
-    .catch(error => console.log('There has been a problem with your fetch operation: ', error));
-}
-
+// 시작시 데이터 받아와서 테이블 그리기
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("called");
     fetch("/rushwash/apply/request/premium?showtable=true")
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         let parsedData = data.map(item => JSON.parse(item));
+        let discountRate = parsedData[parsedData.length - 1];
         parsedData.forEach(function(i){
-            addColumn(i);
+            addColumn(i,discountRate);
         });
+
+        onTable(1);
+        offTable(2);
+        offTable(3);
     })
     .catch(error => console.log('There has been a problem with your fetch operation: ', error));
+
 });
 
 //칼럼생성
-function addColumn(result) {
+function addColumn(result , discountRate) {
     let itemNo = result.itemNo;
     let itemName = result.name;
     let itemPrice = result.price;
     let categoryNo = result.categoryCode;
-    console.log(categoryNo);
+    let rate = 100 - discountRate;
+    let premiumPrice = itemPrice * (rate/100);
+
     const resultTable = document.querySelector("#resultTable");
 
     // 태그 생성
     const trTag = document.createElement("tr");
+    let targetNum = 0;
     if(categoryNo == 1){
-        let targetNum = 1;
-    } else( categoryNo == 2){
-        let targetNum == 2;
-    } else
+        targetNum = 1;
+    } else if( categoryNo == 2){
+        targetNum = 2;
+    } else {
+        targetNum = 3;
+    }
     trTag.classList.add('columnTr' + targetNum);
 
     const nameTag = document.createElement("td");
@@ -97,7 +94,8 @@ function addColumn(result) {
     normalPriceTag.classList.add('normalPrice');
     
     const premiumPriceTag = document.createElement("td");
-    // premiumPriceTagPriceTag.classList.add('premiumPrice');
+    premiumPriceTag.classList.add('premiumPrice');
+
 
     const eaTdTag = document.createElement("td");
     
@@ -106,11 +104,11 @@ function addColumn(result) {
 
     
     eaDivTag.insertAdjacentHTML("afterbegin", '<input type="text" class="quantity-input inputTag'+itemNo+'" value="0" min="0" max="99" name="item'+itemNo+'"> <button type="button" class="quantity-up" id="up-btn'+itemNo+'" onclick="increase(event)">+</button> <button type="button" class="quantity-down" id="down-btn'+itemNo+'" onclick="decrease(event)">-</button>');
-    // eaDivTag.insertAdjacentHTML("afterbegin", '<button data-action="decrement" type="button"> <span class="m-auto text-2xl font-thin">-</span> </button> <input type="number" name="custom-input-number" value="0"></input> <button data-action="increment" type="button"> <span class="m-auto text-2xl font-thin">+</span> </button>');
             
+    
     nameTag.innerText = itemName;
     normalPriceTag.innerText = itemPrice +'원';
-    premiumPriceTag.innerText = itemPrice + '원';
+    premiumPriceTag.innerText = premiumPrice + '원';
     eaTdTag.appendChild(eaDivTag);
     trTag.appendChild(nameTag);
     trTag.appendChild(normalPriceTag);
@@ -119,14 +117,15 @@ function addColumn(result) {
     resultTable.appendChild(trTag);
 }
 
-function offTable(num){
+//테이블 보이기
+function onTable(num){
     const columnTr = document.querySelectorAll(".columnTr" + num);
     columnTr.forEach(columntr => {
         columntr.style.display = "";
     });
 }
 
-//화면 바꾸기
+//테이블 안보이기
 function offTable(num){
     const columnTr = document.querySelectorAll(".columnTr" + num);
     columnTr.forEach(columntr => {
@@ -174,3 +173,18 @@ function sumEa() {
     
     eaSum.innerText = resultSum;
 }
+
+// 총가격 변경
+// function sumNormalPrice() {
+//     const normalPrices = document.querySelectorAll(".normalPrice");
+//     const normalPriceSum = document.querySelector('.normalPriceSum');
+
+//     let resultSum = 0;
+//     normalPrices.forEach(element => {
+//         let innnertext = element.innerText;
+//         let innerValue = innnertext.slice(0,-1);
+//         resultSum += Number(innerValue);
+//         console.log(resultSum);
+//     });
+//     normalPriceSum.innerText = resultSum;
+// }
