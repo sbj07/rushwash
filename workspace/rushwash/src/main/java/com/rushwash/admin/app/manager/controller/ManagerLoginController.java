@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.rushwash.admin.app.manager.service.ManagerService;
 import com.rushwash.admin.app.manager.vo.ManagerVo;
 
-@WebServlet("/admin/login")
+@WebServlet("/adminlogin")
 public class ManagerLoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

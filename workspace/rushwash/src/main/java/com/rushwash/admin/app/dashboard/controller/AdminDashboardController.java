@@ -31,12 +31,6 @@ public class AdminDashboardController extends HttpServlet{
 			Map<String, String> planInfoCount     = dashboardVo.getPlanInfoCount();
 			Map<String, String> orderStatusCount  = dashboardVo.getOrderStatusCount();
 
-			System.out.println(orderStatusCount.get("1"));
-			System.out.println(orderStatusCount.get("2"));
-			System.out.println(orderStatusCount.get("3"));
-			System.out.println(orderStatusCount.get("4"));
-			System.out.println(orderStatusCount.get("5"));
-			
 			req.setAttribute("itemCategoryCount", itemCategoryCount);
 			req.setAttribute("planInfoCount", planInfoCount);
 			req.setAttribute("orderStatusCount", orderStatusCount);

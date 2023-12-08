@@ -223,9 +223,8 @@ Map<String, String> orderStatusCount = (Map<String, String>) request.getAttribut
 
 <script>
 	<%if (alertMsg != null) {%>
-		alert("<%=alertMsg%>
-	");
-<%}%>
+		alert("<%=alertMsg%>");
+	<%}%>
 	
 </script>
 

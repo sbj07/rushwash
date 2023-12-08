@@ -79,7 +79,7 @@
 			aria-labelledby="headingPages" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">세탁 신청:</h6>
-				<a class="collapse-item" href="laundryHistory.html">세탁주문 관리</a>
+				<a class="collapse-item" href="/rushwash/admin/laundry">세탁주문 관리</a>
 				<a class="collapse-item" href="/rushwash/admin/laundry/control">상세 세탁물 관리</a> 
 				<div class="collapse-divider"></div>
 				<h6 class="collapse-header">그외 서비스:</h6>
