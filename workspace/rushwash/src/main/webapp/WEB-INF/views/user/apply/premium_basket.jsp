@@ -1,10 +1,7 @@
 <%@page import="com.rushwash.app.item.vo.ItemVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
-    List<ItemVo> itemList = (List<ItemVo>) request.getAttribute("itemList");
-%>    
+    pageEncoding="UTF-8"%>    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -44,13 +41,13 @@
                             <tr id="tfoot-top">
                                 <td>수량합계</td>
                                 <td>총가격</td>
-                                <td>19000원</td>
+                                <td><span class="normalPriceSum">0</span>원</td>
                                 <td rowspan="2" class="td-payment">
                                     <button type="submit" id="btn-payment">바로결제</button>
                                 </td>
                             </tr>
                             <tr id="tfoot-bottom">
-                                <td><span class="eaSum">0</span>개</td>
+                                <td><span class="eaSum" name="eaSum">0</span>개</td>
                                 <td>플랜 할인 가격</td>
                                 <td>15000원</td>
                             </tr>
