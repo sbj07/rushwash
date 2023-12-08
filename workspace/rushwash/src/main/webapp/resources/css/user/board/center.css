@@ -12,7 +12,7 @@ main{
     display: flex;
 }
 
-table tr:first-child {
+table thead tr:first-child {
     color: white;
 }
 table td {
@@ -26,13 +26,21 @@ table td {
     vertical-align: middle;
     text-align: center;
 }
-table tr:first-child{
+table thead tr:first-child{
     background-color: var(--color-navy);
 }
 table tr{
     background-color: white;
     
 }
+tbody tr:hover{
+	background-color: lightgray;
+}
+ td:nth-child(2) {
+    /* 여기에 원하는 스타일 속성을 추가 */
+    text-align: center;
+
+  }
 td:last-child {
     text-align: right;
     color: rgb(128, 126, 126);
@@ -67,11 +75,11 @@ td:last-child {
 
 }
 
-#wrap table tr:first-child td:first-child {
+#wrap table thead tr:first-child td:first-child {
     border-top-left-radius: 30px;
 }
 
-#wrap table tr:first-child td:last-child {
+#wrap table thead tr:first-child td:last-child {
     border-top-right-radius: 30px;
 }
 #wrap table td:first-child {
