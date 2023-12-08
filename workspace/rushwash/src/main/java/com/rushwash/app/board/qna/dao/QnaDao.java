@@ -12,6 +12,7 @@ import com.rushwash.app.board.qna.vo.QnaVo;
 
 public class QnaDao {
 
+	
 	//게시글작성
 	public int write(Connection conn, QnaVo vo) throws Exception{
 		
@@ -31,14 +32,19 @@ public class QnaDao {
 	//게시글 목록 조회
 	public List<QnaVo> selectQnaList(Connection conn, PageVo pvo) throws Exception {
 		
-		String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE , N.CONTENT , N.COMMT, M.MANAGER_ID , N.ENROLL_DATE, N.DEL_YN FROM QNA N JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+		
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.NO, T.TITLE, T.CONTENT, T.COMMT, T.MANAGER_ID, T.MEMBER_NO, TRUNC(SYSDATE) AS ENROLL_DATE, T.DEL_YN FROM ( SELECT N.NO, N.TITLE, N.CONTENT, N.COMMT, M.MANAGER_ID, N.MEMBER_NO, N.ENROLL_DATE, N.DEL_YN FROM QNA N JOIN MEMBER B ON N.MEMBER_NO = B.NO JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' AND N.MEMBER_NO = ? ORDER BY NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, pvo.getStartRow());
-		pstmt.setInt(2, pvo.getLastRow());
+		//pstmt.setString(1, memberNo);
+	    pstmt.setInt(2, pvo.getStartRow());
+	    pstmt.setInt(3, pvo.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
 		
 		List<QnaVo> boardVoList = new ArrayList<QnaVo>();
 		while(rs.next()) {
+			
+			QnaVo vo = new QnaVo();
+			
 			String no = rs.getString("NO");
 			String title = rs.getString("TITLE");
 			String content = rs.getString("CONTENT");
@@ -46,8 +52,9 @@ public class QnaDao {
 			String managerId = rs.getString("MANAGER_ID");
 			String enrollDate = rs.getString("ENROLL_DATE");
 			String delYn = rs.getString("DEL_YN");
+			String memberNo = rs.getString("MEMBER_NO");
 			
-			QnaVo vo = new QnaVo();
+			
 			vo.setNo(no);
 			vo.setTitle(title);
 			vo.setContent(content);
@@ -55,6 +62,7 @@ public class QnaDao {
 			vo.setManagerId(managerId);
 			vo.setEnrollDate(enrollDate);
 			vo.setDelYn(delYn);
+			vo.setMemberNo(memberNo);;
 			
 			boardVoList.add(vo);
 		}
@@ -84,15 +92,37 @@ public class QnaDao {
 
 	public QnaVo selectQnaByNo(Connection conn, String no) throws Exception {
 		 
-		String sql = "";
+		String sql = "SELECT B.NO ,B.CONTENT ,B.TITLE, B.MEMBER_NO, B.ENROLL_DATE ,B.DEL_YN ,B.COMMT, M.MANAGER_ID FROM QNA B JOIN MANAGER M ON B.MANAGER_NO = M.NO WHERE B.NO = ? AND B.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, no);
 		ResultSet rs = pstmt.executeQuery();
 		
 		QnaVo vo = null;
 		if(rs.next()) {
-			String title = rs.getString();
+			no = rs.getString("NO");
+			String content = rs.getString("CONTENT");
+			String title = rs.getString("TITLE");
+			String memberNo = rs.getString("MEMBER_NO");
+			String enrollDate = rs.getString("ENROLL_DATE");
+			String delYn = rs.getString("DEL_YN");
+			String commt = rs.getString("COMMT");
+			String managerId = rs.getString("MANAGER_ID");
+			
+			vo = new QnaVo();
+			vo.setNo(no);
+			vo.setContent(content);
+			vo.setTitle(title);
+			vo.setMemberNo(memberNo);
+			vo.setEnrollDate(enrollDate);
+			vo.setDelYn(delYn);
+			vo.setCommt(commt);
+			vo.setManagerId(managerId);
 		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return vo;
 	}
 
 }

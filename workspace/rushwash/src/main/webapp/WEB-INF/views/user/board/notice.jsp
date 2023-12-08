@@ -80,16 +80,16 @@
 </body>
 </html>
 <script>
-	const trArr = document.querySelectorAll("main > div > table > tbody > tr");
-	for(let i = 0 ; i < trArr.length; ++i){
-		trArr[i].addEventListener('click' , handleClick);
-	}
-	
-	function handleClick(event){
-		const tr = event.currentTarget;
-		const no = tr.children[0].innerText;
-		location.href = '/rushwash/board/noticewrite?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
-	}
+const trArr = document.querySelectorAll("main > div > table > tbody > tr");
+for(let i = 0 ; i < trArr.length; ++i){
+	trArr[i].addEventListener('click' , handleClick);
+}
+
+function handleClick(event){
+	const tr = event.currentTarget;
+	const no = tr.children[0].innerText;
+	location.href = '/rushwash/board/noticewrite?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
+}
 	
 	<% if(searchMap != null){ %>
 		function setSearchArea(){

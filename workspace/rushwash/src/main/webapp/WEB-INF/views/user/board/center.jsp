@@ -36,7 +36,7 @@ pageEncoding="UTF-8"%>
 		      	<tr>
 		            <td><%= vo.getNo() %></td>
 		            <td><%= vo.getTitle() %></td>
-		            <td><%= vo.getEnrollDate() %></td>
+		            <td><%= vo.getEnrollDate() %><%= vo.getManagerId() %></td>
 		          </tr>
 		      <%}%>
 		      	
@@ -77,3 +77,15 @@ pageEncoding="UTF-8"%>
 
 </body>
 </html>
+<script>
+const trArr = document.querySelectorAll("main > div > table > tbody > tr");
+for(let i = 0 ; i < trArr.length; ++i){
+	trArr[i].addEventListener('click' , handleClick);
+}
+
+function handleClick(event){
+	const tr = event.currentTarget;
+	const no = tr.children[0].innerText;
+	location.href = '/rushwash/board/qnadetail?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
+}
+</script>

@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.rushwash.admin.app.page.vo.PageVo;
+import com.rushwash.app.board.faq.service.FaqService;
+import com.rushwash.app.board.faq.vo.FaqVo;
 import com.rushwash.app.board.qna.service.QnaService;
 import com.rushwash.app.board.qna.vo.QnaVo;
 import com.rushwash.app.member.vo.MemberVo;
@@ -20,11 +23,23 @@ public class CenterController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
+			resp.setContentType("text/html;charset=UTF-8");
+			
+			  HttpSession session =req.getSession();
+		      MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
+		      String memberNo = loginMember.getNo();
+
+			
 			//로그인 안되어있으면 에러페이지로 보내기
-			MemberVo loginMember = (MemberVo) req.getSession().getAttribute("loginMember");
-			if(loginMember == null) {
-				req.getRequestDispatcher("/WEB-INF/views/user/member/login.jsp").forward(req, resp);
+			
+			if(loginMember != null) {
+				memberNo = loginMember.getNo();
+				
+			}else {
+				throw new Exception();
 			}
+
+			
 			
 			QnaService bs = new QnaService();
 			//
@@ -40,13 +55,22 @@ public class CenterController extends HttpServlet{
 			
 			List<QnaVo> boardVoList = bs.selectQnaList(pvo);
 			
+			
 			req.setAttribute("boardVoList", boardVoList);
 			req.setAttribute("pvo", pvo);
 			req.getRequestDispatcher("/WEB-INF/views/user/board/center.jsp").forward(req, resp);
 			/////
+			FaqService fs = new FaqService();
+			List<FaqVo> faqVoList = fs.selectFaqList();
+			req.setAttribute("faqVoList", faqVoList);
+			req.getRequestDispatcher("/WEB-INF/views/user/board/center.jsp").forward(req, resp);
+			
 		}catch(Exception e) {
+			
 			System.out.println("로그인 하세요.");
 			req.setAttribute("errorMsg", "로그인 하세요.");
+			req.setAttribute("alerMsg","로그인 후 이용해주세요");
+			resp.getWriter().print("<script>alert('로그인이 필요합니다.'); location.href='/rushwash/member/login';</script>");
 		}
 		
 		
