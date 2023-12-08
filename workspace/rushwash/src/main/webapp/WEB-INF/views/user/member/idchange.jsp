@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+   	String x = (String) request.getAttribute("errorMsg");
+	String y = (String) request.getAttribute("alertMsg");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,20 +13,34 @@
 </head>
 <%@ include file='/WEB-INF/views/user/common/user_header.jsp' %>
 <body>
-
-	<div id="text">
+	
+	<form action = "/rushwash/member/idchange" method ="POST">
+		<div id="text">
         <h1 align="center">아이디 변경</h1>
-        <div id="input-container">
-            <p>현재 아이디</p>
-            <input type="text">
-            <p>새로운 아이디</p>
-            <input type="text" placeholder="새로운 아이디 입력">
-        </div>
-    </div>
-    <div id="button-container">
-        <button type="button" onclick="">아이디 변경</button>
-    </div>	
+        	<div id="input-container">
+            	<p>현재 아이디</p>
+            	<input type="text" name="memberId" id="memberId">
+            	<p>새로운 아이디</p>
+            	<input type="text" name="newId" id="newId" placeholder="새로운 아이디 입력">
+        	</div>
+    	</div>
+    	<div id="button-container">
+        	<button type="submit">아이디 변경</button>
+    	</div>	
+	</form>
 
 </body>
 <%@ include file='/WEB-INF/views/user/common/user_footer.jsp' %>
 </html>
+
+<script>
+	<% if(x != null){ %>
+		alert('<%= x %>');
+	<% } %>
+	
+	<% if(y != null){ %>
+	alert('<%= y %>');
+	<% } %>
+	
+</script>
+

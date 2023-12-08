@@ -119,5 +119,20 @@ public class MemberService {
 		return result;
 	}
 
+	public int idChange(String id, String newId) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+
+		//dao
+		MemberDao dao = new MemberDao();
+		int result = dao.idChange(conn, id, newId);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 
 }

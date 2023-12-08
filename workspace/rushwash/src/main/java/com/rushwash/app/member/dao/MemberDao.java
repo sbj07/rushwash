@@ -106,5 +106,24 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	//아이디변경
+	public int idChange(Connection conn, String id, String newId) throws Exception {
+
+	    //sql
+	    String sql = "UPDATE MEMBER SET ID = ?  WHERE ID = ?";
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setString(1, newId); 
+	    pstmt.setString(2, id); 
+	    int result = pstmt.executeUpdate();
+
+	    //close
+	    JDBCTemplate.close(pstmt);
+
+	    return result;
+
+	}
+	
+	
 	
 }
