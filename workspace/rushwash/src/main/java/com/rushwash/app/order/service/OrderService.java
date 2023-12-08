@@ -10,17 +10,26 @@ import com.rushwash.app.order.vo.OrderVo;
 
 public class OrderService {
 
-	public List<OrderVo> getorderList() throws Exception{
+	public List<OrderVo> getorderList(String memberNo) throws Exception{
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		OrderDao dao = new OrderDao();
-		List<OrderVo> orderVoList = dao.getorderList(conn);
+		List<OrderVo> orderVoList = dao.getorderList(conn ,memberNo);
 		
 		JDBCTemplate.close(conn);
 		
 		return orderVoList;
 		
+	}
+
+	public OrderVo getorderDetail(String memberNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		OrderDao dao = new OrderDao();
+	
+		JDBCTemplate.close(conn);
 	}
 	
 
