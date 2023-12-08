@@ -37,7 +37,7 @@ public class MemberDao {
 
 	public MemberVo login(Connection conn, MemberVo vo) throws Exception {
 		//sql
-		String sql = "SELECT * FROM MEMBER WHERE ID = ? AND PWD = ? AND DEL_YN = 'N'";
+		String sql = "SELECT M.NO ,M.ID ,M.PWD ,M.EMAIL ,M.ADDRESS ,M.NAME ,M.TEL ,M.ENROLL_DATE ,M.MODIFY_DATE, M.POINT, M.DEL_YN ,C.CARD_COMPANY ,C.CARD_NO ,G. SUB_GRADE FROM MEMBER M LEFT JOIN PLAN_INFO P ON M.NO = P.MEMBER_NO LEFT JOIN PLAN_GRADE G ON G.NO = P.GRADE_NO LEFT JOIN CARD_INFO C ON M.NO = C.MEMBER_NO WHERE M.ID = ? AND M.PWD = ? AND M.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getMemberId());
 		pstmt.setString(2, vo.getMemberPwd());
@@ -57,6 +57,9 @@ public class MemberDao {
 			String delYn = rs.getString("DEL_YN");
 			String modifyDate = rs.getString("MODIFY_DATE");
 			String point = rs.getString("POINT");
+			String planName = rs.getString("SUB_GRADE");
+			String cardNo = rs.getString("CARD_NO");
+			String cardCompany = rs.getString("CARD_COMPANY");
 
 			loginMember = new MemberVo();
 			loginMember.setNo(no);
@@ -70,6 +73,9 @@ public class MemberDao {
 			loginMember.setDelYn(delYn);
 			loginMember.setModifyDate(modifyDate);
 			loginMember.setPoint(point);
+			loginMember.setSubGrade(planName);
+			loginMember.setCardNo(cardNo);
+			loginMember.setCardCompany(cardCompany);
 		}
 		
 		//close
@@ -100,104 +106,5 @@ public class MemberDao {
 		
 		return result;
 	}
-
-	//내정보화면
-	public MemberVo myInfo(Connection conn, String no) throws Exception {
-
-		//sql
-		String sql = "SELECT ID, EMAIL, ADDRESS, NAME, TEL, DEL_YN FROM MEMBER WHERE NO =? AND DEL_YN ='N'";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, no);
-		ResultSet rs = pstmt.executeQuery();
-		
-		//rs
-		MemberVo vo = null;
-		if(rs.next()) {
-			String id = rs.getString("ID");
-			String email = rs.getString("EMAIL");
-			String address = rs.getString("ADDRESS");
-			String name = rs.getString("NAME");
-			String tel = rs.getString("TEL");
-			String delYn = rs.getString("DEL_YN");
-
-			vo = new MemberVo();
-			vo.setNo(no);
-			vo.setMemberId(id);
-			vo.setMemberEmail(email);
-			vo.setMemberAddress(address);
-			vo.setMemberName(name);
-			vo.setMemberTel(tel);
-			vo.setDelYn(delYn);
-		}
-		
-		//close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
-		
-		return vo;
-	}
-
-	//개인정보수정 화면
-	public MemberVo editInfo(Connection conn, String no) throws Exception {
-		//sql
-		String sql = "SELECT ID, EMAIL, ADDRESS, TEL FROM MEMBER WHERE NO =? AND DEL_YN ='N'";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, no);
-		ResultSet rs = pstmt.executeQuery();
-		
-		//rs
-		MemberVo vo = null;
-		if(rs.next()) {
-			String id = rs.getString("ID");
-			String email = rs.getString("EMAIL");
-			String address = rs.getString("ADDRESS");
-			String tel = rs.getString("TEL");
-			
-			vo = new MemberVo();
-			vo.setNo(no);
-			vo.setMemberId(id);
-			vo.setMemberEmail(email);
-			vo.setMemberAddress(address);
-			vo.setMemberTel(tel);
-		}
-		
-		//close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
-		
-		return vo;
-	}
-
-	public MemberVo sub(Connection conn, String no) throws Exception {
-
-		//sql
-		String sql = "SELECT M. NAME , M. ID , G. SUB_GRADE FROM MEMBER M JOIN PLAN_INFO P ON M.NO = P.MEMBER_NO JOIN PLAN_GRADE G ON G.NO = P.GRADE_NO WHERE M.NO = ? AND M.DEL_YN = 'N'";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, no);
-		ResultSet rs = pstmt.executeQuery();
-		//rs
-		MemberVo vo = null;
-		
-		if(rs.next()) {
-			String name = rs.getString("NAME");
-			String id = rs.getString("ID");
-			System.out.println(id);
-			String subGrade = rs.getString("SUB_GRADE");
-			vo = new MemberVo();
-			vo.setNo(no);
-			vo.setMemberName(name);
-			vo.setMemberId(id);
-			vo.setSubGrade(subGrade);
-		}
-		
-		//close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
-		
-		return vo;
-
-	}
-
 	
-
 }

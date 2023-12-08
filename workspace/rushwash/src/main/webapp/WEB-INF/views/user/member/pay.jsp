@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	MemberVo vo = (MemberVo) request.getAttribute("vo");
+%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +28,24 @@
                 <div id="title-box">
                     <h2 id="title">결제 수단</h2> 
                     <div id="card-box">
-                        <button type="button" id="change-card" onclick="location.href='/rushwash/payment/card-regist'">카드 등록</button> 
+                        <button type="button" id="change-card" onclick="location.href='/rushwash/payment/card-regist'">카드 변경</button> 
                     </div>
                 </div>     
                 <div id="pay-info">
                     <form id="pay-form">
+                    <% if(vo != null) { %>
+                    	<p>카드</p>
+                        <input type="text" id="memberName" name="memberName" value="<%= vo.getCardCompany() %>" readonly> 
                         <p>결제정보</p>
-                        <input type="text" id="memberName" name="memberName">   
+                        <input type="text" id="memberName" name="memberName" value="<%= vo.getCardNo() %>" readonly>   
                         <button id="delete-card" onclick="">삭제</button>                                        
+                    <% } else { %>
+                    	<p>카드</p>
+                        <input type="text" id="memberName" name="memberName" readonly> 
+                        <p>결제정보</p>
+                        <input type="text" id="memberName" name="memberName" readonly>   
+                        <button id="delete-card" onclick="">삭제</button> 
+                    <% } %>
                     </form>
                    
                 </div>
