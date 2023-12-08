@@ -1,11 +1,15 @@
+<%@page import="com.rushwash.app.board.qna.vo.QnaVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	QnaVo vo = (QnaVo)request.getAttribute("vo");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/rushwash/resources/css/user/qna_detail.css">
+<link rel="stylesheet" href="/rushwash/resources/css/user/board/qna_detail.css">
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
@@ -18,15 +22,15 @@
             <table>
                 <tr>
                     <td>제목</td>
-                    <td></td>
+                    <td><%= vo.getTitle() %></td>
                 </tr>
                 <tr>
-                    <td id="content">공지</td>
-                    <td></td>
+                    <td id="content">내용</td>
+                    <td><%= vo.getContent() %></td>
                 </tr>
                 <tr class="third">
                     <td class="answer">답변</td>
-                    <td></td>
+                    <td><%= vo.getCommt() %></td>
                 </tr>
             </table>
             <div class="btn">
