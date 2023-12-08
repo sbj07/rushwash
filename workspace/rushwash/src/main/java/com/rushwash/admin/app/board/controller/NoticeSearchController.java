@@ -48,6 +48,8 @@ public class NoticeSearchController extends HttpServlet {
 			List<NoticeVo> NoticeVoList = bs.search(m , pvo);
 			
 			// result
+			req.setAttribute("searchType", searchType); // 추가된 부분
+            req.setAttribute("searchValue", searchValue); // 추가된 부분
 			req.setAttribute("NoticeVoList", NoticeVoList);
 			req.setAttribute("pvo", pvo);
 			req.getRequestDispatcher("/WEB-INF/admin/view/board/noticeList.jsp").forward(req, resp);

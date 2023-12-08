@@ -49,6 +49,8 @@ public class FaqSearchController extends HttpServlet {
 			List<FaqVo> FaqVoList = bs.search(m , pvo);
 			
 			// result
+			req.setAttribute("searchType", searchType); // 추가된 부분
+            req.setAttribute("searchValue", searchValue); // 추가된 부분
 			req.setAttribute("FaqVoList", FaqVoList);
 			req.setAttribute("pvo", pvo);
 			req.getRequestDispatcher("/WEB-INF/admin/view/board/faqList.jsp").forward(req, resp);
