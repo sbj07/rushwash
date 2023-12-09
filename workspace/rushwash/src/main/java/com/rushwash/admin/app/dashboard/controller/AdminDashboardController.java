@@ -22,14 +22,7 @@ public class AdminDashboardController extends HttpServlet{
 		
 		try {
 			HttpSession session    = req.getSession();
-			System.out.println("dashboard controller > session :::  " + session + "/" + session.getCreationTime());
 			ManagerVo loginManager = (ManagerVo) session.getAttribute("loginManager");
-			System.out.println("dashboard controller > loginManager :::  " + loginManager);
-			
-			if(loginManager==null) {
-//				resp.sendRedirect("/rushwash/adminlogin");
-			}
-			
 			
 			//service
 			adminDashboardService as = new adminDashboardService();

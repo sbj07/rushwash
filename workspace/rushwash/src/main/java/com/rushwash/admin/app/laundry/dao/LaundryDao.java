@@ -65,24 +65,27 @@ public class LaundryDao {
 		pstmt.setString(2, vo.getNo());
 		int result = pstmt.executeUpdate();
 		
+		diliverLaundry(conn, vo);
+		
 		//close
 		JDBCTemplate.close(pstmt);
 		
 		return result;
 	}
 	
-	//상세세탁물 중 같은 주문번호끼리 모두 세탁완료(3)이 되면 오더를 배송중(4)로 변경 --완성및 테스트 후 private로 바꾸기
-	public boolean diliverLaundry(Connection conn,LaundryVo vo) throws Exception {
+	//상세세탁물 중 같은 주문번호끼리 모두 세탁완료(3)이 되면 오더를 배송중(4)로 변경
+	private int diliverLaundry(Connection conn,LaundryVo vo) throws Exception {
 		boolean isComplete = false;
 		String orderNo = findOrderNo(conn, vo);
+		System.out.println(orderNo + "::: diliveryLaundry 동작");
 		
-		//sql
+		//sql -- 현재 세탁물과 주문번호가 일치하는 세탁물들 조회
 		String sql = "select * from laundry l join laundry_order lo on l.order_no=lo.no where lo.no=?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, orderNo);
 		ResultSet rs = pstmt.executeQuery();
 		
-		//rs
+		//rs -- 일치세탁물 들의 상태 체크
 		List<LaundryVo> voList= new ArrayList<LaundryVo>();
 		while(rs.next()) {
 			String laundryStatus = rs.getString("LAUNDRY_STATUS");
@@ -98,18 +101,25 @@ public class LaundryDao {
 				isComplete=true;
 			}else {
 				isComplete=false;
+				break;
 			}
+			System.out.println(isComplete);
 		}
+		System.out.println(voList);
 		
-		//TODO true일 때 해당 Order의 Order_Status를 배송중(4)로 변경
+		//true일 때 해당 Order의 Order_Status를 배송중(4)로 변경
+		int result = 0;
 		if(isComplete) {
-			
+			OrderVo orderVo = new OrderVo();
+			orderVo.setStatus("4");
+			orderVo.setOrderNo(orderNo);
+			result = submitOrderStatus(conn, orderVo);
+			System.out.println(orderVo.getOrderNo()+"번 세탁물의 상태를"+orderVo.getStatus()+"로 "+ result+"번 수정");
 		}
 		
-		return isComplete;
+		return result;
 	}
 		
-		//Order_Status 4로 바꾸기 메소드 아래에 작성 TODO
 		
 	
 		//상세세탁물 넘버로 오더넘버 찾기

@@ -3,13 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-// System.out.println("dashboard.jsp > start > session : " + session);
-System.out.println("dashboard.jsp > start > session.time : " + session.getCreationTime());
 String alertMsg = (String) session.getAttribute("alertMsg");
 session.removeAttribute("alertMsg");
 Map<String, String> orderStatusCount = (Map<String, String>) request.getAttribute("orderStatusCount"); 
-// System.out.println("dashboard.jsp > end > session : " + session);
-System.out.println("dashboard.jsp > end > session.time : " + session.getCreationTime());
 %>
 
 <!DOCTYPE html>
