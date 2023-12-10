@@ -55,9 +55,9 @@ public class FormWriteController extends HttpServlet{
 			String ea = map.get("resultEa");
 			String price = map.get("resultPrice");
 			
-			req.setAttribute("ea", ea);
-			req.setAttribute("price", price);
-			req.setAttribute("cardVo", cardVo);
+			session.setAttribute("ea", ea);
+			session.setAttribute("price", price);
+			session.setAttribute("cardVo", cardVo);
 			req.getRequestDispatcher("/WEB-INF/views/user/payment/laundry_form.jsp").forward(req, resp);
 
 		} catch (Exception e) {
@@ -108,7 +108,10 @@ public class FormWriteController extends HttpServlet{
 			if(orderResult != 1 && laundryResult != 1 && pointResult != 1) {
 				throw new Exception();
 			}
-			req.getRequestDispatcher("/WEB-INF/views/user/apply/confirm_form.jsp").forward(req, resp);
+
+			session.setAttribute("lastTotalPrice", totalPrice);
+			session.setAttribute("spendPoint", spendPoint);
+			resp.sendRedirect("/rushwash/apply/confirm-form"); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

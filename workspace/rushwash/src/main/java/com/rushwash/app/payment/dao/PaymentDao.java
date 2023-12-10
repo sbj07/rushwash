@@ -75,7 +75,6 @@ public class PaymentDao {
 	}
 
 	public int changeUserPoint(Connection conn, String memberNo, int userPoint) throws Exception {
-		System.out.println("dao실행");
 		String sql = "UPDATE MEMBER SET POINT = ? WHERE NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, userPoint);
