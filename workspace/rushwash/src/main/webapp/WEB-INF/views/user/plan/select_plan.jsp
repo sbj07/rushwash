@@ -52,7 +52,6 @@
 <script>
 
     function submitForm(planvalue){
-        console.log(planvalue);
         let postForm = document.createElement('form');
 
         let plan;

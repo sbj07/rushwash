@@ -81,11 +81,10 @@ public class PlanPaymentController extends HttpServlet{
 				payResult = paymentService.changeReqularPayment(cardNo,periodDate);
 			}
 			int gradeResult = planService.changeGrade(gradeNo, memberNo);
-			System.out.println(gradeResult);
+			
 			if(payResult == 1|| gradeResult == 1) {
 				resp.sendRedirect("/rushwash/home");
-			}else {
-				
+			}else {	
 				throw new Exception();
 			}
 			

@@ -53,7 +53,9 @@ public class CardVo {
 		this.cardCompany = cardCompany;
 	}
 	public String getCardNo() {
-		return cardNo;
+		String lastCardNo = cardNo.substring(cardNo.length()-4, cardNo.length());
+		
+		return lastCardNo;
 	}
 	public void setCardNo(String cardNo) {
 		this.cardNo = cardNo;

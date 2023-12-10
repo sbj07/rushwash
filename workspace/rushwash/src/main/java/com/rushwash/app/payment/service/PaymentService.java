@@ -132,4 +132,34 @@ public class PaymentService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	public int putCardInfo(CardVo cardVo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PaymentDao dao = new PaymentDao();
+		int result = dao.putCardInfo(conn, cardVo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int changeCardInfo(CardVo cardVo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PaymentDao dao = new PaymentDao();
+		int result = dao.changeCardInfo(conn, cardVo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

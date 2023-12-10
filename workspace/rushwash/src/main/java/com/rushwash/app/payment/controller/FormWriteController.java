@@ -41,10 +41,7 @@ public class FormWriteController extends HttpServlet{
 			// 유저의 결제수단 정보
 			CardVo cardVo = paymentService.getCardInfo(memberNo);
 			
-			//카드번호자르기
 			String cardNo = cardVo.getCardNo();
-			String lastCardNo = cardNo.substring(cardNo.length()-4, cardNo.length());
-			cardVo.setCardNo(lastCardNo);
 			
 			// 유저의 플랜정보
 			PlanService planService = new PlanService();

@@ -108,5 +108,37 @@ public class PaymentDao {
 	
 		return result;
 	}
+	
+	public int putCardInfo(Connection conn,  CardVo cardVo) throws Exception {
+		String sql = "INSERT INTO CARD_INFO ( NO ,MEMBER_NO ,CARD_COMPANY ,CARD_NO ,CVC_NO ,CARD_PWD ,VALIDITY_PERIOD ) VALUES ( SEQ_CARD_INFO_NO.NEXTVAL ,? ,? ,? ,? ,? ,? )";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, cardVo.getMemberNo());
+		pstmt.setString(2, cardVo.getCardCompany());
+		pstmt.setString(3, cardVo.getCardNo());
+		pstmt.setString(4, cardVo.getCvcNo());
+		pstmt.setString(5, cardVo.getCardPwd());
+		pstmt.setString(6, cardVo.getValidityPeriod());
+		
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
+
+	public int changeCardInfo(Connection conn, CardVo cardVo) throws Exception {
+		String sql = "UPDATE CARD_INFO SET CARD_COMPANY = ? ,CARD_NO = ? ,CVC_NO = ? ,CARD_PWD = ? ,VALIDITY_PERIOD =? WHERE MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, cardVo.getCardCompany());
+		pstmt.setString(2, cardVo.getCardNo());
+		pstmt.setString(3, cardVo.getCvcNo());
+		pstmt.setString(4, cardVo.getCardPwd());
+		pstmt.setString(5, cardVo.getValidityPeriod());
+		pstmt.setString(6, cardVo.getMemberNo());
+		
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
 
 }
