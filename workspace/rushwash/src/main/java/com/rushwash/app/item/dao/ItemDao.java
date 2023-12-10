@@ -39,4 +39,20 @@ public class ItemDao {
 		return itemList;
 	}
 
+	public String getPrice(Connection conn, String itemNo) throws Exception {
+		String sql = "SELECT PRICE FROM ITEM WHERE NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, itemNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		String itemPrice = "";
+		if(rs.next()) {
+			itemPrice = rs.getString("PRICE");
+		}
+		
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		return itemPrice;
+	}
+
 }
