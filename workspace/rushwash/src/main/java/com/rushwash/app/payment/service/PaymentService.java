@@ -101,4 +101,35 @@ public class PaymentService {
 		return pointResult;
 	}
 
+	public int putRegularPayment(String cardNo , int periodDate) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PaymentDao dao = new PaymentDao();
+		int result = dao.putRegularPayment(conn, cardNo, periodDate);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int changeReqularPayment(String cardNo, int periodDate) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PaymentDao dao = new PaymentDao();
+		int result = dao.changeRegularPayment(conn, cardNo, periodDate);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

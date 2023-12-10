@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -60,6 +61,10 @@
 </body>
 </html>
 <script>
+    <c:if test = "${ not empty alertMsg}">
+        alert("${alertMsg}");
+        console.log("hi");
+    </c:if>
     function redirectPremium() {
         location.href='/rushwash/apply/request/premium';
     }

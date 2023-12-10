@@ -70,9 +70,9 @@ table.price-table >tbody > tr {
     padding-left: 20px;
 }
 
-
 /* 수량  */
 .quantity{
+    margin: 0 auto;
     width: 100px;
     display: flex;
     flex-direction: row;
@@ -81,7 +81,7 @@ table.price-table >tbody > tr {
 }
 
 /* 업, 다운 버튼 */
-#up-btn , #down-btn {
+.quantity-up , .quantity-down {
     background-color: var(--color-navy);
     border: 0px;
     width: 25px;
@@ -151,4 +151,9 @@ tfoot {
 
     border: 0;
     border-radius: 5px;
+}
+
+
+#resultTable tr td:not(:first-child) {
+    margin: 0 auto;
 }

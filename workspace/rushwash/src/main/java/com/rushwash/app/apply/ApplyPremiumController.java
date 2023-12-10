@@ -45,7 +45,10 @@ public class ApplyPremiumController extends HttpServlet {
 			//유저 구독정보 가져오기
 			PlanService planService = new PlanService();
 			String discountRate = planService.getDiscountRate(memberNo);
-			
+			if(discountRate.equals("0")) {
+				session.setAttribute("alertMsg","비구독회원은 한번이용을 선택해주세요!");
+				resp.sendRedirect("/rushwash/apply/request");
+			}
 			Gson gson = new Gson();
 			
 			//상품목록 리스트 json 변환

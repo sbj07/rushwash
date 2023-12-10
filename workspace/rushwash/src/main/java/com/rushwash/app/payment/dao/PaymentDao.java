@@ -85,5 +85,28 @@ public class PaymentDao {
 		
 		return pointResult;
 	}
+	
+	public int putRegularPayment(Connection conn , String cardNo , int periodDate) throws Exception {
+		String sql ="INSERT INTO PAYMENT_INFO ( NO ,CARD_NO ,PAYMENT_DATE ) VALUES ( SEQ_PAYMENT_INFO_NO.NEXTVAL ,? ,? )";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, cardNo);
+		pstmt.setInt(2, periodDate);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+	
+		return result;
+	}
+
+	public int changeRegularPayment(Connection conn, String cardNo, int periodDate) throws Exception {
+		String sql ="UPDATE PAYMENT_INFO SET PAYMENT_DATE = ? WHERE CARD_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, periodDate);
+		pstmt.setString(2, cardNo);
+		int result = pstmt.executeUpdate();
+		JDBCTemplate.close(pstmt);
+	
+		return result;
+	}
 
 }
