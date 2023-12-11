@@ -13,6 +13,10 @@
     font-weight: bold;
 }
 
+#input-container p:first-child {
+    margin-left: -3%;  
+}
+
 #input-container > p {
     margin: 10px 0;
     font-weight: bold;
@@ -32,6 +36,19 @@
     font-size: 18px;
     width: 40%;
 }
+
+#input-container input[type="text"] {
+    border: none;
+    border-bottom: 3px solid #163172;
+    outline: none;
+    padding: 10px;
+    background-color: transparent;
+    font-weight: bolder;
+    font-size: 18px;
+    width: 40%;
+    margin-bottom: 5%;
+}
+
 
 #input-container {
     display: flex;

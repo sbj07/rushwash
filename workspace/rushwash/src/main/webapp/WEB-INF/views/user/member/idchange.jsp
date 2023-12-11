@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
    	String x = (String) request.getAttribute("errorMsg");
-	String y = (String) request.getAttribute("alertMsg");
 %> 
 <!DOCTYPE html>
 <html>
@@ -22,6 +21,7 @@
             	<input type="text" name="memberId" id="memberId">
             	<p>새로운 아이디</p>
             	<input type="text" name="newId" id="newId" placeholder="새로운 아이디 입력">
+            	<button type="button" class="step-url" onclick="checkIdDup();">중복확인</button>
         	</div>
     	</div>
     	<div id="button-container">
@@ -38,9 +38,35 @@
 		alert('<%= x %>');
 	<% } %>
 	
-	<% if(y != null){ %>
-	alert('<%= y %>');
-	<% } %>
 	
+function checkIdDup(){
+	
+	const newIdValue = document.querySelector("input[name=newId]").value;
+	
+	if(newIdValue.length < 6 || newIdValue.length > 12){
+		alert("아이디는 6~12자 사이로 입력해주세요.");
+		return;
+	}
+
+	if(!(/^[a-z0-9]+$/).test(newIdValue)){
+		alert("아이디는 영어 소문자와 숫자로만 이루어져야 합니다.");
+		return;
+	}
+
+	
+	fetch("/rushwash/member/check/id?memberId=" + newIdValue)
+	.then( (resp) => { return resp.json() } )
+	.then( (data) => { 
+		const result = data.msg;
+		const isOk = result === "ok";
+		if(isOk){	
+			alert("사용가능한 아이디 입니다.");
+			window.idOk = true;
+		}else{
+			alert("이미 사용중인 아이디 입니다.");
+			window.idOk = false;
+		}
+	} );
+}
 </script>
 

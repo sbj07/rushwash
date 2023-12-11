@@ -66,6 +66,7 @@
                         <h3 class="join_title"><label for="email">이메일</label></h3>
                         <span class="box int_email">
                             <input type="text" id="email" class="int" maxlength="100" name="memberEmail" placeholder="이메일 입력">
+                       		<button type="button" class="step-url" onclick="checkEmailDup();">중복확인</button> 
                         </span>
                         <span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>   
 
@@ -152,7 +153,7 @@ function checkId() {
 }
 
 function checkPw() {
-    const pwPattern = /[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,16}/;
+	const pwPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+|<>?:{}]).{8,16}$/;
     if(pw1.value === "") {
         error[1].innerHTML = "필수 정보입니다.";
         error[1].style.display = "block";
@@ -255,6 +256,25 @@ function checkIdDup(){
 		}else{
 			error[0].innerHTML = "이미 사용중인 아이디 입니다.";
 			error[0].style.color = "#ff0000";
+			window.idOk = false;
+		}
+	} );
+}
+
+function checkEmailDup(){
+	
+	const memberEmailValue = document.querySelector("main input[name=memberEmail]").value;
+	
+	fetch("/rushwash/member/check/email?memberEmail=" + memberEmailValue)
+	.then( (resp) => { return resp.json() } )
+	.then( (data) => { 
+		const result = data.msg;
+		const isOk = result === "ok";
+		if(isOk){	
+			alert("사용가능한 이메일 입니다.");
+			window.idOk = true;
+		}else{
+			alert("이미 사용중인 이메일 입니다.");
 			window.idOk = false;
 		}
 	} );
