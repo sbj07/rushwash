@@ -76,7 +76,7 @@ public class MemberService {
 		int result2 = dao.insertPlan(conn, vo);
 		
 		//tx
-		if(result == 1) {
+		if(result == 1 && result2 == 1) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);

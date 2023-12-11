@@ -40,8 +40,11 @@ public class FormWriteController extends HttpServlet{
 			
 			// 유저의 결제수단 정보
 			CardVo cardVo = paymentService.getCardInfo(memberNo);
-			
-			String cardNo = cardVo.getCardNo();
+			if(cardVo.getMemberNo() == null) {
+				session.setAttribute("alertMsg", "등록된 결제 정보가 없습니다. 카드정보 입력 후 이용바랍니다.");
+				resp.sendRedirect("/rushwash/payment/card-regist");
+				return;
+			}
 			
 			// 유저의 플랜정보
 			PlanService planService = new PlanService();
@@ -51,6 +54,7 @@ public class FormWriteController extends HttpServlet{
 			Map<String , String> map = paymentService.calcTotalEaAndPrice(itemList,discountRate);
 			String ea = map.get("resultEa");
 			String price = map.get("resultPrice");
+//			System.out.println(cardVo.getCardNo());
 			
 			session.setAttribute("ea", ea);
 			session.setAttribute("price", price);

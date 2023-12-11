@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import com.rushwash.app.member.vo.MemberVo;
 
-@WebFilter("/apply/*")
+//@WebFilter("/apply/*")
+@WebFilter(urlPatterns={"/apply/*" , "/member/mypage"})
 public class UserFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -25,7 +26,7 @@ public class UserFilter implements Filter{
 		
 		
 		if( loginMember == null ) {
-			req.setAttribute("alertMsg", "로그인이 필요합니다.");
+			session.setAttribute("alertMsg", "로그인이 필요합니다.");
 			resp.sendRedirect("/rushwash/home");
 		}else {
 			chain.doFilter(request, response);

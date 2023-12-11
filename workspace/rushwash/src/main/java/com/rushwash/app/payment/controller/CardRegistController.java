@@ -24,7 +24,6 @@ public class CardRegistController extends HttpServlet {
 			PaymentService paymentService = new PaymentService();
 			CardVo cardVo = paymentService.getCardInfo(memberNo);
 			
-			System.out.println(cardVo.getNo());
 			if(cardVo.getNo() != null) {
 				req.setAttribute("cardVo", cardVo);
 			}
@@ -65,10 +64,8 @@ public class CardRegistController extends HttpServlet {
 			CardVo preCardVo = paymentService.getCardInfo(memberNo);
 			int result;
 			if(preCardVo.getNo() == null) {
-				System.out.println("preCardVo==null");
 				result = paymentService.putCardInfo(cardVo);
 			}else {
-				System.out.println("preCardVo!=null");
 				result = paymentService.changeCardInfo(cardVo);
 			}
 			CardVo newCardVo = paymentService.getCardInfo(memberNo);
@@ -76,7 +73,7 @@ public class CardRegistController extends HttpServlet {
 			if(result != 1) {
 				throw new Exception();
 			}
-			System.out.println("성공");
+			session.setAttribute("alertMsg","카드등록이 완료되었습니다. 다시 진행해주세요!");
 			resp.sendRedirect("/rushwash/home");
 		} catch (Exception e) {
 			e.printStackTrace();

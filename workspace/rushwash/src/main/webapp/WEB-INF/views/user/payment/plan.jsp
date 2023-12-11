@@ -40,11 +40,11 @@
                         </tr>
                         <tr>
                             <td>월 결제 예정일</td>
-                            <td>${periodDate}</td>
+                            <td>매월 ${periodDate}일</td>
                         </tr>
                         <tr>
                             <td>정기 결제 금액</td>
-                            <td>${gradeVo.price}</td>
+                            <td>${gradeVo.price}원</td>
                         </tr>
                     </table>
                 </div>
@@ -62,6 +62,7 @@
 
 <script>
     function submitForm(planvalue){
+        alert("결제가 완료되었습니다!");
         let postForm = document.createElement('form');
 
         let plan;
