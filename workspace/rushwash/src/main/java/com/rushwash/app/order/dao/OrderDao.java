@@ -59,7 +59,7 @@ public class OrderDao {
 		return orderVoList;
 	}
 
-	public OrderVo getorderDetail(Connection conn, String memberNo) throws Exception {
+	public ArrayList<OrderVo> getorderDetail(Connection conn, String memberNo) throws Exception {
 
 		String sql = "SELECT I.NAME AS ITEM ,O.PRICE ,L.EA ,O.PAYMENT_DATE ,O.EXP_DATE ,T.STATUS AS LAUNDRY_STATUS ,M.NAME AS MEMBER_NAME ,M.TEL ,O.ADDRESS ,O.REQUEST FROM MEMBER M JOIN LAUNDRY_ORDER O ON M.NO = O.MEMBER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN LAUNDRY L ON T.NO = L.ORDER_NO JOIN ITEM I ON L.ITEM_NO = I.NO WHERE O.NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -68,7 +68,8 @@ public class OrderDao {
 
 		OrderVo vo = null;
 
-		if (rs.next()) {
+		ArrayList<OrderVo> voList = new ArrayList<OrderVo>();
+		while (rs.next()) {
 			vo = new OrderVo();
 			vo.setItem(rs.getString("ITEM"));
 			vo.setPrice(rs.getString("PRICE"));
@@ -80,11 +81,13 @@ public class OrderDao {
 			vo.setTel(rs.getString("TEL"));
 			vo.setAddress(rs.getString("ADDRESS"));
 			vo.setRequest(rs.getString("REQUEST"));
+			
+			voList.add(vo);
 		}
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);
 		
-		return vo;
+		return voList;
 	}
 
 }

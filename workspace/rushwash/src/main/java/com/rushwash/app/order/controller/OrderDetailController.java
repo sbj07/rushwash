@@ -1,6 +1,7 @@
 package com.rushwash.app.order.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,10 +28,8 @@ public class OrderDetailController extends HttpServlet{
 			
 			//service
 			OrderService os = new OrderService();
-			Map<String, Object> map = os.getorderDetail(memberNo);
-			OrderVo vo = (OrderVo) map.get("vo");
-			
-			req.setAttribute("vo", vo);
+			ArrayList<OrderVo> voList = os.getorderDetail(memberNo);
+			req.setAttribute("voList", voList);
 			req.getRequestDispatcher("/WEB-INF/views/user/order/detail.jsp").forward(req, resp);
 			
 		}catch(Exception e) {
