@@ -68,7 +68,7 @@
                             <td>${ cardVo.cardNo }</td>
                         </tr>
                         <tr>
-                            <td colspan="2"><button type="button" id="btn-card-regist">결제수단등록</button></td>
+                            <td colspan="2"><button type="button" onclick="goRegist()" id="btn-card-regist">결제수단등록</button></td>
                         </tr>
                     </table>
                 </div>
@@ -119,5 +119,11 @@
             console.log("사용포인트 : " + spendPoint.value  );
             console.log("총 가격 : " + totalPrice.value  );
         } 
+    }
+
+
+    function goRegist(){
+        location.href='/rushwash/payment/card-regist';
+
     }
 </script>
