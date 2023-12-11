@@ -15,9 +15,8 @@ main{
     height: 400px;
 }
 #wrap{
-    padding-left: 250px;
-    padding-top: 20px;
-    width: 1000px;
+  width: 1200px;
+  padding-left: 19%;
 }
 
 table td{
@@ -40,6 +39,9 @@ table td{
     height: 40px;
     border-radius: 20px;
     margin-top: 20px;
+}
+.btn1:hover{
+	background-color: var(--color-navy);
 }
 .font{
     font-size: 35px;

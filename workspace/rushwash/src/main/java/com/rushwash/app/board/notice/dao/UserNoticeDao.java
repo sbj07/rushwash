@@ -109,7 +109,7 @@ public class UserNoticeDao {
 		String searchType = m.get("searchType");
 		
 		//sql
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT B.NO, B.TITLE, B.CONTENT, B.ENROLL_DATE, B.DEL_YN FROM NOTICE B WHERE B.DEL_YN = 'N' AND " + searchType  + " LIKE '%' || ? || '%' ORDER BY B.NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.* FROM ( SELECT B.NO, B.TITLE, B.CONTENT, TO_CHAR(B.ENROLL_DATE , 'YYYY\"년 \"MM\"월 \"DD\"일\"') AS ENROLL_DATE, B.DEL_YN FROM NOTICE B WHERE B.DEL_YN = 'N' AND " + searchType  + " LIKE '%' || ? || '%' ORDER BY B.NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, m.get("searchValue"));
 		pstmt.setInt(2, pvo.getStartRow());

@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/rushwash/resources/css/user/home.css">
 </head>
 <%@ include file='/WEB-INF/views/user/common/user_header.jsp' %>
+<%@ include file='/WEB-INF/views/user/common/event.jsp' %>
 <body>
 	<main>
         <div id="wrap">
@@ -35,7 +36,7 @@
                     <br>
                     세탁 가능해요.
                 </div>
-                <div>
+              <div>
                     <div class="first_font">
                         생활 빨래 서비스
                     </div>
