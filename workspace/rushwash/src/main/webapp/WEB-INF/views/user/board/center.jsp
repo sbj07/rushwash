@@ -25,29 +25,31 @@ pageEncoding="UTF-8"%>
          <div class="font">
            QNA
          </div>
-         <table class="table-wrapper">
-            <thead>
-                <tr>
-                <td>번호</td>
-                <td>제목</td>
-                <td>작성일</td>
-              </tr>
-            </thead>
-            <tbody>
-            <% for(QnaVo vo : boardVoList){ %>
-               <tr>
-                  <td><%= vo.getNo() %></td>
-                  <td><%= vo.getTitle() %></td>
-                  <% if(vo.getCommt() != null){%>
-                  	<td><%= vo.getEnrollDate() %><div class="text">답변완료</div></td>
-                  <%}else{%>
-                  	<td><%= vo.getEnrollDate() %></td>
-                  <%}%>
-                </tr>
-            <%}%>
-               
-            </tbody>             
-          </table>
+         <div>
+	         <table class="table-wrapper">
+	            <thead>
+	                <tr>
+	                <td>번호</td>
+	                <td>제목</td>
+	                <td>작성일</td>
+	              </tr>
+	            </thead>
+	            <tbody>
+	            <% for(QnaVo vo : boardVoList){ %>
+	               <tr>
+	                  <td><%= vo.getNo() %></td>
+	                  <td><%= vo.getTitle() %></td>
+	                  <% if(vo.getCommt() != null){%>
+	                  	<td><%= vo.getEnrollDate() %><div class="text">답변완료</div></td>
+	                  <%}else{%>
+	                  	<td><%= vo.getEnrollDate() %></td>
+	                  <%}%>
+	                </tr>
+	            <%}%>
+	               
+	            </tbody>             
+	          </table>
+          </div>
           <div class="btn">
            <button class="btn1" onclick="location.href='/rushwash/board/qnawrite'">작성하기</button>
        </div>
@@ -91,7 +93,7 @@ pageEncoding="UTF-8"%>
 </body>
 </html>
 <script>
-const trArr = document.querySelectorAll("main > div > table > tbody > tr");
+const trArr = document.querySelectorAll("main > div > div>table > tbody > tr");
 for(let i = 0 ; i < trArr.length; ++i){
    trArr[i].addEventListener('click' , handleClick);
 }

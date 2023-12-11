@@ -36,7 +36,7 @@ pageEncoding="UTF-8"%>
 			<tr>
 				<td><%= vo.getName()%></td>
 				<td><%= vo.getPrice() %></td>
-				<td><%= vo.getCategoryCode() %></td>
+				<td ><div class="price">구독 정보를 확인해주세요.</div></td>
 			 </tr>
 		<% } %>
 			

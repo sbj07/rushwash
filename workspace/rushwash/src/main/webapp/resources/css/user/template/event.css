@@ -1,0 +1,24 @@
+    
+ body{
+	 margin-top: 5%;
+ }
+    
+    
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.swiper-slide img{
+	justify-content: center;
+	align-items: center;
+}
+
+.slide-content img {
+    max-width: 50%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}

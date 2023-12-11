@@ -33,14 +33,4 @@
         <a href="/rushwash/member/mypage"><i class="fa-regular fa-user"></i></a>
     </nav>
 </header>
-<script>
-/*   function checkLogin() {
-    if (loginMember == null) {
-		alert("로그인 해주세요.");
-    }
-  } */
-</script>
 
-<!-- <div class="event">
-  <h1>광고</h1>
-</div> -->
