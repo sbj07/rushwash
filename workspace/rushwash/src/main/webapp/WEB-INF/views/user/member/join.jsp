@@ -265,6 +265,12 @@ function checkEmailDup(){
 	
 	const memberEmailValue = document.querySelector("main input[name=memberEmail]").value;
 	
+	if(!memberEmailValue){
+		alert("이메일을 입력하세요");
+		return;
+	}
+	
+	
 	fetch("/rushwash/member/check/email?memberEmail=" + memberEmailValue)
 	.then( (resp) => { return resp.json() } )
 	.then( (data) => { 

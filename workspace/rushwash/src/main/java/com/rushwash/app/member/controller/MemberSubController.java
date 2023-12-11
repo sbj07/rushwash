@@ -21,13 +21,16 @@ public class MemberSubController extends HttpServlet {
 
             MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
             
-            req.setAttribute("vo", loginMember);
+            MemberService ms = new MemberService();
+            String gradeName = ms.getMemberInfo(loginMember.getNo());
+            
+            req.setAttribute("gradeName", gradeName);
             req.getRequestDispatcher("/WEB-INF/views/user/member/sub.jsp").forward(req, resp);
 
         } catch(Exception e) {
-            System.out.println("[ERROR-M003] 사용자 정보 조회 중 에러 발생 ...");
+            System.out.println("[ERROR-M011] 구독 정보 조회 중 에러 발생 ...");
             e.printStackTrace();
-            req.setAttribute("errorMsg", "사용자 정보 조회 실패...");
+            req.setAttribute("errorMsg", "구독 정보 조회 실패...");
             req.getRequestDispatcher("/WEB-INF/views/user/member/sub.jsp").forward(req, resp);
         }
 	}

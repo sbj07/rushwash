@@ -238,6 +238,7 @@ public class MemberDao {
 	    return memberPwd;
 	}
 
+	//구독등급 추가
 	public int insertPlan(Connection conn, MemberVo vo) throws Exception {
 		
 		String sql = "INSERT INTO PLAN_INFO ( NO ,GRADE_NO ,MEMBER_NO ,PLAN_DATE ) VALUES ( SEQ_PLAN_INFO_NO.NEXTVAL ,1 ,(SELECT NO FROM MEMBER WHERE ID = ? AND PWD = ? ) ,SYSDATE )";
@@ -248,6 +249,53 @@ public class MemberDao {
 		//close
 		JDBCTemplate.close(pstmt);
 		return result;
+		
+	}
+
+	//구독 정보만 가져오기
+	public String getMemberInfo(Connection conn, String no) throws Exception {
+
+		//sql
+		String sql = "SELECT G.SUB_GRADE FROM MEMBER M JOIN PLAN_INFO P ON P.MEMBER_NO = M.NO JOIN PLAN_GRADE G ON G.NO = P.GRADE_NO WHERE M.NO = ? ";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, no);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		String gradeName = null;
+		if(rs.next()) {
+			gradeName = rs.getString("SUB_GRADE");
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return gradeName;
+		
+	}
+	
+	//결제 정보 가져오기
+	public String getMemberPayInfo(Connection conn, String no) throws Exception {
+
+		//sql
+		String sql = "SELECT C.CARD_NO , C.CARD_COMPANY FROM MEMBER M JOIN CARD_INFO C ON C.MEMBER_NO = M.NO WHERE ID = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, no);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		String payInfo = null;
+		if(rs.next()) {
+			payInfo = rs.getString("CARD_NO");
+			payInfo = rs.getString("CARD_COMPANY");
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return payInfo;
 		
 	}
 }
