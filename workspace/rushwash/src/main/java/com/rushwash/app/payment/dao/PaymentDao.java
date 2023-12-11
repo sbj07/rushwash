@@ -15,11 +15,11 @@ import com.rushwash.app.payment.vo.UserLaundryVo;
 public class PaymentDao {
 
 	public CardVo getCardInfo(Connection conn, String memberNo) throws Exception {
-		String sql = "SELECT C.NO , C.CARD_COMPANY , C.CARD_NO , C.CVC_NO , C.CARD_PWD , C.VALIDITY_PERIOD , P.PAYMENT_DATE FROM CARD_INFO C JOIN MEMBER M ON C.MEMBER_NO = M.NO JOIN PAYMENT_INFO P ON C.NO = P.CARD_NO WHERE M.NO = ?";
+//		String sql = "SELECT C.NO , C.CARD_COMPANY , C.CARD_NO , C.CVC_NO , C.CARD_PWD , C.VALIDITY_PERIOD , P.PAYMENT_DATE FROM CARD_INFO C JOIN MEMBER M ON C.MEMBER_NO = M.NO JOIN PAYMENT_INFO P ON C.NO = P.CARD_NO WHERE M.NO = ?";
+		String sql = "SELECT C.NO , C.CARD_COMPANY , C.CARD_NO , C.CVC_NO , C.CARD_PWD , C.VALIDITY_PERIOD FROM CARD_INFO C JOIN MEMBER M ON C.MEMBER_NO = M.NO WHERE M.NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 		ResultSet rs = pstmt.executeQuery();
-		
 		CardVo vo = new CardVo();
 		if(rs.next()) {
 			String no = rs.getString("NO");
@@ -28,7 +28,6 @@ public class PaymentDao {
 			String cvcNo = rs.getString("CVC_NO");
 			String cardPwd = rs.getString("CARD_PWD");
 			String validityPeriod = rs.getString("VALIDITY_PERIOD");
-			String paymentDate = rs.getString("PAYMENT_DATE");
 			
 			vo.setNo(no);
 			vo.setMemberNo(memberNo);
@@ -37,8 +36,8 @@ public class PaymentDao {
 			vo.setCvcNo(cvcNo);
 			vo.setCardPwd(cardPwd);
 			vo.setValidityPeriod(validityPeriod);
-			vo.setPaymentDate(paymentDate);
 		}
+		System.out.println(vo);
 		
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);

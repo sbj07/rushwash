@@ -26,9 +26,12 @@ public class PlanPaymentController extends HttpServlet{
 			MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 			String gradeNo = (String) session.getAttribute("seletedGrade");
 			String memberNo = loginMember.getNo();
-			
 			PaymentService paymentService = new PaymentService();
 			CardVo cardVo = paymentService.getCardInfo(memberNo);
+			if(cardVo.getNo() == null) {
+				req.setAttribute("alertMsg", "카드정보 등록후 이용해주세요.");
+				req.getRequestDispatcher("/WEB-INF/views/user/payment/card_regist.jsp").forward(req, resp);
+			}
 			PlanService planService = new PlanService();
 			PlanGradeVo gradeVo = planService.getPlanGrade(gradeNo);
 			
