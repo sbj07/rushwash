@@ -14,17 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.rushwash.admin.app.laundry.service.LaundryService;
-import com.rushwash.admin.app.laundry.vo.OrderVo;
+import com.rushwash.admin.app.laundry.vo.LaundryVo;
 
-@WebServlet("/admin/laundry")
-public class LaundryOrderController extends HttpServlet{
+@WebServlet("/admin/laundry/detail")
+public class OrderDetailController extends HttpServlet{
 	LaundryService ls = new LaundryService();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String orderNo = req.getParameter("orderNo");
 		try {
 			//service
-			List<OrderVo> voList = ls.getOrderList();
+			List<LaundryVo> voList = ls.getLaundryList(orderNo);
 			
 			//result
 			if(voList == null) {
@@ -32,11 +33,11 @@ public class LaundryOrderController extends HttpServlet{
 			}
 			
 			req.setAttribute("voList", voList);
-			req.getRequestDispatcher("/WEB-INF/admin/view/laundry/laundryOrder.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/admin/view/laundry/laundryControl.jsp").forward(req, resp);
 		} catch (Exception e) {
-			System.out.println("[ERROR-L003 세탁신청 정보 전체조회 실패]");
+			System.out.println("[ERROR-L001 상세세탁물 정보 전체조회 실패]");
 			e.printStackTrace();
-			req.setAttribute("errMsg", "세탁신청 정보 전체조회 실패 에러");
+			req.setAttribute("errMsg", "상세세탁물 정보 전체조회 실패 에러");
 			req.getRequestDispatcher("/WEB-INF/view/common/error.jsp").forward(req, resp);
 		}
 	}
@@ -57,31 +58,29 @@ public class LaundryOrderController extends HttpServlet{
             String no = getString(jsonData, "no");
             String status = getString(jsonData, "status");
 
-            OrderVo vo = new OrderVo();
-            vo.setOrderNo(no);
+            LaundryVo vo = new LaundryVo();
+            vo.setNo(no);
             vo.setStatus(status);
-            System.out.println(vo);
             
             //service
-            int result = ls.submitOrderStatus(vo);
-
+            int result = ls.submitStatus(vo);
+            
             //result
             if (result != 1) {
-				throw new Exception("[ERROR-L004]세탁신청 상태변경 실패");
+				throw new Exception("[ERROR-L002]세탁물 상태변경 실패");
 			}
             
-            // Assuming you have methods in your service to retrieve updated startDate and endDate
-            String updatedCollectDate = ls.getUpdatedCollect(no);
-            String updatedDiliveryDate = ls.getUpdateDilivery(no);
+         // Assuming you have methods in your service to retrieve updated startDate and endDate
+            String updatedStartDate = ls.getUpdatedStartDate(no);
+            String updatedEndDate = ls.getUpdatedEndDate(no);
 
             // Create a JSON response with the updated start and end dates
             JsonObject jsonResponse = new JsonObject();
-            jsonResponse.addProperty("updatedCollectDate", updatedCollectDate);
-            jsonResponse.addProperty("updatedDiliveryDate", updatedDiliveryDate);
+            jsonResponse.addProperty("updatedStartDate", updatedStartDate);
+            jsonResponse.addProperty("updatedEndDate", updatedEndDate);
 
             // Send the JSON response back to the client
             resp.getWriter().write(jsonResponse.toString());
-            
 
         } catch (Exception e) {
         	System.out.println(e.getMessage());
@@ -95,6 +94,5 @@ public class LaundryOrderController extends HttpServlet{
     private String getString(JsonObject jsonObject, String key) {
         return jsonObject.has(key) ? jsonObject.getAsJsonPrimitive(key).getAsString() : ""; // 최종null""
     }
-    
-	
-}//class end
+
+}

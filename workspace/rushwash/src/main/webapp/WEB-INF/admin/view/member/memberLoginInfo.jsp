@@ -31,15 +31,15 @@
 					<!-- Page Heading(페이지 제목) -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">유저 로그인정보 조회</h1>
+						<h1 class="h3 mb-0 text-gray-800">회원 로그인정보 조회</h1>
 					</div>
-					<p class="mb-4">모든 유저의 로그인정보를 확인합니다. 회원권한 조정 또한 가능합니다. 개인정보보호법을 충실히 따라주세요.</p>
+					<p class="mb-4">모든 회원의 로그인정보를 확인합니다. 회원권한 조정 또한 가능합니다. 개인정보보호법을 충실히 따라주세요.</p>
 
 					<!-- End of Main Content -->
 
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">전체 유저</h6>
+							<h6 class="m-0 font-weight-bold text-primary">전체 회원</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
