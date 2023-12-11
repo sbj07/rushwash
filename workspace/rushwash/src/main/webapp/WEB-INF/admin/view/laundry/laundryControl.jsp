@@ -51,7 +51,7 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
 										<tr>
 											<th>세탁물번호</th>
 											<th>주문번호</th>
-											<th>유저번호</th>
+											<th>유저이름</th>
 											<th>품목명</th>
 											<th>수량</th>
 											<th>세탁시작일</th>
@@ -64,7 +64,7 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
 										<tr>
 											<th>세탁물번호</th>
 											<th>주문번호</th>
-											<th>유저번호</th>
+											<th>유저이름</th>
 											<th>품목명</th>
 											<th>수량</th>
 											<th>세탁시작일</th>
@@ -80,7 +80,7 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
 										<tr>
 											<td><%=vo.getNo()%></td>
 											<td><%=vo.getOrderNo()%></td>
-											<td><%=vo.getMemberNo()%></td>
+											<td><%=vo.getMemberName()%></td>
 											<td><%=vo.getItem()%></td>
 											<td><%=vo.getEa()%></td>
 											<td><%=vo.getWashStartDate()%></td>

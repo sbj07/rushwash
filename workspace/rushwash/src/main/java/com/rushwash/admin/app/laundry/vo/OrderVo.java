@@ -34,6 +34,8 @@ public class OrderVo {
 	private String orderRequset;
 	private String address;
 	private String delYn;
+	private String memberName;
+	
 	
 	public String getOrderNo() {
 		return orderNo;
@@ -107,12 +109,21 @@ public class OrderVo {
 	public void setDelYn(String delYn) {
 		this.delYn = delYn;
 	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderVo [orderNo=" + orderNo + ", memberNo=" + memberNo + ", price=" + price + ", paymentDate="
-				+ paymentDate + ", collectDate=" + collectDate + ", expDate=" + expDate + ", diliveryDate="
-				+ diliveryDate + ", receiveDate=" + receiveDate + ", orderRequset=" + orderRequset + ", address="
-				+ address + ", status=" + status + ", delYn=" + delYn + "]";
+		return "OrderVo [orderNo=" + orderNo + ", memberNo=" + memberNo + ", status=" + status + ", price=" + price
+				+ ", paymentDate=" + paymentDate + ", collectDate=" + collectDate + ", expDate=" + expDate
+				+ ", diliveryDate=" + diliveryDate + ", receiveDate=" + receiveDate + ", orderRequset=" + orderRequset
+				+ ", address=" + address + ", delYn=" + delYn + ", memberName=" + memberName + "]";
 	}
 	
 	
