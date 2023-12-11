@@ -24,7 +24,10 @@ public class CardRegistController extends HttpServlet {
 			PaymentService paymentService = new PaymentService();
 			CardVo cardVo = paymentService.getCardInfo(memberNo);
 			
-			req.setAttribute("cardVo", cardVo);
+			System.out.println(cardVo.getNo());
+			if(cardVo.getNo() != null) {
+				req.setAttribute("cardVo", cardVo);
+			}
 			req.getRequestDispatcher("/WEB-INF/views/user/payment/card_regist.jsp").forward(req, resp);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,7 +47,6 @@ public class CardRegistController extends HttpServlet {
 			String cvcNo = req.getParameter("cvcNo");
 			String cardPwd = req.getParameter("cardPwd");
 			
-			System.out.println(cardNo);
 			
 			String[] splitPeriod = validityPeriod.split("-");
 			String year = splitPeriod[0].substring(2); // 연도의 마지막 두 자리만 추출
@@ -60,15 +62,17 @@ public class CardRegistController extends HttpServlet {
 			cardVo.setCardPwd(cardPwd);
 			
 			PaymentService paymentService = new PaymentService();
-//			CardVo preCardVo = new CardVo();
 			CardVo preCardVo = paymentService.getCardInfo(memberNo);
 			int result;
-			if(preCardVo == null) {
+			if(preCardVo.getNo() == null) {
+				System.out.println("preCardVo==null");
 				result = paymentService.putCardInfo(cardVo);
 			}else {
+				System.out.println("preCardVo!=null");
 				result = paymentService.changeCardInfo(cardVo);
 			}
-			
+			CardVo newCardVo = paymentService.getCardInfo(memberNo);
+			req.setAttribute("cardVo", newCardVo);
 			if(result != 1) {
 				throw new Exception();
 			}
