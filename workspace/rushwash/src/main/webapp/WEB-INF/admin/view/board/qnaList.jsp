@@ -74,7 +74,11 @@
 										<td><%= vo.getEnrollDate() %></td>
 										<td><%= vo.getDelYn() %></td>
 										<td><%= vo.getSecretYn() %></td>
+										<% if(vo.getManagerId() != null){ %>
 										<td><%= vo.getManagerId() %></td>
+										<%}else { %>
+											<td></td>
+											<%} %>
 									</tr>
 								<% } %>
 							</tbody>
