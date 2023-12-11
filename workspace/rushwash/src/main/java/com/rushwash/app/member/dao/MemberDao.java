@@ -237,4 +237,17 @@ public class MemberDao {
 	    
 	    return memberPwd;
 	}
+
+	public int insertPlan(Connection conn, MemberVo vo) throws Exception {
+		
+		String sql = "INSERT INTO PLAN_INFO ( NO ,GRADE_NO ,MEMBER_NO ,PLAN_DATE ) VALUES ( SEQ_PLAN_INFO_NO.NEXTVAL ,1 ,(SELECT NO FROM MEMBER WHERE ID = ? AND PWD = ? ) ,SYSDATE )";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getMemberId());
+		pstmt.setString(2, vo.getMemberPwd());
+		int result = pstmt.executeUpdate();
+		//close
+		JDBCTemplate.close(pstmt);
+		return result;
+		
+	}
 }

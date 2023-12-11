@@ -73,6 +73,7 @@ public class MemberService {
 		//dao
 		MemberDao dao = new MemberDao();
 		int result = dao.join(conn, vo);
+		int result2 = dao.insertPlan(conn, vo);
 		
 		//tx
 		if(result == 1) {
@@ -86,6 +87,8 @@ public class MemberService {
 		return result;
 	
 	}
+	
+
 
 	//로그인
 	public MemberVo login(MemberVo vo) throws Exception {
