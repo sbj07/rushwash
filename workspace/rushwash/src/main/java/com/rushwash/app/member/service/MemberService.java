@@ -76,7 +76,7 @@ public class MemberService {
 		int result2 = dao.insertPlan(conn, vo);
 		
 		//tx
-		if(result == 1) {
+		if(result == 1 && result2 == 1) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
@@ -273,6 +273,38 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		
 		return memberPwd;
+	}
+
+	//구독 정보만 가져오기
+	public String getMemberInfo(String no) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		String gradeName = dao.getMemberInfo(conn, no);
+		
+		//close
+		JDBCTemplate.close(conn);
+		return gradeName;
+	
+	}
+
+	//결제 정보만 가져오기
+	public String getMemberPayInfo(String no) throws Exception {
+
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		String payInfo = dao.getMemberPayInfo(conn, no);
+		
+		//close
+		JDBCTemplate.close(conn);
+		return payInfo;
+	
 	}
 
 }

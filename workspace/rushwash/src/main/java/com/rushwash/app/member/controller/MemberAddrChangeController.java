@@ -39,14 +39,11 @@ public class MemberAddrChangeController extends HttpServlet {
 				throw new Exception("주소 변경 불가");
 
 			} else {
-				req.getSession().invalidate();
-				req.getSession().setAttribute("alertMsg", "주소 변경 완료");
-				resp.sendRedirect("/rushwash/home");
-//				vo.setMemberId(newId);
-//				session.setAttribute("loginMember", vo);
+				vo.setMemberAddress(newAddr);
+				session.setAttribute("loginMember", vo);
 				
-//				req.setAttribute("alertMsg" , "아이디 변경 완료. 재로그인 하세요.");
-//				resp.sendRedirect("/rushwash/home");
+				session.setAttribute("alertMsg" , "주소 변경 완료");
+				resp.sendRedirect("/rushwash/member/mypage");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

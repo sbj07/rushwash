@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -33,19 +34,20 @@
                 </div>     
                 <div id="pay-info">
                     <form id="pay-form">
-                    <% if(vo != null) { %>
+                    <c:if test="${ not empty loginMember }" > 
                     	<p>카드</p>
-                        <input type="text" id="memberName" name="memberName" value="<%= vo.getCardCompany() %>" readonly> 
+                        <input type="text" id="cardNo" name="cardNo" value="${ loginMember.cardNo }" readonly> 
                         <p>결제정보</p>
-                        <input type="text" id="memberName" name="memberName" value="<%= vo.getCardNo() %>" readonly>   
+                        <input type="text" id="cardCompany" name="cardCompany" value="${ loginMember.cardCompany }" readonly>   
                         <button type="button" id="delete-card" onclick="location.href='/rushwash/payment/card-regist'">변경</button>                                        
-                    <% } else { %>
+                   	</c:if>
+                   	<c:if test="${ empty loginMember }" >
                     	<p>카드</p>
-                        <input type="text" id="memberName" name="memberName" readonly> 
+                        <input type="text" id="cardNo" name="cardNo" readonly> 
                         <p>결제정보</p>
-                        <input type="text" id="memberName" name="memberName" readonly>   
+                        <input type="text" id="cardCompany" name="cardCompant" readonly>   
                         <button type="button" id="delete-card" onclick="location href='/rushwash/payment/card-regist">변경</button> 
-                    <% } %>
+                   </c:if>
                     </form>
                    
                 </div>
