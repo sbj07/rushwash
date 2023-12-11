@@ -20,6 +20,7 @@
                 문의작성하기(수정)
             </div>
           <form action="/rushwash/board/qnaedit" method="post">
+                    <input type="hidden" name="no" value="<%= vo.getNo() %>">
             <table>
                 <tr>
                     <td class="title">제목</td>
@@ -30,7 +31,6 @@
                     <td><textarea name="content" id="content" cols="100" rows="30" ><%= vo.getContent()%></textarea></td>
                 </tr>
                 <tr>
-                    <input type="hidden" name="no" value="<%= vo.getNo() %>">
                     
                     <td class="submit-cell" colspan="2"><input type="submit" value="수정하기" class="submit"></td>
                 </tr>

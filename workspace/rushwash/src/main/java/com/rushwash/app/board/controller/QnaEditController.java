@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.rushwash.app.board.qna.service.QnaService;
 import com.rushwash.app.board.qna.vo.QnaVo;
@@ -42,15 +43,16 @@ public class QnaEditController extends HttpServlet{
 	//게시글 수정
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		System.out.println("~~~~~");
-		System.out.println(req.getSession().getAttribute("loginMember"));
 	
 		
 		try {
+			
+			resp.setContentType("text/html;charset=UTF-8");
+			HttpSession session = req.getSession();
+			
 			String title = req.getParameter("title");
-			String content = req.getParameter("CONTENT");
-			String no = req.getParameter("NO");
+			String content = req.getParameter("content");
+			String no = req.getParameter("no");
 			
 			QnaVo vo = new QnaVo();
 			vo.setTitle(title);
@@ -59,10 +61,11 @@ public class QnaEditController extends HttpServlet{
 			QnaService qs = new QnaService();
 			int result = qs.edit(vo);
 			
-			if(result != 0) {
+			if(result != 1) {
 				throw new Exception();
 			}
-			resp.sendRedirect("/rushwash/board/qnadetail?no=" + no);
+			//resp.sendRedirect("/rushwash/board/qnadetail?no=" + no);
+			resp.getWriter().print("<script>alert('게시글이 수정 되었습니다.'); location.href='/rushwash/board/center';</script>");
 		}catch(Exception e) {
 			e.printStackTrace();
 			req.setAttribute("errorMsg", "게시글 수정 실패...");

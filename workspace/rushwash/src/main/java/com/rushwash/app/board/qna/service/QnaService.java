@@ -58,6 +58,7 @@ public class QnaService {
 
 	//상세조회
 	public Map<String, Object> selectQnaByNo(String no) throws Exception {
+		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		QnaDao dao = new QnaDao();

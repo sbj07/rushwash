@@ -95,8 +95,9 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 
 	public QnaVo selectQnaByNo(Connection conn, String no) throws Exception {
 		 
-		String sql = "SELECT B.NO ,B.CONTENT ,B.TITLE, B.MEMBER_NO, TO_CHAR(B.ENROLL_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS ENROLL_DATE , B.DEL_YN ,B.MODIFY_DATE, B.COMMT, M.MANAGER_ID FROM QNA B JOIN MANAGER M ON B.MANAGER_NO = M.NO WHERE B.NO = ? AND B.DEL_YN = 'N'";
+		String sql = "SELECT B.NO ,B.CONTENT ,B.TITLE,  TO_CHAR(B.ENROLL_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS ENROLL_DATE , B.DEL_YN ,B.MODIFY_DATE, B.COMMT, M.MANAGER_ID FROM QNA B JOIN MANAGER M ON B.MANAGER_NO = M.NO WHERE B.NO = ? AND B.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		System.out.println("dao's no : " + no);
 		pstmt.setString(1, no);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -104,7 +105,7 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 		if(rs.next()) {
 			String content = rs.getString("CONTENT");
 			String title = rs.getString("TITLE");
-			String memberNo = rs.getString("MEMBER_NO");
+//			String memberNo = rs.getString("MEMBER_NO");
 			String enrollDate = rs.getString("ENROLL_DATE");
 			String delYn = rs.getString("DEL_YN");
 			String modifyDate = rs.getString("MODIFY_DATE");
@@ -115,7 +116,7 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 			vo.setNo(no);
 			vo.setContent(content);
 			vo.setTitle(title);
-			vo.setMemberNo(memberNo);
+//			vo.setMemberNo(memberNo);
 			vo.setEnrollDate(enrollDate);
 			vo.setDelYn(delYn);
 			vo.setModifyDate(modifyDate);
@@ -138,7 +139,7 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 		pstmt.setString(2, vo.getContent());
 		pstmt.setString(3, vo.getNo());
 		int result = pstmt.executeUpdate();
-		System.out.println(result);
+
 		JDBCTemplate.close(pstmt);
 		
 		return result;
