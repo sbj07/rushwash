@@ -20,16 +20,18 @@ import com.rushwash.app.order.vo.OrderVo;
 public class OrderDetailController extends HttpServlet{
 	
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			String memberNo = loginMember.getNo();
-			
+			String no = req.getParameter("no");
 			//service
 			OrderService os = new OrderService();
-			ArrayList<OrderVo> voList = os.getorderDetail(memberNo);
+			ArrayList<OrderVo> voList = os.getorderDetail(memberNo, no);
 			req.setAttribute("voList", voList);
+			req.setAttribute("orderDetailNo", no);
+			req.setAttribute("totalprice", voList.get(0).getPrice());
 			req.getRequestDispatcher("/WEB-INF/views/user/order/detail.jsp").forward(req, resp);
 			
 		}catch(Exception e) {
@@ -38,6 +40,17 @@ public class OrderDetailController extends HttpServlet{
 //            resp.getWriter().print("<script>alert('로그인이 필요합니다.'); location.href='/rushwash/order/list';</script>");
 
 		}
+		
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String no = req.getParameter("orderNo");
+		System.out.println("오더넘"+no);
+		
+		OrderService os = new OrderService();
+		int result = os.detaildelete(no);
 	}
 
 }

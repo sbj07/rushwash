@@ -17,7 +17,7 @@ import com.rushwash.app.order.vo.OrderVo;
 @WebServlet("/order/list")
 public class OrderListController extends HttpServlet{
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			resp.setContentType("text/html;charset=UTF-8");
 
@@ -25,7 +25,6 @@ public class OrderListController extends HttpServlet{
 			HttpSession session =req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			String memberNo = loginMember.getNo();
-			
 			
 			if (loginMember != null) {
 			     memberNo = loginMember.getNo();

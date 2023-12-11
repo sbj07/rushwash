@@ -4,6 +4,7 @@ public class OrderVo {
 	
 	private String no;				//주문번호(요펑관리번호)
 	private String item;			//상품(품목)
+	private String priceItem;			//결제내역
 	private String price;			//결제내역
 	private String ea;				//수량(세탁물)
 	private String memberName;		//수령인
@@ -18,19 +19,18 @@ public class OrderVo {
 	private String collectDate;		//수거일자
 	private String receiveDate ;	//수령일(완료일)
 	private String delYn;			//취소
-	
-	
 	public OrderVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public OrderVo(String no, String item, String price, String ea, String memberName, String address, String tel,
-			String request, String expDate, String orderStatus, String laundryStatus, String paymentDate,
+	public OrderVo(String no, String item, String priceItem, String price, String ea, String memberName, String address,
+			String tel, String request, String expDate, String orderStatus, String laundryStatus, String paymentDate,
 			String diliveryDate, String collectDate, String receiveDate, String delYn) {
 		super();
 		this.no = no;
 		this.item = item;
 		this.price = price;
+		this.priceItem = priceItem;
 		this.ea = ea;
 		this.memberName = memberName;
 		this.address = address;
@@ -56,6 +56,12 @@ public class OrderVo {
 	}
 	public void setItem(String item) {
 		this.item = item;
+	}
+	public String getPriceItem() {
+		return priceItem;
+	}
+	public void setPriceItem(String priceItem) {
+		this.priceItem = priceItem;
 	}
 	public String getPrice() {
 		return price;
@@ -143,13 +149,12 @@ public class OrderVo {
 	}
 	@Override
 	public String toString() {
-		return "OrderVo [no=" + no + ", item=" + item + ", price=" + price + ", ea=" + ea + ", memberName=" + memberName
-				+ ", address=" + address + ", tel=" + tel + ", request=" + request + ", expDate=" + expDate
-				+ ", orderStatus=" + orderStatus + ", laundryStatus=" + laundryStatus + ", paymentDate=" + paymentDate
-				+ ", diliveryDate=" + diliveryDate + ", collectDate=" + collectDate + ", receiveDate=" + receiveDate
-				+ ", delYn=" + delYn + "]";
+		return "OrderVo [no=" + no + ", item=" + item + ", priceItem=" + priceItem + ", price=" + price + ", ea=" + ea
+				+ ", memberName=" + memberName + ", address=" + address + ", tel=" + tel + ", request=" + request
+				+ ", expDate=" + expDate + ", orderStatus=" + orderStatus + ", laundryStatus=" + laundryStatus
+				+ ", paymentDate=" + paymentDate + ", diliveryDate=" + diliveryDate + ", collectDate=" + collectDate
+				+ ", receiveDate=" + receiveDate + ", delYn=" + delYn + "]";
 	}
-	
 	
 	
 	

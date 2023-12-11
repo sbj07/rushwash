@@ -41,7 +41,7 @@
 							<td>${vo.ea}</td>
 							<td>${vo.paymentDate}</td>
 							<td>${vo.laundryStatus}</td>
-							<td><a id="aa" href="/rushwash/order/detail">상세조회</a></td>
+							<td><a id="aa" href="/rushwash/order/detail?no=${vo.no }">상세조회</a></td>
 						</tr>
 					</c:forEach>
 

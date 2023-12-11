@@ -25,17 +25,26 @@ public class OrderService {
 
 	}
 
-	public ArrayList<OrderVo> getorderDetail(String memberNo) throws Exception {
+	public ArrayList<OrderVo> getorderDetail(String memberNo, String no) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
 
 		OrderDao dao = new OrderDao();
-		ArrayList<OrderVo> voList = dao.getorderDetail(conn, memberNo);
+		ArrayList<OrderVo> voList = dao.getorderDetail(conn, memberNo ,no);
 
 		JDBCTemplate.close(conn);
 		
 		return voList;
 
+	}
+
+	public int detaildelete(String no) throws Exception{
+		Connection conn = JDBCTemplate.getConnection();
+		
+		OrderDao dao = new OrderDao();
+		int result =dao.detaildelete(conn, no);
+		
+		
 	}
 
 }
