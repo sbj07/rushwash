@@ -22,46 +22,48 @@
     </div>
 	<div id="div4">총 가격 : </div>
     <div id="div2">
-        <table id="tt00">
-            <thead>
-                <tr id="th1">
-                    <th>상품</th>
-                    <th>가격</th>
-                    <th>수량</th>
-                    <th>주문일</th>
-                    <th>진행상태</th>
-                </tr>
-            </thead>
-            <tbody>
-            	<c:forEach items="voList" var="vo">
-                <tr>
-                    <td>스터트</td>
-                    <td>5,000 원</td>
-                    <td>2</td>
-                    <td>2021.02.15</td>
-                    <td>세탁중</td>
-                </tr>
-            	</c:forEach>
-            	<tr id="th2">
-                    <td>수령인</td>
-                    <td>핸드폰번호</td>
-                    <td>주소</td>
-                    <td colspan="2">요청사항</td>
-                </tr>
-                <c:forEach items="voList" var="vo">
-                	<tr>
-	                    <td>수령asdfasdfasd인</td>
-	                    <td>핸드fasdfasdfas폰번호</td>
-	                    <td>주dfasdfasdfasdf소</td>
-	                    <td colspan="2">asdfasdfsdf</td>
-               	 </tr>
-                
-                </c:forEach>
-            </tbody>
-        </table>
+    <table id="tt00">
+				<thead>
+					<tr id="th1">
+						<th>상품</th>
+						<th>가격</th>
+						<th>수량</th>
+						<th>주문일</th>
+						<th>예상세탁완료일</th>
+						<th>진행상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${map }" var="vo">
+						<tr class="td2">
+							<td>${vo.item}</td>
+							<td>${vo.price}</td>
+							<td>${vo.ea}</td>
+							<td>${vo.paymentDate }</td>
+							<td>${vo.expDate }</td>
+							<td>${vo.laundryStatus }</td>
+						</tr>
+					</c:forEach>
+					<tr class="td2">
+						<td>수령인</td>
+						<td>핸드폰번호</td>
+						<td colspan="2">주소</td>
+						<td colspan="2">요청사항</td>
+					</tr>
+					<c:forEach items="${map }" var="vo">
+						<tr class="td2">
+							<td>${vo.memberName }</td>
+							<td>${vo.tel }</td>
+							<td colspan="2">${vo.address }</td>
+							<td colspan="2">${vo.request }</td>
+						</tr>
+
+					</c:forEach>
+				</tbody>
+			</table>
     </div>
 
-    <div id="div2">
+    <div id="div3">
 		<button type="botton" >주문취소</button>
     </div>
 </main>

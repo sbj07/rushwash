@@ -17,7 +17,7 @@ public class OrderVo {
 	private String diliveryDate;	//발송일
 	private String collectDate;		//수거일자
 	private String receiveDate ;	//수령일(완료일)
-	private String delYn;			//추소
+	private String delYn;			//취소
 	
 	
 	public OrderVo() {

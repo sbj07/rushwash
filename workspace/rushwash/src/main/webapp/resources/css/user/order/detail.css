@@ -6,88 +6,42 @@
     --색상-베이지: #F6F6F6;
 }
 
-body {
-    margin: 0;
-}
+/* detail.css */
 
 #wrap {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    padding-top: 20px;
+    text-align: center; /* 테이블을 가운데 정렬 */
 }
 
-#div1 {
-	text-align: center;
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color:  #163172;;
+#tt00 {
+    margin: 0 auto; /* 테이블을 가운데 정렬 */
 }
 
-#div4 {
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: right;
-}
-
-#div2 {
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-table {
-    width: 100%;
-    font-size: 20px;
-
-}
-
-th, td {
-	height: 50px;
-    padding: 8px;
-    text-align: left;
-    letter-spacing: 1px;
-    border-bottom: 1px solid lightgray;
-}
-#tt00 th{
-	background-color: #163172;
-	color: white;
-	height: 50px;
-	
-}
-
-button {
+.td2 td {
+    text-align: center; /* 테이블 셀 안의 글자를 중앙 정렬 */
+    vertical-align: middle;
     padding: 10px;
-    background-color: #163172;;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 0 auto;
-    display: block;
 }
-div{
-	text-align: center;
-}
-#tt00 th,
-#tt00 td{
-	text-align: center;
-	vertical-align: middle
 
+.td2 th {
+    background-color: #163172;
+    color: white;
+    height: 50px;
+    text-align: center; /* 테이블 헤더의 글자를 중앙 정렬 */
 }
-thead{
-	border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+
+
+.td2 tr:first-child {
+    border-top: 1px solid black;
 }
-#th2 {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
+
+.td2 tr:last-child {
+    border-bottom: 1px solid black;
 }
-table th:first-child {
+
+.td2 th:first-child {
     border-top-left-radius: 20px;
 }
 
-table th:last-child {
+.td2 th:last-child {
     border-top-right-radius: 20px;
 }
