@@ -80,7 +80,9 @@ nav a{
     color: var(--color-black);
     
 }
-
+section{
+	margin-top: 30%;
+}
 .event{
     height: 150px;
     border: 2px solid white;
