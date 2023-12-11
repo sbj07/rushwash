@@ -45,7 +45,7 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
+								<table class="table table-bordered table-hover" id="dataTable" width="100%"
 									cellspacing="0">
 									<thead>
 										<tr>
@@ -86,9 +86,28 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 											<td><%=vo.getMemberName()%></td>
 											<td><%=vo.getPrice()%></td>
 											<td><%=vo.getPaymentDate()%></td>
-											<td><%=vo.getCollectDate()%></td>
-											<td><%=vo.getDiliveryDate()%></td>
-											<td><%=vo.getReceiveDate()%></td>
+											<td id="collectDate_<%=vo.getOrderNo()%>">
+												<%if(vo.getCollectDate() != null) { %>
+													<%=vo.getCollectDate() %>
+												<%}else{ %>
+													-
+												<%} %>
+											
+											</td>
+											<td id="diliveryDate_<%=vo.getOrderNo()%>">
+											    <%if(vo.getDiliveryDate() != null) { %>
+													<%=vo.getDiliveryDate() %>
+												<%}else{ %>
+													-
+												<%} %>
+											</td>
+											<td>
+												<%if(vo.getReceiveDate() != null) { %>
+													<%=vo.getReceiveDate() %>
+												<%}else{ %>
+													-
+												<%} %>
+											</td>
 											<td>
 												<%if(vo.getOrderRequset() != null) { %>
 													<%=vo.getOrderRequset() %>
@@ -97,7 +116,7 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 												<%} %>
 											</td>
 											<td><%=vo.getAddress()%></td>
-											<td>
+											<td class="not-click">
 												<form id="statusForm_<%=vo.getOrderNo()%>">
 													<select class="custom-select" name="status">
 														<option class="options" value="1" <%=vo.getStatus().equals("1") ? "selected" : "" %> disabled>수거요청</option>
@@ -140,7 +159,6 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 <script type="text/javascript">
      // Use querySelectorAll to select all elements with the class "custom-select"
     var statusSelects = document.querySelectorAll('.custom-select');
-     console.log(statusSelects);
 
      function backColor(){
     	// Add event listener to each selected element
@@ -190,6 +208,20 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
  		    return resp.json();
  		  })
  		  .then(data => {
+ 			// addProperty한 데이터 가져오기
+	        const updatedCollectDate = data.updatedCollectDate;
+	        const updatedDiliveryDate = data.updatedDiliveryDate;
+
+	        // Update only the corresponding row
+	        let collectDateElement = document.querySelector('#collectDate_' + no);
+	        let diliveryDateElement = document.querySelector('#diliveryDate_' + no);
+
+	        // Update the content of the elements
+	        if (collectDateElement && diliveryDateElement) {
+	        	collectDateElement.innerHTML = updatedCollectDate;
+	        	diliveryDateElement.innerHTML = updatedDiliveryDate;
+	        }
+ 			  
  		  })
  		  .catch(error => {
  		    // Handle errors
@@ -198,6 +230,25 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
  				
  		 backColor();
  	}//confirm end
+ 	
+	 // 클릭하여 상세정보
+    let trArr = document.querySelectorAll("table > tbody > tr");
+    for (let i = 0; i < trArr.length; ++i) {
+        trArr[i].addEventListener('click', handleClick);
+    }
+
+    function handleClick(event) {
+    	const targetId = event.target.id;
+    	console.log(targetId);
+        // 클릭된 요소의 ID가 'not-click'이면 처리 중단
+        if (targetId.startsWith('statusForm_')) {
+            return;
+        }
+    	
+        const tr = event.currentTarget;
+        const no = tr.children[0].innerText;
+        location.href = '/rushwash/admin/laundry/detail?orderNo=' + no;
+    }
  	
 </script>
 

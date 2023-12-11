@@ -33,10 +33,9 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
 					<!-- Page Heading(페이지 제목) -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">세탁물 관리</h1>
+						<h1 class="h3 mb-0 text-gray-800">상세 세탁물 관리</h1>
 					</div>
-					<p class="mb-4">정렬이 가능하며, 각 주문은 세탁상태가 모두 "세탁완료"가 될 경우, 배송이
-						시작됩니다.</p>
+					<p class="mb-4">각 주문은 세탁상태가 모두 "세탁완료"가 될 경우, 배송이 시작됩니다.</p>
 
 					<!-- End of Main Content -->
 

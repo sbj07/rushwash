@@ -70,7 +70,17 @@ public class AdminLaundryController extends HttpServlet{
 				throw new Exception("[ERROR-L002]세탁물 상태변경 실패");
 			}
             
-            resp.sendRedirect("/rushwash/admin/laundry/control");
+         // Assuming you have methods in your service to retrieve updated startDate and endDate
+            String updatedStartDate = ls.getUpdatedStartDate(no);
+            String updatedEndDate = ls.getUpdatedEndDate(no);
+
+            // Create a JSON response with the updated start and end dates
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("updatedStartDate", updatedStartDate);
+            jsonResponse.addProperty("updatedEndDate", updatedEndDate);
+
+            // Send the JSON response back to the client
+            resp.getWriter().write(jsonResponse.toString());
 
         } catch (Exception e) {
         	System.out.println(e.getMessage());

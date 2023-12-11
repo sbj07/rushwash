@@ -25,6 +25,19 @@ public class LaundryService {
 
 		return voList;
 	}
+	// 상세세탁물 리스트 불러오기 -- ver2 orderNo 오버로딩
+	public List<LaundryVo> getLaundryList(String ordNo) throws Exception {
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		List<LaundryVo> voList = dao.getLaundryList(conn, ordNo);
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return voList;
+	}
 
 	// 상세세탁물 상태값 갱신
 	public int submitStatus(LaundryVo vo) throws Exception {
@@ -33,6 +46,12 @@ public class LaundryService {
 
 		// dao
 		int result = dao.submitStatus(conn, vo);
+
+		if (vo.getStatus().equals("2")) {
+			dao.inputStartDate(conn, vo);
+		} else if (vo.getStatus().equals("3")) {
+			dao.inputEndDate(conn, vo);
+		}
 
 		// tx
 		if (result == 1) {
@@ -69,6 +88,12 @@ public class LaundryService {
 		// dao
 		int result = dao.submitOrderStatus(conn, vo);
 
+		if(vo.getStatus().equals("2")) {
+			dao.inputCollectDate(conn, vo);
+		} else if(vo.getStatus().equals("4")) {
+			dao.inputDiliveryDate(conn, vo);
+		}
+		
 		// tx
 		if (result == 1) {
 			JDBCTemplate.commit(conn);
@@ -80,6 +105,58 @@ public class LaundryService {
 		JDBCTemplate.close(conn);
 
 		return result;
+	}
+
+	public String getUpdatedStartDate(String no) throws Exception {
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+
+		// dao
+		String startDate = dao.getUpdatedStartDate(conn, no);
+
+		// close
+		JDBCTemplate.close(conn);
+
+		return startDate;
+	}
+
+	public String getUpdatedEndDate(String no) throws Exception {
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+
+		// dao
+		String endDate = dao.getUpdatedEndDate(conn, no);
+
+		// close
+		JDBCTemplate.close(conn);
+
+		return endDate;
+	}
+	//수거일
+	public String getUpdatedCollect(String no) throws Exception {
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		String endDate = dao.getUpdatedCollect(conn, no);
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return endDate;
+	}
+	//발송일
+	public String getUpdateDilivery(String no) throws Exception {
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		String endDate = dao.getUpdateDilivery(conn, no);
+		
+		// close
+		JDBCTemplate.close(conn);
+		
+		return endDate;
 	}
 
 }
