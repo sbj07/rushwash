@@ -6,42 +6,89 @@
     --색상-베이지: #F6F6F6;
 }
 
-/* detail.css */
+body {
+    margin: 0;
+}
 
 #wrap {
-    text-align: center; /* 테이블을 가운데 정렬 */
+    width: 80%;
+    height: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding-top: 20px;
 }
 
-#tt00 {
-    margin: 0 auto; /* 테이블을 가운데 정렬 */
+#div1 {
+	text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color:  #163172;;
 }
 
-.td2 td {
-    text-align: center; /* 테이블 셀 안의 글자를 중앙 정렬 */
-    vertical-align: middle;
+#div4 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+#div2 {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    font-size: 20px;
+
+}
+
+th, td {
+	height: 50px;
+    padding: 8px;
+    text-align: left;
+    letter-spacing: 1px;
+    border-bottom: 1px solid lightgray;
+}
+#tt00 th{
+	background-color: #163172;
+	color: white;
+	height: 50px;
+	
+}
+
+button {
     padding: 10px;
-}
-
-.td2 th {
-    background-color: #163172;
+    background-color: #163172;;
     color: white;
-    height: 50px;
-    text-align: center; /* 테이블 헤더의 글자를 중앙 정렬 */
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
 }
-
-
-.td2 tr:first-child {
-    border-top: 1px solid black;
+div{
+	text-align: center;
 }
+#tt00 th,
+#tt00 td{
+	text-align: center;
+	vertical-align: middle
 
-.td2 tr:last-child {
-    border-bottom: 1px solid black;
 }
-
-.td2 th:first-child {
+thead{
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+#td22{
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+table th:first-child {
     border-top-left-radius: 20px;
 }
 
-.td2 th:last-child {
+table th:last-child {
     border-top-right-radius: 20px;
 }

@@ -20,7 +20,7 @@
        <br>
        <br>
     </div>
-	<div id="div4">총 가격 : </div>
+	<div id="div4">총 가격 : ${vo.price}</div>
     <div id="div2">
     <table id="tt00">
 				<thead>
@@ -34,8 +34,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${map }" var="vo">
-						<tr class="td2">
+			
+					<c:forEach items="${voList }" var="vo">
+						<tr class="td2" id="td21">
 							<td>${vo.item}</td>
 							<td>${vo.price}</td>
 							<td>${vo.ea}</td>
@@ -44,14 +45,14 @@
 							<td>${vo.laundryStatus }</td>
 						</tr>
 					</c:forEach>
-					<tr class="td2">
+					<tr class="td2" id="td22">
 						<td>수령인</td>
 						<td>핸드폰번호</td>
 						<td colspan="2">주소</td>
 						<td colspan="2">요청사항</td>
 					</tr>
-					<c:forEach items="${map }" var="vo">
-						<tr class="td2">
+					<c:forEach items="${voList }" var="vo">
+						<tr class="td2" id="td23">
 							<td>${vo.memberName }</td>
 							<td>${vo.tel }</td>
 							<td colspan="2">${vo.address }</td>

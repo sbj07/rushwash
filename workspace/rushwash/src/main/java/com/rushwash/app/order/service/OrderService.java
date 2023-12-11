@@ -1,6 +1,7 @@
 package com.rushwash.app.order.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,19 +25,16 @@ public class OrderService {
 
 	}
 
-	public Map<String, Object> getorderDetail(String memberNo) throws Exception {
+	public ArrayList<OrderVo> getorderDetail(String memberNo) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
 
 		OrderDao dao = new OrderDao();
-		OrderVo vo = dao.getorderDetail(conn, memberNo);
+		ArrayList<OrderVo> voList = dao.getorderDetail(conn, memberNo);
 
 		JDBCTemplate.close(conn);
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("vo", vo);
-		
-		return map;
+		return voList;
 
 	}
 
