@@ -86,6 +86,7 @@
 </html>
 
 <script>
+    console.log("${cardVo.cardNo}");
     const pointBox = document.querySelector("#user-point");
     const payPrice = document.querySelector("#pay-price");
     const spendPoint = document.querySelector("#spendPoint");
@@ -93,15 +94,13 @@
 
     spendPoint.value = "0";
 
-
-    console.log("사용포인트 : " + spendPoint.value  );
-    console.log("총 가격 : " + totalPrice.value  );
+    console.log("${cardVo.cardNo}");
     pointBox.addEventListener("blur", changePoint);
 
     function changePoint(event) {
         const inputBox = event.target;
         let inputPoint = parseInt(inputBox.value); 
-        let userPoint = parseInt( ${loginMember.point} );
+        let userPoint = parseInt( "${loginMember.point}" );
         
         if(inputPoint > userPoint ){
             let changeValue = userPoint.toString();
@@ -116,14 +115,11 @@
             spendPoint.value = pointBox.value;
             payPrice.value = payPrice.innerText;
             totalPrice.value = payPrice.value;
-            console.log("사용포인트 : " + spendPoint.value  );
-            console.log("총 가격 : " + totalPrice.value  );
         } 
     }
 
 
     function goRegist(){
         location.href='/rushwash/payment/card-regist';
-
     }
 </script>

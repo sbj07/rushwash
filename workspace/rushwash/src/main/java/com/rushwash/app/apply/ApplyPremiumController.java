@@ -60,9 +60,9 @@ public class ApplyPremiumController extends HttpServlet {
 			
 			// 할인율json 리스트에추가
 			jsonList.add(discountRate);
-						
 			//view
 			String json = new Gson().toJson(jsonList);
+			
 			if(isShow != null) 
 			{
 				PrintWriter out = resp.getWriter();

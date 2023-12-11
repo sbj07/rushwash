@@ -15,11 +15,11 @@ import com.rushwash.app.payment.vo.UserLaundryVo;
 public class PaymentDao {
 
 	public CardVo getCardInfo(Connection conn, String memberNo) throws Exception {
-//		String sql = "SELECT C.NO , C.CARD_COMPANY , C.CARD_NO , C.CVC_NO , C.CARD_PWD , C.VALIDITY_PERIOD , P.PAYMENT_DATE FROM CARD_INFO C JOIN MEMBER M ON C.MEMBER_NO = M.NO JOIN PAYMENT_INFO P ON C.NO = P.CARD_NO WHERE M.NO = ?";
 		String sql = "SELECT C.NO , C.CARD_COMPANY , C.CARD_NO , C.CVC_NO , C.CARD_PWD , C.VALIDITY_PERIOD FROM CARD_INFO C JOIN MEMBER M ON C.MEMBER_NO = M.NO WHERE M.NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 		ResultSet rs = pstmt.executeQuery();
+		
 		CardVo vo = new CardVo();
 		if(rs.next()) {
 			String no = rs.getString("NO");
@@ -37,7 +37,6 @@ public class PaymentDao {
 			vo.setCardPwd(cardPwd);
 			vo.setValidityPeriod(validityPeriod);
 		}
-		System.out.println(vo);
 		
 		JDBCTemplate.close(rs);
 		JDBCTemplate.close(pstmt);
@@ -113,7 +112,7 @@ public class PaymentDao {
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, cardVo.getMemberNo());
 		pstmt.setString(2, cardVo.getCardCompany());
-		pstmt.setString(3, cardVo.getCardNo());
+		pstmt.setString(3, cardVo.getOriginCardNo());
 		pstmt.setString(4, cardVo.getCvcNo());
 		pstmt.setString(5, cardVo.getCardPwd());
 		pstmt.setString(6, cardVo.getValidityPeriod());
@@ -128,7 +127,7 @@ public class PaymentDao {
 		String sql = "UPDATE CARD_INFO SET CARD_COMPANY = ? ,CARD_NO = ? ,CVC_NO = ? ,CARD_PWD = ? ,VALIDITY_PERIOD =? WHERE MEMBER_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, cardVo.getCardCompany());
-		pstmt.setString(2, cardVo.getCardNo());
+		pstmt.setString(2, cardVo.getOriginCardNo());
 		pstmt.setString(3, cardVo.getCvcNo());
 		pstmt.setString(4, cardVo.getCardPwd());
 		pstmt.setString(5, cardVo.getValidityPeriod());

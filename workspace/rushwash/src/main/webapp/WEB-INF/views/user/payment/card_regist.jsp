@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,6 +8,12 @@
 <title>결제수단등록</title>
 <link rel="stylesheet" href="/rushwash/resources/css/user/payment/card_regist.css">
 </head>
+
+<script>
+    <c:if test="${ not empty alertMsg}">
+        alert("${alertMsg}");
+    </c:if>
+</script>
 <body>
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
     <main>
@@ -14,20 +21,22 @@
 
             <div class="form-body form-header">결제수단 등록</div>
 
-            <div class="form-body form-content">
-                <span>현재 결제 수단</span>
-                <hr>
-                <table class="form-table">
-                    <tr>
-                        <td>카드사</td>
-                        <td>${cardVo.cardCompany}</td>
-                    </tr>
-                    <tr>
-                        <td>카드번호</td>
-                        <td>${cardVo.cardNo}</td>
-                    </tr>
-                </table>
-            </div>
+            <c:if test="${not empty cardVo}">
+                <div class="form-body form-content">
+                        <span>현재 결제 수단</span>
+                        <hr>
+                    <table class="form-table">
+                        <tr>
+                            <td>카드사</td>
+                            <td>${cardVo.cardCompany}</td>
+                        </tr>
+                        <tr>
+                            <td>카드번호</td>
+                            <td>${cardVo.cardNo}</td>
+                        </tr>
+                    </table>
+                </div>
+            </c:if>
 
             <form action="/rushwash/payment/card-regist" method="post">
 
@@ -79,3 +88,4 @@
     <%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %>
 </body>
 </html>
+
