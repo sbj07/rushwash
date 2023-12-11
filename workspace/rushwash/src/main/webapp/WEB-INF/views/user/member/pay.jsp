@@ -38,13 +38,13 @@
                         <input type="text" id="memberName" name="memberName" value="<%= vo.getCardCompany() %>" readonly> 
                         <p>결제정보</p>
                         <input type="text" id="memberName" name="memberName" value="<%= vo.getCardNo() %>" readonly>   
-                        <button id="delete-card" onclick="">삭제</button>                                        
+                        <button type="button" id="delete-card" onclick="location.href='/rushwash/payment/card-regist'">변경</button>                                        
                     <% } else { %>
                     	<p>카드</p>
                         <input type="text" id="memberName" name="memberName" readonly> 
                         <p>결제정보</p>
                         <input type="text" id="memberName" name="memberName" readonly>   
-                        <button id="delete-card" onclick="">삭제</button> 
+                        <button type="button" id="delete-card" onclick="location href='/rushwash/payment/card-regist">변경</button> 
                     <% } %>
                     </form>
                    
