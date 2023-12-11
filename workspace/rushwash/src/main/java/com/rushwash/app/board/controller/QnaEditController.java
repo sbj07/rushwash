@@ -45,7 +45,7 @@ public class QnaEditController extends HttpServlet{
 		
 		System.out.println("~~~~~");
 		System.out.println(req.getSession().getAttribute("loginMember"));
-		System.out.println("~~~~~");
+	
 		
 		try {
 			String title = req.getParameter("title");
@@ -56,11 +56,10 @@ public class QnaEditController extends HttpServlet{
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setNo(no);
-			
 			QnaService qs = new QnaService();
 			int result = qs.edit(vo);
 			
-			if(result != 1) {
+			if(result != 0) {
 				throw new Exception();
 			}
 			resp.sendRedirect("/rushwash/board/qnadetail?no=" + no);

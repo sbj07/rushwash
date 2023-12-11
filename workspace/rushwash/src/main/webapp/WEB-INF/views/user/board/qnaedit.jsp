@@ -30,6 +30,7 @@
                     <td><textarea name="content" id="content" cols="100" rows="30" ><%= vo.getContent()%></textarea></td>
                 </tr>
                 <tr>
+                    <input type="hidden" name="no" value="<%= vo.getNo() %>">
                     
                     <td class="submit-cell" colspan="2"><input type="submit" value="수정하기" class="submit"></td>
                 </tr>

@@ -2,14 +2,8 @@ package com.rushwash.app.board.qna.vo;
 
 public class QnaVo {
 	
-	@Override
-	public String toString() {
-		return "QnaWriteVo [no=" + no + ", managerNo=" + managerNo + ", managerId=" + managerId + ", commt=" + commt
-				+ ", enrollDate=" + enrollDate + ", delYn=" + delYn + ", title=" + title + ", content=" + content
-				+ ", secretYn=" + secretYn + ", memberNo=" + memberNo + "]";
-	}
 	public QnaVo(String no, String managerNo, String managerId, String commt, String enrollDate, String delYn,
-			String title, String content, String secretYn, String memberNo) {
+			String title, String content, String secretYn, String memberNo, String modifyDate) {
 		super();
 		this.no = no;
 		this.managerNo = managerNo;
@@ -21,6 +15,7 @@ public class QnaVo {
 		this.content = content;
 		this.secretYn = secretYn;
 		this.memberNo = memberNo;
+		this.modifyDate = modifyDate;
 	}
 	public QnaVo() {
 		super();
@@ -86,6 +81,12 @@ public class QnaVo {
 	public void setMemberNo(String memberNo) {
 		this.memberNo = memberNo;
 	}
+	public String getModifyDate() {
+		return modifyDate;
+	}
+	public void setModifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
+	}
 	private String no;
 	private String managerNo;
 	private String managerId;
@@ -96,5 +97,6 @@ public class QnaVo {
 	private String content;
 	private String secretYn;
 	private String memberNo;
+	private String modifyDate;
 	
 }
