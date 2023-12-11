@@ -23,11 +23,13 @@ public class QnaWriteCommt extends HttpServlet{
 			HttpSession session = req.getSession();
 			
 			// data
+			ManagerVo loginManager = (ManagerVo) session.getAttribute("loginManager");
 			String commt = req.getParameter("commt");
 			String no = req.getParameter("no");
 			
 			QnaVo vo = new QnaVo();
 			vo.setCommt(commt);
+			vo.setManagerId(loginManager.getId());
 			
 			// service
 			QnaService bs = new QnaService();

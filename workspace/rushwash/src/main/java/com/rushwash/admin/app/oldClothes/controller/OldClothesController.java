@@ -55,10 +55,13 @@ public class OldClothesController extends HttpServlet{
             // Extract values from the parsed object
             String no = getString(jsonData, "no");
             String status = getString(jsonData, "status");
+            String collectDate = getString(jsonData, "collectDate");
 
             OldClothesVo vo = new OldClothesVo();
             vo.setNo(no);
             vo.setStatus(status);
+            vo.setCollectDate(collectDate);
+            System.out.println(vo);
             
             //service
             int result = os.submitStatus(vo);

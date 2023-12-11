@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.rushwash.admin.app.board.faq.service.FaqService;
 import com.rushwash.admin.app.board.faq.vo.FaqVo;
 import com.rushwash.admin.app.manager.vo.ManagerVo;
+import com.rushwash.app.member.vo.MemberVo;
 
 @WebServlet("/admin/board/faqWrite")
 public class FaqWriteController extends HttpServlet{
@@ -31,21 +32,24 @@ public class FaqWriteController extends HttpServlet{
 			HttpSession session = req.getSession();
 			
 			// data
+			ManagerVo loginManager = (ManagerVo) session.getAttribute("loginManager");
+			System.out.println(loginManager);
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
 			
 			
-			ManagerVo loginManager = new ManagerVo();
+			
 //			ManagerVo loginManager = (ManagerVo)session.getAttribute("loginManager");
 			
-//			if(loginManager == null) {
-//				throw new Exception("로그인 안했음");
-//			}
+			if(loginManager == null) {
+				throw new Exception("로그인 안했음");
+			}
 			
 			FaqVo vo = new FaqVo();
 			vo.setTitle(title);
 			vo.setContent(content);
-			vo.setManagerId(loginManager.getNo());
+			vo.setManagerId(loginManager.getId());
+			System.out.println("로그인 매니저:"+ vo.getManagerId());
 			
 			// service
 			FaqService bs = new FaqService();

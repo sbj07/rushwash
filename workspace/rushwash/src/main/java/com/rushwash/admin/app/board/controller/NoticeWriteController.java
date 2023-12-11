@@ -35,17 +35,17 @@ public class NoticeWriteController extends HttpServlet{
 			String content = req.getParameter("content");
 			
 			
-			ManagerVo loginManager = new ManagerVo();
-//			ManagerVo loginManager = (ManagerVo)session.getAttribute("loginManager");
+//			ManagerVo loginManager = new ManagerVo();
+			ManagerVo loginManager = (ManagerVo)session.getAttribute("loginManager");
 			
-//			if(loginManager == null) {
-//				throw new Exception("로그인 안했음");
-//			}
+			if(loginManager == null) {
+				throw new Exception("로그인 안했음");
+			}
 			
 			NoticeVo vo = new NoticeVo();
 			vo.setTitle(title);
 			vo.setContent(content);
-			vo.setManagerId(loginManager.getNo());
+			vo.setManagerId(loginManager.getId());
 			
 			// service
 			NoticeService bs = new NoticeService();

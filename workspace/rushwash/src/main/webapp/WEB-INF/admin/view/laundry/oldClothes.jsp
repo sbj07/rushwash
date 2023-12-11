@@ -165,10 +165,25 @@
  		  let formData = {
  				no: no,
                 status: document.querySelector('#statusForm_' + no + ' select[name="status"]').value
+              
+                
             };
  		  // 데이터를 JSON 방식으로
  		  let jsonString = JSON.stringify(formData);
-
+ 		  
+ 		  if (formData.status === "2") {
+ 	        // 수거일자 값을 현재 날짜 및 시간으로 변경합니다.
+ 	        var collectDateElement = document.querySelector('#statusForm_' + no + ' td:nth-child(4)');
+ 	        collectDateElement.textContent = new Date().toLocaleString(); // 현재 날짜 및 시간을 표시
+ 		  }else if(formData.status === "3"){
+ 			 // 제출 버튼을 비활성화하고 이벤트 리스너를 제거
+              var submitButton = document.querySelector('#statusForm_' + no + ' input[type="button"]');
+              submitButton.disabled = true;
+              submitButton.removeEventListener('click', function () {
+                  submitForm(no);
+              });
+ 		  }
+ 		  
  		  // URL 전달 패치 (옵션 : 포스트, json, body지정)
  		  fetch('http://127.0.0.1:8080/rushwash/admin/clothes', {
  		    method: 'POST',

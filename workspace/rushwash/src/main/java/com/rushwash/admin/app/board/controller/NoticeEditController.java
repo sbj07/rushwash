@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.rushwash.admin.app.board.notice.service.NoticeService;
 import com.rushwash.admin.app.board.notice.vo.NoticeVo;
+import com.rushwash.admin.app.manager.vo.ManagerVo;
 
 
 @WebServlet("/admin/board/notice/edit")
@@ -47,8 +49,10 @@ public class NoticeEditController extends HttpServlet{
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 			try {
+HttpSession session = req.getSession();
 				
-				//data
+				// data
+				ManagerVo loginManager = (ManagerVo) session.getAttribute("loginManager");
 				String title = req.getParameter("title");
 				String content = req.getParameter("content");
 				String no = req.getParameter("no");
@@ -57,6 +61,7 @@ public class NoticeEditController extends HttpServlet{
 				vo.setTitle(title);
 				vo.setContent(content);
 				vo.setNo(no);
+				vo.setManagerId(loginManager.getId());
 				
 				//service
 				NoticeService bs = new NoticeService();

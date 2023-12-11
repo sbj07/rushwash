@@ -123,16 +123,17 @@ public class FaqDao {
 	      
 	      return result;
 	   }//delete
-
+	   
+	   //게시글 작성
 	   public int write(Connection conn, FaqVo vo) throws Exception {
 		//SQL
-	      String sql = "INSERT INTO FAQ (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) VALUES ( SEQ_FAQ_NO.NEXTVAL, ?, ?, 2, SYSDATE)";
+	      String sql = "INSERT INTO FAQ (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) SELECT SEQ_FAQ_NO.NEXTVAL, ?, ?, m.NO, SYSDATE FROM MANAGER m WHERE m.MANAGER_ID = ?";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
-//	      pstmt.setString(1, vo.getNo());
 	      pstmt.setString(1, vo.getTitle());
 	      pstmt.setString(2, vo.getContent());
-//	      pstmt.setString(3, vo.getManagerNo());
+	      pstmt.setString(3, vo.getManagerId());
 	      int result = pstmt.executeUpdate();
+	      System.out.println("result값 : "+result);
 	      
 	      //close
 	      JDBCTemplate.close(pstmt);
@@ -143,11 +144,12 @@ public class FaqDao {
 	   // 게시글 수정
 	   public int updateFaqByNo(Connection conn, FaqVo vo, String no) throws Exception {
 		   // SQL
-		   String sql = "UPDATE FAQ SET TITLE = ? , CONTENT = ? WHERE NO = ?";
+		   String sql = "UPDATE FAQ SET TITLE = ?, CONTENT = ?, MANAGER_NO = (SELECT m.NO FROM MANAGER m WHERE m.MANAGER_ID = ?), ENROLL_DATE = SYSDATE WHERE NO = ?";
 		   PreparedStatement pstmt = conn.prepareStatement(sql);
 		   pstmt.setString(1, vo.getTitle());
 		   pstmt.setString(2, vo.getContent());
-		   pstmt.setString(3, vo.getNo());
+		   pstmt.setString(3, vo.getManagerId());
+		   pstmt.setString(4, vo.getNo());
 		   int result = pstmt.executeUpdate();
 		   
 		   // close
