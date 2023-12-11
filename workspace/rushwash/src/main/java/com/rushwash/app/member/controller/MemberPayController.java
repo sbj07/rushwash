@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import com.rushwash.app.member.service.MemberService;
 import com.rushwash.app.member.vo.MemberVo;
+import com.rushwash.app.payment.service.PaymentService;
+import com.rushwash.app.payment.vo.CardVo;
 
 @WebServlet("/member/pay")
 public class MemberPayController extends HttpServlet {
@@ -21,10 +23,11 @@ public class MemberPayController extends HttpServlet {
 
             MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
             
-            MemberService ms = new MemberService();
-            String payInfo = ms.getMemberPayInfo(loginMember.getNo());
-            
-            req.setAttribute("payInfo", payInfo);
+            PaymentService ps = new PaymentService();
+            CardVo cardVo = ps.getCardInfo(loginMember.getNo());
+            //String payInfo = ms.getMemberPayInfo(loginMember.getNo());
+            System.out.println(cardVo.getCardCompany());
+            req.setAttribute("cardVo", cardVo);
             req.getRequestDispatcher("/WEB-INF/views/user/member/pay.jsp").forward(req, resp);
 
         } catch(Exception e) {
