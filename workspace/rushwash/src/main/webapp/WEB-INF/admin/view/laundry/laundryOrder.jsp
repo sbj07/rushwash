@@ -237,14 +237,14 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
         trArr[i].addEventListener('click', handleClick);
     }
 
+    const tempArr = document.querySelectorAll(".not-click");
+    for(let i = 0 ; i < tempArr.length; ++i){
+    	tempArr[i].addEventListener('click' , function(event){
+    		event.stopPropagation();
+    	});
+    }
+    
     function handleClick(event) {
-    	const targetId = event.target.id;
-    	console.log(targetId);
-        // 클릭된 요소의 ID가 'not-click'이면 처리 중단
-        if (targetId.startsWith('statusForm_')) {
-            return;
-        }
-    	
         const tr = event.currentTarget;
         const no = tr.children[0].innerText;
         location.href = '/rushwash/admin/laundry/detail?orderNo=' + no;
