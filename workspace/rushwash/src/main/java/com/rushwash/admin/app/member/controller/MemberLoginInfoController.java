@@ -1,6 +1,8 @@
 package com.rushwash.admin.app.member.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.rushwash.admin.app.member.service.MemberService;
 import com.rushwash.admin.app.member.vo.MemberVo;
 
@@ -40,4 +44,48 @@ public class MemberLoginInfoController extends HttpServlet {
 		}
 		
 		}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        // Set the response content type
+        resp.setContentType("application/json");
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream()))) {
+            
+        	//DATA
+        	// Parse JSON data using Gson
+            JsonObject jsonData = JsonParser.parseReader(reader).getAsJsonObject();
+
+            // Extract values from the parsed object
+            String no = getString(jsonData, "no");
+            String delYn = getString(jsonData, "status");
+            MemberVo vo = new MemberVo();
+            vo.setNo(no);
+            vo.setDelYn(delYn);
+            
+            //service
+            MemberService ms = new MemberService();
+            int result = ms.submitStatus(vo);
+            
+            //result
+            if (result != 1) {
+				throw new Exception("[ERROR-L002]멤버상태 상태변경 실패");
+			}
+            
+            resp.sendRedirect("/rushwash/admin/member/loginInfo");
+
+        } catch (Exception e) {
+        	System.out.println(e.getMessage());
+			e.printStackTrace();
+			req.setAttribute("errMsg", "멤버상태 상태변경 실패");
+			req.getRequestDispatcher("/WEB-INF/admin/view/common/error.jsp").forward(req, resp);
+        }
+    }
+
+    // Helper method to get an integer with null handling
+    private String getString(JsonObject jsonObject, String key) {
+        return jsonObject.has(key) ? jsonObject.getAsJsonPrimitive(key).getAsString() : ""; // 최종null""
+    }
+	
 }

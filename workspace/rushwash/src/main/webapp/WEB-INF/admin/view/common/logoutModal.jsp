@@ -14,7 +14,7 @@
                 <div class="modal-body">로그아웃을 원하시면 '로그아웃'을 클릭해주세요.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                    <a class="btn btn-primary" href="/rushwash/admin/login" onclick="<%session.invalidate();%>">로그아웃</a>
+                    <a class="btn btn-primary" href="/rushwash/admin/logout">로그아웃</a>
                 </div>
             </div>
         </div>

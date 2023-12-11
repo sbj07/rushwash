@@ -9,76 +9,77 @@ import com.rushwash.admin.app.laundry.vo.LaundryVo;
 import com.rushwash.admin.app.laundry.vo.OrderVo;
 
 public class LaundryService {
-	
+
 	LaundryDao dao = new LaundryDao();
-	
-	//상세세탁물 리스트 불러오기
+
+	// 상세세탁물 리스트 불러오기
 	public List<LaundryVo> getLaundryList() throws Exception {
-		//conn
+		// conn
 		Connection conn = JDBCTemplate.getConnection();
-		
-		//dao
+
+		// dao
 		List<LaundryVo> voList = dao.getLaundryList(conn);
 
-		//close
+		// close
 		JDBCTemplate.close(conn);
-		
+
 		return voList;
 	}
 
-	//상세세탁물 상태값 갱신
+	// 상세세탁물 상태값 갱신
 	public int submitStatus(LaundryVo vo) throws Exception {
-		//conn
+		// conn
 		Connection conn = JDBCTemplate.getConnection();
-		
-		//dao
-		int result = dao.submitStatus(conn,vo);
-		
-		//tx
-		if(result == 1) {
+
+		// dao
+		int result = dao.submitStatus(conn, vo);
+
+		// tx
+		if (result == 1) {
 			JDBCTemplate.commit(conn);
-		}else {
+		} else {
 			JDBCTemplate.rollback(conn);
 		}
-		
-		//close
+
+		// close
 		JDBCTemplate.close(conn);
-		
+
 		return result;
 	}
-	
-	//세탁주문 리스트 불러오기
-		public List<OrderVo> getOrderList() throws Exception {
-			//conn
-			Connection conn = JDBCTemplate.getConnection();
-			
-			//dao
-			List<OrderVo> voList = dao.getOrderList(conn);
 
-			//close
-			JDBCTemplate.close(conn);
-			
-			return voList;
+	// 세탁주문 리스트 불러오기
+	public List<OrderVo> getOrderList() throws Exception {
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+
+		// dao
+		List<OrderVo> voList = dao.getOrderList(conn);
+
+		// close
+		JDBCTemplate.close(conn);
+
+		return voList;
+	}
+
+	// 세탁주문 상태값 갱신
+	public int submitOrderStatus(OrderVo vo) throws Exception {
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+
+		// dao
+		int result = dao.submitOrderStatus(conn, vo);
+
+		// tx
+		if (result == 1) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
 		}
 
-		public int submitOrderStatus(OrderVo vo) throws Exception {
-			//conn
-			Connection conn = JDBCTemplate.getConnection();
-			
-			//dao
-			int result = dao.submitOrderStatus(conn,vo);
-			
-			//tx
-			if(result == 1) {
-				JDBCTemplate.commit(conn);
-			}else {
-				JDBCTemplate.rollback(conn);
-			}
-			
-			//close
-			JDBCTemplate.close(conn);
-			
-			return result;
-		}
+		// close
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
 
 }

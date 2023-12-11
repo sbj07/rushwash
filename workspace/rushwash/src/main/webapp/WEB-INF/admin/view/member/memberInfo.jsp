@@ -33,7 +33,7 @@
 						class="d-sm-flex align-items-center justify-content-between mb-4">
 						<h1 class="h3 mb-0 text-gray-800">전체 유저 조회</h1>
 					</div>
-					<p class="mb-4">모든 유저의 기본정보를 확인합니다. 강제탈퇴 처리 또한 이 페이지에서 가능합니다.</p>
+					<p class="mb-4">모든 유저의 기본정보를 조회합니다.</p>
 
 					<!-- End of Main Content -->
 
@@ -95,10 +95,7 @@
 											</td>
 											<td><%=vo.getPoint() %></td>
 											<td>
-											<select class="custom-select" name="status">
-													<option value="N">N</option>
-													<option value="Y">Y</option>
-											</select>
+												<%=vo.getDelYn()%>
 											</td>
 										</tr>
 									<%} %>
@@ -126,28 +123,5 @@
 	<%@ include file="/WEB-INF/admin/view/common/logoutModal.jsp"%>
 
 </body>
-
-<script type="text/javascript">
-     // Use querySelectorAll to select all elements with the class "custom-select"
-    var statusSelects = document.querySelectorAll(".custom-select");
-
- // Add event listener to each selected element
-    statusSelects.forEach(function(statusSelect) {
-      // Get the initial selected value
-      var selectedValue = statusSelect.value;
-
-      // Set the background color based on the initial selected value
-      switch (selectedValue) {
-        case "Y":
-          statusSelect.style.backgroundColor = "lightcoral";
-          break;
-        case "N":
-          statusSelect.style.backgroundColor = "lightblue";
-          break;
-        default:
-          statusSelect.style.backgroundColor = ""; // Reset to default
-      }
-    });
-</script>
 
 </html>

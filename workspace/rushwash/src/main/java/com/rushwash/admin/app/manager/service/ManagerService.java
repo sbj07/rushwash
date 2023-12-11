@@ -6,6 +6,7 @@ import java.util.List;
 import com.rushwash.admin.app.db.util.JDBCTemplate;
 import com.rushwash.admin.app.manager.dao.ManagerDao;
 import com.rushwash.admin.app.manager.vo.ManagerVo;
+import com.rushwash.admin.app.member.vo.MemberVo;
 
 public class ManagerService {
 
@@ -90,5 +91,26 @@ public class ManagerService {
 		
 		return isOk;
 	}
+
+	// 로그인정보 상태값 갱신
+		public int submitStatus(ManagerVo vo) throws Exception {
+			// conn
+			Connection conn = JDBCTemplate.getConnection();
+
+			// dao
+			int result = dao.submitStatus(conn, vo);
+
+			// tx
+			if (result == 1) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+
+			// close
+			JDBCTemplate.close(conn);
+
+			return result;
+		}
 
 }
