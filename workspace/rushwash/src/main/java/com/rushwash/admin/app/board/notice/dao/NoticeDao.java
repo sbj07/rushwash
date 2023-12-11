@@ -128,10 +128,11 @@ public class NoticeDao {
 	   //게시글 작성
 	   public int write(Connection conn, NoticeVo vo) throws Exception {
 		//SQL
-	      String sql = "INSERT INTO NOTICE (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) VALUES ( SEQ_NOTICE_NO.NEXTVAL, ?, ?, 2, SYSDATE)";
+	      String sql = "INSERT INTO NOTICE (NO, TITLE, CONTENT, MANAGER_NO, ENROLL_DATE) SELECT SEQ_NOTICE_NO.NEXTVAL, ?, ?, m.NO, SYSDATE FROM MANAGER m WHERE m.MANAGER_ID = ?";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, vo.getTitle());
 	      pstmt.setString(2, vo.getContent());
+	      pstmt.setString(3, vo.getManagerId());
 	      int result = pstmt.executeUpdate();
 	      
 	      //close
@@ -143,11 +144,13 @@ public class NoticeDao {
 	   // 게시글 수정
 	   public int updateNoticeByNo(Connection conn, NoticeVo vo, String no) throws Exception {
 		   // SQL
-		   String sql = "UPDATE NOTICE SET TITLE = ? , CONTENT = ? WHERE NO = ?";
+		   String sql = "UPDATE NOTICE SET TITLE = ?, CONTENT = ?, MANAGER_NO = (SELECT m.NO FROM MANAGER m WHERE m.MANAGER_ID = ?), ENROLL_DATE = SYSDATE WHERE NO = ?";
+		   
 		   PreparedStatement pstmt = conn.prepareStatement(sql);
 		   pstmt.setString(1, vo.getTitle());
 		   pstmt.setString(2, vo.getContent());
-		   pstmt.setString(3, vo.getNo());
+		   pstmt.setString(3, vo.getManagerId());
+		   pstmt.setString(4, vo.getNo());
 		   int result = pstmt.executeUpdate();
 		   
 		   // close

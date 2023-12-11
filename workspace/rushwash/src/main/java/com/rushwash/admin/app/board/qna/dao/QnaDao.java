@@ -140,10 +140,11 @@ public class QnaDao {
 	   //댓글 작성
 		public int write(Connection conn, QnaVo vo, String no) throws Exception {
 			//SQL
-		      String sql = "UPDATE QNA SET  COMMT = ? WHERE NO = ?";
+		      String sql = "UPDATE QNA SET COMMT = ?, MANAGER_NO = (SELECT m.NO FROM MANAGER m WHERE m.MANAGER_ID = ?), ENROLL_DATE = SYSDATE WHERE NO = ?";
 		      PreparedStatement pstmt = conn.prepareStatement(sql);
 		      pstmt.setString(1, vo.getCommt());
-		      pstmt.setString(2, no);
+		      pstmt.setString(2, vo.getManagerId());
+		      pstmt.setString(3, no);
 		      int result = pstmt.executeUpdate();
 		      //close
 		      JDBCTemplate.close(pstmt);
