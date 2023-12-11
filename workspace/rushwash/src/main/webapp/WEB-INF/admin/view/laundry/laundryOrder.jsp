@@ -32,7 +32,7 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 					<!-- Page Heading(페이지 제목) -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">세탁물 관리</h1>
+						<h1 class="h3 mb-0 text-gray-800">세탁주문 관리</h1>
 					</div>
 					<p class="mb-4">정렬이 가능하며, 각 주문은 세탁상태가 모두 "세탁완료"가 될 경우, 배송이
 						시작됩니다.</p>
@@ -50,7 +50,7 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 									<thead>
 										<tr>
 											<th>주문번호</th>
-											<th>유저번호</th>
+											<th>유저이름</th>
 											<th>결제가격</th>
 											<th>결제일</th>
 											<th>수거일</th>
@@ -65,7 +65,7 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 									<tfoot>
 										<tr>
 											<th>주문번호</th>
-											<th>유저번호</th>
+											<th>유저이름</th>
 											<th>결제가격</th>
 											<th>결제일</th>
 											<th>수거일</th>
@@ -83,7 +83,7 @@ List<OrderVo> voList = (List<OrderVo>) request.getAttribute("voList");
 										%>
 										<tr>
 											<td><%=vo.getOrderNo()%></td>
-											<td><%=vo.getMemberNo()%></td>
+											<td><%=vo.getMemberName()%></td>
 											<td><%=vo.getPrice()%></td>
 											<td><%=vo.getPaymentDate()%></td>
 											<td><%=vo.getCollectDate()%></td>

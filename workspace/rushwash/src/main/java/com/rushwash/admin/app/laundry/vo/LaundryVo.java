@@ -28,6 +28,7 @@ public class LaundryVo {
 	private String statusNo;
 	private String status;
 	private String delYn;
+	private String memberName;
 	
 	public String getOrderNo() {
 		return orderNo;
@@ -90,11 +91,18 @@ public class LaundryVo {
 	public void setStatusNo(String statusNo) {
 		this.statusNo = statusNo;
 	}
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 	@Override
 	public String toString() {
 		return "LaundryVo [orderNo=" + orderNo + ", memberNo=" + memberNo + ", no=" + no + ", item=" + item + ", ea="
 				+ ea + ", washStartDate=" + washStartDate + ", washEndDate=" + washEndDate + ", statusNo=" + statusNo
-				+ ", status=" + status + ", delYn=" + delYn + "]";
+				+ ", status=" + status + ", delYn=" + delYn + ", memberName=" + memberName + "]";
 	}
 	
 	

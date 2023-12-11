@@ -15,7 +15,7 @@ public class LaundryDao {
 	//상세세탁물 리스트 불러오기
 	public List<LaundryVo> getLaundryList(Connection conn) throws Exception {
 		//sql
-		String sql = "SELECT L.*,LO.MEMBER_NO, LS.STATUS , I.NAME FROM LAUNDRY L LEFT JOIN LAUNDRY_ORDER LO ON L.ORDER_NO=LO.NO LEFT JOIN LAUNDRY_STATUS LS ON L.LAUNDRY_STATUS = LS.NO LEFT JOIN ITEM I ON I.NO = L.ITEM_NO LEFT JOIN ITEM_CATEGORY IC ON IC.NO = L.ITEM_NO";
+		String sql = "SELECT m.name as memberName, L.*,LO.MEMBER_NO, LS.STATUS , I.NAME FROM LAUNDRY L LEFT JOIN LAUNDRY_ORDER LO ON L.ORDER_NO=LO.NO LEFT JOIN LAUNDRY_STATUS LS ON L.LAUNDRY_STATUS = LS.NO LEFT JOIN ITEM I ON I.NO = L.ITEM_NO LEFT JOIN ITEM_CATEGORY IC ON IC.NO = L.ITEM_NO left join member m on lo.member_no=m.no";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -32,6 +32,7 @@ public class LaundryDao {
 			String status = rs.getString("STATUS");
 			String delYn = rs.getString("DEL_YN");
 			String statusNo = rs.getString("LAUNDRY_STATUS");
+			String memberName = rs.getString("MEMBERNAME");
 			
 			LaundryVo vo = new LaundryVo();
 			
@@ -45,6 +46,7 @@ public class LaundryDao {
 			vo.setStatus(status);
 			vo.setStatusNo(statusNo);
 			vo.setDelYn(delYn);
+			vo.setMemberName(memberName);
 			
 			voList.add(vo);
 		}
@@ -72,6 +74,7 @@ public class LaundryDao {
 		
 		return result;
 	}
+	//상세세탁물 상태 변경 시 세탁시작/세타종료일 sysdate update
 	
 	//상세세탁물 중 같은 주문번호끼리 모두 세탁완료(3)이 되면 오더를 배송중(4)로 변경
 	private int diliverLaundry(Connection conn,LaundryVo vo) throws Exception {
@@ -144,7 +147,7 @@ public class LaundryDao {
 	//세탁주문 리스트 불러오기
 	public List<OrderVo> getOrderList(Connection conn) throws Exception {
 		//sql
-		String sql = "select * from LAUNDRY_ORDER";
+		String sql = "select lo.*, m.name from LAUNDRY_ORDER lo join member m on lo.member_no=m.no";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -163,6 +166,7 @@ public class LaundryDao {
 			String address = rs.getString("ADDRESS");
 			String receiveDate = rs.getString("RECEIVE_DATE");
 			String delYn = rs.getString("DEL_YN");
+			String memberName = rs.getString("NAME");
 			
 			OrderVo vo = new OrderVo();
 			
@@ -178,6 +182,7 @@ public class LaundryDao {
 			vo.setAddress(address);
 			vo.setReceiveDate(receiveDate);
 			vo.setDelYn(delYn);
+			vo.setMemberName(memberName);
 			
 			voList.add(vo);
 		}
