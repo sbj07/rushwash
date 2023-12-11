@@ -60,6 +60,15 @@ public class OldClothesDao {
 		int pointUpdateResult;
 		PreparedStatement pointUpdateStmt = null;
 		//sql
+		if(vo.getStatus().equals("2") && vo.getCollectDate() == null) {
+			String dateUpdateSql = "update Old_Clothes set COLLECT_DATE = SYSDATE WHERE NO = ?";
+			PreparedStatement dateUpdateStmt = conn.prepareStatement(dateUpdateSql);
+			
+			dateUpdateStmt.setString(1, vo.getNo());
+			
+			int dateUpdateResult = dateUpdateStmt.executeUpdate();
+			
+		}
 		String statusUpdateSql = "update Old_Clothes set REQUSET_CODE=? WHERE no=?";
 		if(vo.getStatus().equals("3")) {
 			String pointUpdateSql = "UPDATE MEMBER SET POINT = POINT + ((SELECT WEIGHT FROM OLD_CLOTHES WHERE NO = ?)/10) WHERE NO = (SELECT MEMBER_NO FROM OLD_CLOTHES WHERE NO = ?)";
