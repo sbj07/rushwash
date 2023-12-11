@@ -18,11 +18,12 @@ main{
 }
 .img_font{
 	color: #bac2e4;
-	font-size: 25px;
+	font-size: 28px;
+	font-weight: bold;
 	margin-top: 10%;
 	margin-left: 20%;
 	padding-bottom: 10%;
-	
+	line-height: 2;
 }
 .img06{
 	padding-left: 20%;

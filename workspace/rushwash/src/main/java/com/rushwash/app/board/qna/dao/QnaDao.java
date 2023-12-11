@@ -10,6 +10,8 @@ import com.rushwash.admin.app.db.util.JDBCTemplate;
 import com.rushwash.admin.app.page.vo.PageVo;
 import com.rushwash.app.board.qna.vo.QnaVo;
 
+import oracle.jdbc.proxy.annotation.Pre;
+
 public class QnaDao {
 
 	
@@ -30,12 +32,12 @@ public class QnaDao {
 	}
 
 	//게시글 목록 조회
-	public List<QnaVo> selectQnaList(Connection conn, PageVo pvo) throws Exception {
+public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) throws Exception {
 		
 		
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.NO, T.TITLE, T.CONTENT, T.COMMT, T.MANAGER_ID, T.MEMBER_NO, TRUNC(SYSDATE) AS ENROLL_DATE, T.DEL_YN FROM ( SELECT N.NO, N.TITLE, N.CONTENT, N.COMMT, M.MANAGER_ID, N.MEMBER_NO, N.ENROLL_DATE, N.DEL_YN FROM QNA N JOIN MEMBER B ON N.MEMBER_NO = B.NO JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' AND N.MEMBER_NO = ? ORDER BY NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.NO, T.TITLE, T.CONTENT, T.COMMT, T.MANAGER_ID, T.MEMBER_NO, TO_CHAR(T.ENROLL_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS ENROLL_DATE, T.DEL_YN FROM ( SELECT N.NO, N.TITLE, N.CONTENT, N.COMMT, M.MANAGER_ID, N.MEMBER_NO, N.ENROLL_DATE, N.DEL_YN FROM QNA N JOIN MEMBER B ON N.MEMBER_NO = B.NO JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' AND N.MEMBER_NO = ? ORDER BY NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		//pstmt.setString(1, memberNo);
+		pstmt.setString(1, memberNo);
 	    pstmt.setInt(2, pvo.getStartRow());
 	    pstmt.setInt(3, pvo.getLastRow());
 		ResultSet rs = pstmt.executeQuery();
@@ -52,7 +54,6 @@ public class QnaDao {
 			String managerId = rs.getString("MANAGER_ID");
 			String enrollDate = rs.getString("ENROLL_DATE");
 			String delYn = rs.getString("DEL_YN");
-			String memberNo = rs.getString("MEMBER_NO");
 			
 			
 			vo.setNo(no);
@@ -123,6 +124,35 @@ public class QnaDao {
 		JDBCTemplate.close(pstmt);
 		
 		return vo;
+	}
+
+	//게시글 수정
+	public int updateBoardByNo(Connection conn, QnaVo vo) throws Exception {
+		
+		String sql = "UPDATE QNA SET TITLE = ? , CONTENT = ? , MODIFY_DATE = SYSDATE WHERE NO = ? AND DEL_YN = 'N'";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, vo.getTitle());
+		pstmt.setString(2, vo.getContent());
+		pstmt.setString(3, vo.getNo());
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
+	}
+
+	//게시글 삭제
+	public int delete(Connection conn, String no, String memberNo) throws Exception {
+		
+		String sql = "UPDATE QNA SET DEL_YN = 'Y' WHERE NO = ? AND MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, no);
+		pstmt.setString(2, memberNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		
+		return result;
 	}
 
 }

@@ -30,10 +30,16 @@
                 </tr>
                 <tr class="third">
                     <td class="answer">답변</td>
-                    <td><%= vo.getCommt() %></td>
+                    <% if(vo.getCommt() == null ){%>
+                    	<td></td>                    
+                    <% }else {%>
+                    	<td><%= vo.getCommt() %></td>
+                    <%} %>
                 </tr>
             </table>
             <div class="btn">
+            	<button class="btn1" onclick="location.href='/rushwash/board/qnaedit?no=<%= vo.getNo() %>'">수정하기</button>
+				<button class="btn1" onclick="location.href='/rushwash/board/qnadelete?no=<%= vo.getNo() %>'">삭제하기</button>
             	<button class="btn1" onclick="go();">목록으로</button>
             </div>
         </div>

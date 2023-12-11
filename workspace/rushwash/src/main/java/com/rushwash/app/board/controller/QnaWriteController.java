@@ -27,8 +27,7 @@ public class QnaWriteController extends HttpServlet {
 
 		try {
 			// 인코딩
-			// req.setCharacterEncoding("UTF-8");
-
+			resp.setContentType("text/html;charset=UTF-8");
 			HttpSession session = req.getSession();
 
 			// data
@@ -53,8 +52,8 @@ public class QnaWriteController extends HttpServlet {
 			if (result != 1) {
 				throw new Exception("result 1이 아님");
 			}
-			req.getSession().setAttribute("alertMsg", "게시글이 작성 되었습니다.");
-			resp.sendRedirect("/rushwash/board/center");
+			
+			resp.getWriter().print("<script>alert('게시글이 작성 되었습니다.'); location.href='/rushwash/board/center';</script>");
 
 		} catch (Exception e) {
 			System.out.println("[ERROR]게시글 작성실패");

@@ -90,6 +90,7 @@ function handleClick(event){
 	const no = tr.children[0].innerText;
 	location.href = '/rushwash/board/noticewrite?no=' + no + '&currPage=<%= pvo.getCurrentPage() %>';	
 }
+
 	
 	<% if(searchMap != null){ %>
 		function setSearchArea(){

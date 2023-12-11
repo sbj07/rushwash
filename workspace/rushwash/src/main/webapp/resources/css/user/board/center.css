@@ -7,7 +7,7 @@
     --color-beige : #F6F6F6;
 }
 main{
-    height: 1500px;
+    height: 1000px;
     padding-top: 10%;
     display: flex;
 }
@@ -66,6 +66,10 @@ td:last-child {
 }
 .table-wrapper {
   margin: 20px; /* 선택 사항: 여백 조절 */
+}
+.text{
+	padding-top: 5%;
+	font-size: 13px;
 }
 #wrap{
 	margin-right: 3%;
