@@ -19,7 +19,18 @@ public class QnaDao {
 	   public List<QnaVo> selectQnaList(Connection conn, PageVo pvo) throws Exception{
 	      
 	      //SQL
-	      String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE , N.CONTENT , N.COMMT, M.MANAGER_ID , N.DEL_YN, N.ENROLL_DATE , N.SECRET_YN, ME.ID FROM QNA N JOIN MANAGER M ON N.MANAGER_NO = M.NO JOIN MEMBER ME ON N.MEMBER_NO = ME.NO WHERE N.DEL_YN = 'N' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+	      String sql = "SELECT RNUM, NO, TITLE, CONTENT, COMMT, MANAGER_ID, ENROLL_DATE, DEL_YN, SECRET_YN, ID FROM ( " +
+	              "  SELECT ROW_NUMBER() OVER (ORDER BY T.NO DESC) RNUM, T.* " +
+	              "  FROM ( " +
+	              "    SELECT QNA.NO, QNA.TITLE, QNA.CONTENT, QNA.COMMT, M.MANAGER_ID, " +
+	              "           QNA.ENROLL_DATE, QNA.DEL_YN, QNA.SECRET_YN, ME.ID " +
+	              "    FROM QNA " +
+	              "    LEFT JOIN MANAGER M ON QNA.MANAGER_NO = M.NO " +
+	              "    JOIN MEMBER ME ON QNA.MEMBER_NO = ME.NO " +
+	              "    WHERE QNA.DEL_YN = 'N' " +
+	              "    ORDER BY QNA.NO DESC " +
+	              "  ) T" +
+	              ") WHERE RNUM BETWEEN ? AND ?";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setInt(1, pvo.getStartRow());
 	      pstmt.setInt(2, pvo.getLastRow());
@@ -90,7 +101,11 @@ public class QnaDao {
 	   public QnaVo selectQnaByNo(Connection conn, String no) throws Exception{
 	      
 	      //SQL
-	      String sql = "SELECT N.NO, N.TITLE, N.CONTENT, M.MANAGER_ID, N.ENROLL_DATE, ME.ID, N.COMMT FROM QNA N JOIN MANAGER M ON N.MANAGER_NO = M.NO JOIN MEMBER ME ON N.MEMBER_NO = ME.NO WHERE N.NO = ?";
+	      String sql = "SELECT N.NO, N.TITLE, N.CONTENT, M.MANAGER_ID, N.ENROLL_DATE, ME.ID, N.COMMT\r\n"
+	      		+ "FROM QNA N\r\n"
+	      		+ "JOIN MEMBER ME ON N.MEMBER_NO = ME.NO\r\n"
+	      		+ "LEFT JOIN MANAGER M ON N.MANAGER_NO = M.NO -- 여기서 LEFT JOIN을 사용하여 MANAGER 테이블을 참조\r\n"
+	      		+ "WHERE N.NO = ?";
 	      PreparedStatement pstmt = conn.prepareStatement(sql);
 	      pstmt.setString(1, no);
 	      ResultSet rs = pstmt.executeQuery();
@@ -155,7 +170,7 @@ public class QnaDao {
 		//댓글삭제
 		public int commtDelete(Connection conn, String no) throws Exception {
 			//SQL
-		      String sql = "UPDATE QNA SET COMMT = '' WHERE NO = ?";
+		      String sql = "UPDATE QNA SET COMMT = NULL, MANAGER_NO = NULL WHERE NO = ?";
 		      PreparedStatement pstmt = conn.prepareStatement(sql);
 		      pstmt.setString(1, no);
 		      int result = pstmt.executeUpdate();
@@ -206,7 +221,6 @@ public class QnaDao {
 		         vo.setSecretYn(secretYn);
 		         
 		         QnaVoList.add(vo);
-		         System.out.println("검색결과 : "+vo);
 		      }
 		      
 		
@@ -224,7 +238,6 @@ public class QnaDao {
 			String sql = "SELECT COUNT(*) FROM QNA WHERE DEL_YN = 'N' AND " + m.get("searchType") + " LIKE '%' || ? || '%'";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.get("searchValue"));
-			System.out.println(m);
 			ResultSet rs = pstmt.executeQuery();
 			
 			// rs
