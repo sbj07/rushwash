@@ -25,12 +25,12 @@ public class MemberService {
 		    throw new Exception("아이디 형식이 잘못되었습니다.");
 		}
 
-		// 비밀번호 8~15자리, 특수문자 포함
+		// 비밀번호 8~16자리, 특수문자 포함
 		String pwd = vo.getMemberPwd();
-		boolean pwdOk = pwd.matches("[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{8,15}");
+		boolean pwdOk = pwd.matches("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[~!@#$%^&*()_+|<>?:{}]).{8,16}$");
 
 		if(!pwdOk) {
-		    throw new Exception("비밀번호는 특수문자를 포함한 8~15자리로 설정해주세요.");
+		    throw new Exception("비밀번호는 영문 대문자, 소문자, 숫자, 특수문자(~!@#$%^&*()_+|<>?:{})를 각각 최소 하나 이상 포함한 8~16자리로 설정해주세요.");
 		}
 
 		// 비밀번호 일치여부 체크
@@ -92,6 +92,23 @@ public class MemberService {
 		
 		//conn
 		Connection conn = JDBCTemplate.getConnection();
+		
+		// 아이디(6~12)자리
+		String id = vo.getMemberId();
+		boolean idOk = id.matches("[a-z0-9_-]{6,12}");
+
+		if(!idOk) {
+		    throw new Exception("아이디 형식이 잘못되었습니다.");
+		}
+		
+		// 비밀번호 8~16자리, 특수문자 포함
+		String pwd = vo.getMemberPwd();
+		boolean pwdOk = pwd.matches("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[~!@#$%^&*()_+|<>?:{}]).{8,16}$");
+
+		if(!pwdOk) {
+		    throw new Exception("비밀번호는 영문 대문자, 소문자, 숫자, 특수문자(~!@#$%^&*()_+|<>?:{})를 각각 최소 하나 이상 포함한 8~16자리로 설정해주세요.");
+		}
+		
 		//dao
 		MemberDao dao = new MemberDao();
 		MemberVo loginMember = dao.login(conn,vo);
@@ -119,6 +136,7 @@ public class MemberService {
 		return result;
 	}
 
+	//아이디 변경
 	public int idChange(String id, String newId) throws Exception {
 
 		//conn
@@ -128,11 +146,130 @@ public class MemberService {
 		MemberDao dao = new MemberDao();
 		int result = dao.idChange(conn, id, newId);
 		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
 		//close
 		JDBCTemplate.close(conn);
 		
 		return result;
 	}
 
+	//비번변경
+	public int pwdChange(String id, String pwd, String newPwd) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		int result = dao.pwdChange(conn, id, pwd, newPwd);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	//주소변경
+	public int addrChange(String id, String addr, String newAddr) throws Exception {
+	    //conn
+	    Connection conn = JDBCTemplate.getConnection();
+
+	    //dao
+	    MemberDao dao = new MemberDao();
+	    int result = dao.addrChange(conn, id, addr, newAddr); 
+
+	    //tx
+	    if(result == 1) {
+	        JDBCTemplate.commit(conn);
+	    } else {
+	        JDBCTemplate.rollback(conn);
+	    }
+
+	    //close
+	    JDBCTemplate.close(conn);
+
+	    return result;
+	}
+	
+	//회원탈퇴
+	public int delete(String id, String pwd) throws Exception {
+	
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		int result = dao.delete(conn , id , pwd);
+		
+		//tx
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//close
+		JDBCTemplate.close(conn);
+
+		return result;
+	}
+	
+	//이메일 중복체크
+	public boolean checkEmail(String memberEmail) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		boolean result = dao.checkEmail(conn, memberEmail);
+		
+		//close
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	//아이디 찾기
+	public String idFind(MemberVo vo) throws Exception {
+		
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		String memberId = dao.idFind(conn, vo);
+		//close
+		JDBCTemplate.close(conn);
+		
+		return memberId;
+	
+	}
+
+	//비번찾기
+	public String pwdFind(MemberVo vo) throws Exception {
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		String memberPwd = dao.pwdFind(conn, vo);
+		//close
+		JDBCTemplate.close(conn);
+		
+		return memberPwd;
+	}
 
 }

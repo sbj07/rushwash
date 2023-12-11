@@ -60,6 +60,22 @@
     margin-bottom: 50px;
 }
 
+.step-url {
+	position: absolute;
+    right: 10px;
+    top: 9.6%;
+    transform: translateY(20%);
+    background-color: #163172; 
+    color: white; 
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+  	margin-top: 26%;
+  	margin-right: 29%;
+}
+
+
 #input-contatiner > p:last-of-type {
     margin-bottom: 90px;  
 }

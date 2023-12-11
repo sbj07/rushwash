@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+   	String x = (String) request.getAttribute("errorMsg");
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,22 +27,39 @@
                     <h2 id="title">회원 탈퇴</h2> 
                 </div>     
                 <div id="user-info">
-                    <form id="user-info-form">
+                    <form action="/rushwash/member/quit" method="POST" id="user-info-form" onsubmit="return checkPwd()">
                         <p>아이디</p>
                         <input type="text" id="memberId" name="memberId" >                                            
                         <p>패스워드</p>
                         <input type="password" id="password" name="password" >   
                         <p>패스워드 재입력</p>
                         <input type="password" id="password2" name="password2">
+	                    <div id="btn01">
+                        <button type="submit" class="btn0">회원탈퇴하기</button>
+					    </div>
                     </form>
-                    <div id="btn01">
-                        <button class="btn0" onclick="">회원탈퇴하기</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 </body>
 <%@ include file='/WEB-INF/views/user/common/user_footer.jsp' %>
 </html>
+
+<script>
+<% if(x != null){ %>
+	alert('<%= x %>');
+<% } %>
+function checkPwd() {
+	const pwd = document.getElementById('password').value;
+	const pwd2 = document.getElementById('password2').value;
+	
+	if(pwd != pwd2) {
+		alert("비밀번호가 일치하지 않습니다.");
+		return false;
+	} else {
+		return true;
+	}
+}
+</script>
