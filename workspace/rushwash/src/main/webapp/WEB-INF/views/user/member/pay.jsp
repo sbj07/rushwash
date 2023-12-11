@@ -36,9 +36,9 @@
                     <form id="pay-form">
                     <c:if test="${ not empty loginMember }" > 
                     	<p>카드</p>
-                        <input type="text" id="cardNo" name="cardNo" value="${ loginMember.cardNo }" readonly> 
+                        <input type="text" id="cardNo" name="cardNo" value="${ cardVo.cardCompany }" readonly> 
                         <p>결제정보</p>
-                        <input type="text" id="cardCompany" name="cardCompany" value="${ loginMember.cardCompany }" readonly>   
+                        <input type="text" id="cardCompany" name="cardCompany" value="${ cardVo.cardNo }" readonly>   
                         <button type="button" id="delete-card" onclick="location.href='/rushwash/payment/card-regist'">변경</button>                                        
                    	</c:if>
                    	<c:if test="${ empty loginMember }" >
