@@ -76,7 +76,9 @@
 										<td><%= vo.getSecretYn() %></td>
 										<% if(vo.getManagerId() != null){ %>
 										<td><%= vo.getManagerId() %></td>
-										<%} %>
+										<%}else { %>
+											<td></td>
+											<%} %>
 									</tr>
 								<% } %>
 							</tbody>
