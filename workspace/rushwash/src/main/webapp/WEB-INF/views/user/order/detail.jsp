@@ -1,3 +1,4 @@
+<%@page import="com.rushwash.app.order.vo.OrderVo"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,52 +21,53 @@
        <br>
        <br>
     </div>
-	<div id="div4">총 가격 : ${vo.price}</div>
+   <div id="div4">총 가격 : ${totalprice}원</div>
     <div id="div2">
     <table id="tt00">
-				<thead>
-					<tr id="th1">
-						<th>상품</th>
-						<th>가격</th>
-						<th>수량</th>
-						<th>주문일</th>
-						<th>예상세탁완료일</th>
-						<th>진행상태</th>
-					</tr>
-				</thead>
-				<tbody>
-			
-					<c:forEach items="${voList }" var="vo">
-						<tr class="td2" id="td21">
-							<td>${vo.item}</td>
-							<td>${vo.price}</td>
-							<td>${vo.ea}</td>
-							<td>${vo.paymentDate }</td>
-							<td>${vo.expDate }</td>
-							<td>${vo.laundryStatus }</td>
-						</tr>
-					</c:forEach>
-					<tr class="td2" id="td22">
-						<td>수령인</td>
-						<td>핸드폰번호</td>
-						<td colspan="2">주소</td>
-						<td colspan="2">요청사항</td>
-					</tr>
-					<c:forEach items="${voList }" var="vo">
-						<tr class="td2" id="td23">
-							<td>${vo.memberName }</td>
-							<td>${vo.tel }</td>
-							<td colspan="2">${vo.address }</td>
-							<td colspan="2">${vo.request }</td>
-						</tr>
+            <thead>
+               <tr id="th1">
+                  <th>상품</th>
+                  <th>가격</th>
+                  <th>수량</th>
+                  <th>주문일</th>
+                  <th>예상세탁완료일</th>
+                  <th>진행상태</th>
+               </tr>
+            </thead>
+            <tbody>
+         
+               <c:forEach items="${voList }" var="vo">
+                  <tr class="td2" id="td21">
+                     <td>${vo.item}</td>
+                     <td>${vo.priceItem}</td>
+                     <td>${vo.ea}</td>
+                     <td>${vo.paymentDate }</td>
+                     <td>${vo.expDate }</td>
+                     <td>${vo.laundryStatus }</td>
+                  </tr>
+               </c:forEach>
+               <tr class="td2" id="td22">
+                  <td>수령인</td>
+                  <td>핸드폰번호</td>
+                  <td colspan="2">주소</td>
+                  <td colspan="2">요청사항</td>
+               </tr>
+                  <tr class="td2" id="td23">
+                     <td>${loginMember.memberName }</td>
+                     <td>${loginMember.memberTel }</td>
+                     <td colspan="2">${loginMember.memberAddress }</td>
+<%--                      <td colspan="2">${loginMember.request }</td> --%>
+                  </tr>
 
-					</c:forEach>
-				</tbody>
-			</table>
+            </tbody>
+         </table>
     </div>
 
     <div id="div3">
-		<button type="botton" >주문취소</button>
+    <form action="/rushwash/order/detail" method="post">
+    	<input type="hidden" name="orderNo" value="${orderDetailNo}">
+      <button type="botton" >주문취소</button>
+    </form>
     </div>
 </main>
 
