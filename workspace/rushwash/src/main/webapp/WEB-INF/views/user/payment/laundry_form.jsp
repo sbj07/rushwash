@@ -10,18 +10,15 @@
 <body>
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
     <main>
-        <form action="">
+        <form action="/rushwash//payment/laundry-form" method="post">
             <div class="form-box">
-
                 <div class="form-body form-header">세탁요청서 작성</div>
-
                 <div class="form-body form-content">
                     <span>수거/배송지 정보</span>
                     <hr>
                     <table class="form-table" id="addr-info">
                         <tr>
                             <td>수령인</td>
-                            <!-- <td><input type="text" id="user-name"></td> -->
                             <td><span>${ loginMember.memberName }</span></td>
                         </tr>
                         <tr>
@@ -45,16 +42,16 @@
                     <table class="form-table">
                         <tr>
                             <td>수량합계</td>
-                            <td colspan="2">15개</td>
+                            <td colspan="2">${ ea } 개</td>
                         </tr>
                         <tr>
                             <td>포인트 할인</td>
                             <td>보유포인트 : ${ loginMember.point }</td>
-                            <td><input type="text" id="user-point"></td>
+                            <td>사용 : <input type="text" id="user-point"></td>
                         </tr>
                         <tr>
                             <td>최종 결제 금액</td>
-                            <td colspan="2">15000 원</td>
+                            <td colspan="2"> <span name="pay-price" id="pay-price" value="3"> ${ price }</span>원</td>
                         </tr>
                     </table>
                 </div>
@@ -64,19 +61,22 @@
                     <table class="form-table">
                         <tr>
                             <td>카드사</td>
-                            <td>신한</td>
+                            <td>${ cardVo.cardCompany }</td>
                         </tr>
                         <tr>
                             <td>카드번호</td>
-                            <td>1234-1234-****-****</td>
+                            <td>${ cardVo.cardNo }</td>
                         </tr>
                         <tr>
-                            <td colspan="2"><button id="btn-card-regist">결제수단등록</button></td>
+                            <td colspan="2"><button type="button" onclick="goRegist()" id="btn-card-regist">결제수단등록</button></td>
                         </tr>
                     </table>
                 </div>
+                <input type="text" name="totalEa" id="totalEa" value="${ ea }" style="visibility: hidden; display: none;">
+                <input type="text" name="spendPoint" id="spendPoint" style="visibility: hidden; display: none;">
+                <input type="text" name="totalPrice" id="totalPrice" value="${ price }" style="visibility: hidden; display: none;">
                 <div class="form-body form-footer">
-                    <button id="btn-payment">결제하기</button>
+                    <button type="submit" id="btn-payment">결제하기</button>
                 </div>
             </div>
         </form>
@@ -84,3 +84,46 @@
     <%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %>
 </body>
 </html>
+
+<script>
+    const pointBox = document.querySelector("#user-point");
+    const payPrice = document.querySelector("#pay-price");
+    const spendPoint = document.querySelector("#spendPoint");
+    const totalPrice = document.querySelector("#totalPrice");
+
+    spendPoint.value = "0";
+
+
+    console.log("사용포인트 : " + spendPoint.value  );
+    console.log("총 가격 : " + totalPrice.value  );
+    pointBox.addEventListener("blur", changePoint);
+
+    function changePoint(event) {
+        const inputBox = event.target;
+        let inputPoint = parseInt(inputBox.value); 
+        let userPoint = parseInt( ${loginMember.point} );
+        
+        if(inputPoint > userPoint ){
+            let changeValue = userPoint.toString();
+            let payIntVal = parseInt(payPrice.innerText);
+            pointBox.value = changeValue;
+            let calc = payIntVal - userPoint;
+            if(calc > 0){
+                payPrice.innerText = calc;
+            } else {
+                payPrice.innerText = "0";
+            }
+            spendPoint.value = pointBox.value;
+            payPrice.value = payPrice.innerText;
+            totalPrice.value = payPrice.value;
+            console.log("사용포인트 : " + spendPoint.value  );
+            console.log("총 가격 : " + totalPrice.value  );
+        } 
+    }
+
+
+    function goRegist(){
+        location.href='/rushwash/payment/card-regist';
+
+    }
+</script>

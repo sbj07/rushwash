@@ -45,7 +45,10 @@ public class ApplyPremiumController extends HttpServlet {
 			//유저 구독정보 가져오기
 			PlanService planService = new PlanService();
 			String discountRate = planService.getDiscountRate(memberNo);
-			
+			if(discountRate.equals("0")) {
+				session.setAttribute("alertMsg","비구독회원은 한번이용을 선택해주세요!");
+				resp.sendRedirect("/rushwash/apply/request");
+			}
 			Gson gson = new Gson();
 			
 			//상품목록 리스트 json 변환
@@ -75,26 +78,34 @@ public class ApplyPremiumController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Enumeration<String> parameterNames = req.getParameterNames();
-		
-		List<ItemVo> itemList = new ArrayList<ItemVo>();
-		
-	    while (parameterNames.hasMoreElements()) {
-	        String paramName = parameterNames.nextElement();
-	        String itemNo = paramName.substring(4);
-	        String paramValue = req.getParameter(paramName);
-	        ItemVo vo = new ItemVo();
-	        
-	        vo.setItemNo(itemNo);
-	        vo.setEa(paramValue);
-	        
-	        if(!paramValue.equals("0")) {	        	
-	        	itemList.add(vo);
-	        }
-	    }
-	    
-	    req.setAttribute("selectedItemList", itemList);
-	    resp.sendRedirect("/rushwash/payment/laundry-form");
-//	    req.getRequestDispatcher("/WEB-INF/views/user/payment/laundry_form.jsp").forward(req, resp);
+		try {
+			Enumeration<String> parameterNames = req.getParameterNames();
+			
+			List<ItemVo> itemList = new ArrayList<ItemVo>();
+			ItemService itemService = new ItemService();
+			
+			
+		    while (parameterNames.hasMoreElements()) {
+		        String paramName = parameterNames.nextElement();
+		        String itemNo = paramName.substring(4);
+		        String paramValue = req.getParameter(paramName);
+		        ItemVo vo = new ItemVo();
+		        vo.setItemNo(itemNo);
+		        vo.setEa(paramValue);
+		        if(!paramValue.equals("0")) {	        	
+		        	String itemPrice = itemService.getPrice(itemNo);
+		        	vo.setPrice(itemPrice);
+		        	itemList.add(vo);
+		        }
+		    }
+		    HttpSession session = req.getSession();
+		    
+		    session.setAttribute("selectedItemList", itemList);
+		    resp.sendRedirect("/rushwash/payment/laundry-form");
+//		    req.getRequestDispatcher("/WEB-INF/views/user/payment/laundry_form.jsp").forward(req, resp);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

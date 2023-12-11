@@ -19,11 +19,11 @@
                 <table class="form-table">
                     <tr>
                         <td>카드사</td>
-                        <td>신한</td>
+                        <td>${cardVo.cardCompany}</td>
                     </tr>
                     <tr>
                         <td>카드번호</td>
-                        <td>1234-1234-****-****</td>
+                        <td>${cardVo.cardNo}</td>
                     </tr>
                 </table>
             </div>
@@ -36,21 +36,21 @@
                     <table class="form-table">
                         <tr>
                             <td>선택하신 플랜</td>
-                            <td>플랜명</td>
+                            <td>${gradeVo.subGrade}</td>
                         </tr>
                         <tr>
                             <td>월 결제 예정일</td>
-                            <td>sysdate</td>
+                            <td>${periodDate}</td>
                         </tr>
                         <tr>
                             <td>정기 결제 금액</td>
-                            <td>플랜별금액</td>
+                            <td>${gradeVo.price}</td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="form-body form-footer">
-                    <button id="btn-regist">결제하기</button>
+                    <button type="button" id="btn-regist" onclick="submitForm('${gradeVo.no}')">결제하기</button>
                 </div>
 
             </form>
@@ -59,3 +59,21 @@
     <%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %>
 </body>
 </html>
+
+<script>
+    function submitForm(planvalue){
+        let postForm = document.createElement('form');
+
+        let plan;
+        plan = document.createElement('input');
+        plan.setAttribute('type','hidden');
+        plan.setAttribute('name', 'planName');
+        plan.setAttribute('value', planvalue);
+
+        postForm.appendChild(plan);
+        postForm.setAttribute('method','post');
+        postForm.setAttribute('action', '/rushwash/payment/plan');
+        document.body.appendChild(postForm);
+        postForm.submit();
+    }
+</script>

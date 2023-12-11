@@ -48,15 +48,12 @@ document.getElementById('outer-category').addEventListener('click', outerButtonC
 
 // 시작시 데이터 받아와서 테이블 그리기
 document.addEventListener("DOMContentLoaded", function() {
-    fetch("/rushwash/apply/request/premium?showtable=true")
+    fetch("/rushwash/apply/request/once?showtable=true")
     .then(response => response.json())
     .then(data => {
         let parsedData = data.map(item => JSON.parse(item));
-        let discountRate = parsedData[parsedData.length - 1];
-        parsedData.forEach(function(i , idx , array){
-            if(idx !== array.length-1){
-                addColumn(i,discountRate);
-            }
+        parsedData.forEach(function(i){
+                addColumn(i);
         });
 
         onTable(1);
@@ -68,13 +65,11 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 //칼럼생성
-function addColumn(result , discountRate) {
+function addColumn(result) {
     let itemNo = result.itemNo;
     let itemName = result.name;
     let itemPrice = result.price;
     let categoryNo = result.categoryCode;
-    let rate = 100 - discountRate;
-    let premiumPrice = itemPrice * (rate/100);
 
     const resultTable = document.querySelector("#resultTable");
 
@@ -96,13 +91,10 @@ function addColumn(result , discountRate) {
     normalPriceTag.classList.add('normalPrice');
     normalPriceTag.classList.add('tr' + itemNo);
     
-    const premiumPriceTag = document.createElement("td");
-    premiumPriceTag.classList.add('premiumPrice');
-    premiumPriceTag.classList.add('tr' + itemNo);
-
-
     const eaTdTag = document.createElement("td");
-    
+    eaTdTag.classList.add('eaTd');
+    eaTdTag.setAttribute('colspan', '2');
+
     const eaDivTag = document.createElement("div");
     eaDivTag.classList.add('quantity');
 
@@ -115,13 +107,9 @@ function addColumn(result , discountRate) {
     normalPriceTag.innerText = itemPrice +'원';
     normalPriceTag.value = itemPrice;
 
-    premiumPriceTag.innerText = premiumPrice + '원';
-    premiumPriceTag.value = premiumPrice;
-
     eaTdTag.appendChild(eaDivTag);
     trTag.appendChild(nameTag);
     trTag.appendChild(normalPriceTag);
-    trTag.appendChild(premiumPriceTag);
     trTag.appendChild(eaTdTag);
     resultTable.appendChild(trTag);
 }
@@ -188,30 +176,21 @@ function sumEa() {
 
 // 총가격 변경
 function sumNormalPrice() {
-
     const normalSum = document.querySelector(".normalPriceSum")
-    const premiumSum = document.querySelector(".premiumPriceSum")
-
     const inputs = document.querySelectorAll(".quantity-input");
 
     let normarPriceValueSum = 0;
-    let premiumPriceValueSum = 0;
     inputs.forEach(element => {
 
        if(element.value != '0'){
         let trName = element.classList.item(2);
         let trs = document.querySelectorAll("."+trName);
         let normarPriceValue = trs[0].value;
-        let premiumPriceValue = trs[1].value;
         
         let normalText = Number(normarPriceValue) * Number(element.value);
         normarPriceValueSum += normalText;
-        
-        let premiumText = Number(premiumPriceValue) * Number(element.value)
-        premiumPriceValueSum += premiumText;
         }
     });
 
     normalSum.innerText = normarPriceValueSum;
-    premiumSum.innerText = premiumPriceValueSum;
 }

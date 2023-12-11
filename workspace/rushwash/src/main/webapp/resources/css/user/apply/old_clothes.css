@@ -49,14 +49,6 @@ main{
     border-top: 3px solid #5E74A1;
 }
 
-input {
-    margin-left: 20px;
-    vertical-align: middle;
-    border: 0;
-    width: fit-content;
-}
-
-
 .form-content2 {
     margin: 10% auto;
 
@@ -99,4 +91,8 @@ pre {
     width: fit-content;
     color: white;
 
+}
+
+.info-span{
+    margin-left: 30px;
 }

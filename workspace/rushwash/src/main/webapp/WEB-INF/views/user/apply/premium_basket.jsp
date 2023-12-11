@@ -49,7 +49,7 @@
                             <tr id="tfoot-bottom">
                                 <td><span class="eaSum" name="eaSum">0</span>개</td>
                                 <td>플랜 할인 가격</td>
-                                <td>15000원</td>
+                                <td><span class="premiumPriceSum">0</span>원</td>
                             </tr>
                         </tfoot>
 

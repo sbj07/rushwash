@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="form-footer">
-                <button class="btn-footer">
+                <button class="btn-footer" type="button" onclick="goConfirm()">
                     수거요청서 작성
                 </button>
             </div>
@@ -36,3 +36,8 @@
     <%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %>
 </body>
 </html>
+<script>
+    function goConfirm(){
+        location.href='/rushwash/apply/request/old-clothes';
+    }
+</script>

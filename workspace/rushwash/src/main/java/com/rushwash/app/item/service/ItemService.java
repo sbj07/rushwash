@@ -22,4 +22,15 @@ public class ItemService {
 		
 	}
 
+	//품목 가격 조회
+	public String getPrice(String itemNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ItemDao dao = new ItemDao();
+		String itemPrice = dao.getPrice(conn, itemNo);
+		
+		JDBCTemplate.close(conn);
+		return itemPrice;
+	}
+
 }

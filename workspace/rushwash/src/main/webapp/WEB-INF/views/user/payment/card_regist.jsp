@@ -20,16 +20,16 @@
                 <table class="form-table">
                     <tr>
                         <td>카드사</td>
-                        <td>신한</td>
+                        <td>${cardVo.cardCompany}</td>
                     </tr>
                     <tr>
                         <td>카드번호</td>
-                        <td>1234-1234-****-****</td>
+                        <td>${cardVo.cardNo}</td>
                     </tr>
                 </table>
             </div>
 
-            <form action="">
+            <form action="/rushwash/payment/card-regist" method="post">
 
                 <div class="form-body form-content">
                     <span>결제 수단 등록/변경</span>
@@ -38,26 +38,33 @@
                         <tr>
                             <td>카드사</td>
                             <td>
-                                <select id="">
-                                    <option value="">에제</option>
+                                <select name="cardCompany">
+                                    <option value="신한">신한</option>
+                                    <option value="삼성">삼성</option>
+                                    <option value="KB">KB</option>
+                                    <option value="농협">농협</option>
+                                    <option value="롯데">롯데</option>
+                                    <option value="우리">우리</option>
+                                    <option value="하나">하나</option>
+                                    <option value="현대">현대</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>카드번호</td>
-                            <td><input type="text"></td>
+                            <td><input type="password" name="cardNo"></td>
                         </tr>
                         <tr>
                             <td>카드 유효기간</td>
-                            <td><input type="text" placeholder="MM/YY"></td>
+                            <td><input type="month" name="validityPeriod"></td>
                         </tr>
                         <tr>
                             <td>CVC 번호</td>
-                            <td><input type="text"></td>
+                            <td><input type="password" name="cvcNo"></td>
                         </tr>
                         <tr>
                             <td>카드 비밀번호</td>
-                            <td><input type="password"></td>
+                            <td><input type="password" name="cardPwd"></td>
                         </tr>
                     </table>
                 </div>

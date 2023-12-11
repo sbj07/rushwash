@@ -97,3 +97,7 @@ main {
     font-weight: 600;
     color: var(--color-navy);
 }
+
+.form-content table tbody tr #nameMember,#telMember {
+    text-align: left;
+}
