@@ -1,11 +1,16 @@
+<%@page import="com.rushwash.app.board.price.vo.PriceVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%
+	List<PriceVo> priceVoList = (List<PriceVo>) request.getAttribute("priceVoList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/rushwash/resources/css/user/price.css">
+<link rel="stylesheet" href="/rushwash/resources/css/user/board/price.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
@@ -19,51 +24,23 @@ pageEncoding="UTF-8"%>
 		가격표
 	  </div>
 	  <table class="table-wrapper">
-		<tr>
-		  <td>품목</td>
-		  <td>기본요금</td>
-		  <td>할인요금</td>
-		</tr>
-		  <tr>
-			<td>와이셔츠</td>
-			<td>7,000</td>
-			<td>6,500</td>
-		  </tr>
-		  <tr>
-			<td>와이셔츠</td>
-			<td>7,000</td>
-			<td>6,500</td>
-		  </tr>
-		  <tr>
-			<td>와이셔츠</td>
-			<td>7,000</td>
-			<td>6,500</td>
-		  </tr>
-		  <tr>
-			<td>와이셔츠</td>
-			<td>7,000</td>
-			<td>6,500</td>
-		  </tr>
-		  <tr>
-			<td>와이셔츠</td>
-			<td>7,000</td>
-			<td>6,500</td>
-		  </tr>
-		  <tr>
-			<td>와이셔츠</td>
-			<td>7,000</td>
-			<td>6,500</td>
-		  </tr>
-		  <tr>
-			<td>와이셔츠</td>
-			<td>7,000</td>
-			<td>6,500</td>
-		  </tr>
-		  <tr>
-			<td>와이셔츠</td>
-			<td>7,000</td>
-			<td>6,500</td>
-		  </tr>
+	  	<thead>
+	  		<tr>
+			  <td>품목</td>
+			  <td>기본요금</td>
+			  <td>할인요금</td>
+			</tr>
+	  	</thead>
+		<tbody>
+		<% for(PriceVo vo : priceVoList){ %>
+			<tr>
+				<td><%= vo.getName()%></td>
+				<td><%= vo.getPrice() %></td>
+				<td><%= vo.getCategoryCode() %></td>
+			 </tr>
+		<% } %>
+			
+		</tbody>
 	   </table>
 	</div>
 	
@@ -72,6 +49,6 @@ pageEncoding="UTF-8"%>
         
 
 	
-    <%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %>
+    <div class="footer"><%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %></div>
 </body>
 </html>

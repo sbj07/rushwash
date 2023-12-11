@@ -7,12 +7,12 @@
     --color-beige : #F6F6F6;
 }
 main{
-    height: 1500px;
+    height:100%;
     padding-top: 10%;
     display: flex;
 }
 
-table tr:first-child {
+table thead tr:first-child {
     color: white;
 }
 table td {
@@ -28,7 +28,7 @@ table td {
     font-size: 25px;
     font-weight: bold;
 }
-table tr:first-child{
+table thead tr:first-child{
     background-color: var(--color-navy);
 }
 table tr{
@@ -44,6 +44,11 @@ td:last-child {
   }
 .img05{
 	height: 550px;
+	padding-top: 25%;
+}
+.footer {
+  position: relative; /* 또는 다른 값을 사용해서 footer를 포함하는 컨테이너에 상대적으로 위치시킵니다. */
+  z-index: 2; /* 이미지보다 위에 위치하도록 설정합니다. */
 }
 .font{
     font-size: 35px;
@@ -52,7 +57,8 @@ td:last-child {
     padding-left: 5%;
 }
 .table-wrapper {
-  margin: 20px; /* 선택 사항: 여백 조절 */
+  margin-left: 3%;
+  margin-top: 3%; 
 }
 #wrap{
 	margin-right: 3%;
@@ -62,11 +68,11 @@ td:last-child {
 
 }
 
-#wrap table tr:first-child td:first-child {
+#wrap table thead tr:first-child td:first-child {
     border-top-left-radius: 30px;
 }
 
-#wrap table tr:first-child td:last-child {
+#wrap table thead tr:first-child td:last-child {
     border-top-right-radius: 30px;
 }
 #wrap table td:first-child {

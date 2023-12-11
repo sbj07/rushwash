@@ -1,6 +1,7 @@
 package com.rushwash.app.board.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,8 @@ public class QnaDetailController extends HttpServlet{
 			String no = req.getParameter("no");
 			
 			QnaService bs = new QnaService();
-			QnaVo vo = bs.selectQnaByNo(no);
+			Map<String,Object> map = bs.selectQnaByNo(no);
+			QnaVo vo = (QnaVo) map.get("vo");
 			
 			req.setAttribute("vo", vo);
 			req.setAttribute("currPage", req.getParameter("currPage"));

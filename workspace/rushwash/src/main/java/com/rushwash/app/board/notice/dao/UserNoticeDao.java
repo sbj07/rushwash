@@ -15,9 +15,9 @@ public class UserNoticeDao {
 
 	//게시글 목록 조회
 	public List<UserNoticeVo> selectBoardList(Connection conn, PageVo pvo) throws Exception {
-	
+		
 		//sql
-		String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE , N.CONTENT , M.MANAGER_ID , N.ENROLL_DATE, N.DEL_YN FROM NOTICE N JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM( SELECT ROWNUM RNUM, T.* FROM ( SELECT N.NO, N.TITLE , N.CONTENT , M.MANAGER_ID , TO_CHAR(N.ENROLL_DATE , 'YYYY\"년 \"MM\"월 \"DD\"일\"') AS ENROLL_DATE, N.DEL_YN FROM NOTICE N JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' ORDER BY NO DESC) T) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, pvo.getStartRow());
 		pstmt.setInt(2, pvo.getLastRow());
@@ -50,6 +50,7 @@ public class UserNoticeDao {
 	
 	}
 
+
 	public int selectBoardCount(Connection conn) throws Exception {
 		String sql = "SELECT COUNT(*) AS cnt FROM NOTICE WHERE DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -72,9 +73,9 @@ public class UserNoticeDao {
 	//공지사항 상세조회
 	public UserNoticeVo selectBoardByNo(Connection conn, String no) throws Exception {
 		//sql
-		String sql = " SELECT B.NO, B.TITLE ,B.CONTENT ,B.ENROLL_DATE, M.MANAGER_ID FROM NOTICE B JOIN MANAGER M ON B.MANAGER_NO = M.NO WHERE M.NO = ? AND B.DEL_YN = 'N'";
+		String sql = " SELECT B.NO, B.TITLE ,B.CONTENT ,TO_CHAR(B.ENROLL_DATE , 'YYYY\"년 \"MM\"월 \"DD\"일\"') AS ENROLL_DATE, M.MANAGER_ID FROM NOTICE B JOIN MANAGER M ON B.MANAGER_NO = M.NO WHERE B.NO = ? AND B.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, "2");
+		pstmt.setString(1, no);
 		ResultSet rs = pstmt.executeQuery();
 		
 		//rs
