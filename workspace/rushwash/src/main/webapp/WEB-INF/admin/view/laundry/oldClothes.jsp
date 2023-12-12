@@ -83,10 +83,10 @@
 											<td><%=vo.getNo()%></td>
 											<td><%=vo.getMemberNo()%></td>
 											<td><%=vo.getRequestDate()%></td>
-											<td>
-										    <% if (vo.getCollectDate() != null) { %>
-										        <%= vo.getCollectDate() %>
-										    <% } %>
+											<td id="collectDate<%=vo.getNo()%>">
+											    <% if (vo.getCollectDate() != null) { %>
+											        <%= vo.getCollectDate() %>
+											    <% } %>
 											</td>
 											<td><%=vo.getWeight()%></td>
 											<td>
@@ -194,11 +194,28 @@
  		    return resp.json();
  		  })
  		  .then(data => {
+ 			// addProperty한 데이터 가져오기
+ 			 const updatedCollectDate = data.updatedCollectDate;
+ 			
+ 			// Update only the corresponding row
+ 	        let collectDateElement = document.querySelector('#collectDate' + no);
+
+			if (collectDateElement) {
+			    collectDateElement.innerHTML = updatedCollectDate;
+			} else {
+			    console.error('Element with ID collectDate' + no + ' not found.');
+			}
+ 			
+ 	    	// Update the content of the elements
+	       	collectDateElement.innerHTML = updatedCollectDate;
+	       	console.log('collectDateElement:', collectDateElement);
+	        
  		  })
  		  .catch(error => {
  		    // Handle errors
  		    console.error('There was a problem with the fetch operation:', error);
  		  });
+ 		  
  		  
  		 
  				
