@@ -17,7 +17,7 @@
         <div id="sidebar">
             <a href="/rushwash/member/mypage" class="menu-item">내 정보</a>
             <a href="/rushwash/member/editinfo" class="menu-item">개인정보수정</a>
-            <a href="/rushwash/member/pay" class="menu-item">결제 수단</a>
+<!--             <a href="/rushwash/member/pay" class="menu-item">결제 수단</a> -->
             <a href="/rushwash/member/quit" class="menu-item">탈퇴 하기</a>
             <a href="/rushwash/member/sub" class="menu-item">구독 등급</a>
         </div>
@@ -35,7 +35,7 @@
                         <p>패스워드 재입력</p>
                         <input type="password" id="password2" name="password2">
 	                    <div id="btn01">
-                        <button type="submit" class="btn0">회원탈퇴하기</button>
+                        <button type="submit" class="btn0" id="delete">회원탈퇴하기</button>
 					    </div>
                     </form>
                     </div>
@@ -58,8 +58,10 @@ function checkPwd() {
 	if(pwd != pwd2) {
 		alert("비밀번호가 일치하지 않습니다.");
 		return false;
-	} else {
+	} 
+	if (!confirm("정말 탈퇴하시겠습니까?")) {
+        return false;
+    }
 		return true;
-	}
 }
 </script>
