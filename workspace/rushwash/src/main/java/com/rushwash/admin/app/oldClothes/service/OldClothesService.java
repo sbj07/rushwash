@@ -42,6 +42,19 @@ public class OldClothesService {
 	    
 	        return result[0];
 	}
+	public String getUpdatedCollect(String no) throws Exception 
+	{
+		// conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// dao
+		String endDate = dao.getUpdatedCollect(conn, no);
+		
+		// close
+		JDBCTemplate.close(conn);
+				
+		return endDate;
+	}
 	 
 }
 	

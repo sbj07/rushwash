@@ -60,7 +60,6 @@ public class OldClothesController extends HttpServlet{
             OldClothesVo vo = new OldClothesVo();
             vo.setNo(no);
             vo.setStatus(status);
-            System.out.println(vo);
             
             //service
             int result = os.submitStatus(vo);
@@ -70,8 +69,19 @@ public class OldClothesController extends HttpServlet{
 				throw new Exception("[ERROR-L002]세탁물 상태변경 실패");
 			}
             
-            resp.sendRedirect("/rushwash/admin/clothes");
-
+            String updatedCollectDate = os.getUpdatedCollect(no);
+            
+            //헌옷 수거일 업데이트
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.addProperty("updatedCollectDate", updatedCollectDate);
+            
+            System.out.println(jsonResponse);
+            
+            //클라이언트에게 json response 보내기
+            resp.getWriter().write(jsonResponse.toString());
+            
+            
+            
         } catch (Exception e) {
         	System.out.println(e.getMessage());
 			e.printStackTrace();

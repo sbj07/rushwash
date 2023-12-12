@@ -54,6 +54,31 @@ public class OldClothesDao {
 		return voList;
 	}
 	
+	//헌옷 수거일 가져오기
+	public String getUpdatedCollect(Connection conn, String no) throws Exception {
+		// sql
+		String sql = "SELECT COLLECT_DATE FROM OLD_CLOTHES WHERE NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, no);
+		ResultSet rs = pstmt.executeQuery();
+
+		// rs
+		String collectDate = null;
+		if (rs.next()) {
+			collectDate = rs.getString("COLLECT_DATE");
+		}
+		System.out.println(collectDate);
+
+		// close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+
+		return collectDate;
+	}
+	
+	
+	
+	
 	//상태값 갱신
 	public int[] submitStatus(Connection conn, OldClothesVo vo) throws Exception {
 		
@@ -71,7 +96,7 @@ public class OldClothesDao {
 		}
 		String statusUpdateSql = "update Old_Clothes set REQUSET_CODE=? WHERE no=?";
 		if(vo.getStatus().equals("3")) {
-			String pointUpdateSql = "UPDATE MEMBER SET POINT = POINT + ((SELECT WEIGHT FROM OLD_CLOTHES WHERE NO = ?)/10) WHERE NO = (SELECT MEMBER_NO FROM OLD_CLOTHES WHERE NO = ?)";
+			String pointUpdateSql = "UPDATE MEMBER SET POINT = POINT + ((SELECT WEIGHT FROM OLD_CLOTHES WHERE NO = ?)*0.5) WHERE NO = (SELECT MEMBER_NO FROM OLD_CLOTHES WHERE NO = ?)";
 			
 			pointUpdateStmt = conn.prepareStatement(pointUpdateSql);
 			
