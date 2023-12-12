@@ -20,8 +20,13 @@ public class OrderListController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			resp.setContentType("text/html;charset=UTF-8");
-
+			String deleteYn = req.getParameter("deleteYn");
 			
+			if(deleteYn == null) {
+				deleteYn = "N";
+				System.out.println("fdsjkdsdskjksdf,dfhkdbkg");
+			}
+			System.out.println("딜리트" + deleteYn);
 			HttpSession session =req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			String memberNo = loginMember.getNo();
@@ -32,7 +37,9 @@ public class OrderListController extends HttpServlet{
 			   throw new Exception("회원 정보 없음");
 			}
 			OrderService os = new OrderService();
-			List<OrderVo> orderVoList = os.getorderList(memberNo);
+			List<OrderVo> orderVoList = os.getorderList(memberNo , deleteYn);
+			System.out.println("딜리트" + deleteYn);
+			req.setAttribute("detailBtn", deleteYn);
 			req.setAttribute("orderVoList", orderVoList);
 			req.getRequestDispatcher("/WEB-INF/views/user/order/list.jsp").forward(req, resp);
 			

@@ -13,11 +13,12 @@ import com.rushwash.app.order.vo.OrderVo;
 
 public class OrderDao {
 
-   public List<OrderVo> getorderList(Connection conn, String memberNo) throws Exception {
+   public List<OrderVo> getorderList(Connection conn, String memberNo , String deleteYn) throws Exception {
 
-      String sql = "SELECT O.NO ,I.PRICE AS PRICE_ITEM ,TO_CHAR(O.PAYMENT_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS PAYMENT_DATE ,TO_CHAR(O.RECEIVE_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS RECEIVE_DATE ,O.DEL_YN ,M.NAME AS MEMBER_NAME ,M.ADDRESS ,M.TEL ,I.NAME AS ITEM ,L.EA ,S.STATUS AS LAUNDRY_STATUS ,T.STATUS AS ORDER_STATUS FROM LAUNDRY L JOIN LAUNDRY_ORDER O ON O.NO = L.ORDER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN MEMBER M ON O.MEMBER_NO = M.NO JOIN LAUNDRY_STATUS S ON L.LAUNDRY_STATUS = S.NO JOIN ITEM I ON L.ITEM_NO = I.NO WHERE M.NO = ?";
+      String sql = "SELECT O.NO ,I.PRICE AS PRICE_ITEM ,TO_CHAR(O.PAYMENT_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS PAYMENT_DATE ,TO_CHAR(O.RECEIVE_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS RECEIVE_DATE ,O.DEL_YN ,M.NAME AS MEMBER_NAME ,M.ADDRESS ,M.TEL ,I.NAME AS ITEM ,L.EA ,S.STATUS AS LAUNDRY_STATUS ,T.STATUS AS ORDER_STATUS FROM LAUNDRY L JOIN LAUNDRY_ORDER O ON O.NO = L.ORDER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN MEMBER M ON O.MEMBER_NO = M.NO JOIN LAUNDRY_STATUS S ON L.LAUNDRY_STATUS = S.NO JOIN ITEM I ON L.ITEM_NO = I.NO WHERE M.NO = ? AND L.DEL_YN=?";
       PreparedStatement pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, memberNo);
+      pstmt.setString(2, deleteYn);
       ResultSet rs = pstmt.executeQuery();
       List<OrderVo> orderVoList = new ArrayList<OrderVo>();
       while (rs.next()) {
@@ -93,10 +94,13 @@ public class OrderDao {
    }
 
 public int detaildelete(Connection conn, String no) throws Exception {
-	String sql = "";
+	String sql = "UPDATE LAUNDRY SET DEL_YN = 'Y' WHERE ORDER_NO = ?";
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1, no);
+	int result = pstmt.executeUpdate();
+	JDBCTemplate.close(pstmt);
 	
+	return result;
 	
 }
 
