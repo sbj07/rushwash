@@ -5,7 +5,7 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Find Id</title>
 <link rel="stylesheet" href="/rushwash/resources/css/user/member/idfind.css">
 </head>
 <%@ include file='/WEB-INF/views/user/common/user_header.jsp' %>
@@ -13,7 +13,7 @@
 	<form action="/rushwash/member/idfind" method="post" onsubmit="return checkVerification()">
 	<div id="text">
         <h1 align="center">아이디 찾기</h1>
-        <p>가입시 등록한 이름과 비밀번호를 입력하시면</p>
+        <p>가입시 등록한 이메일과 인증번호를 입력하시면</p>
         <p>아이디를 알려드립니다</p>
         <div id="input-container">
             <input type="text" id="email" name="email" placeholder="이메일">

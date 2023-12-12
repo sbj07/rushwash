@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -13,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>My Page</title>
 <link rel="stylesheet" href="/rushwash/resources/css/user/member/mypage.css">
 </head>
 <%@ include file='/WEB-INF/views/user/common/user_header.jsp' %>
@@ -43,20 +44,11 @@
 						<input type="text" id="address" name="address" value="<%= vo.getMemberAddress() %>" readonly>
 						<p>전화번호</p>
 						<input type="tel" id="phone" name="phone" value="<%= vo.getMemberTel() %>" readonly>
+                    <% } %>
+                   <c:if test="${ not empty loginMember }" >  
 						<p>보유 포인트</p>
-						<input type="text" id="point" name="point" value="<%= vo.getPoint() %>" readonly>
-                    <% } else { %>
-                    	<p>아이디</p>
-						<input type="text" name="memberId" value="" readonly>
-						<p>이메일</p>
-						<input type="text" id="email" name="email" value="" readonly>
-						<p>주소 (배송지)</p>
-						<input type="text" id="address" name="address" value="" readonly>
-						<p>전화번호</p>
-						<input type="tel" id="phone" name="phone" value="" readonly>
-						<p>보유 포인트</p>
-						<input type="text" id="point" name="point" value="" readonly>
-                   	 <% } %>
+						<input type="text" id="point" name="point" value="${ pointInfo }" readonly>
+                   </c:if>
                                  
                     </form>
                 </div>

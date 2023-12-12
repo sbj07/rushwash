@@ -23,7 +23,11 @@ public class MemberMyPageController extends HttpServlet {
 
             MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
             
+            MemberService ms = new MemberService();
+            int pointInfo = ms.getPointInfo(loginMember.getNo());
+            
             req.setAttribute("vo", loginMember);
+            req.setAttribute("pointInfo", pointInfo);
             req.getRequestDispatcher("/WEB-INF/views/user/member/mypage.jsp").forward(req, resp);
 
         } catch(Exception e) {

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>My Page</title>
 <link rel="stylesheet" href="/rushwash/resources/css/user/member/quit.css">
 </head>
 <%@ include file='/WEB-INF/views/user/common/user_header.jsp' %>

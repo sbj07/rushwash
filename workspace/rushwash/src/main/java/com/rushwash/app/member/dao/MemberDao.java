@@ -276,6 +276,7 @@ public class MemberDao {
 		
 	}
 
+	//이메일로 아이디 찾기(이메일 인증)
 	public String findUserByEmail(Connection conn, String email) throws Exception {
 		
 		//sql
@@ -292,5 +293,27 @@ public class MemberDao {
 		    JDBCTemplate.close(pstmt);
 
 		    return memberId;
+	}
+
+	public int getPointInfo(Connection conn, String no) throws Exception {
+		
+		//sql
+		String sql = "SELECT POINT FROM MEMBER WHERE NO = ? ";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, no);
+		ResultSet rs = pstmt.executeQuery();
+		
+		//rs
+		int pointInfo = 0;
+		if(rs.next()) {
+			pointInfo = rs.getInt("POINT");
+		}
+		
+		//close
+		JDBCTemplate.close(rs);
+		JDBCTemplate.close(pstmt);
+		
+		return pointInfo;
+				
 	}
 }
