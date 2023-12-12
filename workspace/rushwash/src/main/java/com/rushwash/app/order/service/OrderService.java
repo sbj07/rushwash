@@ -54,4 +54,20 @@ public class OrderService {
 		return result;
 	}
 
+	public int status(String no) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		OrderDao dao = new OrderDao();
+		int result = dao.status(conn,no);
+		if(result==1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
 }
