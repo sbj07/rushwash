@@ -69,7 +69,6 @@ public class OldClothesController extends HttpServlet{
                     // If weight update is successful, add it to the JSON response
                     JsonObject jsonResponse = new JsonObject();
                     jsonResponse.addProperty("updatedWeight", updatedWeight);
-                    System.out.println(updatedWeight);
                     resp.getWriter().write(jsonResponse.toString());
                     return;
                 }

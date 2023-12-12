@@ -28,7 +28,6 @@ public class CenterController extends HttpServlet{
 		      MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			
 			//로그인 안되어있으면 에러페이지로 보내기
-		    System.out.println("loginMember : " + loginMember);
 		    
 		    if(loginMember == null) {
 		    	throw new Exception("로그인 멤버가 NULL 임");
