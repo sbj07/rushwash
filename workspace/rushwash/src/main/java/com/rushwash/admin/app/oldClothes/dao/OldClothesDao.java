@@ -67,7 +67,6 @@ public class OldClothesDao {
 		if (rs.next()) {
 			collectDate = rs.getString("COLLECT_DATE");
 		}
-		System.out.println(collectDate);
 
 		// close
 		JDBCTemplate.close(rs);
