@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="/rushwash/resources/css/user/board/notice_write.css">
 </head>
 <body>
+
+
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
 
    <main>

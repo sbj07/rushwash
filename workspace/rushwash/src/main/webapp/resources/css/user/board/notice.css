@@ -6,9 +6,7 @@
     --color-lightblue : #d6e4f0;
     --color-beige : #F6F6F6;
 }
-body{
-	align-items: center;
-}
+
 main{
     height: 1500px;
     padding-top: 50px;
@@ -74,7 +72,7 @@ select{
 }
 .search-area{
 	height: 50%;
-	margin-bottom: 5%;
+	margin-bottom: 2%;
 }
 .title{
 	color: white;
@@ -85,16 +83,20 @@ select{
     color: var(--color-navy);
     padding-bottom: 50px;
 }
+.main{
+	margin-left: 22%;
+	margin-top: 5%;
+}
 .page-area{
 	text-align: center;
-	padding-right: 15%;
-	margin-top: 5%;
+	margin-top: 2%;
 	font-size: 20px;
 }
 
+
 #wrap{
-    padding-left: 250px;
-    padding-top: 80px;
+   justify-content: center;
+   align-items: center;
 }
 
 #wrap table thead tr:first-child td:first-child {

@@ -18,43 +18,46 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
-    
+
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
 
 	<main>
     <div id="wrap">
-      <div class="font">
-        공지사항
-      </div>
-      <div class="search-area">
-      	<form action="/rushwash/board/search" method="get">
-      		<select name="searchType">
-      			<option value="title">제목</option>
-      			<option value="content">내용</option>
-      		</select>
-      		<input type="text" name="searchValue" placeholder="검색할 내용을 입력하세요" class="text">
-      		<input type="submit" value="검색하기" class="submit">
-      	</form>
-      </div>
-      <table>
-      	<thead>
-      		<tr>
-      			<td class="title">번호</td>
-      			<td class="title">제목</td>
-      			<td>작성일자</td>
-      		</tr>
-      	</thead>
-      	<tbody>
-          <%for(UserNoticeVo vo : boardVoList){ %>
-	          <tr>
-	          	<td><%= vo.getNo() %></td>
-	            <td><%= vo.getTitle() %></td>
-	            <td><%= vo.getEnrollDate() %></td>
-	          </tr>
-          <%}%> 
-         </tbody>
-          
-       </table>
+	    <div class="main">
+		      <div class="font">
+		        공지사항
+		      </div>
+		      <div class="search-area">
+		      	<form action="/rushwash/board/search" method="get">
+		      		<select name="searchType">
+		      			<option value="title">제목</option>
+		      			<option value="content">내용</option>
+		      		</select>
+		      		<input type="text" name="searchValue" placeholder="검색할 내용을 입력하세요" class="text">
+		      		<input type="submit" value="검색하기" class="submit">
+		      	</form>
+		      </div>
+		      <table>
+		      	<thead>
+		      		<tr>
+		      			<td class="title">번호</td>
+		      			<td class="title">제목</td>
+		      			<td>작성일자</td>
+		      		</tr>
+		      	</thead>
+		      	<tbody>
+		          <%for(UserNoticeVo vo : boardVoList){ %>
+			          <tr>
+			          	<td><%= vo.getNo() %></td>
+			            <td><%= vo.getTitle() %></td>
+			            <td><%= vo.getEnrollDate() %></td>
+			          </tr>
+		          <%}%> 
+		         </tbody>
+		          
+		       </table>
+	    </div>
+      
        <div class="page-area">
        		<% if(pvo.getStartPage() != 1){ %>
        			<a href="/rushwash/board/notice?pno=<%= pvo.getStartPage()-1%>">이전</a>
@@ -80,7 +83,7 @@
 </body>
 </html>
 <script>
-const trArr = document.querySelectorAll("main > div > table > tbody > tr");
+const trArr = document.querySelectorAll("main > div > div > table > tbody > tr");
 for(let i = 0 ; i < trArr.length; ++i){
 	trArr[i].addEventListener('click' , handleClick);
 }

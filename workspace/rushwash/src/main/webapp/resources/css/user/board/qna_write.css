@@ -48,6 +48,9 @@ td.submit-cell {
     height: 40px;
     width: 90px;
 }
+.submit:hover{
+	background-color: var(--color-navy);
+}
 .title{
     text-align: center;
     padding-left: 40px;
@@ -60,6 +63,5 @@ td.submit-cell {
 }
 
 #wrap{
-    padding-left: 280px;
-    padding-top: 20px;
+   padding-left: 25%;
 }

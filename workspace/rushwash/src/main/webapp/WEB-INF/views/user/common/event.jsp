@@ -13,20 +13,20 @@
             <img src="/rushwash/resources/img/user/event01.png" alt="Slide 1">
         </div>
         <div class="swiper-slide">
-            <img src="/rushwash/resources/img/user/event01.png" alt="Slide 2">
+            <img src="/rushwash/resources/img/user/event02.png" alt="Slide 2">
         </div>
         <div class="swiper-slide">
-            <img src="/rushwash/resources/img/user/event02.png" alt="Slide 3">
+            <img src="/rushwash/resources/img/user/event03.png" alt="Slide 3">
         </div>
         <div class="swiper-slide">
             <img src="/rushwash/resources/img/user/event01.png" alt="Slide 4">
         </div>
     </div>
-    <!-- Add Pagination -->
+<!--     Add Pagination
     <div class="swiper-pagination"></div>
-    <!-- Add Navigation -->
+    Add Navigation
     <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-prev"></div> -->
 </div>
 
 <script>

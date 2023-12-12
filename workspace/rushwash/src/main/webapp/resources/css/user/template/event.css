@@ -1,8 +1,9 @@
-    
  body{
-	 margin-top: 5%;
+    margin-top: 5%;
  }
-    
+.swiper-wrapper img{
+   padding-left: 25%;
+}
     
 .swiper-slide {
     display: flex;
@@ -12,8 +13,8 @@
 }
 
 .swiper-slide img{
-	justify-content: center;
-	align-items: center;
+   justify-content: center;
+   align-items: center;
 }
 
 .slide-content img {
