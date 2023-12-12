@@ -77,6 +77,37 @@ public class OldClothesDao {
 	}
 	
 	
+	// 무게 값 업데이트하고 가져오기
+	public String getUpdatedWeight(Connection conn, String no, String weight) throws Exception {
+	    // sql
+	    String updateSql = "UPDATE OLD_CLOTHES SET WEIGHT = ? WHERE NO = ?";
+	    try (PreparedStatement updatePstmt = conn.prepareStatement(updateSql)) {
+	        updatePstmt.setString(1, weight);
+	        updatePstmt.setString(2, no);
+
+	        // 무게 업데이트
+	        int updateResult = updatePstmt.executeUpdate();
+
+	        if (updateResult > 0) {
+	            // 업데이트 성공 시, 업데이트된 무게를 가져오는 sql
+	            String selectSql = "SELECT WEIGHT FROM OLD_CLOTHES WHERE NO = ?";
+	            try (PreparedStatement selectPstmt = conn.prepareStatement(selectSql)) {
+	                selectPstmt.setString(1, no);
+	                try (ResultSet rs = selectPstmt.executeQuery()) {
+	                    if (rs.next()) {
+	                        return rs.getString("WEIGHT");
+	                    } else {
+	                        throw new Exception("무게 값을 가져오는 데 실패했습니다.");
+	                    }
+	                }
+	            }
+	        } else {
+	            throw new Exception("무게 업데이트에 실패했습니다.");
+	        }
+	    }
+	}
+
+	
 	
 	
 	//상태값 갱신
@@ -96,7 +127,7 @@ public class OldClothesDao {
 		}
 		String statusUpdateSql = "update Old_Clothes set REQUSET_CODE=? WHERE no=?";
 		if(vo.getStatus().equals("3")) {
-			String pointUpdateSql = "UPDATE MEMBER SET POINT = POINT + ((SELECT WEIGHT FROM OLD_CLOTHES WHERE NO = ?)*0.5) WHERE NO = (SELECT MEMBER_NO FROM OLD_CLOTHES WHERE NO = ?)";
+			String pointUpdateSql = "UPDATE MEMBER SET POINT = POINT + ((SELECT WEIGHT FROM OLD_CLOTHES WHERE NO = ?)*500) WHERE NO = (SELECT MEMBER_NO FROM OLD_CLOTHES WHERE NO = ?)";
 			
 			pointUpdateStmt = conn.prepareStatement(pointUpdateSql);
 			
