@@ -26,6 +26,7 @@ public class OrderDetailController extends HttpServlet{
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			String memberNo = loginMember.getNo();
 			String no = req.getParameter("no");
+			
 			//service
 			OrderService os = new OrderService();
 			ArrayList<OrderVo> voList = os.getorderDetail(memberNo, no);
@@ -33,7 +34,6 @@ public class OrderDetailController extends HttpServlet{
 			req.setAttribute("orderDetailNo", no);
 			req.setAttribute("totalprice", voList.get(0).getPrice());
 			req.getRequestDispatcher("/WEB-INF/views/user/order/detail.jsp").forward(req, resp);
-			
 		}catch(Exception e) {
 			System.out.println("[ERROR-O002] 주문내역 상세조회 중 에러 발생...");
 			e.printStackTrace();

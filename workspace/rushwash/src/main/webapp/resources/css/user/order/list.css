@@ -1,94 +1,126 @@
 :root {
-	/* color */
-	--color-black: #0F0F0F;
-	--color-navy: #163172;
-	--color-blue: #1E56A0;
-	--color-lightblue: #d6e4f0;
-	--color-beige: #F6F6F6;
+   /* color */
+   --color-black: #0F0F0F;
+   --color-navy: #163172;
+   --color-blue: #1E56A0;
+   --color-lightblue: #d6e4f0;
+   --color-beige: #F6F6F6;
 }
 
 
 body {
-	background-color: #F6F6F6;
-	text-align: center;
-	margin: 0;
-	padding: 0;
+   background-color: #F6F6F6;
+   text-align: center;
+   margin: 0;
+   padding: 0;
 }
 
 
 
 
 main {
-	padding-top: 150px;
-	padding-bottom: 150px;
-	background-color: #F6F6F6;
+   padding-top: 13%;
+   padding-bottom: 150px;
+   background-color: #F6F6F6;
 
 }
 
 
 #ttn1,
 #ttn2 {
-	width: 100%;
+   width: 100%;
 }
 
 #btn {
-	text-align: center;
-	width: 473px;
-	position: relative;
-	position: absolute;
-
-
+   text-align: center;   
+   position: relative;
+   position: absolute;
+   margin-left: 11%;
+   margin-bottom: 10%;
 }
-
+.font{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--color-navy);
+    margin-right: 70%;
+    padding-bottom: 3%;
+}
 .btn1,
 .btn2 {
-	margin: 0 auto;
-	bottom: 0;
-	height: 30px;
-	margin-bottom: 10px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+   margin: 0 auto;
+   bottom: 0;
+   height: 40px;
+   margin-bottom: 10px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   background-color: var(--color-lightblue);
+   color: black;
 }
+  #btn button.btn-active {
+      background-color: black;
+      color: #fff;
+   }
 
-.btn1,
+/*.btn1,
 .btn2:hover {
-	border: 2px solid #163172;
-	background-color: black;
-	color: white;
-	cursor: pointer;
-}
+   border: 2px solid #163172;
+   background-color: black;
+   color: white;
+   cursor: pointer;
+}*/
 
 
 #t1,
 #t2 {
 
-	/* border-collapse: collapse; */
-	width: 80%;
-	margin: 0 auto;
-	margin-top: 20px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+   /* border-collapse: collapse; */
+   width: 80%;
+   margin: 0 auto;
+   margin-top: 40px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   height: 40%;
 }
 
 #t1 th,
 #t1 td,
 #t2 th,
 #t2 td {
-	padding: 8px;
-	text-align: center;
+   padding: 8px;
+   text-align: center;
 }
 
 #aa{
-	font-weight: bold;
-	color: black;
+   font-weight: bold;
+   color: black;
 }
 #t1 th,
 #t2 th {
 
-	background-color: #163172;
-	color: white;
-	height: 50px;
+   background-color: #163172;
+   color: white;
+   height: 60px;
+   font-size: 20px;
+   padding-top: 2%;
+}
+#t1 td,
+#t2 td{
+   border-bottom: 1px solid lightgray;
+   font-size: 20px;
+   padding-top: 2%;
+}
+#t1 tr:hover{
+   background-color: lightgray;
+}
+#t2 tr:hover{
+   background-color: lightgray;
+}
 
+#order{
+   margin-top: 1.5%;
+}
+#trParent{
+   background-color: white;
 }
 
 table th:first-child {

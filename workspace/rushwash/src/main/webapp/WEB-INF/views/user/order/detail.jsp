@@ -1,9 +1,11 @@
 <%@page import="com.rushwash.app.order.vo.OrderVo"%>
+<%@page import="com.rushwash.app.member.vo.MemberVo"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/rushwash/resources/css/user/order/detail.css">
-    
+ 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +14,7 @@
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
-
+<%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>S
 <main id="wrap">
 
     <div id="div1">
@@ -56,7 +57,7 @@
                      <td>${loginMember.memberName }</td>
                      <td>${loginMember.memberTel }</td>
                      <td colspan="2">${loginMember.memberAddress }</td>
-<%--                      <td colspan="2">${loginMember.request }</td> --%>
+                     <td colspan="2">${OrderVO.request }</td>
                   </tr>
 
             </tbody>
@@ -64,9 +65,10 @@
     </div>
 
     <div id="div3">
-    <form action="/rushwash/order/detail" method="post">
+    <form action="/rushwash/order/detail" method="post" id="ffom0">
     	<input type="hidden" name="orderNo" value="${orderDetailNo}">
       <button type="botton" >주문취소</button>
+      <button type="botton" >수거완료</button>
     </form>
     </div>
 </main>
