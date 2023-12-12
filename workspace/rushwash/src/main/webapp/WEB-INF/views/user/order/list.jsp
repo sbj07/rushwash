@@ -42,7 +42,7 @@
 
                <c:forEach items="${ orderVoList }" var="vo">
                   <tr id="trParent">
-                     <td>${not empty vo.no && vo.no && vo.delYn eq 'N' ? vo.no : ''}</td>
+                     <td>${vo.delYn eq 'N' ? vo.no : ''}</td>
                      <td>${vo.ea}</td>
                      <td>${vo.paymentDate}</td>
                      <td>${vo.laundryStatus}</td>
@@ -67,13 +67,14 @@
             <tbody>
 
                <c:forEach items="${orderVoList}" var="vo">
+               <c:if test="${ vo.delYn eq 'Y'}">
                   <tr id="trParent">
-                    <td>${not empty vo.no && vo.no && vo.delYn eq 'Y' ? vo.no : ''}</td>
+                    <td>${ vo.no}</td>
                      <td>${vo.ea }</td>
                      <td>${vo.receiveDate }</td>
                      <td>${vo.orderStatus }</td>
                   </tr>
-
+				</c:if>
                </c:forEach>
             </tbody>
          </table>

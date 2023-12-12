@@ -52,7 +52,7 @@ public class OrderDetailController extends HttpServlet{
 			OrderService os = new OrderService();
 			int result = os.detaildelete(no);
 			if(result > 0) {
-				req.setAttribute("alertMas", "주문 취소완료");
+				req.setAttribute("alertMsg", "주문 취소완료");
 //				req.getRequestDispatcher("/WEB-INF/views/user/order/list.jsp").forward(req, resp);
 				resp.sendRedirect("/rushwash/order/list");
 			}

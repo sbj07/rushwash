@@ -68,7 +68,9 @@
     <form action="/rushwash/order/detail" method="post" id="ffom0">
     	<input type="hidden" name="orderNo" value="${orderDetailNo}">
       <button type="botton" >주문취소</button>
+     <c:if test="${vo.orderStatus eq '1' }">
       <button type="botton" >수거완료</button>
+      </c:if>/
     </form>
     </div>
 </main>

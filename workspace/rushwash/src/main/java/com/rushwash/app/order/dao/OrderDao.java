@@ -98,9 +98,23 @@ public int detaildelete(Connection conn, String no) throws Exception {
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1, no);
 	int result = pstmt.executeUpdate();
+	
 	JDBCTemplate.close(pstmt);
 	
 	return result;
+	
+}
+
+public int status(Connection conn, String no )throws Exception {
+	String sql = "UPDATE ORDER_STATUS OS SET OS.NO = 6 WHERE OS.NO = 1 AND EXISTS ( SELECT 1 FROM MEMBER M JOIN LAUNDRY_ORDER LO ON M.NO = LO.MEMBER_NO WHERE LO.ORDER_STATUS = OS.NO";
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1, no);
+	int result = pstmt.executeUpdate();
+	
+	JDBCTemplate.close(pstmt);
+	
+	return result;
+	
 	
 }
 
