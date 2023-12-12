@@ -19,6 +19,37 @@
     font-size: 23px;
 }
 
+.step-url {
+	position: absolute;
+    right: 10px;
+    top: 9.6%;
+    transform: translateY(20%);
+    background-color: #163172; 
+    color: white; 
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+  	margin-top: 24%;
+  	margin-right: 29%;
+}
+
+.step-url2 {
+	position: absolute;
+    right: 10px;
+    top: 9.6%;
+    transform: translateY(20%);
+    background-color: #163172; 
+    color: white; 
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+  	margin-top: 32%;
+  	margin-right: 30%;
+}
+
+
 #input-container input[type="text"],
 #input-container input[type="password"] {
     border: none;

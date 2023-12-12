@@ -245,22 +245,6 @@ public class MemberService {
 		return result;
 	}
 
-	//아이디 찾기
-	public String idFind(MemberVo vo) throws Exception {
-		
-		//conn
-		Connection conn = JDBCTemplate.getConnection();
-		
-		//dao
-		MemberDao dao = new MemberDao();
-		String memberId = dao.idFind(conn, vo);
-		//close
-		JDBCTemplate.close(conn);
-		
-		return memberId;
-	
-	}
-
 	//비번찾기
 	public String pwdFind(MemberVo vo) throws Exception {
 		//conn
@@ -305,6 +289,26 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return payInfo;
 	
+	}
+
+
+	//이메일 인증으로 아이디 찾기
+	public String findUserByEmail(String email) throws Exception {
+		
+		//conn
+	    Connection conn = JDBCTemplate.getConnection();
+
+	    // MemberDao 인스턴스 생성
+	    MemberDao dao = new MemberDao();
+
+	    // email을 통해 사용자의 아이디 찾기
+	    String memberId = dao.findUserByEmail(conn, email);
+
+	    // Connection 종료
+	    JDBCTemplate.close(conn);
+
+	    // 찾아진 사용자 아이디 반환
+	    return memberId;
 	}
 
 }

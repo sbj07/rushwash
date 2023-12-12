@@ -23,29 +23,27 @@ public class MemberIdFindController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
-			//data
-			String memberName = req.getParameter("memberName");
-			String memberPwd = req.getParameter("memberPwd");
+		    // 사용자가 입력한 이메일
+		    String email = req.getParameter("email");
 
-			MemberVo vo = new MemberVo();
-			vo.setMemberName(memberName);
-			vo.setMemberPwd(memberPwd);
-			
-			//service
-			MemberService ms = new MemberService();
-			String memberId = ms.idFind(vo); // 아이디 찾기 결과를 String으로 받음
+		    // MemberService를 이용해 이메일로 사용자 아이디 찾기
+		    MemberService ms = new MemberService();
+		    String memberId = ms.findUserByEmail(email); // 이메일로 사용자 아이디 찾기 결과를 문자열로 받음
 
-			// 아이디를 session 속성에 저장
-			HttpSession session = req.getSession();
-			session.setAttribute("memberId", memberId);
-
-			//result
-			req.getRequestDispatcher("/WEB-INF/views/user/member/knowid.jsp").forward(req, resp);
-			
+		    if (memberId != null) {
+		        // 사용자 아이디 찾기 성공: 아이디를 세션에 저장하고 결과 페이지로 이동
+		        HttpSession session = req.getSession();
+		        session.setAttribute("memberId", memberId);
+		        req.getRequestDispatcher("/WEB-INF/views/user/member/knowid.jsp").forward(req, resp);
+		    } else {
+		        // 사용자 아이디 찾기 실패: 오류 메시지를 설정하고 아이디 찾기 페이지로 이동
+		        req.setAttribute("errorMsg", "해당 이메일로 가입된 계정이 없습니다.");
+		        req.getRequestDispatcher("/WEB-INF/views/user/member/idfind.jsp").forward(req, resp);
+		    }
 		} catch(Exception e) {
-			e.printStackTrace();
-			req.setAttribute("errorMsg", "일치하는 계정이 없습니다.");
-			req.getRequestDispatcher("/WEB-INF/views/user/member/idfind.jsp").forward(req, resp);
+		    e.printStackTrace();
+		    req.setAttribute("errorMsg", "아이디 찾기에 실패했습니다. 다시 시도해주세요.");
+		    req.getRequestDispatcher("/WEB-INF/views/user/member/idfind.jsp").forward(req, resp);
 		}
 	}
 }
