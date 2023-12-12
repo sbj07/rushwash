@@ -68,5 +68,21 @@ function checkIdDup(){
 		}
 	} );
 }
+
+
+function submitIdChange() {
+    if (!window.idOk) {
+        alert("아이디 중복 확인을 해주세요.");
+        return;
+    }
+    document.querySelector("form").submit();
+}
+
+window.onload = function() {
+    document.querySelector("button[type=submit]").addEventListener("click", function(event) {
+        event.preventDefault();  
+        submitIdChange();  
+    });
+};    
 </script>
 

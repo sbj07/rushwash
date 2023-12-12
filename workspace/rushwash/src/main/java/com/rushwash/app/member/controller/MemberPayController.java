@@ -26,13 +26,11 @@ public class MemberPayController extends HttpServlet {
             
             PaymentService ps = new PaymentService();
             CardVo cardVo = ps.getCardInfo(loginMember.getNo());
-            System.out.println(cardVo);
             if(cardVo.getCardCompany() == null) {
             	System.out.println("if문 실행");
             	resp.sendRedirect("/rushwash/payment/card-regist");
             	return;
             }
-            System.out.println(cardVo.getCardCompany());
             req.setAttribute("cardVo", cardVo);
             
             req.getRequestDispatcher("/WEB-INF/views/user/member/pay.jsp").forward(req, resp);

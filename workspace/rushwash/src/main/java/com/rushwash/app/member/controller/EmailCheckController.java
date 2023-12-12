@@ -30,5 +30,4 @@ public class EmailCheckController extends HttpServlet{
 	        out.write("{\"msg\" : \"fail\"}"); 
 	    }
 	}
-	
 }

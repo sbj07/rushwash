@@ -31,7 +31,17 @@ public class MemberPwdChangeController extends HttpServlet {
 	            String pwd = vo.getMemberPwd();
 	            
 	            //data
+	            String inputId = req.getParameter("memberId");
+	            String inputPwd = req.getParameter("memberPwd");
 	            String newPwd = req.getParameter("newPwd");
+	            
+	            if (!id.equals(inputId)) {
+	                throw new Exception("아이디가 일치하지 않습니다.");
+	            }
+	            
+	            if (!pwd.equals(inputPwd)) {
+	                throw new Exception("현재 비밀번호가 일치하지 않습니다.");
+	            }
 	            
 	            //service
 	            MemberService ms = new MemberService();
@@ -51,7 +61,7 @@ public class MemberPwdChangeController extends HttpServlet {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			req.setAttribute("errorMsg" , "비밀번호 변경 불가. 다시 시도 하세요.");
+			req.setAttribute("errorMsg" , "아이디 혹은 비밀번호를 잘못 입력하셨습니다.");
 			req.getRequestDispatcher("/WEB-INF/views/user/member/pwdchange.jsp").forward(req, resp);
 		}
 	}

@@ -87,8 +87,6 @@ public class MemberService {
 		return result;
 	
 	}
-	
-
 
 	//로그인
 	public MemberVo login(MemberVo vo) throws Exception {
