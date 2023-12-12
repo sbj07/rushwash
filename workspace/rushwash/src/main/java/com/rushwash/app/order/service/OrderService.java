@@ -18,7 +18,7 @@ public class OrderService {
 
 		OrderDao dao = new OrderDao();
 		List<OrderVo> orderVoList = dao.getorderList(conn, memberNo , deleteYn);
-
+		
 		JDBCTemplate.close(conn);
 
 		return orderVoList;
