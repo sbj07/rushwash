@@ -61,7 +61,12 @@
                         </tr>
                         <tr>
                             <td>카드번호</td>
-                            <td><input type="password" name="cardNo"></td>
+                            <td>
+                                <input type="password" name="cardNo1"> -
+                                <input type="password" name="cardNo2"> -
+                                <input type="password" name="cardNo3"> - 
+                                <input type="password" name="cardNo4">
+                            </td>
                         </tr>
                         <tr>
                             <td>카드 유효기간</td>
@@ -88,4 +93,3 @@
     <%@ include file="/WEB-INF/views/user/common/user_footer.jsp" %>
 </body>
 </html>
-

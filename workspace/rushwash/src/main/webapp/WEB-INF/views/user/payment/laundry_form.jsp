@@ -46,7 +46,7 @@
                         </tr>
                         <tr>
                             <td>포인트 할인</td>
-                            <td>보유포인트 : ${ loginMember.point }</td>
+                            <td> 보유포인트 : <span id="myPoint"> ${ loginMember.point } </span></td>
                             <td>사용 : <input type="text" id="user-point"></td>
                         </tr>
                         <tr>
@@ -86,15 +86,15 @@
 </html>
 
 <script>
-    console.log("${cardVo.cardNo}");
     const pointBox = document.querySelector("#user-point");
     const payPrice = document.querySelector("#pay-price");
     const spendPoint = document.querySelector("#spendPoint");
     const totalPrice = document.querySelector("#totalPrice");
 
+    const myPoint = document.querySelector("#myPoint");
+
     spendPoint.value = "0";
 
-    console.log("${cardVo.cardNo}");
     pointBox.addEventListener("blur", changePoint);
 
     function changePoint(event) {
@@ -115,7 +115,16 @@
             spendPoint.value = pointBox.value;
             payPrice.value = payPrice.innerText;
             totalPrice.value = payPrice.value;
-        } 
+        } else {
+            let payIntVal2 = parseInt(payPrice.innerText);
+            let calc2 = payIntVal2 - inputPoint;
+
+            payPrice.innerText = calc2;
+
+            spendPoint.value = pointBox.value;
+            payPrice.value = payPrice.innerText;
+            totalPrice.value = payPrice.value;
+        }
     }
 
 

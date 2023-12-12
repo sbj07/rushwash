@@ -41,7 +41,11 @@ public class CardRegistController extends HttpServlet {
 			
 			String memberNo = loginMember.getNo();
 			String cardCompany = req.getParameter("cardCompany");
-			String cardNo = req.getParameter("cardNo");
+			String cardNo1 = req.getParameter("cardNo1");
+			String cardNo2 = req.getParameter("cardNo2");
+			String cardNo3 = req.getParameter("cardNo3");
+			String cardNo4 = req.getParameter("cardNo4");
+			String cardNo = cardNo1 + cardNo2 + cardNo3 + cardNo4;
 			String validityPeriod = req.getParameter("validityPeriod");
 			String cvcNo = req.getParameter("cvcNo");
 			String cardPwd = req.getParameter("cardPwd");
