@@ -54,7 +54,7 @@ td:last-child {
 }
 .btn{
 	text-align: center;
-	margin-right: 20px;
+	margin-right: 20px; 
 }
 .btn1{
     background-color: black;
@@ -63,6 +63,9 @@ td:last-child {
     height: 40px;
     border-radius: 20px;
     margin-top: 20px;
+}
+.btn1:hover{
+	background-color: var(--color-navy);
 }
 .table-wrapper {
   margin: 20px; /* 선택 사항: 여백 조절 */
