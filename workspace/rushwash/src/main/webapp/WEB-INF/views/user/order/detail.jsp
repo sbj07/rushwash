@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>S
+<%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
 <main id="wrap">
 
     <div id="div1">
@@ -28,6 +28,8 @@
             <thead>
                <tr id="th1">
                   <th>상품</th>
+                  <th>수량</th>
+                  <th>가격</th>
                   <th>주문일</th>
                   <th>예상세탁완료일</th>
                   <th>진행상태</th>
@@ -38,6 +40,8 @@
                <c:forEach items="${voList }" var="vo">
                   <tr class="td2" id="td21">
                      <td>${vo.item}</td>
+                     <td>${vo.ea}</td>
+                     <td>${vo.price}</td>
                      <td>${vo.paymentDate }</td>
                      <td>${vo.expDate }</td>
                      <td>${vo.laundryStatus }</td>
@@ -64,9 +68,11 @@
     <form action="/rushwash/order/detail" method="post" id="ffom0">
     	<input type="hidden" name="orderNo" value="${orderDetailNo}">
       <button type="botton" >주문취소</button>
-     <c:if test="${vo.orderStatus eq '1' }">
-      <button type="botton" >수거완료</button>
-      </c:if>/
+    </form>
+    <form>
+     <c:if test="${vo.orderStatus eq '5' }">
+      <button type="botton" >수령완료</button>
+      </c:if>
     </form>
     </div>
 </main>

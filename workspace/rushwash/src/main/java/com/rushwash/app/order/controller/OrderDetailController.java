@@ -22,6 +22,8 @@ public class OrderDetailController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			resp.setContentType("text/html;charset=UTF-8");
+
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo)session.getAttribute("loginMember");
 			String memberNo = loginMember.getNo();
@@ -47,6 +49,8 @@ public class OrderDetailController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		try {
+			resp.setContentType("text/html;charset=UTF-8");
+
 			String no = req.getParameter("orderNo");
 			
 			OrderService os = new OrderService();
@@ -58,8 +62,10 @@ public class OrderDetailController extends HttpServlet{
 			}
 			
 		}catch(Exception e) {
-			System.out.println("에러");
+			System.out.println("[ERROR-E003] 주문 취소 에러");
 			e.printStackTrace();
+            resp.getWriter().print("<script>alert('수거요청 시에만 주문취소 가능'); location.href='/rushwash/order/list';</script>");
+
 			
 		}
 	}

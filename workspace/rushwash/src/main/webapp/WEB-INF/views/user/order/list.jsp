@@ -32,7 +32,7 @@
             <thead>
                <tr>
                   <th>주문번호</th>
-                  <th>총 수량</th>
+                  <th>수량</th>
                   <th>주문일</th>
                   <th>주문상태</th>
                   <th>상세조회</th>
@@ -58,7 +58,7 @@
 
                <tr>
                   <th>주문번호</th>
-                  <th>총 수량</th>
+                  <th>수량</th>
                   <th>수령일</th>
                   <th>주문상태</th>
                </tr>
@@ -67,14 +67,12 @@
             <tbody>
 
                <c:forEach items="${orderVoList}" var="vo">
-               <c:if test="${ vo.delYn eq 'Y'}">
                   <tr id="trParent">
-                    <td>${ vo.no}</td>
+                    <td>${ vo.delYn eq 'Y' ? vo.no : ''}</td>
                      <td>${vo.ea }</td>
                      <td>${vo.receiveDate }</td>
                      <td>${vo.orderStatus }</td>
                   </tr>
-				</c:if>
                </c:forEach>
             </tbody>
          </table>
