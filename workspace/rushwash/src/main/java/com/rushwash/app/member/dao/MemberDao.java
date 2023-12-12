@@ -193,29 +193,6 @@ public class MemberDao {
 		return result;
 	}
 
-	//아이디 찾기
-	public String idFind(Connection conn, MemberVo vo) throws Exception {
-		
-		//sql
-		String sql = "SELECT ID FROM MEMBER WHERE NAME = ? AND PWD = ? AND DEL_YN = 'N'";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, vo.getMemberName());
-		pstmt.setString(2, vo.getMemberPwd());
-		ResultSet rs = pstmt.executeQuery();
-		
-		//rs
-		String memberId = null;
-		if(rs.next()) {
-			memberId = rs.getString("ID");
-		}
-		
-		//close
-		JDBCTemplate.close(rs);
-	    JDBCTemplate.close(pstmt);
-	    
-	    return memberId;
-	}
-
 	//비밀번호 찾기
 	public String pwdFind(Connection conn, MemberVo vo) throws Exception {
 		//sql
@@ -297,5 +274,23 @@ public class MemberDao {
 		
 		return payInfo;
 		
+	}
+
+	public String findUserByEmail(Connection conn, String email) throws Exception {
+		
+		//sql
+		String sql = "SELECT ID FROM MEMBER WHERE EMAIL = ? AND DEL_YN = 'N'";
+		 PreparedStatement pstmt = conn.prepareStatement(sql);
+		    pstmt.setString(1, email); 
+		    ResultSet rs = pstmt.executeQuery();
+		    String memberId = null;
+		    if (rs.next()) {
+		    	memberId = rs.getString("ID");
+		    }
+
+		    JDBCTemplate.close(rs);
+		    JDBCTemplate.close(pstmt);
+
+		    return memberId;
 	}
 }
