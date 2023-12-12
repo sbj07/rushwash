@@ -42,8 +42,6 @@ public class PlanPaymentController extends HttpServlet{
 			req.setAttribute("gradeVo", gradeVo);
 			req.setAttribute("periodDate", periodDate);
 			
-			
-			
 			req.getRequestDispatcher("/WEB-INF/views/user/payment/plan.jsp").forward(req, resp);
 		
 		} catch (Exception e) {

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.rushwash.app.member.vo.MemberVo;
+import com.rushwash.app.payment.service.PaymentService;
+
 @WebServlet("/plan/select")
 public class PlanController extends HttpServlet {
 
@@ -20,11 +23,24 @@ public class PlanController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		String gradeNo = req.getParameter("planName");
+		try {
+			HttpSession session = req.getSession();
+			String gradeNo = req.getParameter("planName");
+			MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
+			String memberNo = loginMember.getNo();
+			
+			PaymentService paymentService = new PaymentService();
+			int result = paymentService.changePlanInfo(memberNo, gradeNo);
+			
+			if(result != 1) {
+				throw new Exception();
+			}
+			
+			resp.sendRedirect("/rushwash/home");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		session.setAttribute("seletedGrade", gradeNo);
-		resp.sendRedirect("/rushwash/payment/plan");
 	}
 	
 }
