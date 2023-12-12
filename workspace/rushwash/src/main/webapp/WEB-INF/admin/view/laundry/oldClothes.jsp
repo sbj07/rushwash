@@ -15,6 +15,7 @@
 
 <head>
 <%@ include file="/WEB-INF/admin/view/common/header.jsp"%>
+<link rel="stylesheet" href="/rushwash/resources/admin/css/oldclothes.css">
 </head>
 
 <!-- PAGE TOP -->
@@ -83,13 +84,22 @@
 											<td><%=vo.getNo()%></td>
 											<td><%=vo.getMemberNo()%></td>
 											<td><%=vo.getRequestDate()%></td>
-											<td id="collectDate<%=vo.getNo()%>">
+											<td id="collectDate_<%=vo.getNo()%>">
 											    <% if (vo.getCollectDate() != null) { %>
 											        <%= vo.getCollectDate() %>
 											    <% } %>
 											</td>
-											<td><%=vo.getWeight()%></td>
 											<td>
+											    <form id="weightForm_<%=vo.getNo()%>">
+											        <% if (vo.getWeight() == null || vo.getWeight().isEmpty()) { %>
+											            <input id="weightform_text" type="text" name="weight">
+											            <input type="submit" value="무게 제출" placeholder="kg" onclick="submitWeight(<%=vo.getNo()%>)">
+											        <% } else { %>
+											            <%= vo.getWeight() %>kg
+											        <% } %>
+											    </form>
+											</td>
+											<td> 
 												<form id="statusForm_<%=vo.getNo()%>">
 													<select class="custom-select" name="status">
 														<option class="options" value="1" <%=vo.getStatusNo().equals("1") ? "selected" : "" %>>수거요청</option>
@@ -198,7 +208,7 @@
  			 const updatedCollectDate = data.updatedCollectDate;
  			
  			// Update only the corresponding row
- 	        let collectDateElement = document.querySelector('#collectDate' + no);
+ 	        let collectDateElement = document.querySelector('#collectDate_' + no);
 
 			if (collectDateElement) {
 			    collectDateElement.innerHTML = updatedCollectDate;
@@ -221,6 +231,50 @@
  				
  		 backColor();
  	}//confirm end
+ 	
+ 	//AJAX
+ 	function submitWeight(no) {
+        // JS 오브젝트 생성
+        let formData = {
+            no: no,
+            weight: document.querySelector('#weightForm_' + no + ' input[name="weight"]').value
+        };
+      
+        // 데이터를 JSON 방식으로
+        let jsonString = JSON.stringify(formData);
+      
+        // URL 전달 패치 (옵션 : 포스트, json, body지정)
+        fetch('http://127.0.0.1:8888/rushwash/admin/clothes', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: jsonString
+        })
+        .then(resp => {
+            if (!resp.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return resp.json();
+        })
+        .then(data => {
+            // addProperty한 데이터 가져오기
+            const updatedWeight = data.updatedWeight;
+
+            // Update only the corresponding row
+            let WeightElement = document.querySelector('#weightForm_' + no + ' input[name="weight"]');
+
+            if (WeightElement) {
+                WeightElement.value = updatedWeight;
+            } else {
+                console.error("에러]");
+            }
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+        backColor();
+    }//confirm end
  	
 	
  	

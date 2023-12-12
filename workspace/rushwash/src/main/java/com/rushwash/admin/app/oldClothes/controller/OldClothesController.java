@@ -47,51 +47,61 @@ public class OldClothesController extends HttpServlet{
         resp.setContentType("application/json");
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream()))) {
-            
-        	//DATA
-        	// Parse JSON data using Gson
+
+            // DATA
+            // Parse JSON data using Gson
             JsonObject jsonData = JsonParser.parseReader(reader).getAsJsonObject();
 
             // Extract values from the parsed object
             String no = getString(jsonData, "no");
             String status = getString(jsonData, "status");
             String collectDate = getString(jsonData, "collectDate");
+            String weight = getString(jsonData, "weight");
 
             OldClothesVo vo = new OldClothesVo();
             vo.setNo(no);
             vo.setStatus(status);
-            
-            //service
+
+            // Update weight
+            if (weight != null && !weight.isEmpty()) {
+                String updatedWeight = os.updateWeight(no, weight);
+                if (updatedWeight != null) {
+                    // If weight update is successful, add it to the JSON response
+                    JsonObject jsonResponse = new JsonObject();
+                    jsonResponse.addProperty("updatedWeight", updatedWeight);
+                    System.out.println(updatedWeight);
+                    resp.getWriter().write(jsonResponse.toString());
+                    return;
+                }
+            }
+
+            // If weight update fails or weight is not provided, proceed with status update
             int result = os.submitStatus(vo);
-            
-            //result
+
+            // result
             if (result != 1) {
-				throw new Exception("[ERROR-L002]세탁물 상태변경 실패");
-			}
-            
+                throw new Exception("[ERROR-L002] 세탁물 상태변경 실패");
+            }
+
             String updatedCollectDate = os.getUpdatedCollect(no);
-            
-            //헌옷 수거일 업데이트
+
+            // 헌옷 수거일 업데이트
             JsonObject jsonResponse = new JsonObject();
             jsonResponse.addProperty("updatedCollectDate", updatedCollectDate);
-            
-            System.out.println(jsonResponse);
-            
-            //클라이언트에게 json response 보내기
+
+            // 클라이언트에게 JSON response 보내기
             resp.getWriter().write(jsonResponse.toString());
-            
-            
-            
+
         } catch (Exception e) {
-        	System.out.println(e.getMessage());
-			e.printStackTrace();
-			req.setAttribute("errMsg", "세탁물 상태변경 실패");
-			req.getRequestDispatcher("/WEB-INF/admin/view/common/error.jsp").forward(req, resp);
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            req.setAttribute("errMsg", "세탁물 상태변경 실패");
+            req.getRequestDispatcher("/WEB-INF/admin/view/common/error.jsp").forward(req, resp);
         }
     }
 
-    // Helper method to get an integer with null handling
+    // Helper method to get a String with null handling
     private String getString(JsonObject jsonObject, String key) {
-        return jsonObject.has(key) ? jsonObject.getAsJsonPrimitive(key).getAsString() : ""; // 최종null""
+        return jsonObject.has(key) ? jsonObject.getAsJsonPrimitive(key).getAsString() : "";
     }
 }

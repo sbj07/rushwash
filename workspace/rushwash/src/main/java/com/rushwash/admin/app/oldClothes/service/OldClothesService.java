@@ -55,9 +55,27 @@ public class OldClothesService {
 				
 		return endDate;
 	}
-	 
-}
 	
+	// 무게 값 업데이트하고 가져오기
+    public String updateWeight(String no, String weight) throws Exception {
+        // conn
+        Connection conn = JDBCTemplate.getConnection();
+
+        try {
+            // dao
+            String updatedWeight = dao.getUpdatedWeight(conn, no, weight);
+
+            // close
+            JDBCTemplate.close(conn);
+
+            return updatedWeight;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            throw new Exception("무게 업데이트 실패");
+        }
+    }
+}
 
 
 
