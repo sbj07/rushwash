@@ -28,7 +28,17 @@ public class MemberAddrChangeController extends HttpServlet {
 			String id = vo.getMemberId();
 			String addr = vo.getMemberAddress();
 			//data
+			String inputId = req.getParameter("memberId");
+			String inputAddr = req.getParameter("addr");
 			String newAddr = req.getParameter("newAddr");
+			
+			if(!id.equals(inputId)) {
+				throw new Exception("현재 아이디 정보를 입력하세요.");
+			}
+			
+			if(!addr.equals(inputAddr)) {
+				throw new Exception("현재 주소 정보를 입력하세요.");
+			}
 			
 			//service
 			MemberService ms = new MemberService();
@@ -47,7 +57,7 @@ public class MemberAddrChangeController extends HttpServlet {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
-			req.setAttribute("errorMsg" , "주소 변경 불가. 다시 시도 하세요.");
+			req.setAttribute("errorMsg" , "아이디 혹은 주소 정보를 잘못 입력하셨습니다");
 			req.getRequestDispatcher("/WEB-INF/views/user/member/addrchange.jsp").forward(req, resp);
 		}
 	}

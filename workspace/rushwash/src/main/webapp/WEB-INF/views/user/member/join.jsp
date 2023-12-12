@@ -234,7 +234,7 @@ function checkPhoneNum() {
         error[6].innerHTML = "필수 정보입니다.";
         error[6].style.display = "block";
     } else if(!isPhoneNum.test(mobile.value)) {
-        error[6].innerHTML = "형식에 맞지 않는 번호입니다.";
+        error[6].innerHTML = "형식에 맞지 않는 번호입니다. (-)를 추가해주세요.";
         error[6].style.display = "block";
     } else {
         error[6].style.display = "none";

@@ -27,8 +27,13 @@ public class MemberIdChangeController extends HttpServlet {
 			MemberVo vo = (MemberVo) session.getAttribute("loginMember");
 			
 			String id = vo.getMemberId();
+			String inputId = req.getParameter("memberId");
 			//data
 			String newId = req.getParameter("newId");
+			
+			if(!id.equals(inputId)) {
+				throw new Exception("현재 아이디 정보를 입력하세요.");
+			}
 			
 			//service
 			MemberService ms = new MemberService();
@@ -42,16 +47,11 @@ public class MemberIdChangeController extends HttpServlet {
 				req.getSession().invalidate();
 				req.getSession().setAttribute("alertMsg", "아이디 변경 완료. 재로그인 하세요.");
 				resp.sendRedirect("/rushwash/home");
-//				vo.setMemberId(newId);
-//				session.setAttribute("loginMember", vo);
-				
-//				req.setAttribute("alertMsg" , "아이디 변경 완료. 재로그인 하세요.");
-//				resp.sendRedirect("/rushwash/home");
 			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			req.setAttribute("errorMsg" , "아이디 변경 불가. 다시 시도 하세요.");
+			req.setAttribute("errorMsg" , "현재 아이디 정보를 입력하세요");
 			req.getRequestDispatcher("/WEB-INF/views/user/member/idchange.jsp").forward(req, resp);
 		}
 		
