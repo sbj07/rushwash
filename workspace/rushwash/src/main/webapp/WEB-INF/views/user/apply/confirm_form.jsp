@@ -53,20 +53,6 @@
                         </tr>
                     </table>
                 </div>
-                <div class="form-body form-content">
-                    <span>결제 수단</span>
-                    <hr>
-                    <table class="form-table">
-                        <tr>
-                            <td>카드사</td>
-                            <td>${ cardVo.cardCompany }</td>
-                        </tr>
-                        <tr>
-                            <td>카드번호</td>
-                            <td>${ cardVo.cardNo }</td>
-                        </tr>
-                    </table>
-                </div>
                 <div class="form-body form-footer">
                     <button type="button" onclick="goMain()" id="btn-go-main">메인으로</button>
                 </div>

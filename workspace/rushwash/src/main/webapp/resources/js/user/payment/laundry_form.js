@@ -21,8 +21,6 @@ function kakaopayLundry(userEmail, userName , totalPrice){
                 buyer_name: userName,
             }, async function (rsp) { // callback
                 if (rsp.success) { //결제 성공시
-                    console.log("성공");
-
                     let formTag = document.getElementById("formTag");
                     formTag.submit();
                 } else if (rsp.success == false) { // 결제 실패시

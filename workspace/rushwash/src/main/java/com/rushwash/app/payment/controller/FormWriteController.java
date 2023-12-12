@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import com.rushwash.app.item.vo.ItemVo;
 import com.rushwash.app.member.vo.MemberVo;
 import com.rushwash.app.payment.service.PaymentService;
-import com.rushwash.app.payment.vo.CardVo;
 import com.rushwash.app.payment.vo.LaundryOrderVo;
 import com.rushwash.app.payment.vo.UserLaundryVo;
 import com.rushwash.app.plan.service.PlanService;
@@ -38,14 +37,6 @@ public class FormWriteController extends HttpServlet{
 			String memberNo = loginMember.getNo();
 			PaymentService paymentService = new PaymentService();
 			
-			// 유저의 결제수단 정보
-			CardVo cardVo = paymentService.getCardInfo(memberNo);
-			if(cardVo.getMemberNo() == null) {
-				session.setAttribute("alertMsg", "등록된 결제 정보가 없습니다. 카드정보 입력 후 이용바랍니다.");
-				resp.sendRedirect("/rushwash/payment/card-regist");
-				return;
-			}
-			
 			// 유저의 플랜정보
 			PlanService planService = new PlanService();
 			String discountRate = planService.getDiscountRate(memberNo);
@@ -58,7 +49,7 @@ public class FormWriteController extends HttpServlet{
 			
 			session.setAttribute("ea", ea);
 			session.setAttribute("price", price);
-			session.setAttribute("cardVo", cardVo);
+//			session.setAttribute("cardVo", cardVo);
 			req.getRequestDispatcher("/WEB-INF/views/user/payment/laundry_form.jsp").forward(req, resp);
 
 		} catch (Exception e) {
@@ -112,7 +103,7 @@ public class FormWriteController extends HttpServlet{
 
 			session.setAttribute("lastTotalPrice", totalPrice);
 			session.setAttribute("spendPoint", spendPoint);
-			resp.sendRedirect("/rushwash/apply/confirm-form"); 
+			resp.sendRedirect("/rushwash/apply/confirm-form");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
