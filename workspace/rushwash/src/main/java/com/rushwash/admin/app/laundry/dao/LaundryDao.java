@@ -114,6 +114,10 @@ public class LaundryDao {
 		pstmt.setString(2, vo.getNo());
 		int result = pstmt.executeUpdate();
 
+		//laundry 중 하나라도 세탁중이면 Order를 세탁중으로
+		setWashOrder(conn,vo);
+		
+		//laundry가 모두 세탁완료이면 Order를 배송중으로
 		diliverLaundry(conn, vo);
 
 		// close
@@ -186,6 +190,51 @@ public class LaundryDao {
 			System.out.println(orderVo.getOrderNo() + "번 세탁물의 상태를" + orderVo.getStatus() + "로 " + result + "번 수정");
 		}
 
+		return result;
+	}
+	// 상세세탁물 중 같은 주문번호끼리 모두 세탁완료(3)이 되면 오더를 배송중(4)로 변경
+	private int setWashOrder(Connection conn, LaundryVo vo) throws Exception {
+		boolean isComplete = false;
+		//세탁번호 찾기
+		String orderNo = findOrderNo(conn, vo);
+		
+		// sql -- 현재 세탁물과 주문번호가 일치하는 세탁물들 조회
+		String sql = "select * from laundry l join laundry_order lo on l.order_no=lo.no where lo.no=?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, orderNo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		// rs -- 일치세탁물 들의 상태 체크
+		List<LaundryVo> voList = new ArrayList<LaundryVo>();
+		while (rs.next()) {
+			String laundryStatus = rs.getString("LAUNDRY_STATUS");
+			LaundryVo dbVo = new LaundryVo();
+			dbVo.setStatus(laundryStatus);
+			voList.add(dbVo);
+		}
+		
+		for (LaundryVo laundryVo : voList) {
+			String status = laundryVo.getStatus();
+			if (status.equals("2")) {
+				isComplete = true;
+				break;
+			} else {
+				isComplete = false;
+			}
+		}
+		
+		// result
+		// true일 때 해당 Order의 Order_Status를 배송중(4)로 변경
+		int result = 0;
+		if (isComplete) {
+			OrderVo orderVo = new OrderVo();
+			orderVo.setStatus("3");
+			orderVo.setOrderNo(orderNo);
+			result = submitOrderStatus(conn, orderVo);
+			inputDiliveryDate(conn, orderVo); //세탁주문의 배송일을 현재시간으로 변경
+			System.out.println(orderVo.getOrderNo() + "번 세탁물의 상태를" + orderVo.getStatus() + "로 " + result + "번 수정");
+		}
+		
 		return result;
 	}
 
