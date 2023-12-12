@@ -84,8 +84,20 @@ List<LaundryVo> voList = (List<LaundryVo>) request.getAttribute("voList");
 											<td><%=vo.getMemberName()%></td>
 											<td><%=vo.getItem()%></td>
 											<td><%=vo.getEa()%></td>
-											<td id="startDate_<%=vo.getNo()%>"><%=vo.getWashStartDate()%></td>
-											<td id="endDate_<%=vo.getNo()%>"><%=vo.getWashEndDate()%></td>
+											<td id="startDate_<%=vo.getNo()%>">
+												<%if(vo.getWashStartDate() != null) { %>
+													<%=vo.getWashStartDate() %>
+												<%}else{ %>
+													-
+												<%} %>
+											</td>
+											<td id="endDate_<%=vo.getNo()%>">
+												<%if(vo.getWashEndDate() != null) { %>
+													<%=vo.getWashEndDate() %>
+												<%}else{ %>
+													-
+												<%} %>
+											</td>
 											<td>
 												<form id="statusForm_<%=vo.getNo()%>">
 													<select class="custom-select" name="status">
