@@ -18,7 +18,7 @@
         <div id="sidebar">
             <a href="/rushwash/member/mypage" class="menu-item">내 정보</a>
             <a href="/rushwash/member/editinfo" class="menu-item">개인정보수정</a>
-            <a href="/rushwash/member/pay" class="menu-item">결제 수단</a>
+<!--             <a href="/rushwash/member/pay" class="menu-item">결제 수단</a> -->
             <a href="/rushwash/member/quit" class="menu-item">탈퇴 하기</a>
             <a href="/rushwash/member/sub" class="menu-item">구독 등급</a>
         </div>
