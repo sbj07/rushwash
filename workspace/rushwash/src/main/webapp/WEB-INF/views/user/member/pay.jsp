@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>My Page</title>
 <link rel="stylesheet" href="/rushwash/resources/css/user/member/pay.css">
 </head>
 <%@ include file='/WEB-INF/views/user/common/user_header.jsp' %>
@@ -41,11 +41,11 @@
                         <input type="text" id="cardCompany" name="cardCompany" value="${ cardVo.cardNo }" readonly>   
                         <button type="button" id="delete-card" onclick="location.href='/rushwash/payment/card-regist'">변경</button>                                        
                    	</c:if>
-                   	<c:if test="${ empty loginMember }" >
+                   	<c:if test="${ empty cardVo.cardNo }" >
                     	<p>카드</p>
                         <input type="text" id="cardNo" name="cardNo" readonly> 
                         <p>결제정보</p>
-                        <input type="text" id="cardCompany" name="cardCompant" readonly>   
+                        <input type="text" id="cardCompany" name="cardCompany" readonly>   
                         <button type="button" id="delete-card" onclick="location href='/rushwash/payment/card-regist">변경</button> 
                    </c:if>
                     </form>

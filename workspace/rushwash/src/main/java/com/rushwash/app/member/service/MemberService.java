@@ -311,4 +311,21 @@ public class MemberService {
 	    return memberId;
 	}
 
+
+	//포인트 정보만 가져오기
+	public int getPointInfo(String no) throws Exception {
+	
+		//conn
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//dao
+		MemberDao dao = new MemberDao();
+		int pointInfo = dao.getPointInfo(conn, no);
+		
+		//close
+		JDBCTemplate.close(conn);
+		return pointInfo;
+	
+	}
+
 }

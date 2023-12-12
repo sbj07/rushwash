@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>join</title>
 <link rel="stylesheet" href="/rushwash/resources/css/user/member/join.css">
 </head>
 <body>
