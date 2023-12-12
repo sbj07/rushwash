@@ -162,4 +162,19 @@ public class PaymentService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int changePlanInfo(String memberNo, String gradeNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PaymentDao paymentDao = new PaymentDao();
+		int result = paymentDao.changePlanInfo(conn, memberNo, gradeNo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }

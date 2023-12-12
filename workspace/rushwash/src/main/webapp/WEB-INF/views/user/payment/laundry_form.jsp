@@ -6,11 +6,17 @@
 <meta charset="UTF-8">
 <title>세탁요청서</title>
 <link rel="stylesheet" href="/rushwash/resources/css/user/payment/laundry_form.css">
+
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script src="/rushwash/resources/js/user/payment/laundry_form.js"></script>
+
 </head>
 <body>
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
     <main>
-        <form action="/rushwash//payment/laundry-form" method="post">
+        <form action="/rushwash//payment/laundry-form" id="formTag" method="post">
             <div class="form-box">
                 <div class="form-body form-header">세탁요청서 작성</div>
                 <div class="form-body form-content">
@@ -76,7 +82,7 @@
                 <input type="text" name="spendPoint" id="spendPoint" style="visibility: hidden; display: none;">
                 <input type="text" name="totalPrice" id="totalPrice" value="${ price }" style="visibility: hidden; display: none;">
                 <div class="form-body form-footer">
-                    <button type="submit" id="btn-payment">결제하기</button>
+                    <button type="button" onclick="paymentLuandry()" id="btn-payment">결제하기</button>
                 </div>
             </div>
         </form>
@@ -86,6 +92,11 @@
 </html>
 
 <script>
+
+    function goRegist(){
+        location.href='/rushwash/payment/card-regist';
+    }
+
     const pointBox = document.querySelector("#user-point");
     const payPrice = document.querySelector("#pay-price");
     const spendPoint = document.querySelector("#spendPoint");
@@ -127,8 +138,13 @@
         }
     }
 
-
-    function goRegist(){
-        location.href='/rushwash/payment/card-regist';
+    function paymentLuandry(){
+        let userEmail = "${loginMember.memberEmail}";
+        let userName = "${loginMember.memberName}";
+        let totalPriceVl = totalPrice.value;
+        kakaopayLundry(userEmail, userName , totalPriceVl);
+        // 총가격 총개수 멤버 이메일, 이름
     }
+
+
 </script>

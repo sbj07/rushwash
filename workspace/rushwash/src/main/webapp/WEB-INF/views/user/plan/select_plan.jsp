@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlanInfo</title>
     <link rel="stylesheet" href="/rushwash/resources/css/user/plan/select_plan.css">
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script src="/rushwash/resources/js/user/apply/pay_port.js"></script>
 </head>
 
     <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
@@ -52,18 +56,20 @@
 <script>
 
     function submitForm(planvalue){
-        let postForm = document.createElement('form');
-
-        let plan;
-        plan = document.createElement('input');
-        plan.setAttribute('type','hidden');
-        plan.setAttribute('name', 'planName');
-        plan.setAttribute('value', planvalue);
-
-        postForm.appendChild(plan);
-        postForm.setAttribute('method','post');
-        postForm.setAttribute('action', '/rushwash/plan/select');
-        document.body.appendChild(postForm);
-        postForm.submit();
+        const useremail = "${loginMember.memberEmail}";
+        const username = "${loginMember.memberName}";
+        if(planvalue == 2){
+            let planName = "스탠다드";
+            let planPrice = "5900"
+            kakaopay( planName , planPrice , useremail , username ,planvalue);
+        } else if (planvalue == 3){
+            let planName = "플래티넘";
+            let planPrice = "7900"
+            kakaopay( planName , planPrice , useremail , username ,planvalue);
+        } else if (planvalue == 4){
+            let planName = "다이아";
+            let planPrice = "11900"
+            kakaopay( planName , planPrice , useremail , username ,planvalue);
+        }
     }
 </script>
