@@ -37,7 +37,6 @@ public class OrderDetailController extends HttpServlet{
 		}catch(Exception e) {
 			System.out.println("[ERROR-O002] 주문내역 상세조회 중 에러 발생...");
 			e.printStackTrace();
-//            resp.getWriter().print("<script>alert('로그인이 필요합니다.'); location.href='/rushwash/order/list';</script>");
 
 		}
 		
@@ -46,11 +45,23 @@ public class OrderDetailController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String no = req.getParameter("orderNo");
-		System.out.println("오더넘"+no);
 		
-		OrderService os = new OrderService();
-		int result = os.detaildelete(no);
+		try {
+			String no = req.getParameter("orderNo");
+			
+			OrderService os = new OrderService();
+			int result = os.detaildelete(no);
+			if(result > 0) {
+				req.setAttribute("alertMas", "주문 취소완료");
+//				req.getRequestDispatcher("/WEB-INF/views/user/order/list.jsp").forward(req, resp);
+				resp.sendRedirect("/rushwash/order/list");
+			}
+			
+		}catch(Exception e) {
+			System.out.println("에러");
+			e.printStackTrace();
+			
+		}
 	}
 
 }

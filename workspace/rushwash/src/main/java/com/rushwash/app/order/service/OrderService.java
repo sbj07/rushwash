@@ -12,12 +12,12 @@ import com.rushwash.app.order.vo.OrderVo;
 
 public class OrderService {
 
-	public List<OrderVo> getorderList(String memberNo) throws Exception {
+	public List<OrderVo> getorderList(String memberNo , String deleteYn) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
 
 		OrderDao dao = new OrderDao();
-		List<OrderVo> orderVoList = dao.getorderList(conn, memberNo);
+		List<OrderVo> orderVoList = dao.getorderList(conn, memberNo , deleteYn);
 
 		JDBCTemplate.close(conn);
 
@@ -43,8 +43,15 @@ public class OrderService {
 		
 		OrderDao dao = new OrderDao();
 		int result =dao.detaildelete(conn, no);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		
+		JDBCTemplate.close(conn);
 		
+		return result;
 	}
 
 }
