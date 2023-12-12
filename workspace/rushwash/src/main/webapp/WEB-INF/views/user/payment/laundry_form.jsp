@@ -61,23 +61,6 @@
                         </tr>
                     </table>
                 </div>
-                <div class="form-body form-content">
-                    <span>결제 수단</span>
-                    <hr>
-                    <table class="form-table">
-                        <tr>
-                            <td>카드사</td>
-                            <td>${ cardVo.cardCompany }</td>
-                        </tr>
-                        <tr>
-                            <td>카드번호</td>
-                            <td>${ cardVo.cardNo }</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><button type="button" onclick="goRegist()" id="btn-card-regist">결제수단등록</button></td>
-                        </tr>
-                    </table>
-                </div>
                 <input type="text" name="totalEa" id="totalEa" value="${ ea }" style="visibility: hidden; display: none;">
                 <input type="text" name="spendPoint" id="spendPoint" style="visibility: hidden; display: none;">
                 <input type="text" name="totalPrice" id="totalPrice" value="${ price }" style="visibility: hidden; display: none;">
@@ -92,10 +75,6 @@
 </html>
 
 <script>
-
-    function goRegist(){
-        location.href='/rushwash/payment/card-regist';
-    }
 
     const pointBox = document.querySelector("#user-point");
     const payPrice = document.querySelector("#pay-price");

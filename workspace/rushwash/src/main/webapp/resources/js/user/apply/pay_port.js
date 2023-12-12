@@ -21,8 +21,6 @@ function kakaopay( planName , planPrice , useremail , username ,planvalue){
                 buyer_name: username,
             }, async function (rsp) { // callback
                 if (rsp.success) { //결제 성공시
-                    console.log("성공");
-
                     let postForm = document.createElement('form');
 
                     let plan;
