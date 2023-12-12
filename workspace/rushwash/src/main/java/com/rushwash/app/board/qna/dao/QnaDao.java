@@ -19,7 +19,7 @@ public class QnaDao {
 	public int write(Connection conn, QnaVo vo) throws Exception{
 		
 		//sql
-		String sql = "INSERT INTO QNA(NO, MANAGER_NO, MEMBER_NO, TITLE, CONTENT, SECRET_YN, DEL_YN, ENROLL_DATE)VALUES(SEQ_QNA_NO.NEXTVAL, 1, ?, ?, ?, 'Y', 'N', SYSDATE)";
+		String sql = "INSERT INTO QNA(NO, MEMBER_NO, TITLE, CONTENT, SECRET_YN, DEL_YN, ENROLL_DATE)VALUES(SEQ_QNA_NO.NEXTVAL,?, ?, ?, 'Y', 'N', SYSDATE)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getMemberNo());
 		pstmt.setString(2, vo.getTitle());
@@ -35,7 +35,7 @@ public class QnaDao {
 public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) throws Exception {
 		
 		
-		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.NO, T.TITLE, T.CONTENT, T.COMMT, T.MANAGER_ID, T.MEMBER_NO, TO_CHAR(T.ENROLL_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS ENROLL_DATE, T.MODIFY_DATE, T.DEL_YN FROM ( SELECT N.NO, N.TITLE, N.CONTENT, N.COMMT, M.MANAGER_ID, N.MEMBER_NO, N.ENROLL_DATE, N.MODIFY_DATE, N.DEL_YN FROM QNA N JOIN MEMBER B ON N.MEMBER_NO = B.NO JOIN MANAGER M ON N.MANAGER_NO = M.NO WHERE N.DEL_YN = 'N' AND N.MEMBER_NO = ? ORDER BY NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
+		String sql = "SELECT * FROM ( SELECT ROWNUM RNUM, T.NO, T.TITLE, T.CONTENT, T.COMMT, T.MEMBER_NO, TO_CHAR(T.ENROLL_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS ENROLL_DATE, T.MODIFY_DATE, T.DEL_YN FROM ( SELECT N.NO, N.TITLE, N.CONTENT, N.COMMT, N.MEMBER_NO, N.ENROLL_DATE, N.MODIFY_DATE, N.DEL_YN FROM QNA N JOIN MEMBER B ON N.MEMBER_NO = B.NO WHERE N.DEL_YN = 'N' AND N.MEMBER_NO = ? ORDER BY NO DESC ) T ) WHERE RNUM BETWEEN ? AND ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 	    pstmt.setInt(2, pvo.getStartRow());
@@ -51,7 +51,6 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 			String title = rs.getString("TITLE");
 			String content = rs.getString("CONTENT");
 			String commt = rs.getString("COMMT");
-			String managerId = rs.getString("MANAGER_ID");
 			String enrollDate = rs.getString("ENROLL_DATE");
 			String modifyDate = rs.getString("MODIFY_DATE");
 			String delYn = rs.getString("DEL_YN");
@@ -61,7 +60,6 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setCommt(commt);
-			vo.setManagerId(managerId);
 			vo.setEnrollDate(enrollDate);
 			vo.setModifyDate(modifyDate);
 			vo.setDelYn(delYn);
@@ -95,9 +93,9 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 
 	public QnaVo selectQnaByNo(Connection conn, String no) throws Exception {
 		 
-		String sql = "SELECT B.NO ,B.CONTENT ,B.TITLE,  TO_CHAR(B.ENROLL_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS ENROLL_DATE , B.DEL_YN ,B.MODIFY_DATE, B.COMMT, M.MANAGER_ID FROM QNA B JOIN MANAGER M ON B.MANAGER_NO = M.NO WHERE B.NO = ? AND B.DEL_YN = 'N'";
+		String sql = "SELECT B.NO ,B.CONTENT ,B.TITLE,  TO_CHAR(B.ENROLL_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS ENROLL_DATE , B.DEL_YN ,B.MODIFY_DATE, B.COMMT FROM QNA B WHERE B.NO = ? AND B.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		System.out.println("dao's no : " + no);
+
 		pstmt.setString(1, no);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -110,7 +108,6 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 			String delYn = rs.getString("DEL_YN");
 			String modifyDate = rs.getString("MODIFY_DATE");
 			String commt = rs.getString("COMMT");
-			String managerId = rs.getString("MANAGER_ID");
 			
 			vo = new QnaVo();
 			vo.setNo(no);
@@ -121,7 +118,6 @@ public List<QnaVo> selectQnaList(Connection conn, PageVo pvo, String memberNo) t
 			vo.setDelYn(delYn);
 			vo.setModifyDate(modifyDate);
 			vo.setCommt(commt);
-			vo.setManagerId(managerId);
 		}
 		
 		JDBCTemplate.close(rs);
