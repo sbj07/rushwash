@@ -45,6 +45,15 @@ public class ManagerService {
 		    throw new Exception("비밀번호는 특수문자를 포함한 8~16자리로 설정 필요.");
 		}
 
+		// 이름은 한국어 only
+		String name = vo.getName();
+		boolean nameOk = pwd.matches("^[가-힣]${1,6}");
+		System.out.println(nameOk);
+		
+		if(!nameOk) {
+			throw new Exception("이름은 한국어만 사용 가능");
+		}
+
 		// 비밀번호 일치여부 체크
 		if(!vo.getPwd().equals(vo.getPwd2())) {
 			throw new Exception("비밀번호 재확인 불일치");
