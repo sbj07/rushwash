@@ -20,7 +20,7 @@ public class QnaDao {
 	      
 	      //SQL
 	      String sql = "SELECT RNUM, NO, TITLE, CONTENT, COMMT, MANAGER_ID, ENROLL_DATE, DEL_YN, SECRET_YN, ID FROM ( " +
-	              "  SELECT ROW_NUMBER() OVER (ORDER BY T.NO DESC) RNUM, T.* " +
+	              "  SELECT ROW_NUMBER() OVER (ORDER BY T.NO ASC) RNUM, T.* " +
 	              "  FROM ( " +
 	              "    SELECT QNA.NO, QNA.TITLE, QNA.CONTENT, QNA.COMMT, M.MANAGER_ID, " +
 	              "           QNA.ENROLL_DATE, QNA.DEL_YN, QNA.SECRET_YN, ME.ID " +

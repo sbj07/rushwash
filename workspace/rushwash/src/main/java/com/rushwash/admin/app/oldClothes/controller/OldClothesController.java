@@ -60,7 +60,6 @@ public class OldClothesController extends HttpServlet{
             OldClothesVo vo = new OldClothesVo();
             vo.setNo(no);
             vo.setStatus(status);
-            System.out.println(vo);
             
             //service
             int result = os.submitStatus(vo);

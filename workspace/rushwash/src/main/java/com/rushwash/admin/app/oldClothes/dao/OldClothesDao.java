@@ -71,7 +71,7 @@ public class OldClothesDao {
 		}
 		String statusUpdateSql = "update Old_Clothes set REQUSET_CODE=? WHERE no=?";
 		if(vo.getStatus().equals("3")) {
-			String pointUpdateSql = "UPDATE MEMBER SET POINT = POINT + ((SELECT WEIGHT FROM OLD_CLOTHES WHERE NO = ?)/10) WHERE NO = (SELECT MEMBER_NO FROM OLD_CLOTHES WHERE NO = ?)";
+			String pointUpdateSql = "UPDATE MEMBER SET POINT = POINT + ((SELECT WEIGHT FROM OLD_CLOTHES WHERE NO = ?)*0.5) WHERE NO = (SELECT MEMBER_NO FROM OLD_CLOTHES WHERE NO = ?)";
 			
 			pointUpdateStmt = conn.prepareStatement(pointUpdateSql);
 			
