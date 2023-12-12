@@ -182,7 +182,7 @@
  		 
  		  
  		  // URL 전달 패치 (옵션 : 포스트, json, body지정)
- 		  fetch('http://127.0.0.1:8080/rushwash/admin/clothes', {
+ 		  fetch('http://127.0.0.1:8888/rushwash/admin/clothes', {
  		    method: 'POST',
  		    headers: {'Content-Type': 'application/json'},
  		    body: jsonString
