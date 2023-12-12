@@ -73,6 +73,7 @@ public class ApplyPremiumController extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println("[ERROR-A001] 품목리스트 조회 에러");
 			e.printStackTrace();
+			
 		}
 	}
 	
