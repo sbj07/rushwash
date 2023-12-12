@@ -28,8 +28,6 @@
             <thead>
                <tr id="th1">
                   <th>상품</th>
-                  <th>가격</th>
-                  <th>수량</th>
                   <th>주문일</th>
                   <th>예상세탁완료일</th>
                   <th>진행상태</th>
@@ -40,8 +38,6 @@
                <c:forEach items="${voList }" var="vo">
                   <tr class="td2" id="td21">
                      <td>${vo.item}</td>
-                     <td>${vo.priceItem}</td>
-                     <td>${vo.ea}</td>
                      <td>${vo.paymentDate }</td>
                      <td>${vo.expDate }</td>
                      <td>${vo.laundryStatus }</td>
