@@ -65,7 +65,6 @@ public class OrderService {
 	//수령완료
 	public int status(String no) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
-		
 		OrderDao dao = new OrderDao();
 		int result = dao.status(conn,no);
 		if(result==1) {

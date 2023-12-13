@@ -42,15 +42,16 @@
 				<tbody>
 
 					<c:forEach items="${ orderVoList }" var="vo">
-						<c:if test = "${ vo.delYn eq 'N' }">
-						<tr id="trParent">
-							<td>${vo.no}</td>
-							<td>${vo.ea}</td>
-							<td>${vo.paymentDate}</td>
-							<td>${vo.laundryStatus}</td>
-							<td id="trChild"><a
-								href="/rushwash/order/detail?no=${ vo.no }">상세조회</a></td>
-						</tr>
+						<c:if test = "${ vo.delYn eq 'N'}">
+							<c:if test = "${ vo.orderStatus ne '수령완료'}">
+								<tr id="trParent">
+									<td>${vo.no}</td>
+									<td>${vo.ea}</td>
+									<td>${vo.paymentDate}</td>
+									<td>${vo.laundryStatus}</td>
+									<td id="trChild"><a href="/rushwash/order/detail?no=${ vo.no }">상세조회</a></td>
+								</tr>
+							</c:if>
 						</c:if>
 					</c:forEach>
 
@@ -71,7 +72,7 @@
 				<tbody>
 
 					<c:forEach items="${orderVoList}" var="vo">
-						<c:if test="${vo.delYn eq 'Y' || vo.orderStatus eq '배송완료' }">
+						<c:if test="${vo.delYn eq 'Y' || vo.orderStatus eq '수령완료' }">
 							<tr>
 								<td>${vo.no}</td>
 								<td>${vo.ea}</td>
