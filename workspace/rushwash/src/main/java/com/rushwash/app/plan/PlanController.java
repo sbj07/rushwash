@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.rushwash.app.member.vo.MemberVo;
 import com.rushwash.app.payment.service.PaymentService;
+import com.rushwash.app.plan.service.PlanService;
 
 @WebServlet("/plan/select")
 public class PlanController extends HttpServlet {
@@ -29,8 +30,8 @@ public class PlanController extends HttpServlet {
 			MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 			String memberNo = loginMember.getNo();
 			
-			PaymentService paymentService = new PaymentService();
-			int result = paymentService.changePlanInfo(memberNo, gradeNo);
+			PlanService planService = new PlanService();
+			int result = planService.changePlanInfo(memberNo, gradeNo);
 			
 			if(result != 1) {
 				throw new Exception();
