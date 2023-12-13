@@ -69,6 +69,11 @@ button {
     border-radius: 10px;
     margin: 0 auto;
     display: block;
+	
+}
+#btn2{
+	text-align: center;
+	display: inline-block;
 }
 div{
 	text-align: center;
