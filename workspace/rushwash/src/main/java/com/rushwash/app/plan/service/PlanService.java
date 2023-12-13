@@ -3,6 +3,7 @@ package com.rushwash.app.plan.service;
 import java.sql.Connection;
 
 import com.rushwash.admin.app.db.util.JDBCTemplate;
+import com.rushwash.app.payment.dao.PaymentDao;
 import com.rushwash.app.plan.dao.PlanDao;
 import com.rushwash.app.plan.vo.PlanGradeVo;
 import com.rushwash.app.plan.vo.PlanVo;
@@ -43,6 +44,22 @@ public class PlanService {
 		PlanDao dao = new PlanDao();
 		PlanGradeVo gradeVo = dao.getPlanGrade(conn, gradeNo);
 		return gradeVo;
+	}
+
+	//구독 정보 변경
+	public int changePlanInfo(String memberNo, String gradeNo) throws Exception {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		PlanDao planDao = new PlanDao();
+		int result = planDao.changePlanInfo(conn, memberNo, gradeNo);
+		
+		if(result == 1) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

@@ -63,6 +63,18 @@ public class PlanDao {
 		JDBCTemplate.close(pstmt);
 		return gradeVo;
 	}
+
+	//구독정보변경
+	public int changePlanInfo(Connection conn, String memberNo, String gradeNo) throws Exception {
+		String sql = "UPDATE PLAN_INFO SET GRADE_NO = ?, PLAN_DATE = SYSDATE WHERE MEMBER_NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, gradeNo);
+		pstmt.setString(2, memberNo);
+		int result = pstmt.executeUpdate();
+		
+		JDBCTemplate.close(pstmt);
+		return result;
+	}
 	
 
 }
