@@ -40,7 +40,6 @@ public class OrderDao {
 			vo.setOrderStatus(orderStatus);
 			vo.setEa(ea);
 			vo.setLaundryStatus(laundryStatus);
-			System.out.println(vo);
 			orderVoList.add(vo);
 		}
 
@@ -53,10 +52,11 @@ public class OrderDao {
 	// 상세조회
 	public ArrayList<OrderVo> getorderDetail(Connection conn, String memberNo, String no) throws Exception {
 
-		String sql = "SELECT O.ORDER_STATUS , O.NO ,I.NAME AS ITEM ,I.PRICE AS PRICE_ITEM ,O.PRICE ,L.EA ,TO_CHAR(O.PAYMENT_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS PAYMENT_DATE ,TO_CHAR(O.EXP_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS EXP_DATE ,T.STATUS AS LAUNDRY_STATUS ,M.NAME AS MEMBER_NAME ,M.TEL ,O.ADDRESS ,O.REQUEST FROM MEMBER M JOIN LAUNDRY_ORDER O ON M.NO = O.MEMBER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN LAUNDRY L ON T.NO = L.ORDER_NO JOIN ITEM I ON L.ITEM_NO = I.NO  WHERE M.NO = ? AND O.NO = ? AND L.DEL_YN = 'N'";
+//		String sql = "SELECT O.ORDER_STATUS , O.NO ,I.NAME AS ITEM ,I.PRICE AS PRICE_ITEM ,O.PRICE ,L.EA ,TO_CHAR(O.PAYMENT_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS PAYMENT_DATE ,TO_CHAR(O.EXP_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS EXP_DATE ,T.STATUS AS LAUNDRY_STATUS ,M.NAME AS MEMBER_NAME ,M.TEL ,O.ADDRESS ,O.REQUEST FROM MEMBER M JOIN LAUNDRY_ORDER O ON M.NO = O.MEMBER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN LAUNDRY L ON T.NO = L.ORDER_NO JOIN ITEM I ON L.ITEM_NO = I.NO  WHERE M.NO = ? AND O.NO = ? AND L.DEL_YN = 'N'";
+		String sql = "SELECT O.ORDER_STATUS ,OS.STATUS ,L.ITEM_NO ,L.EA ,I.PRICE ,I.NAME ,O.PAYMENT_DATE ,O.EXP_DATE ,O.PRICE AS TOTAL_PRICE FROM LAUNDRY L JOIN ITEM I ON I.NO = L.ITEM_NO JOIN LAUNDRY_ORDER O ON L.ORDER_NO = O.NO JOIN ORDER_STATUS OS ON OS.NO = O.ORDER_STATUS WHERE L.ORDER_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, memberNo);
-		pstmt.setString(2, no);
+//		pstmt.setString(1, memberNo);
+		pstmt.setString(1, no);
 
 		ResultSet rs = pstmt.executeQuery();
 
@@ -65,17 +65,13 @@ public class OrderDao {
 		ArrayList<OrderVo> voList = new ArrayList<OrderVo>();
 		while (rs.next()) {
 			vo = new OrderVo();
-			vo.setItem(rs.getString("ITEM"));
-			vo.setPriceItem(rs.getString("PRICE_ITEM"));
-			vo.setPrice(rs.getString("PRICE"));
+			vo.setItem(rs.getString("NAME"));
+			vo.setPriceItem(rs.getString("PRICE"));
+			vo.setPrice(rs.getString("TOTAL_PRICE"));
 			vo.setEa(rs.getString("EA"));
 			vo.setPaymentDate(rs.getString("PAYMENT_DATE"));
 			vo.setExpDate(rs.getString("EXP_DATE"));
-			vo.setLaundryStatus(rs.getString("LAUNDRY_STATUS"));
-			vo.setMemberName(rs.getString("MEMBER_NAME"));
-			vo.setTel(rs.getString("TEL"));
-			vo.setAddress(rs.getString("ADDRESS"));
-			vo.setRequest(rs.getString("REQUEST"));
+			vo.setLaundryStatus(rs.getString("STATUS"));
 			vo.setOrderStatus(rs.getString("ORDER_STATUS"));
 
 			voList.add(vo);
@@ -90,7 +86,6 @@ public class OrderDao {
 	public int detaildelete(Connection conn, String no) throws Exception {
 		String sql = "UPDATE LAUNDRY SET DEL_YN = 'Y' WHERE DEL_YN = 'N' AND ORDER_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		System.out.println("dao"+no);
 		pstmt.setString(1, no);
 		int result = pstmt.executeUpdate();
 
@@ -103,7 +98,6 @@ public class OrderDao {
 	public int detaildeleteOrder(Connection conn, String no) throws Exception {
 		String sql = "UPDATE LAUNDRY_ORDER SET DEL_YN = 'Y' WHERE DEL_YN = 'N' AND NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		System.out.println("dao"+no);
 		pstmt.setString(1, no);
 		int result = pstmt.executeUpdate();
 
@@ -116,7 +110,7 @@ public class OrderDao {
 	
 	//수령완료(배송완료시에만)
 	public int status(Connection conn, String no) throws Exception {
-		String sql = "UPDATE ORDER_STATUS OS SET OS.NO = 6 WHERE OS.NO = 1 AND EXISTS ( SELECT 1 FROM MEMBER M JOIN LAUNDRY_ORDER LO ON M.NO = LO.MEMBER_NO WHERE LO.ORDER_STATUS = OS.NO";
+		String sql = "UPDATE LAUNDRY_ORDER SET ORDER_STATUS = 6 WHERE ORDER_STATUS = 5 AND NO =?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, no);
 		int result = pstmt.executeUpdate();

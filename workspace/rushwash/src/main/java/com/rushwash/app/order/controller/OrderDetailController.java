@@ -60,7 +60,6 @@ public class OrderDetailController extends HttpServlet{
 		
 			
 			String no = req.getParameter("orderNo");
-			System.out.println(no);
 			int result = os.detaildelete(no);
 			System.out.println(result);
 			if(result > 0) {

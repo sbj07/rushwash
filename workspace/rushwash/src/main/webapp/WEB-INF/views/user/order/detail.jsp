@@ -32,7 +32,6 @@
                <tr id="th1">
                   <th>상품</th>
                   <th>수량</th>
-                  <th>가격</th>
                   <th>주문일</th>
                   <th>예상세탁완료일</th>
                   <th>진행상태</th>
@@ -44,7 +43,6 @@
                   <tr class="td2" id="td21">
                      <td>${vo.item}</td>
                      <td>${vo.ea}</td>
-                     <td>${vo.price}</td>
                      <td>${vo.paymentDate }</td>
                      <td>${vo.expDate }</td>
                      <td>${vo.laundryStatus }</td>
@@ -74,7 +72,8 @@
       <button type="submit" id="btn2">주문취소</button>
       </c:if>
     </form>
-    <form action="/rushwash/order/detail" method="post" >
+    <form action="/rushwash/order/cpmpleted" method="post" >
+        <input type="hidden" name="orderNo" value="${orderDetailNo}">
      <c:if test="${ orderStatus eq '5' }">
       <button type="submit" id="btn2" >수령완료</button>
       </c:if>
