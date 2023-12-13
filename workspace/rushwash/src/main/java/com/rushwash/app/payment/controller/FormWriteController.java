@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.rushwash.app.item.vo.ItemVo;
+import com.rushwash.app.member.service.MemberService;
 import com.rushwash.app.member.vo.MemberVo;
 import com.rushwash.app.payment.service.PaymentService;
 import com.rushwash.app.payment.vo.LaundryOrderVo;
@@ -33,23 +34,27 @@ public class FormWriteController extends HttpServlet{
 			HttpSession session = req.getSession();
 			MemberVo loginMember = (MemberVo) session.getAttribute("loginMember");
 			List<ItemVo> itemList = (List<ItemVo>) session.getAttribute("selectedItemList");
-			
 			String memberNo = loginMember.getNo();
-			PaymentService paymentService = new PaymentService();
+			
+			// 유저의 포인트정보
+			MemberService memberService = new MemberService();
+			int memberPoint = memberService.getPointInfo(memberNo);
+			
+			loginMember.setPoint(Integer.toString(memberPoint));
 			
 			// 유저의 플랜정보
 			PlanService planService = new PlanService();
 			String discountRate = planService.getDiscountRate(memberNo);
 			
 			//총수량 과 할인된 금액
+			PaymentService paymentService = new PaymentService();
 			Map<String , String> map = paymentService.calcTotalEaAndPrice(itemList,discountRate);
 			String ea = map.get("resultEa");
 			String price = map.get("resultPrice");
-//			System.out.println(cardVo.getCardNo());
+			
 			
 			session.setAttribute("ea", ea);
 			session.setAttribute("price", price);
-//			session.setAttribute("cardVo", cardVo);
 			req.getRequestDispatcher("/WEB-INF/views/user/payment/laundry_form.jsp").forward(req, resp);
 
 		} catch (Exception e) {
