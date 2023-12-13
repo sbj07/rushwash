@@ -273,21 +273,21 @@ public class MemberService {
 	
 	}
 
-	//결제 정보만 가져오기
-	public String getMemberPayInfo(String no) throws Exception {
-
-		//conn
-		Connection conn = JDBCTemplate.getConnection();
-		
-		//dao
-		MemberDao dao = new MemberDao();
-		String payInfo = dao.getMemberPayInfo(conn, no);
-		
-		//close
-		JDBCTemplate.close(conn);
-		return payInfo;
-	
-	}
+//	//결제 정보만 가져오기
+//	public String getMemberPayInfo(String no) throws Exception {
+//
+//		//conn
+//		Connection conn = JDBCTemplate.getConnection();
+//		
+//		//dao
+//		MemberDao dao = new MemberDao();
+//		String payInfo = dao.getMemberPayInfo(conn, no);
+//		
+//		//close
+//		JDBCTemplate.close(conn);
+//		return payInfo;
+//	
+//	}
 
 
 	//이메일 인증으로 아이디 찾기

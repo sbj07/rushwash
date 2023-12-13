@@ -39,7 +39,7 @@ public class MemberDao {
 	//로그인
 	public MemberVo login(Connection conn, MemberVo vo) throws Exception {
 		//sql
-		String sql = "SELECT M.NO ,M.ID ,M.PWD ,M.EMAIL ,M.ADDRESS ,M.NAME ,M.TEL ,M.ENROLL_DATE ,M.MODIFY_DATE, M.POINT, M.DEL_YN ,C.CARD_COMPANY ,C.CARD_NO ,G. SUB_GRADE FROM MEMBER M LEFT JOIN PLAN_INFO P ON M.NO = P.MEMBER_NO LEFT JOIN PLAN_GRADE G ON G.NO = P.GRADE_NO LEFT JOIN CARD_INFO C ON M.NO = C.MEMBER_NO WHERE M.ID = ? AND M.PWD = ? AND M.DEL_YN = 'N'";
+		String sql = "SELECT M.NO ,M.ID ,M.PWD ,M.EMAIL ,M.ADDRESS ,M.NAME ,M.TEL ,M.ENROLL_DATE ,M.MODIFY_DATE ,M.POINT ,M.DEL_YN ,G. SUB_GRADE FROM MEMBER M LEFT JOIN PLAN_INFO P ON M.NO = P.MEMBER_NO LEFT JOIN PLAN_GRADE G ON G.NO = P.GRADE_NO WHERE M.ID = ? AND M.PWD = ? AND M.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, vo.getMemberId());
 		pstmt.setString(2, vo.getMemberPwd());
@@ -60,8 +60,6 @@ public class MemberDao {
 			String modifyDate = rs.getString("MODIFY_DATE");
 			String point = rs.getString("POINT");
 			String planName = rs.getString("SUB_GRADE");
-			String cardNo = rs.getString("CARD_NO");
-			String cardCompany = rs.getString("CARD_COMPANY");
 
 			loginMember = new MemberVo();
 			loginMember.setNo(no);
@@ -76,8 +74,6 @@ public class MemberDao {
 			loginMember.setModifyDate(modifyDate);
 			loginMember.setPoint(point);
 			loginMember.setSubGrade(planName);
-			loginMember.setCardNo(cardNo);
-			loginMember.setCardCompany(cardCompany);
 		}
 		
 		//close
@@ -228,6 +224,30 @@ public class MemberDao {
 		return result;
 		
 	}
+	
+//	//결제 정보 가져오기
+//	public String getMemberPayInfo(Connection conn, String no) throws Exception {
+//
+//		//sql
+//		String sql = "SELECT C.CARD_NO , C.CARD_COMPANY FROM MEMBER M JOIN CARD_INFO C ON C.MEMBER_NO = M.NO WHERE ID = ?";
+//		PreparedStatement pstmt = conn.prepareStatement(sql);
+//		pstmt.setString(1, no);
+//		ResultSet rs = pstmt.executeQuery();
+//		
+//		//rs
+//		String payInfo = null;
+//		if(rs.next()) {
+//			payInfo = rs.getString("CARD_NO");
+//			payInfo = rs.getString("CARD_COMPANY");
+//		}
+//		
+//		//close
+//		JDBCTemplate.close(rs);
+//		JDBCTemplate.close(pstmt);
+//		
+//		return payInfo;
+//		
+//	}
 
 	//구독 정보만 가져오기
 	public String getMemberInfo(Connection conn, String no) throws Exception {
@@ -252,30 +272,6 @@ public class MemberDao {
 		
 	}
 	
-	//결제 정보 가져오기
-	public String getMemberPayInfo(Connection conn, String no) throws Exception {
-
-		//sql
-		String sql = "SELECT C.CARD_NO , C.CARD_COMPANY FROM MEMBER M JOIN CARD_INFO C ON C.MEMBER_NO = M.NO WHERE ID = ?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, no);
-		ResultSet rs = pstmt.executeQuery();
-		
-		//rs
-		String payInfo = null;
-		if(rs.next()) {
-			payInfo = rs.getString("CARD_NO");
-			payInfo = rs.getString("CARD_COMPANY");
-		}
-		
-		//close
-		JDBCTemplate.close(rs);
-		JDBCTemplate.close(pstmt);
-		
-		return payInfo;
-		
-	}
-
 	//이메일로 아이디 찾기(이메일 인증)
 	public String findUserByEmail(Connection conn, String email) throws Exception {
 		
@@ -294,7 +290,10 @@ public class MemberDao {
 
 		    return memberId;
 	}
+	
+	
 
+	//포인트만 가져오기
 	public int getPointInfo(Connection conn, String no) throws Exception {
 		
 		//sql
