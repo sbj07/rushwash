@@ -14,19 +14,6 @@ import com.rushwash.app.payment.vo.UserLaundryVo;
 
 public class PaymentService {
 
-//	// 결제정보
-//	public CardVo getCardInfo(String memberNo) throws Exception {
-//		Connection conn = JDBCTemplate.getConnection();
-//		
-//		PaymentDao dao = new PaymentDao();
-//		
-//		CardVo vo = dao.getCardInfo(conn , memberNo);
-//		
-//		JDBCTemplate.close(conn);
-//		
-//		return vo;
-//	}
-
 	// 총수량, 가격 계산
 	public Map<String, String> calcTotalEaAndPrice(List<ItemVo> itemList, String discountRate) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
@@ -85,6 +72,7 @@ public class PaymentService {
 		return result;
 	}
 
+	
 	public int changeUserPoint(String memberNo, int userPoint) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
 		
@@ -101,80 +89,5 @@ public class PaymentService {
 		return pointResult;
 	}
 
-//	public int putRegularPayment(String cardNo , int periodDate) throws Exception {
-//		Connection conn = JDBCTemplate.getConnection();
-//		
-//		PaymentDao dao = new PaymentDao();
-//		int result = dao.putRegularPayment(conn, cardNo, periodDate);
-//		
-//		if(result == 1) {
-//			JDBCTemplate.commit(conn);
-//		}else {
-//			JDBCTemplate.rollback(conn);
-//		}
-//		
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
 
-//	public int changeReqularPayment(String cardNo, int periodDate) throws Exception {
-//		Connection conn = JDBCTemplate.getConnection();
-//		
-//		PaymentDao dao = new PaymentDao();
-//		int result = dao.changeRegularPayment(conn, cardNo, periodDate);
-//		
-//		if(result == 1) {
-//			JDBCTemplate.commit(conn);
-//		}else {
-//			JDBCTemplate.rollback(conn);
-//		}
-//		
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
-	
-//	public int putCardInfo(CardVo cardVo) throws Exception {
-//		Connection conn = JDBCTemplate.getConnection();
-//		
-//		PaymentDao dao = new PaymentDao();
-//		int result = dao.putCardInfo(conn, cardVo);
-//		
-//		if(result == 1) {
-//			JDBCTemplate.commit(conn);
-//		}else {
-//			JDBCTemplate.rollback(conn);
-//		}
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
-
-//	public int changeCardInfo(CardVo cardVo) throws Exception {
-//		Connection conn = JDBCTemplate.getConnection();
-//		
-//		PaymentDao dao = new PaymentDao();
-//		int result = dao.changeCardInfo(conn, cardVo);
-//		
-//		if(result == 1) {
-//			JDBCTemplate.commit(conn);
-//		}else {
-//			JDBCTemplate.rollback(conn);
-//		}
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
-
-//	public int changePlanInfo(String memberNo, String gradeNo) throws Exception {
-//		Connection conn = JDBCTemplate.getConnection();
-//		
-//		PaymentDao paymentDao = new PaymentDao();
-//		int result = paymentDao.changePlanInfo(conn, memberNo, gradeNo);
-//		
-//		if(result == 1) {
-//			JDBCTemplate.commit(conn);
-//		}else {
-//			JDBCTemplate.rollback(conn);
-//		}
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
 }
