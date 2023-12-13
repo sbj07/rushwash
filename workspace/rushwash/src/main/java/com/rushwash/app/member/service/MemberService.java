@@ -309,7 +309,6 @@ public class MemberService {
 	    return memberId;
 	}
 
-
 	//포인트 정보만 가져오기
 	public int getPointInfo(String no) throws Exception {
 	
@@ -326,4 +325,4 @@ public class MemberService {
 	
 	}
 
-}
+}	
