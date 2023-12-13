@@ -15,11 +15,9 @@ public class OrderDao {
 
 	// 주문내역 조회(진행중인내역,지난내역)
 	public List<OrderVo> getorderList(Connection conn, String memberNo, String deleteYn) throws Exception {
-
-		String sql = "SELECT O.DEL_YN , O.NO ,O.PRICE ,TO_CHAR(O.PAYMENT_DATE ,'YYYY\"년\"MM\"월\"DD\"일\"') AS PAYMENT_DATE ,TO_CHAR(O.RECEIVE_DATE ,'YYYY\"년\"MM\"월\"DD\"일\"') AS RECEIVE_DATE, T.STATUS AS ORDER_STATUS , L.EA, S.STATUS AS LAUNDRY_STATUS FROM LAUNDRY_ORDER O JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN LAUNDRY L ON O.NO = L.ORDER_NO JOIN LAUNDRY_STATUS S ON L.LAUNDRY_STATUS = S.NO WHERE O.NO = ? AND O.DEL_YN = ?";
+		String sql = "SELECT O.DEL_YN , O.NO ,O.PRICE ,TO_CHAR(O.PAYMENT_DATE ,'YYYY\"년\"MM\"월\"DD\"일\"') AS PAYMENT_DATE ,TO_CHAR(O.RECEIVE_DATE ,'YYYY\"년\"MM\"월\"DD\"일\"') AS RECEIVE_DATE, T.STATUS AS ORDER_STATUS , L.EA, S.STATUS AS LAUNDRY_STATUS FROM LAUNDRY_ORDER O JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN LAUNDRY L ON O.NO = L.ORDER_NO JOIN LAUNDRY_STATUS S ON L.LAUNDRY_STATUS = S.NO WHERE O.MEMBER_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
-		pstmt.setString(2, deleteYn);
 		ResultSet rs = pstmt.executeQuery();
 		List<OrderVo> orderVoList = new ArrayList<OrderVo>();
 		while (rs.next()) {
@@ -34,14 +32,15 @@ public class OrderDao {
 			String laundryStatus = rs.getString("LAUNDRY_STATUS");
 
 			OrderVo vo = new OrderVo();
+			vo.setDelYn(delYn);
 			vo.setNo(no);
 			vo.setPrice(price);
 			vo.setPaymentDate(paymentDate);
 			vo.setReceiveDate(receiveDate);
 			vo.setOrderStatus(orderStatus);
-			vo.setDelYn(delYn);
+			vo.setEa(ea);
 			vo.setLaundryStatus(laundryStatus);
-
+			System.out.println(vo);
 			orderVoList.add(vo);
 		}
 
@@ -54,7 +53,7 @@ public class OrderDao {
 	// 상세조회
 	public ArrayList<OrderVo> getorderDetail(Connection conn, String memberNo, String no) throws Exception {
 
-		String sql = "SELECT O.NO ,I.NAME AS ITEM ,I.PRICE AS PRICE_ITEM ,O.PRICE ,L.EA ,TO_CHAR(O.PAYMENT_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS PAYMENT_DATE ,TO_CHAR(O.EXP_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS EXP_DATE ,T.STATUS AS LAUNDRY_STATUS ,M.NAME AS MEMBER_NAME ,M.TEL ,O.ADDRESS ,O.REQUEST FROM MEMBER M JOIN LAUNDRY_ORDER O ON M.NO = O.MEMBER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN LAUNDRY L ON T.NO = L.ORDER_NO JOIN ITEM I ON L.ITEM_NO = I.NO  WHERE M.NO = ? AND O.NO = ? AND L.DEL_YN = 'N'";
+		String sql = "SELECT O.ORDER_STATUS , O.NO ,I.NAME AS ITEM ,I.PRICE AS PRICE_ITEM ,O.PRICE ,L.EA ,TO_CHAR(O.PAYMENT_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS PAYMENT_DATE ,TO_CHAR(O.EXP_DATE , 'YYYY\"년\"MM\"월\"DD\"일\"') AS EXP_DATE ,T.STATUS AS LAUNDRY_STATUS ,M.NAME AS MEMBER_NAME ,M.TEL ,O.ADDRESS ,O.REQUEST FROM MEMBER M JOIN LAUNDRY_ORDER O ON M.NO = O.MEMBER_NO JOIN ORDER_STATUS T ON O.ORDER_STATUS = T.NO JOIN LAUNDRY L ON T.NO = L.ORDER_NO JOIN ITEM I ON L.ITEM_NO = I.NO  WHERE M.NO = ? AND O.NO = ? AND L.DEL_YN = 'N'";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberNo);
 		pstmt.setString(2, no);
@@ -77,6 +76,7 @@ public class OrderDao {
 			vo.setTel(rs.getString("TEL"));
 			vo.setAddress(rs.getString("ADDRESS"));
 			vo.setRequest(rs.getString("REQUEST"));
+			vo.setOrderStatus(rs.getString("ORDER_STATUS"));
 
 			voList.add(vo);
 		}
@@ -88,8 +88,22 @@ public class OrderDao {
 
 	// 주문내역 삭제(수거요청시에만)
 	public int detaildelete(Connection conn, String no) throws Exception {
-		String sql = "UPDATE LAUNDRY SET DEL_YN = 'Y' WHERE ORDER_NO = 1 AND DEL_YN = 'N' AND EXISTS ( SELECT 1 FROM LAUNDRY_ORDER WHERE LAUNDRY.ORDER_NO = LAUNDRY_ORDER.NO AND LAUNDRY_ORDER.NO = ?)";
+		String sql = "UPDATE LAUNDRY SET DEL_YN = 'Y' WHERE DEL_YN = 'N' AND ORDER_NO = ?";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
+		System.out.println("dao"+no);
+		pstmt.setString(1, no);
+		int result = pstmt.executeUpdate();
+
+		JDBCTemplate.close(pstmt);
+
+		return result;
+
+	}
+	
+	public int detaildeleteOrder(Connection conn, String no) throws Exception {
+		String sql = "UPDATE LAUNDRY_ORDER SET DEL_YN = 'Y' WHERE DEL_YN = 'N' AND NO = ?";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		System.out.println("dao"+no);
 		pstmt.setString(1, no);
 		int result = pstmt.executeUpdate();
 

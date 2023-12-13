@@ -12,6 +12,8 @@ import com.rushwash.app.order.vo.OrderVo;
 
 public class OrderService {
 
+	
+	//주문내역
 	public List<OrderVo> getorderList(String memberNo , String deleteYn) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
@@ -25,6 +27,8 @@ public class OrderService {
 
 	}
 
+	
+	//상세조회
 	public ArrayList<OrderVo> getorderDetail(String memberNo, String no) throws Exception {
 
 		Connection conn = JDBCTemplate.getConnection();
@@ -38,22 +42,27 @@ public class OrderService {
 
 	}
 
+	
+	//삭제
 	public int detaildelete(String no) throws Exception{
 		Connection conn = JDBCTemplate.getConnection();
 		
 		OrderDao dao = new OrderDao();
 		int result =dao.detaildelete(conn, no);
-		if(result > 0) {
+		int result2 =dao.detaildeleteOrder(conn, no);
+		if(result > 0 && result2 > 0) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
+		result = result + result2;
 		
 		JDBCTemplate.close(conn);
 		
 		return result;
 	}
 
+	//수령완료
 	public int status(String no) throws Exception {
 		Connection conn = JDBCTemplate.getConnection();
 		

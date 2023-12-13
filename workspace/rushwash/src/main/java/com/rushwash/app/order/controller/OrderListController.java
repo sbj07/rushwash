@@ -46,15 +46,7 @@ public class OrderListController extends HttpServlet{
 			// key 값을 no 로 하여 중복을 제거하자
 			HashMap<String, OrderVo> map = new HashMap<String, OrderVo>();
 			for (OrderVo orderVo : voList) {
-			    String compositeKey = orderVo.getNo() + "-" + orderVo.getOrderStatus();
-			    map.put(compositeKey, orderVo);
-				map.put(orderVo.getEa(), orderVo);
-				map.put(orderVo.getDelYn(), orderVo);
-				map.put(orderVo.getPrice(), orderVo);
-				map.put(orderVo.getPaymentDate(), orderVo);
-				map.put(orderVo.getReceiveDate(), orderVo);
-				map.put(orderVo.getOrderStatus(), orderVo);
-				map.put(orderVo.getLaundryStatus(), orderVo);
+				map.put(orderVo.getNo() ,orderVo);
 			}
 
 				
@@ -64,9 +56,9 @@ public class OrderListController extends HttpServlet{
 			// 중복제거 완료
 			
 			// 확인
-			System.out.println("===============");
-			System.out.println(map);
-			System.out.println("===============");
+//			System.out.println("===============");
+//			System.out.println(map);
+//			System.out.println("===============");
 			
 			// map 에는 여러 객체가 있을 수 있다. (no가 중복인건 없고, 다른 요청들 여러개)
 			// map 에 있는 여러 객체들을 전부 꺼내자
@@ -78,7 +70,6 @@ public class OrderListController extends HttpServlet{
 			
 			//검색한 내용을 바탕으로 작성 ㄱㄱ
 			ArrayList<OrderVo> orderVoList = new ArrayList<OrderVo>(map.values());
-			
 			
 			
 			req.setAttribute("detailBtn", deleteYn);

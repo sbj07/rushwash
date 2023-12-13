@@ -10,8 +10,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title>	
 </head>
+<script >
+	console.log("${orderDetailNo}");
+</script>
 <body>
 
 <%@ include file="/WEB-INF/views/user/common/user_header.jsp" %>
@@ -67,11 +70,13 @@
     <div id="div3">
     <form action="/rushwash/order/detail" method="post" id="ffom0">
     	<input type="hidden" name="orderNo" value="${orderDetailNo}">
-      <button type="botton" >주문취소</button>
+    	<c:if test="${ orderStatus eq '1'}">
+      <button type="submit" id="btn2">주문취소</button>
+      </c:if>
     </form>
-    <form>
-     <c:if test="${vo.orderStatus eq '5' }">
-      <button type="botton" >수령완료</button>
+    <form action="/rushwash/order/detail" method="post" >
+     <c:if test="${ orderStatus eq '5' }">
+      <button type="submit" id="btn2" >수령완료</button>
       </c:if>
     </form>
     </div>
