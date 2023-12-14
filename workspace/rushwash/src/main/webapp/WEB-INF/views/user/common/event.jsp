@@ -19,7 +19,7 @@
             <img src="/rushwash/resources/img/user/event03.png" alt="Slide 3">
         </div>
         <div class="swiper-slide">
-            <img src="/rushwash/resources/img/user/event01.png" alt="Slide 4">
+            <img src="/rushwash/resources/img/user/event04.png" alt="Slide 4">
         </div>
     </div>
 <!--     Add Pagination
