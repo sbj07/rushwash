@@ -11,7 +11,7 @@
 	var myPieChart = new Chart(ctx, {
 		type : 'doughnut',
 		data : {
-			labels : [ "Non-subscription", "Gold", "Silver", "Bronze"],
+			labels : [ "Non-subscription", "Standard", "Platinum", "Diamond"],
 			datasets : [ {
 				data : [ 
 					  <%=planInfoCount.get("1")%>
