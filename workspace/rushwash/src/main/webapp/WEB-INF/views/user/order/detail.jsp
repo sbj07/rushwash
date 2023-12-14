@@ -72,7 +72,7 @@
       <button type="submit" id="btn2">주문취소</button>
       </c:if>
     </form>
-    <form action="/rushwash/order/cpmpleted" method="post" >
+    <form action="/rushwash/order/completed" method="post" >
         <input type="hidden" name="orderNo" value="${orderDetailNo}">
      <c:if test="${ orderStatus eq '5' }">
       <button type="submit" id="btn2" >수령완료</button>
