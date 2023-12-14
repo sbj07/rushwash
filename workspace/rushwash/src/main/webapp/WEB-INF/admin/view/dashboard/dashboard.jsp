@@ -182,13 +182,13 @@ Map<String, String> orderStatusCount = (Map<String, String>) request.getAttribut
 										<i class="fas fa-circle text-primary"></i> 비구독
 										</span> 
 										<span class="mr-2"> 
-										<i class="fas fa-circle text-success"></i> 브론즈
+										<i class="fas fa-circle text-success"></i> 스탠다드
 										</span> 
 										<span class="mr-2"> 
-										<i class="fas fa-circle text-info"></i>실버
+										<i class="fas fa-circle text-info"></i>플래티넘
 										</span>
 										<span class="mr-2"> 
-										<i class="fas fa-circle text-warning"></i>골드
+										<i class="fas fa-circle text-warning"></i>다이아
 										</span>
 									</div>
 									<hr>
